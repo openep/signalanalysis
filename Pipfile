@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+pandas = "*"
+scipy = "*"
+sklearn = "*"
+matplotlib = "*"
+carputils = {editable = true, git = "https://git.opencarp.org/openCARP/carputils.git"}
+
+[dev-packages]
+pytest = "*"
+
+[requires]
+python_version = "3.8"
