@@ -7,20 +7,20 @@ import tools.maths
 import tools.python
 
 
-def get_signal_rms(signals: Union[pd.DataFrame, List[pd.DataFrame]],
-                   unipolar_only: bool = True) -> List[List[float]]:
+def get_signal_rms(signal: pd.DataFrame,
+                   unipolar_only: bool = True) -> List[float]:
     """Calculate the ECG(RMS) of the ECG as a scalar
 
     Parameters
     ----------
-    signals: list of pd.DataFrame or pd.DataFrame
+    signal: pd.DataFrame
         ECG or VCG data to process
     unipolar_only : bool, optional
         Whether to use only unipolar ECG leads to calculate RMS, default=True
 
     Returns
     -------
-    signals_rms : list of list of float
+    signal_rms : list of float
         Scalar RMS ECG or VCG data
 
     Notes
@@ -44,24 +44,20 @@ def get_signal_rms(signals: Union[pd.DataFrame, List[pd.DataFrame]],
         https://doi.org/10.1371/journal.pone.0184352
     """
 
-    if isinstance(signals, pd.DataFrame):
-        signals = [signals]
+    assert isinstance(signal, pd.DataFrame)
 
-    signals_rms = list()
-    for signal in signals:
-        signal_rms = signal.copy()
-        if unipolar_only and ('V1' in signal_rms.columns):
-            signal_rms['VF'] = (2/3)*signal_rms['aVF']
-            signal_rms['VL'] = (2/3)*signal_rms['aVL']
-            signal_rms['VR'] = (2/3)*signal_rms['aVR']
-            signal_rms.drop(['aVF', 'aVL', 'aVR', 'LI', 'LII', 'LIII'], axis=1, inplace=True)
-        n_leads = len(signal_rms.columns)
-        for key in signal_rms:
-            signal_rms.loc[:, key] = signal_rms[key]**2
-        signal_rms = np.sqrt(signal_rms.sum(axis=1)/n_leads)
-        signals_rms.append(signal_rms)
+    signal_rms = signal.copy()
+    if unipolar_only and ('V1' in signal_rms.columns):
+        signal_rms['VF'] = (2/3)*signal_rms['aVF']
+        signal_rms['VL'] = (2/3)*signal_rms['aVL']
+        signal_rms['VR'] = (2/3)*signal_rms['aVR']
+        signal_rms.drop(['aVF', 'aVL', 'aVR', 'LI', 'LII', 'LIII'], axis=1, inplace=True)
+    n_leads = len(signal_rms.columns)
+    for key in signal_rms:
+        signal_rms.loc[:, key] = signal_rms[key]**2
+    signal_rms = np.sqrt(signal_rms.sum(axis=1)/n_leads)
 
-    return signals_rms
+    return signal_rms
 
 
 def get_twave_end(ecgs: Union[List[pd.DataFrame], pd.DataFrame],

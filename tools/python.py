@@ -255,6 +255,9 @@ def deprecated_convert_time_to_index(qrs_start: Optional[float] = None,
                                      dt: float = 2) -> Tuple[int, int]:
     """Return indices of QRS start and end points. NB: indices returned match Matlab output
 
+    ..deprecated::
+            This function is depreacted, but is in use due to other functions still using it for the moment
+
     Parameters
     ----------
     qrs_start : float or int, optional

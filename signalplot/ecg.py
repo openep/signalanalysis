@@ -4,9 +4,6 @@ from typing import Union, Optional, List, Tuple
 
 import tools.python
 
-# import matplotlib
-# matplotlib.use('Agg')
-
 
 def plot(ecgs: Union[List[pd.DataFrame], pd.DataFrame],
          legend_ecg: Optional[List[str]] = None,
