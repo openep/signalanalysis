@@ -16,8 +16,8 @@ import signalanalysis.general
 sns.set()
 
 
-class Ecg:
-    """Base ECG class to encapsulate data regarding an ECG recording
+class Ecg(signalanalysis.general.Signal):
+    """Base ECG class to encapsulate data regarding an ECG recording, inheriting from signalanalysis.general.Signal
 
     Attributes
     ----------
@@ -51,7 +51,7 @@ class Ecg:
         Calculates the start of the QRS complex
     """
     def __init__(self,
-                 filename: str = '',
+                 filename: str,
                  **kwargs):
         """When initialising an ECG, the minimum requirement is to pass the name for the file when opening
 
@@ -67,30 +67,21 @@ class Ecg:
             File containing the indentifiers for the electrode ECG placement. Only useful if `filename` refers to a
             .igb data file for a whole torso simulation, and the ECG needs to be derived from these data
         """
-        # Properties that can be derived subsequently to opening the file
-        self.n_beats = 0
-        self.n_beats_threshold = 0.5
-        self.beats = list()
-
-        self.qrs_start = list()
-        self.qrs_end = list()
-        self.twave_end = list()
-
-        self.data_source = None
-        self.comments = None
+        super(Ecg, self).__init__()
 
         # Minimum requirements for an ECG - the raw data, and the file from which it is derived
-        self.data = pd.DataFrame()
         self.filename = filename
-        self.normalised = False
-        if self.filename:
-            self.read(filename, **kwargs)
-            self.get_n_beats()
+        self.read(filename, **kwargs)
+        self.get_n_beats()
 
     def read(self,
              filename: str,
              normalise: bool = False,
              **kwargs):
+        # Reset all other values to zero to prevent confusion if reading new data to an existing structure,
+        # for some unknown reason
+        super().reset()
+
         if filename.endswith("igb"):
             self.data = read_ecg_from_igb(filename, normalise=normalise, **kwargs)
         elif filename.endswith("csv"):
@@ -100,18 +91,6 @@ class Ecg:
         else:
             self.read_ecg_from_wfdb(filename, normalise=normalise)
         self.normalised = normalise
-
-        # Reset all other values to zero to prevent confusion if reading new data to an existing structure,
-        # for some unknown reason
-        self.reset()
-
-    def reset(self):
-        """Reset all properties of the class"""
-        self.n_beats = 0
-        self.qrs_start = list()
-        self.qrs_end = list()
-        self.data_source = None
-        self.comments = None
 
     def read_ecg_from_wfdb(self,
                            filename: str,
@@ -145,7 +124,9 @@ class Ecg:
         if normalise:
             self.data = data_temp/data_temp.abs().max()
         else:
-            self.data = pd.DataFrame(data=data_full.p_signal, columns=columns_full, index=t)
+            self.data = data_temp
+
+        self.comments = data_full.comments
 
     def get_n_beats(self,
                     threshold: float = 0.5,

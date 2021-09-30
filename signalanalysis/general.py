@@ -7,6 +7,104 @@ import tools.maths
 import tools.python
 
 
+class Signal:
+    """Base class for general signal, either ECG or VCG
+
+    Attributes
+    ----------
+    data : pd.DataFrame
+        Raw ECG data for the different leads
+    filename : str
+        Filename for the location of the data
+    normalised : bool
+        Whether or not the data for the leads have been normalised
+    n_beats : int
+        Number of beats recorded in the trace. Set to 0 if not calculated
+    qrs_start : list of float
+        Times calculated for the start of the QRS complex
+    qrs_end : end
+        Times calculated for the end of the QRS complex
+    data_source : str
+        Source for the data, if known e.g. Staff III database, CARP simulation, etc.
+    comments : str
+        Any further details known about the data, e.g. sex, age, etc.
+
+    Methods
+    -------
+    get_rms(unipolar_only=True)
+        Returns the RMS of the combined signal
+    """
+    def __init__(self,
+                 **kwargs):
+        """Creates parameters that will be common (or are expected to be common) across all signal types
+
+        Parameters
+        ----------
+        normalise : str
+            Whether or not to normalise all ECG leads, default=False
+        """
+        # Properties that can be derived subsequently to opening the file
+        self.data = pd.DataFrame()
+        self.filename = str()
+
+        self.n_beats = 0
+        self.n_beats_threshold = 0.5
+        self.beats = list()
+        self.rms = list()
+
+        self.qrs_start = list()
+        self.qrs_end = list()
+        self.twave_end = list()
+
+        self.data_source = None
+        self.comments = None
+
+        # Keyword arguments (optional)
+        if 'normalise' in kwargs:
+            self.normalised = kwargs.get('normalise')
+        else:
+            self.normalised = bool()
+
+    def reset(self):
+        """Reset all properties of the class
+
+        Function called when reading in new data into an existing class (for some reason), which would make these
+        properties and attributes clash with the other data
+        """
+        self.data = pd.DataFrame()
+        self.filename = str()
+        self.n_beats = 0
+        self.n_beats_threshold = 0.5
+        self.beats = list()
+        self.rms = list()
+        self.qrs_start = list()
+        self.qrs_end = list()
+        self.twave_end = list()
+        self.data_source = None
+        self.comments = None
+        self.normalised = bool()
+
+    def get_rms(self,
+                unipolar_only: bool = True):
+        """Returns the RMS of the combined signal
+
+        Parameters
+        ----------
+        unipolar_only : bool
+            Whether to use only unipolar ECG leads to calculate RMS, default=True
+        """
+        signal_rms = self.data.copy()
+        if unipolar_only and ('V1' in signal_rms.columns):
+            signal_rms['VF'] = (2 / 3) * signal_rms['aVF']
+            signal_rms['VL'] = (2 / 3) * signal_rms['aVL']
+            signal_rms['VR'] = (2 / 3) * signal_rms['aVR']
+            signal_rms.drop(['aVF', 'aVL', 'aVR', 'LI', 'LII', 'LIII'], axis=1, inplace=True)
+        n_leads = len(signal_rms.columns)
+        for key in signal_rms:
+            signal_rms.loc[:, key] = signal_rms[key] ** 2
+        self.rms = np.sqrt(signal_rms.sum(axis=1) / n_leads)
+
+
 def get_signal_rms(signal: pd.DataFrame,
                    unipolar_only: bool = True) -> List[float]:
     """Calculate the ECG(RMS) of the ECG as a scalar
