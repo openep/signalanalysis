@@ -7,9 +7,55 @@ from matplotlib import gridspec
 import warnings
 from typing import Union, List, Tuple, Optional, Iterable
 
+import signalanalysis.general
+import signalanalysis.ecg
 import tools.maths
 import tools.python
 import tools.plotting
+
+
+class Vcg(signalanalysis.general.Signal):
+    """Base class to encapsulate data from VCG
+
+    Attributes
+    ----------
+
+    Methods
+    -------
+    """
+
+    def __init__(self,
+                 ecg: signalanalysis.ecg.Ecg):
+        super(Vcg, self).__init__()
+        self.get_from_ecg(ecg)
+
+    def get_from_ecg(self, ecg: signalanalysis.ecg.Ecg):
+        """Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
+
+        Parameters
+        ----------
+        ecg : signalanalysis.ecg.Ecg
+            List of ECG dataframe data, or ECG dataframe data directly, with dict keys corresponding to ECG outputs
+
+        References
+        ----------
+        Kors JA, van Herpen G, Sittig AC, van Bemmel JH.
+            Reconstruction of the Frank vectorcardiogram from standard electrocardiographic leads: diagnostic comparison
+            of different methods
+            Eur Heart J. 1990 Dec;11(12):1083-92.
+        """
+        kors = np.array([[0.38, -0.07, 0.11],
+                         [-0.07, 0.93, -0.23],
+                         [-0.13, 0.06, -0.43],
+                         [0.05, -0.02, -0.06],
+                         [-0.01, -0.05, -0.14],
+                         [0.14, 0.06, -0.20],
+                         [0.06, -0.17, -0.11],
+                         [0.54, 0.13, 0.31]])
+
+        ecg_matrix = np.array([ecg.data['LI'], ecg.data['LII'], ecg.data['V1'], ecg.data['V2'], ecg.data['V3'],
+                               ecg.data['V4'], ecg.data['V5'], ecg.data['V6']])
+        self.data = pd.DataFrame(np.dot(ecg_matrix.transpose(), kors), index=ecg.data.index, columns=['x', 'y', 'z'])
 
 
 def get_vcg_from_ecg(ecgs: Union[List[pd.DataFrame], pd.DataFrame]) -> List[pd.DataFrame]:
