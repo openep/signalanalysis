@@ -61,7 +61,8 @@ def filter_butterworth(data: Union[np.ndarray, pd.DataFrame],
                        filter_type: str = 'low') -> Union[np.ndarray, pd.DataFrame]:
     """Filter data using Butterworth filter
 
-    Filter a given set of data using a Butterworth filter, designed to have a specific passband for desired frequencies.
+    Filter a given set of data using a Butterworth filter, designed to have a specific passband for desired
+    frequencies. It is set up to use seconds, not milliseconds.
 
     Parameters
     ----------
@@ -85,11 +86,12 @@ def filter_butterworth(data: Union[np.ndarray, pd.DataFrame],
 
     # Define filter window (expressed as a fraction of the Nyquist frequency, which is half the sampling rate)
     if isinstance(data, pd.DataFrame):
-        dt = np.mean(np.diff(data.index))/1000
+        dt = np.mean(np.diff(data.index))
+        assert 0.001 <= dt <= 0.5, "dt seems to be a number that doesn't fit with seconds..."
         sample_freq = 1/dt
     window = freq_filter/(sample_freq*0.5)
 
-    [b, a] = signal.butter(order, window, filter_type)
+    [b, a] = signal.butter(N=order, Wn=window, btype=filter_type)
     if isinstance(data, pd.DataFrame):
         data_filtered = pd.DataFrame(columns=data.columns, index=data.index)
         for col in data_filtered:
@@ -100,7 +102,7 @@ def filter_butterworth(data: Union[np.ndarray, pd.DataFrame],
 
 
 def filter_savitzkygolay(data: pd.DataFrame,
-                         window_length: int = 50,
+                         window_length: int = 0.05,
                          order: int = 2,
                          deriv: int = 0,
                          delta: float = 1.0):
@@ -115,8 +117,8 @@ def filter_savitzkygolay(data: pd.DataFrame,
     data : pd.DataFrame
         Data to filter
     window_length : float, optional
-        The length of the filter window in milliseconds. When passed to the scipy filter, will be converted to a
-        positive odd integer (i.e. the number of coefficients). Default=50
+        The length of the filter window in seconds. When passed to the scipy filter, will be converted to a
+        positive odd integer (i.e. the number of coefficients). Default=0.05
     order : int, optional
         The order of the polynomial used to fit the samples. polyorder must be less than window_length. Default=2
     deriv : int, optional

@@ -42,6 +42,9 @@ class Signal:
         ----------
         normalise : str
             Whether or not to normalise all ECG leads, default=False
+        filter : {'butterworth', 'savitzky-golay'}, optional
+            Whether to apply a filter to the signal data, and if so, which filter to apply. Keyword arguments for
+            each filter can then be passed (see filters in tools.maths for details)
         """
         # Properties that can be derived subsequently to opening the file
         self.data = pd.DataFrame()
@@ -64,6 +67,14 @@ class Signal:
             self.normalised = kwargs.get('normalise')
         else:
             self.normalised = bool()
+
+        # NB: filter must be applied in individual class __init__ functions, as it must be applied after the data
+        # have been read into self.data
+        if 'filter' in kwargs:
+            assert kwargs.get('filter') in ['butterworth', 'savitzky-golay'], "Unknown value for filter_signal passed"
+            self.filter = kwargs.get('filter')
+        else:
+            self.filter = None
 
     def reset(self):
         """Reset all properties of the class

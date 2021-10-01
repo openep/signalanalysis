@@ -67,11 +67,16 @@ class Ecg(signalanalysis.general.Signal):
             File containing the indentifiers for the electrode ECG placement. Only useful if `filename` refers to a
             .igb data file for a whole torso simulation, and the ECG needs to be derived from these data
         """
-        super(Ecg, self).__init__()
+        super(Ecg, self).__init__(**kwargs)
 
         # Minimum requirements for an ECG - the raw data, and the file from which it is derived
         self.filename = filename
         self.read(filename, **kwargs)
+        if self.filter is not None:
+            if self.filter == 'butterworth':
+                self.data = tools.maths.filter_butterworth(self.data, **kwargs)
+            elif self.filter == 'savitzky-golay':
+                self.data = tools.maths.filter_savitzkygolay(self.data, **kwargs)
         self.get_n_beats()
 
     def read(self,
