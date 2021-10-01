@@ -270,7 +270,7 @@ class Ecg(signalanalysis.general.Signal):
 def read_ecg_from_igb(filename: str,
                       electrode_file: Optional[str] = None,
                       normalise: bool = False,
-                      dt: float = 2) -> pd.DataFrame:
+                      dt: float = 0.002) -> pd.DataFrame:
     """Translate the phie.igb file(s) to 10-lead, 12-trace ECG data
 
     Extracts the complete mesh data from the phie.igb file using CARPutils, which contains the data for the body
@@ -288,7 +288,7 @@ def read_ecg_from_igb(filename: str,
     normalise : bool, optional
         Whether or not to normalise the ECG signals on a per-lead basis, default=False
     dt : float, optional
-        Time interval from which to construct the time data to associate with the ECG, default=2
+        Time interval from which to construct the time data to associate with the ECG, default=0.002s (2ms)
 
     Returns
     -------
@@ -433,7 +433,7 @@ def get_electrode_phie(phie_data: np.ndarray, electrode_file: Optional[str] = No
 
     # Import default arguments
     if electrode_file is None:
-        electrode_file = '12LeadElectrodes.dat'
+        electrode_file = 'tests/12LeadElectrodes.dat'
 
     # Extract node locations for ECG data, then pull data corresponding to those nodes
     pts_electrodes = np.loadtxt(electrode_file, usecols=(1,), dtype=int)
