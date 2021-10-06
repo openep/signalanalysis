@@ -133,6 +133,15 @@ class Ecg(signalanalysis.general.Signal):
 
         self.comments = data_full.comments
 
+    def get_rms(self, preprocess_data: pd.DataFrame = None, drop_columns: List[str] = None, unipolar_only: bool = True):
+        signal_rms = self.data.copy()
+        if unipolar_only and ('V1' in signal_rms.columns):
+            signal_rms['VF'] = (2 / 3) * signal_rms['aVF']
+            signal_rms['VL'] = (2 / 3) * signal_rms['aVL']
+            signal_rms['VR'] = (2 / 3) * signal_rms['aVR']
+            signal_rms.drop(['aVF', 'aVL', 'aVR', 'LI', 'LII', 'LIII'], axis=1, inplace=True)
+        super(Ecg, self).get_rms(signal_rms, drop_columns=drop_columns)
+
     def get_n_beats(self,
                     threshold: float = 0.5,
                     min_separation: float = 0.2,

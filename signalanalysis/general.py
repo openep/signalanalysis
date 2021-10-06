@@ -1,10 +1,14 @@
 import numpy as np
 import scipy.signal
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from typing import List, Union, Optional
 
 import tools.maths
 import tools.python
+
+sns.set()
 
 
 class Signal:
@@ -95,25 +99,103 @@ class Signal:
         self.comments = None
         self.normalised = bool()
 
-    def get_rms(self,
-                unipolar_only: bool = True):
+    def get_rms(self, preprocess_data: pd.DataFrame = None, drop_columns: List[str] = None):
         """Returns the RMS of the combined signal
 
         Parameters
         ----------
-        unipolar_only : bool
-            Whether to use only unipolar ECG leads to calculate RMS, default=True
+        preprocess_data : pd.DataFrame, optional
+            Only passed if there is some extant data that is to be used for getting the RMS (for example,
+            if the unipolar data only from ECG is being used, and the data is thus preprocessed in a manner specific
+            for ECG data in the ECG routine)
+        drop_columns : list of str, optional
+            List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
+            preprocess_data
+        # unipolar_only : bool
+        #     Whether to use only unipolar ECG leads to calculate RMS, default=True
         """
-        signal_rms = self.data.copy()
-        if unipolar_only and ('V1' in signal_rms.columns):
-            signal_rms['VF'] = (2 / 3) * signal_rms['aVF']
-            signal_rms['VL'] = (2 / 3) * signal_rms['aVL']
-            signal_rms['VR'] = (2 / 3) * signal_rms['aVR']
-            signal_rms.drop(['aVF', 'aVL', 'aVR', 'LI', 'LII', 'LIII'], axis=1, inplace=True)
+        if drop_columns is None:
+            drop_columns = list()
+        if preprocess_data is None:
+            signal_rms = self.data.copy()
+        else:
+            signal_rms = preprocess_data
+
+        if drop_columns is not None:
+            assert all(drop_column in signal_rms for drop_column in drop_columns),\
+                "Values passed in drop_columns not valid"
+            signal_rms.drop(drop_columns, axis=1, inplace=True)
+        # if unipolar_only and ('V1' in signal_rms.columns):
+        #     signal_rms['VF'] = (2 / 3) * signal_rms['aVF']
+        #     signal_rms['VL'] = (2 / 3) * signal_rms['aVL']
+        #     signal_rms['VR'] = (2 / 3) * signal_rms['aVR']
+        #     signal_rms.drop(['aVF', 'aVL', 'aVR', 'LI', 'LII', 'LIII'], axis=1, inplace=True)
         n_leads = len(signal_rms.columns)
         for key in signal_rms:
             signal_rms.loc[:, key] = signal_rms[key] ** 2
         self.rms = np.sqrt(signal_rms.sum(axis=1) / n_leads)
+
+    def get_n_beats(self,
+                    threshold: float = 0.5,
+                    min_separation: float = 0.2,
+                    unipolar_only: bool = True,
+                    plot: bool = False):
+        """Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
+
+        When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
+        RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
+        list in a lossless manner, i.e. saved as [ECG1, ECG2, ..., ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
+        ..., ECGn=[peak(n-1):end]
+
+        Parameters
+        ----------
+        threshold : float {0<1}
+            Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
+        min_separation : float
+            Minimum time (in s) that should be used to separate separate beats, default=0.2s
+        unipolar_only : bool, optional
+            Whether to use only unipolar ECG leads to calculate RMS, default=True
+        plot : bool
+            Whether to plot results of beat detection, default=False
+
+        Returns
+        -------
+        self.n_beats : int
+            Number of beats detected in signal
+
+        Notes
+        -----
+        The scalar RMS is calculated according to
+
+        .. math:: \sqrt{\frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t))}
+
+        for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
+        is calculated using only 'unipolar' leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)
+
+        ..math:: VF = LL-V_{WCT} = \frac{2}{3}aVF
+        ..math:: VL = LA-V_{WCT} = \frac{2}{3}aVL
+        ..math:: VR = RA-V_{WCT} = \frac{2}{3}aVR
+        """
+
+        # Calculate locations of RMS peaks to determine number and locations of beats
+        if not self.rms:
+            self.get_rms(unipolar_only=unipolar_only)
+        i_separation = self.data.index.get_loc(min_separation)
+        i_peaks, _ = scipy.signal.find_peaks(self.rms, height=threshold*max(self.rms), distance=i_separation)
+        self.n_beats = len(i_peaks)
+        self.n_beats_threshold = threshold
+
+        # Split the trace into individual beats
+        t_peaks = self.rms.index[i_peaks]
+        t_split = [self.data.index[0]]+list(t_peaks)+[self.data.index[-1]]
+        for i_split in range(self.n_beats):
+            self.beats.append(self.data.loc[t_split[i_split]:t_split[i_split+2], :])
+
+        if plot:
+            fig = plt.figure()
+            ax = fig.add_subplot(1, 1, 1)
+            ax.plot(self.rms)
+            ax.plot(t_peaks, self.rms[t_peaks], 'o', markerfacecolor='none')
 
 
 def get_signal_rms(signal: pd.DataFrame,
