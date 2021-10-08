@@ -1,0 +1,141 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>tools.plotting.write_colourmap_to_xml &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.python" href="tools.python.html" />
+    <link rel="prev" title="tools.plotting.set_symmetrical_axis_limits" href="tools.plotting.set_symmetrical_axis_limits.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.python.html" title="tools.python"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.plotting.set_symmetrical_axis_limits.html" title="tools.plotting.set_symmetrical_axis_limits"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.plotting.html" accesskey="U">tools.plotting</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">tools.plotting.write_colourmap_to_xml</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="tools-plotting-write-colourmap-to-xml">
+<h1>tools.plotting.write_colourmap_to_xml<a class="headerlink" href="#tools-plotting-write-colourmap-to-xml" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="tools.plotting.write_colourmap_to_xml">
+<span class="sig-prename descclassname"><span class="pre">tools.plotting.</span></span><span class="sig-name descname"><span class="pre">write_colourmap_to_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_highlight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_highlight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity_highlight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_tags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colourmap</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'colourmap.xml'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#tools.plotting.write_colourmap_to_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Paraview friendly colourmap useful for highlighting a particular range</p>
+<p>Creates a colourmap that is entirely gray, save for a specified region of interest that will vary according to the
+specified colourmap</p>
+<dl class="simple">
+<dt>start_data                      start value for overall data (can’t just use data for region of interest -</dt><dd><p>Paraview will scale)</p>
+</dd>
+</dl>
+<p>end_data                        end value for overall data
+start_highlight                 start value for region of interest
+end_highlight                   end value for region of interest</p>
+<p>opacity_data        1.0                 overall opacity to use for all data
+opacity_highlight   1.0                 opacity for region of interest
+colourmap           ‘viridis’           colourmap to use
+outfile             ‘colourmap.xml’     filename to save .xml file under</p>
+<p>None</p>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.plotting.set_symmetrical_axis_limits.html"
+                        title="previous chapter">tools.plotting.set_symmetrical_axis_limits</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.python.html"
+                        title="next chapter">tools.python</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/tools.plotting.write_colourmap_to_xml.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.python.html" title="tools.python"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.plotting.set_symmetrical_axis_limits.html" title="tools.plotting.set_symmetrical_axis_limits"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.plotting.html" >tools.plotting</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">tools.plotting.write_colourmap_to_xml</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

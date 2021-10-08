@@ -111,8 +111,6 @@ class Signal:
         drop_columns : list of str, optional
             List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
             preprocess_data
-        # unipolar_only : bool
-        #     Whether to use only unipolar ECG leads to calculate RMS, default=True
         """
         if drop_columns is None:
             drop_columns = list()

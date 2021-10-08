@@ -1,0 +1,151 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>tools.python.deprecated_convert_time_to_index &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.python.find_list_fraction" href="tools.python.find_list_fraction.html" />
+    <link rel="prev" title="tools.python.convert_time_to_index" href="tools.python.convert_time_to_index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.python.find_list_fraction.html" title="tools.python.find_list_fraction"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.python.convert_time_to_index.html" title="tools.python.convert_time_to_index"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.python.html" accesskey="U">tools.python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">tools.python.deprecated_convert_time_to_index</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="tools-python-deprecated-convert-time-to-index">
+<h1>tools.python.deprecated_convert_time_to_index<a class="headerlink" href="#tools-python-deprecated-convert-time-to-index" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="tools.python.deprecated_convert_time_to_index">
+<span class="sig-prename descclassname"><span class="pre">tools.python.</span></span><span class="sig-name descname"><span class="pre">deprecated_convert_time_to_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qrs_start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qrs_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tools.python.deprecated_convert_time_to_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return indices of QRS start and end points. NB: indices returned match Matlab output</p>
+<dl class="simple">
+<dt>..deprecated::</dt><dd><p>This function is depreacted, but is in use due to other functions still using it for the moment</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qrs_start</strong> (<em>float</em><em> or </em><em>int</em><em>, </em><em>optional</em>) – Start time to convert to index. If not given, will default to the same as the start time of the entire list</p></li>
+<li><p><strong>qrs_end</strong> (<em>float</em><em> or </em><em>int</em><em>, </em><em>optional</em>) – End time to convert to index. If not given, will default to the same as the end time of the entire list</p></li>
+<li><p><strong>time</strong> (<em>float</em><em>, </em><em>optional</em>) – Time data to be used to calculate index. If given, will over-ride the values used for dt/t_start/t_end.
+Default=None</p></li>
+<li><p><strong>t_start</strong> (<em>float</em><em> or </em><em>int</em><em>, </em><em>optional</em>) – Start time of overall data, default=0</p></li>
+<li><p><strong>t_end</strong> (<em>float</em><em> or </em><em>int</em><em>, </em><em>optional</em>) – End time of overall data, default=200</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em> or </em><em>int</em><em>, </em><em>optional</em>) – Interval between time points, default=2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>i_qrs_start</strong> (<em>int</em>) – Index of start time</p></li>
+<li><p><strong>i_qrs_end</strong> (<em>int</em>) – Index of end time</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.python.convert_time_to_index.html"
+                        title="previous chapter">tools.python.convert_time_to_index</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.python.find_list_fraction.html"
+                        title="next chapter">tools.python.find_list_fraction</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/tools.python.deprecated_convert_time_to_index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.python.find_list_fraction.html" title="tools.python.find_list_fraction"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.python.convert_time_to_index.html" title="tools.python.convert_time_to_index"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.python.html" >tools.python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">tools.python.deprecated_convert_time_to_index</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+\indexentry{module@\spxentry{module}!signalanalysis@\spxentry{signalanalysis}|hyperpage}{5}
+\indexentry{signalanalysis@\spxentry{signalanalysis}!module@\spxentry{module}|hyperpage}{5}
+\indexentry{module@\spxentry{module}!signalanalysis.ecg@\spxentry{signalanalysis.ecg}|hyperpage}{5}
+\indexentry{signalanalysis.ecg@\spxentry{signalanalysis.ecg}!module@\spxentry{module}|hyperpage}{5}
+\indexentry{get\_ecg\_from\_electrodes() (in module signalanalysis.ecg)@\spxentry{get\_ecg\_from\_electrodes()}\spxextra{in module signalanalysis.ecg}|hyperpage}{6}
+\indexentry{get\_electrode\_phie() (in module signalanalysis.ecg)@\spxentry{get\_electrode\_phie()}\spxextra{in module signalanalysis.ecg}|hyperpage}{6}
+\indexentry{get\_qrs\_start() (in module signalanalysis.ecg)@\spxentry{get\_qrs\_start()}\spxextra{in module signalanalysis.ecg}|hyperpage}{6}
+\indexentry{read\_ecg\_from\_csv() (in module signalanalysis.ecg)@\spxentry{read\_ecg\_from\_csv()}\spxextra{in module signalanalysis.ecg}|hyperpage}{7}
+\indexentry{read\_ecg\_from\_dat() (in module signalanalysis.ecg)@\spxentry{read\_ecg\_from\_dat()}\spxextra{in module signalanalysis.ecg}|hyperpage}{7}
+\indexentry{read\_ecg\_from\_igb() (in module signalanalysis.ecg)@\spxentry{read\_ecg\_from\_igb()}\spxextra{in module signalanalysis.ecg}|hyperpage}{8}
+\indexentry{Ecg (class in signalanalysis.ecg)@\spxentry{Ecg}\spxextra{class in signalanalysis.ecg}|hyperpage}{8}
+\indexentry{data (signalanalysis.ecg.Ecg attribute)@\spxentry{data}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{8}
+\indexentry{filename (signalanalysis.ecg.Ecg attribute)@\spxentry{filename}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{8}
+\indexentry{normalised (signalanalysis.ecg.Ecg attribute)@\spxentry{normalised}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{8}
+\indexentry{n\_beats (signalanalysis.ecg.Ecg attribute)@\spxentry{n\_beats}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{8}
+\indexentry{qrs\_start (signalanalysis.ecg.Ecg attribute)@\spxentry{qrs\_start}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{9}
+\indexentry{qrs\_end (signalanalysis.ecg.Ecg attribute)@\spxentry{qrs\_end}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{9}
+\indexentry{data\_source (signalanalysis.ecg.Ecg attribute)@\spxentry{data\_source}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{9}
+\indexentry{comments (signalanalysis.ecg.Ecg attribute)@\spxentry{comments}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{9}
+\indexentry{read() (signalanalysis.ecg.Ecg method)@\spxentry{read()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
+\indexentry{read\_ecg\_from\_wfdb() (signalanalysis.ecg.Ecg method)@\spxentry{read\_ecg\_from\_wfdb()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
+\indexentry{get\_n\_beats() (signalanalysis.ecg.Ecg method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
+\indexentry{get\_qrs\_start() (signalanalysis.ecg.Ecg method)@\spxentry{get\_qrs\_start()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
+\indexentry{get\_n\_beats() (signalanalysis.ecg.Ecg method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
+\indexentry{get\_qrs\_start() (signalanalysis.ecg.Ecg method)@\spxentry{get\_qrs\_start()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{10}
+\indexentry{get\_rms() (signalanalysis.ecg.Ecg method)@\spxentry{get\_rms()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{11}
+\indexentry{reset() (signalanalysis.ecg.Ecg method)@\spxentry{reset()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{11}
+\indexentry{module@\spxentry{module}!signalanalysis.general@\spxentry{signalanalysis.general}|hyperpage}{11}
+\indexentry{signalanalysis.general@\spxentry{signalanalysis.general}!module@\spxentry{module}|hyperpage}{11}
+\indexentry{get\_signal\_rms() (in module signalanalysis.general)@\spxentry{get\_signal\_rms()}\spxextra{in module signalanalysis.general}|hyperpage}{11}
+\indexentry{get\_twave\_end() (in module signalanalysis.general)@\spxentry{get\_twave\_end()}\spxextra{in module signalanalysis.general}|hyperpage}{12}
+\indexentry{Signal (class in signalanalysis.general)@\spxentry{Signal}\spxextra{class in signalanalysis.general}|hyperpage}{13}
+\indexentry{data (signalanalysis.general.Signal attribute)@\spxentry{data}\spxextra{signalanalysis.general.Signal attribute}|hyperpage}{13}
+\indexentry{filename (signalanalysis.general.Signal attribute)@\spxentry{filename}\spxextra{signalanalysis.general.Signal attribute}|hyperpage}{13}
+\indexentry{normalised (signalanalysis.general.Signal attribute)@\spxentry{normalised}\spxextra{signalanalysis.general.Signal attribute}|hyperpage}{13}
+\indexentry{n\_beats (signalanalysis.general.Signal attribute)@\spxentry{n\_beats}\spxextra{signalanalysis.general.Signal attribute}|hyperpage}{13}
+\indexentry{qrs\_start (signalanalysis.general.Signal attribute)@\spxentry{qrs\_start}\spxextra{signalanalysis.general.Signal attribute}|hyperpage}{13}
+\indexentry{qrs\_end (signalanalysis.general.Signal attribute)@\spxentry{qrs\_end}\spxextra{signalanalysis.general.Signal attribute}|hyperpage}{13}
+\indexentry{data\_source (signalanalysis.general.Signal attribute)@\spxentry{data\_source}\spxextra{signalanalysis.general.Signal attribute}|hyperpage}{13}
+\indexentry{comments (signalanalysis.general.Signal attribute)@\spxentry{comments}\spxextra{signalanalysis.general.Signal attribute}|hyperpage}{13}
+\indexentry{get\_rms() (signalanalysis.general.Signal method)@\spxentry{get\_rms()}\spxextra{signalanalysis.general.Signal method}|hyperpage}{13}
+\indexentry{get\_n\_beats() (signalanalysis.general.Signal method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.general.Signal method}|hyperpage}{14}
+\indexentry{get\_rms() (signalanalysis.general.Signal method)@\spxentry{get\_rms()}\spxextra{signalanalysis.general.Signal method}|hyperpage}{14}
+\indexentry{reset() (signalanalysis.general.Signal method)@\spxentry{reset()}\spxextra{signalanalysis.general.Signal method}|hyperpage}{14}
+\indexentry{module@\spxentry{module}!signalanalysis.vcg@\spxentry{signalanalysis.vcg}|hyperpage}{15}
+\indexentry{signalanalysis.vcg@\spxentry{signalanalysis.vcg}!module@\spxentry{module}|hyperpage}{15}
+\indexentry{calculate\_delta\_dipole\_angle() (in module signalanalysis.vcg)@\spxentry{calculate\_delta\_dipole\_angle()}\spxextra{in module signalanalysis.vcg}|hyperpage}{15}
+\indexentry{compare\_dipole\_angles() (in module signalanalysis.vcg)@\spxentry{compare\_dipole\_angles()}\spxextra{in module signalanalysis.vcg}|hyperpage}{16}
+\indexentry{get\_azimuth\_elevation() (in module signalanalysis.vcg)@\spxentry{get\_azimuth\_elevation()}\spxextra{in module signalanalysis.vcg}|hyperpage}{17}
+\indexentry{get\_dipole\_magnitudes() (in module signalanalysis.vcg)@\spxentry{get\_dipole\_magnitudes()}\spxextra{in module signalanalysis.vcg}|hyperpage}{17}
+\indexentry{get\_qrs\_start\_end() (in module signalanalysis.vcg)@\spxentry{get\_qrs\_start\_end()}\spxextra{in module signalanalysis.vcg}|hyperpage}{18}
+\indexentry{get\_single\_vcg\_azimuth\_elevation() (in module signalanalysis.vcg)@\spxentry{get\_single\_vcg\_azimuth\_elevation()}\spxextra{in module signalanalysis.vcg}|hyperpage}{19}
+\indexentry{get\_spatial\_velocity() (in module signalanalysis.vcg)@\spxentry{get\_spatial\_velocity()}\spxextra{in module signalanalysis.vcg}|hyperpage}{19}
+\indexentry{get\_vcg\_area() (in module signalanalysis.vcg)@\spxentry{get\_vcg\_area()}\spxextra{in module signalanalysis.vcg}|hyperpage}{20}
+\indexentry{get\_vcg\_from\_ecg() (in module signalanalysis.vcg)@\spxentry{get\_vcg\_from\_ecg()}\spxextra{in module signalanalysis.vcg}|hyperpage}{21}
+\indexentry{get\_weighted\_dipole\_angles() (in module signalanalysis.vcg)@\spxentry{get\_weighted\_dipole\_angles()}\spxextra{in module signalanalysis.vcg}|hyperpage}{21}
+\indexentry{plot\_density\_effect() (in module signalanalysis.vcg)@\spxentry{plot\_density\_effect()}\spxextra{in module signalanalysis.vcg}|hyperpage}{22}
+\indexentry{plot\_metric\_change() (in module signalanalysis.vcg)@\spxentry{plot\_metric\_change()}\spxextra{in module signalanalysis.vcg}|hyperpage}{22}
+\indexentry{plot\_metric\_change\_barplot() (in module signalanalysis.vcg)@\spxentry{plot\_metric\_change\_barplot()}\spxextra{in module signalanalysis.vcg}|hyperpage}{22}
+\indexentry{Vcg (class in signalanalysis.vcg)@\spxentry{Vcg}\spxextra{class in signalanalysis.vcg}|hyperpage}{23}
+\indexentry{get\_from\_ecg() (signalanalysis.vcg.Vcg method)@\spxentry{get\_from\_ecg()}\spxextra{signalanalysis.vcg.Vcg method}|hyperpage}{23}
+\indexentry{get\_n\_beats() (signalanalysis.vcg.Vcg method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.vcg.Vcg method}|hyperpage}{23}
+\indexentry{get\_rms() (signalanalysis.vcg.Vcg method)@\spxentry{get\_rms()}\spxextra{signalanalysis.vcg.Vcg method}|hyperpage}{24}
+\indexentry{reset() (signalanalysis.vcg.Vcg method)@\spxentry{reset()}\spxextra{signalanalysis.vcg.Vcg method}|hyperpage}{24}
+\indexentry{module@\spxentry{module}!signalplot@\spxentry{signalplot}|hyperpage}{24}
+\indexentry{signalplot@\spxentry{signalplot}!module@\spxentry{module}|hyperpage}{24}
+\indexentry{module@\spxentry{module}!signalplot.ecg@\spxentry{signalplot.ecg}|hyperpage}{24}
+\indexentry{signalplot.ecg@\spxentry{signalplot.ecg}!module@\spxentry{module}|hyperpage}{24}
+\indexentry{plot() (in module signalplot.ecg)@\spxentry{plot()}\spxextra{in module signalplot.ecg}|hyperpage}{25}
+\indexentry{module@\spxentry{module}!signalplot.general@\spxentry{signalplot.general}|hyperpage}{26}
+\indexentry{signalplot.general@\spxentry{signalplot.general}!module@\spxentry{module}|hyperpage}{26}
+\indexentry{module@\spxentry{module}!signalplot.vcg@\spxentry{signalplot.vcg}|hyperpage}{26}
+\indexentry{signalplot.vcg@\spxentry{signalplot.vcg}!module@\spxentry{module}|hyperpage}{26}
+\indexentry{add\_unit\_sphere() (in module signalplot.vcg)@\spxentry{add\_unit\_sphere()}\spxextra{in module signalplot.vcg}|hyperpage}{26}
+\indexentry{animate\_3d() (in module signalplot.vcg)@\spxentry{animate\_3d()}\spxextra{in module signalplot.vcg}|hyperpage}{27}
+\indexentry{plot\_2d() (in module signalplot.vcg)@\spxentry{plot\_2d()}\spxextra{in module signalplot.vcg}|hyperpage}{27}
+\indexentry{plot\_3d() (in module signalplot.vcg)@\spxentry{plot\_3d()}\spxextra{in module signalplot.vcg}|hyperpage}{28}
+\indexentry{plot\_arc3d() (in module signalplot.vcg)@\spxentry{plot\_arc3d()}\spxextra{in module signalplot.vcg}|hyperpage}{29}
+\indexentry{plot\_density\_effect() (in module signalplot.vcg)@\spxentry{plot\_density\_effect()}\spxextra{in module signalplot.vcg}|hyperpage}{29}
+\indexentry{plot\_metric\_change() (in module signalplot.vcg)@\spxentry{plot\_metric\_change()}\spxextra{in module signalplot.vcg}|hyperpage}{30}
+\indexentry{plot\_metric\_change\_barplot() (in module signalplot.vcg)@\spxentry{plot\_metric\_change\_barplot()}\spxextra{in module signalplot.vcg}|hyperpage}{31}
+\indexentry{plot\_spatial\_velocity() (in module signalplot.vcg)@\spxentry{plot\_spatial\_velocity()}\spxextra{in module signalplot.vcg}|hyperpage}{32}
+\indexentry{plot\_xyz\_components() (in module signalplot.vcg)@\spxentry{plot\_xyz\_components()}\spxextra{in module signalplot.vcg}|hyperpage}{33}
+\indexentry{plot\_xyz\_vector() (in module signalplot.vcg)@\spxentry{plot\_xyz\_vector()}\spxextra{in module signalplot.vcg}|hyperpage}{34}
+\indexentry{module@\spxentry{module}!tools@\spxentry{tools}|hyperpage}{35}
+\indexentry{tools@\spxentry{tools}!module@\spxentry{module}|hyperpage}{35}
+\indexentry{module@\spxentry{module}!tools.maths@\spxentry{tools.maths}|hyperpage}{35}
+\indexentry{tools.maths@\spxentry{tools.maths}!module@\spxentry{module}|hyperpage}{35}
+\indexentry{acos2() (in module tools.maths)@\spxentry{acos2()}\spxextra{in module tools.maths}|hyperpage}{35}
+\indexentry{asin2() (in module tools.maths)@\spxentry{asin2()}\spxextra{in module tools.maths}|hyperpage}{36}
+\indexentry{filter\_butterworth() (in module tools.maths)@\spxentry{filter\_butterworth()}\spxextra{in module tools.maths}|hyperpage}{36}
+\indexentry{filter\_savitzkygolay() (in module tools.maths)@\spxentry{filter\_savitzkygolay()}\spxextra{in module tools.maths}|hyperpage}{36}
+\indexentry{get\_median() (in module tools.maths)@\spxentry{get\_median()}\spxextra{in module tools.maths}|hyperpage}{37}
+\indexentry{normalise\_signal() (in module tools.maths)@\spxentry{normalise\_signal()}\spxextra{in module tools.maths}|hyperpage}{37}
+\indexentry{simplex\_volume() (in module tools.maths)@\spxentry{simplex\_volume()}\spxextra{in module tools.maths}|hyperpage}{38}
+\indexentry{module@\spxentry{module}!tools.plotting@\spxentry{tools.plotting}|hyperpage}{38}
+\indexentry{tools.plotting@\spxentry{tools.plotting}!module@\spxentry{module}|hyperpage}{38}
+\indexentry{add\_colourbar() (in module tools.plotting)@\spxentry{add\_colourbar()}\spxextra{in module tools.plotting}|hyperpage}{38}
+\indexentry{add\_xyz\_axes() (in module tools.plotting)@\spxentry{add\_xyz\_axes()}\spxextra{in module tools.plotting}|hyperpage}{39}
+\indexentry{get\_plot\_colours() (in module tools.plotting)@\spxentry{get\_plot\_colours()}\spxextra{in module tools.plotting}|hyperpage}{39}
+\indexentry{get\_plot\_lines() (in module tools.plotting)@\spxentry{get\_plot\_lines()}\spxextra{in module tools.plotting}|hyperpage}{40}
+\indexentry{set\_axis\_limits() (in module tools.plotting)@\spxentry{set\_axis\_limits()}\spxextra{in module tools.plotting}|hyperpage}{40}
+\indexentry{set\_symmetrical\_axis\_limits() (in module tools.plotting)@\spxentry{set\_symmetrical\_axis\_limits()}\spxextra{in module tools.plotting}|hyperpage}{40}
+\indexentry{write\_colourmap\_to\_xml() (in module tools.plotting)@\spxentry{write\_colourmap\_to\_xml()}\spxextra{in module tools.plotting}|hyperpage}{41}
+\indexentry{module@\spxentry{module}!tools.python@\spxentry{tools.python}|hyperpage}{41}
+\indexentry{tools.python@\spxentry{tools.python}!module@\spxentry{module}|hyperpage}{41}
+\indexentry{check\_list\_depth() (in module tools.python)@\spxentry{check\_list\_depth()}\spxextra{in module tools.python}|hyperpage}{42}
+\indexentry{convert\_index\_to\_time() (in module tools.python)@\spxentry{convert\_index\_to\_time()}\spxextra{in module tools.python}|hyperpage}{42}
+\indexentry{convert\_input\_to\_list() (in module tools.python)@\spxentry{convert\_input\_to\_list()}\spxextra{in module tools.python}|hyperpage}{43}
+\indexentry{convert\_time\_to\_index() (in module tools.python)@\spxentry{convert\_time\_to\_index()}\spxextra{in module tools.python}|hyperpage}{44}
+\indexentry{deprecated\_convert\_time\_to\_index() (in module tools.python)@\spxentry{deprecated\_convert\_time\_to\_index()}\spxextra{in module tools.python}|hyperpage}{44}
+\indexentry{find\_list\_fraction() (in module tools.python)@\spxentry{find\_list\_fraction()}\spxextra{in module tools.python}|hyperpage}{45}
+\indexentry{get\_i\_colour() (in module tools.python)@\spxentry{get\_i\_colour()}\spxextra{in module tools.python}|hyperpage}{45}
+\indexentry{get\_time() (in module tools.python)@\spxentry{get\_time()}\spxextra{in module tools.python}|hyperpage}{45}
+\indexentry{recursive\_len() (in module tools.python)@\spxentry{recursive\_len()}\spxextra{in module tools.python}|hyperpage}{46}

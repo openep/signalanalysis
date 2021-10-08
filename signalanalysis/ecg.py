@@ -174,14 +174,18 @@ class Ecg(signalanalysis.general.Signal):
         -----
         The scalar RMS is calculated according to
 
-        .. math:: \sqrt{\frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t))}
+        .. math::
+            \sqrt{ \\frac{1}{n}\sum_{i=1}^n (\\textnormal{ECG}_i^2(t)) }
 
         for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
         is calculated using only 'unipolar' leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)
 
-        ..math:: VF = LL-V_{WCT} = \frac{2}{3}aVF
-        ..math:: VL = LA-V_{WCT} = \frac{2}{3}aVL
-        ..math:: VR = RA-V_{WCT} = \frac{2}{3}aVR
+        .. math::
+            VF = LL-V_{WCT} = \\frac{2}{3}aVF
+        .. math::
+            VL = LA-V_{WCT} = \\frac{2}{3}aVL
+        .. math::
+            VR = RA-V_{WCT} = \\frac{2}{3}aVR
         """
 
         # Calculate locations of RMS peaks to determine number and locations of beats

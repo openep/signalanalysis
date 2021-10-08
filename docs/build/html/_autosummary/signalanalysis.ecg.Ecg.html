@@ -1,0 +1,368 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>signalanalysis.ecg.Ecg &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.general" href="signalanalysis.general.html" />
+    <link rel="prev" title="signalanalysis.ecg.read_ecg_from_igb" href="signalanalysis.ecg.read_ecg_from_igb.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.general.html" title="signalanalysis.general"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.ecg.read_ecg_from_igb.html" title="signalanalysis.ecg.read_ecg_from_igb"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.ecg.html" accesskey="U">signalanalysis.ecg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.ecg.Ecg</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="signalanalysis-ecg-ecg">
+<h1>signalanalysis.ecg.Ecg<a class="headerlink" href="#signalanalysis-ecg-ecg" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">signalanalysis.ecg.</span></span><span class="sig-name descname"><span class="pre">Ecg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span></code></a></p>
+<p>Base ECG class to encapsulate data regarding an ECG recording, inheriting from signalanalysis.general.Signal</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#signalanalysis.ecg.Ecg.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw ECG data for the different leads</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#signalanalysis.ecg.Ecg.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filename for the location of the data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.normalised">
+<span class="sig-name descname"><span class="pre">normalised</span></span><a class="headerlink" href="#signalanalysis.ecg.Ecg.normalised" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not the data for the leads have been normalised</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.n_beats">
+<span class="sig-name descname"><span class="pre">n_beats</span></span><a class="headerlink" href="#signalanalysis.ecg.Ecg.n_beats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of beats recorded in the trace. Set to 0 if not calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.qrs_start">
+<span class="sig-name descname"><span class="pre">qrs_start</span></span><a class="headerlink" href="#signalanalysis.ecg.Ecg.qrs_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Times calculated for the start of the QRS complex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.qrs_end">
+<span class="sig-name descname"><span class="pre">qrs_end</span></span><a class="headerlink" href="#signalanalysis.ecg.Ecg.qrs_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Times calculated for the end of the QRS complex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>end</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.data_source">
+<span class="sig-name descname"><span class="pre">data_source</span></span><a class="headerlink" href="#signalanalysis.ecg.Ecg.data_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Source for the data, if known e.g. Staff III database, CARP simulation, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.comments">
+<span class="sig-name descname"><span class="pre">comments</span></span><a class="headerlink" href="#signalanalysis.ecg.Ecg.comments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any further details known about the data, e.g. sex, age, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in the data from the original file. Called upon initialisation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.read_ecg_from_wfdb">
+<span class="sig-name descname"><span class="pre">read_ecg_from_wfdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.read_ecg_from_wfdb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads data from a WFDB type series of files, e.g. from the Lobachevsky ECG database
+(<a class="reference external" href="https://physionet.org/content/ludb/1.0.1/">https://physionet.org/content/ludb/1.0.1/</a>)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.get_n_beats">
+<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_n_beats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the number of beats given in the recording</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.get_qrs_start">
+<span class="sig-name descname"><span class="pre">get_qrs_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_qrs_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the start of the QRS complex</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id0" title="signalanalysis.ecg.Ecg.get_n_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_beats</span></code></a></p></td>
+<td><p>Calculate the number of beats in an ECG trace, and save the individual beats to file for later use</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id1" title="signalanalysis.ecg.Ecg.get_qrs_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_qrs_start</span></code></a></p></td>
+<td><p>Calculates start of QRS complex using method of Hermans et al. (2017).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.get_rms" title="signalanalysis.ecg.Ecg.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
+<td><p>Returns the RMS of the combined signal</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.read" title="signalanalysis.ecg.Ecg.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.read_ecg_from_wfdb" title="signalanalysis.ecg.Ecg.read_ecg_from_wfdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_ecg_from_wfdb</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.reset" title="signalanalysis.ecg.Ecg.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
+<td><p>Reset all properties of the class</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the number of beats in an ECG trace, and save the individual beats to file for later use</p>
+<p>When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
+RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
+list in a lossless manner, i.e. saved as [ECG1, ECG2, …, ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
+…, ECGn=[peak(n-1):end]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float {0&lt;1}</em>) – Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5</p></li>
+<li><p><strong>min_separation</strong> (<em>float</em>) – Minimum time (in s) that should be used to separate separate beats, default=0.2s</p></li>
+<li><p><strong>unipolar_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use only unipolar ECG leads to calculate RMS, default=True</p></li>
+<li><p><strong>plot</strong> (<em>bool</em>) – Whether to plot results of beat detection, default=False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self.n_beats</strong> – Number of beats detected in signal</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The scalar RMS is calculated according to</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{ \frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t)) }\]</div>
+<p>for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
+is calculated using only ‘unipolar’ leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)</p>
+<div class="math notranslate nohighlight">
+\[VF = LL-V_{WCT} = \frac{2}{3}aVF\]</div>
+<div class="math notranslate nohighlight">
+\[VL = LA-V_{WCT} = \frac{2}{3}aVL\]</div>
+<div class="math notranslate nohighlight">
+\[VR = RA-V_{WCT} = \frac{2}{3}aVR\]</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">get_qrs_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates start of QRS complex using method of Hermans et al. (2017)</p>
+<p>Calculates the start of the QRS complex by a simplified version of the work presented in <a class="footnote-reference brackets" href="#id3" id="id2">1</a>, wherein the
+point of maximum second derivative of the ECG RMS signal is used as the start of the QRS complex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#signalanalysis.ecg.Ecg" title="signalanalysis.ecg.Ecg"><em>Ecg</em></a>) – ECG data to analyse</p></li>
+<li><p><strong>unipolar_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use only unipolar leads to calculate RMS, default=True</p></li>
+<li><p><strong>min_separation</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum separation from the peak used to detect various beats, default=0.05s</p></li>
+<li><p><strong>plot_result</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the results for error-checking, default=False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self.qrs_start</strong> – QRS start times</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For further details of the action of unipolar_only, see general_analysis.get_signal_rms</p>
+<p>It is faster to use scipy.ndimage.laplace() rather than np.gradient(np.gradient)), but preliminary checks
+indicated some edge problems that might throw off the results.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>Hermans BJM, Vink AS, Bennis FC, Filippini LH, Meijborg VMF, Wilde AAM, Pison L, Postema PG, Delhaas T,
+“The development and validation of an easy to use automatic QT-interval algorithm,”
+PLoS ONE, 12(9), 1–14 (2017), <a class="reference external" href="https://doi.org/10.1371/journal.pone.0184352">https://doi.org/10.1371/journal.pone.0184352</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.get_rms">
+<span class="sig-name descname"><span class="pre">get_rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_rms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the RMS of the combined signal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preprocess_data</strong> (<em>pd.DataFrame</em><em>, </em><em>optional</em>) – Only passed if there is some extant data that is to be used for getting the RMS (for example,
+if the unipolar data only from ECG is being used, and the data is thus preprocessed in a manner specific
+for ECG data in the ECG routine)</p></li>
+<li><p><strong>drop_columns</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
+preprocess_data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset all properties of the class</p>
+<p>Function called when reading in new data into an existing class (for some reason), which would make these
+properties and attributes clash with the other data</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="signalanalysis.ecg.read_ecg_from_igb.html"
+                        title="previous chapter">signalanalysis.ecg.read_ecg_from_igb</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signalanalysis.general.html"
+                        title="next chapter">signalanalysis.general</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/signalanalysis.ecg.Ecg.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.general.html" title="signalanalysis.general"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.ecg.read_ecg_from_igb.html" title="signalanalysis.ecg.read_ecg_from_igb"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.ecg.html" >signalanalysis.ecg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.ecg.Ecg</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

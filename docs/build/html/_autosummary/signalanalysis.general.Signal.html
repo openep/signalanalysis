@@ -1,0 +1,308 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>signalanalysis.general.Signal &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.vcg" href="signalanalysis.vcg.html" />
+    <link rel="prev" title="signalanalysis.general.get_twave_end" href="signalanalysis.general.get_twave_end.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.html" title="signalanalysis.vcg"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.general.get_twave_end.html" title="signalanalysis.general.get_twave_end"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.general.html" accesskey="U">signalanalysis.general</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.general.Signal</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="signalanalysis-general-signal">
+<h1>signalanalysis.general.Signal<a class="headerlink" href="#signalanalysis-general-signal" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">signalanalysis.general.</span></span><span class="sig-name descname"><span class="pre">Signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.general.Signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for general signal, either ECG or VCG</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#signalanalysis.general.Signal.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw ECG data for the different leads</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#signalanalysis.general.Signal.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filename for the location of the data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.normalised">
+<span class="sig-name descname"><span class="pre">normalised</span></span><a class="headerlink" href="#signalanalysis.general.Signal.normalised" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not the data for the leads have been normalised</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.n_beats">
+<span class="sig-name descname"><span class="pre">n_beats</span></span><a class="headerlink" href="#signalanalysis.general.Signal.n_beats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of beats recorded in the trace. Set to 0 if not calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.qrs_start">
+<span class="sig-name descname"><span class="pre">qrs_start</span></span><a class="headerlink" href="#signalanalysis.general.Signal.qrs_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Times calculated for the start of the QRS complex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.qrs_end">
+<span class="sig-name descname"><span class="pre">qrs_end</span></span><a class="headerlink" href="#signalanalysis.general.Signal.qrs_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Times calculated for the end of the QRS complex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>end</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.data_source">
+<span class="sig-name descname"><span class="pre">data_source</span></span><a class="headerlink" href="#signalanalysis.general.Signal.data_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Source for the data, if known e.g. Staff III database, CARP simulation, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.comments">
+<span class="sig-name descname"><span class="pre">comments</span></span><a class="headerlink" href="#signalanalysis.general.Signal.comments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any further details known about the data, e.g. sex, age, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.get_rms">
+<span class="sig-name descname"><span class="pre">get_rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.general.Signal.get_rms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the RMS of the combined signal</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.general.Signal.get_n_beats" title="signalanalysis.general.Signal.get_n_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_beats</span></code></a></p></td>
+<td><p>Calculate the number of beats in an ECG trace, and save the individual beats to file for later use</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
+<td><p>Returns the RMS of the combined signal</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.general.Signal.reset" title="signalanalysis.general.Signal.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
+<td><p>Reset all properties of the class</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.get_n_beats">
+<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.general.Signal.get_n_beats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the number of beats in an ECG trace, and save the individual beats to file for later use</p>
+<blockquote>
+<div><p>When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
+RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
+list in a lossless manner, i.e. saved as [ECG1, ECG2, …, ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
+…, ECGn=[peak(n-1):end]</p>
+<dl class="simple">
+<dt>threshold<span class="classifier">float {0&lt;1}</span></dt><dd><p>Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5</p>
+</dd>
+<dt>min_separation<span class="classifier">float</span></dt><dd><p>Minimum time (in s) that should be used to separate separate beats, default=0.2s</p>
+</dd>
+<dt>unipolar_only<span class="classifier">bool, optional</span></dt><dd><p>Whether to use only unipolar ECG leads to calculate RMS, default=True</p>
+</dd>
+<dt>plot<span class="classifier">bool</span></dt><dd><p>Whether to plot results of beat detection, default=False</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>self.n_beats<span class="classifier">int</span></dt><dd><p>Number of beats detected in signal</p>
+</dd>
+</dl>
+<p>The scalar RMS is calculated according to</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{\]</div>
+</div></blockquote>
+<p>rac{1}{n}sum_{i=1}^n (        extnormal{ECG}_i^2(t))}</p>
+<blockquote>
+<div><p>for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
+is calculated using only ‘unipolar’ leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)</p>
+<p>..math:: VF = LL-V_{WCT} =</p>
+</div></blockquote>
+<dl class="simple">
+<dt>rac{2}{3}aVF</dt><dd><p>..math:: VL = LA-V_{WCT} =</p>
+</dd>
+<dt>rac{2}{3}aVL</dt><dd><p>..math:: VR = RA-V_{WCT} =</p>
+</dd>
+</dl>
+<p>rac{2}{3}aVR</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">get_rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the RMS of the combined signal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preprocess_data</strong> (<em>pd.DataFrame</em><em>, </em><em>optional</em>) – Only passed if there is some extant data that is to be used for getting the RMS (for example,
+if the unipolar data only from ECG is being used, and the data is thus preprocessed in a manner specific
+for ECG data in the ECG routine)</p></li>
+<li><p><strong>drop_columns</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
+preprocess_data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.general.Signal.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset all properties of the class</p>
+<p>Function called when reading in new data into an existing class (for some reason), which would make these
+properties and attributes clash with the other data</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="signalanalysis.general.get_twave_end.html"
+                        title="previous chapter">signalanalysis.general.get_twave_end</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signalanalysis.vcg.html"
+                        title="next chapter">signalanalysis.vcg</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/signalanalysis.general.Signal.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.html" title="signalanalysis.vcg"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.general.get_twave_end.html" title="signalanalysis.general.get_twave_end"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.general.html" >signalanalysis.general</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.general.Signal</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

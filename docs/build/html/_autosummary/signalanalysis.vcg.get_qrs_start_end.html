@@ -1,0 +1,158 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>signalanalysis.vcg.get_qrs_start_end &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.vcg.get_single_vcg_azimuth_elevation" href="signalanalysis.vcg.get_single_vcg_azimuth_elevation.html" />
+    <link rel="prev" title="signalanalysis.vcg.get_dipole_magnitudes" href="signalanalysis.vcg.get_dipole_magnitudes.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.get_single_vcg_azimuth_elevation.html" title="signalanalysis.vcg.get_single_vcg_azimuth_elevation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.get_dipole_magnitudes.html" title="signalanalysis.vcg.get_dipole_magnitudes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.vcg.html" accesskey="U">signalanalysis.vcg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.vcg.get_qrs_start_end</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="signalanalysis-vcg-get-qrs-start-end">
+<h1>signalanalysis.vcg.get_qrs_start_end<a class="headerlink" href="#signalanalysis-vcg-get-qrs-start-end" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="signalanalysis.vcg.get_qrs_start_end">
+<span class="sig-prename descclassname"><span class="pre">signalanalysis.vcg.</span></span><span class="sig-name descname"><span class="pre">get_qrs_start_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcgs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity_offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_p</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_frac_start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.22</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_frac_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.54</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_sv</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qrs_window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">180</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ecgs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#signalanalysis.vcg.get_qrs_start_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the extent of the VCG QRS complex on the basis of max derivative</p>
+<p>TODO: Check whether i_qrs_start variable is needed, or can be simplified using DataFrame function</p>
+<p>Calculate the start and end points, and hence duration, of the QRS complex of a list of VCGs. It does this by
+finding the time at which the spatial velocity of the VCG exceeds a threshold value (the start time), then searches
+backwards from the end of the VCG to find when this threshold is exceeded (the end time); the start and end
+thresholds do not necessarily have to be the same.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vcgs</strong> (<em>list of pd.DataFrame</em><em> or </em><em>pd.DataFrame</em>) – List of VCG data to get QRS start and end points for</p></li>
+<li><p><strong>velocity_offset</strong> (<em>int</em><em>, </em><em>optional</em>) – Offset between values in VCG over which to calculate spatial velocity, i.e. 1 will use neighbouring values to
+calculate the gradient/velocity. Default=2</p></li>
+<li><p><strong>low_p</strong> (<em>float</em><em>, </em><em>optional</em>) – Low frequency for bandpass filter, default=40</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Order for Butterworth filter, default=2</p></li>
+<li><p><strong>threshold_frac_start</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of maximum spatial velocity to trigger start of QRS detection, default=0.15</p></li>
+<li><p><strong>threshold_frac_end</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of maximum spatial velocity to trigger end of QRS detection, default=0.15</p></li>
+<li><p><strong>filter_sv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to apply filtering to spatial velocity prior to finding the start/end points for the threshold</p></li>
+<li><p><strong>qrs_window</strong> (<em>float</em><em>, </em><em>optional</em>) – Default size of ‘window’ in which to search for end of QRS complex, default=180ms</p></li>
+<li><p><strong>ecgs</strong> (<em>list of pd.DataFrame</em><em> or </em><em>pd.DataFrame</em><em>, </em><em>optional</em>) – ECG data associated with VCG data. Only used if having trouble establishing QRS start, in which case will be
+used to plot ECG data to allow user to determine whether or not the QRS is occurring at the start of the
+simulation, or whether there is a more deep-seated issue with the data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>qrs_start</strong> (<em>list of float</em>) – List of start time of QRS complexes of provided VCGs</p></li>
+<li><p><strong>qrs_end</strong> (<em>list of float</em>) – List of end time of QRS complex of provided VCGs</p></li>
+<li><p><strong>qrs_duration</strong> (<em>list of float</em>) – List of duration of QRS complex of provided VCGs</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="signalanalysis.vcg.get_dipole_magnitudes.html"
+                        title="previous chapter">signalanalysis.vcg.get_dipole_magnitudes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signalanalysis.vcg.get_single_vcg_azimuth_elevation.html"
+                        title="next chapter">signalanalysis.vcg.get_single_vcg_azimuth_elevation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/signalanalysis.vcg.get_qrs_start_end.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.get_single_vcg_azimuth_elevation.html" title="signalanalysis.vcg.get_single_vcg_azimuth_elevation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.get_dipole_magnitudes.html" title="signalanalysis.vcg.get_dipole_magnitudes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.vcg.html" >signalanalysis.vcg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.vcg.get_qrs_start_end</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

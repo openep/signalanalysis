@@ -1,0 +1,141 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>signalanalysis.ecg.read_ecg_from_csv &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.ecg.read_ecg_from_dat" href="signalanalysis.ecg.read_ecg_from_dat.html" />
+    <link rel="prev" title="signalanalysis.ecg.get_qrs_start" href="signalanalysis.ecg.get_qrs_start.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.ecg.read_ecg_from_dat.html" title="signalanalysis.ecg.read_ecg_from_dat"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.ecg.get_qrs_start.html" title="signalanalysis.ecg.get_qrs_start"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.ecg.html" accesskey="U">signalanalysis.ecg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.ecg.read_ecg_from_csv</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="signalanalysis-ecg-read-ecg-from-csv">
+<h1>signalanalysis.ecg.read_ecg_from_csv<a class="headerlink" href="#signalanalysis-ecg-read-ecg-from-csv" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="signalanalysis.ecg.read_ecg_from_csv">
+<span class="sig-prename descclassname"><span class="pre">signalanalysis.ecg.</span></span><span class="sig-name descname"><span class="pre">read_ecg_from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#signalanalysis.ecg.read_ecg_from_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract ECG data from CSV file exported from St Jude Medical ECG recording</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Name/location of the .dat file to read</p></li>
+<li><p><strong>normalise</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to normalise the ECG signals on a per-lead basis, default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ecg</strong> – Extracted data for the 12-lead ECG</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="signalanalysis.ecg.get_qrs_start.html"
+                        title="previous chapter">signalanalysis.ecg.get_qrs_start</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signalanalysis.ecg.read_ecg_from_dat.html"
+                        title="next chapter">signalanalysis.ecg.read_ecg_from_dat</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/signalanalysis.ecg.read_ecg_from_csv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.ecg.read_ecg_from_dat.html" title="signalanalysis.ecg.read_ecg_from_dat"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.ecg.get_qrs_start.html" title="signalanalysis.ecg.get_qrs_start"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.ecg.html" >signalanalysis.ecg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.ecg.read_ecg_from_csv</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

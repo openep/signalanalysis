@@ -1,0 +1,161 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>signalplot.vcg.plot_spatial_velocity &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalplot.vcg.plot_xyz_components" href="signalplot.vcg.plot_xyz_components.html" />
+    <link rel="prev" title="signalplot.vcg.plot_metric_change_barplot" href="signalplot.vcg.plot_metric_change_barplot.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalplot.vcg.plot_xyz_components.html" title="signalplot.vcg.plot_xyz_components"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="signalplot.vcg.plot_metric_change_barplot.html" title="signalplot.vcg.plot_metric_change_barplot"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalplot.html" >signalplot</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalplot.vcg.html" accesskey="U">signalplot.vcg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalplot.vcg.plot_spatial_velocity</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="signalplot-vcg-plot-spatial-velocity">
+<h1>signalplot.vcg.plot_spatial_velocity<a class="headerlink" href="#signalplot-vcg-plot-spatial-velocity" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="signalplot.vcg.plot_spatial_velocity">
+<span class="sig-prename descclassname"><span class="pre">signalplot.vcg.</span></span><span class="sig-name descname"><span class="pre">plot_spatial_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sv</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">matplotlib.pyplot.figure</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_vcg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_limits</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits_linestyles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits_colours</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_sv</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#signalplot.vcg.plot_spatial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the spatial velocity for given VCG data</p>
+<p>Plot the spatial velocity and VCG elements, with limits (e.g. QRS limits) if provided. Note that if spatial
+velocity is not provided, default values will be used to calculate it - if anything else is desired, then spatial
+velocity must be calculated first and provided to the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vcg</strong> (<em>pd.DataFrame</em><em> or </em><em>list of pd.DataFrame</em>) – VCG data</p></li>
+<li><p><strong>sv</strong> (<em>list of list of float</em><em>, </em><em>optional</em>) – Spatial velocity data. Only required to be given here if special parameters wish to be given, otherwise it
+will be calculated using default parameters (default)</p></li>
+<li><p><strong>limits</strong> (<em>list of list of float</em><em>, </em><em>optional</em>) – <p>A series of ‘limits’ to be plotted on the figure with the VCG and spatial plot. Presented as a list of the
+same length of the VCG data, with the required limits within:</p>
+<blockquote>
+<div><p>e.g. [[QRS_start1, QRS_start2, …], [QRS_end1, QRS_end2, …], …]</p>
+</div></blockquote>
+<p>Default=None</p>
+</p></li>
+<li><p><strong>fig</strong> (<em>plt.figure</em><em>, </em><em>optional</em>) – Handle to existing figure, if data is wished to be plotted on existing plot, default=None</p></li>
+<li><p><strong>legend_vcg</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Labels to apply to the VCG/SV data, default=None</p></li>
+<li><p><strong>legend_limits</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Labels to apply to the limits, default=None</p></li>
+<li><p><strong>limits_linestyles</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Linestyles to apply to the different limits being supplied, default=None (will use varying linestyles based
+on tools.plotting.get_plot_lines)</p></li>
+<li><p><strong>limits_colours</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Colours to apply to the different limits being supplied, default=None (will use varying colours based on
+tools.plotting.get_plot_colours)</p></li>
+<li><p><strong>filter_sv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to apply filtering to spatial velocity prior to finding the start/end points for the
+threshold, default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Handles to the figure and axes generated</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fig, ax</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="signalplot.vcg.plot_metric_change_barplot.html"
+                        title="previous chapter">signalplot.vcg.plot_metric_change_barplot</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signalplot.vcg.plot_xyz_components.html"
+                        title="next chapter">signalplot.vcg.plot_xyz_components</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/signalplot.vcg.plot_spatial_velocity.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalplot.vcg.plot_xyz_components.html" title="signalplot.vcg.plot_xyz_components"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="signalplot.vcg.plot_metric_change_barplot.html" title="signalplot.vcg.plot_metric_change_barplot"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalplot.html" >signalplot</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalplot.vcg.html" >signalplot.vcg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalplot.vcg.plot_spatial_velocity</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

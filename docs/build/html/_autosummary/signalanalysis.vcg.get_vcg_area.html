@@ -1,0 +1,153 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>signalanalysis.vcg.get_vcg_area &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.vcg.get_vcg_from_ecg" href="signalanalysis.vcg.get_vcg_from_ecg.html" />
+    <link rel="prev" title="signalanalysis.vcg.get_spatial_velocity" href="signalanalysis.vcg.get_spatial_velocity.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.get_vcg_from_ecg.html" title="signalanalysis.vcg.get_vcg_from_ecg"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.get_spatial_velocity.html" title="signalanalysis.vcg.get_spatial_velocity"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.vcg.html" accesskey="U">signalanalysis.vcg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.vcg.get_vcg_area</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="signalanalysis-vcg-get-vcg-area">
+<h1>signalanalysis.vcg.get_vcg_area<a class="headerlink" href="#signalanalysis-vcg-get-vcg-area" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="signalanalysis.vcg.get_vcg_area">
+<span class="sig-prename descclassname"><span class="pre">signalanalysis.vcg.</span></span><span class="sig-name descname"><span class="pre">get_vcg_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcgs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits_start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'pythag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matlab_match</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#signalanalysis.vcg.get_vcg_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate area under VCG curve for a given section (e.g. QRS complex).</p>
+<p>Calculate the area under the VCG between two intervals (usually QRS start and QRS end). This is calculated in two
+ways: a ‘Pythagorean’ method, wherein the area under each of the VCG(x), VCG(y) and VCG(z) curves are calculated,
+then combined in a Euclidean norm, or a ‘3D’ method, wherein the area of the arc traced in 3D space between
+successive timepoints is calculated, then summed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vcgs</strong> (<em>pd.DataFrame</em><em> or </em><em>list of pd.DataFrame</em>) – VCG data from which to get area</p></li>
+<li><p><strong>limits_start</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Start times (NOT INDICES) for where to calculate area under curve from, default=0</p></li>
+<li><p><strong>limits_end</strong> (<em>list of float</em><em>, </em><em>optional</em>) – End times (NOT INDICES) for where to calculate are under curve until, default=end</p></li>
+<li><p><strong>method</strong> (<em>{'pythag'</em><em>, </em><em>'3d'}</em><em>, </em><em>optional</em>) – Which method to use to calculate the area under the VCG curve, default=’pythag’</p></li>
+<li><p><strong>matlab_match</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to alter the calculation for start and end indices to match the original Matlab output, from which this
+module is based, default=False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>qrs_area_3d</strong> (<em>list of float</em>) – Values for the area under the curve (as defined by the 3D method) between the provided limits for each of the
+VCGs</p></li>
+<li><p><strong>qrs_area_pythag</strong> (<em>list of float</em>) – Values for the area under the curve (as defined by the Pythagorean method) between the provided limits for each
+of the VCGs</p></li>
+<li><p><strong>qrs_area_components</strong> (<em>list of list of float</em>) – Areas under the individual x, y, z curves of the VCG, for each of the supplied VCGs</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="signalanalysis.vcg.get_spatial_velocity.html"
+                        title="previous chapter">signalanalysis.vcg.get_spatial_velocity</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signalanalysis.vcg.get_vcg_from_ecg.html"
+                        title="next chapter">signalanalysis.vcg.get_vcg_from_ecg</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/signalanalysis.vcg.get_vcg_area.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.get_vcg_from_ecg.html" title="signalanalysis.vcg.get_vcg_from_ecg"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.vcg.get_spatial_velocity.html" title="signalanalysis.vcg.get_spatial_velocity"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="signalanalysis.vcg.html" >signalanalysis.vcg</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.vcg.get_vcg_area</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

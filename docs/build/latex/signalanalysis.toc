@@ -1,0 +1,79 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Usage}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Installation \& Getting Started}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}Reading ECG/VCG data}{4}{section.1.2}
+\contentsline {section}{\numberline {1.3}Shifting to classes from methods}{4}{section.1.3}
+\contentsline {chapter}{\numberline {2}docutils Documentation}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}signalanalysis}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}signalanalysis.ecg}{5}{subsection.2.1.1}
+\contentsline {subsubsection}{signalanalysis.ecg.get\_ecg\_from\_electrodes}{6}{subsubsection*.3}
+\contentsline {subsubsection}{signalanalysis.ecg.get\_electrode\_phie}{6}{subsubsection*.5}
+\contentsline {subsubsection}{signalanalysis.ecg.get\_qrs\_start}{6}{subsubsection*.7}
+\contentsline {subsubsection}{signalanalysis.ecg.read\_ecg\_from\_csv}{7}{subsubsection*.10}
+\contentsline {subsubsection}{signalanalysis.ecg.read\_ecg\_from\_dat}{7}{subsubsection*.12}
+\contentsline {subsubsection}{signalanalysis.ecg.read\_ecg\_from\_igb}{8}{subsubsection*.14}
+\contentsline {subsubsection}{signalanalysis.ecg.Ecg}{8}{subsubsection*.16}
+\contentsline {subsection}{\numberline {2.1.2}signalanalysis.general}{11}{subsection.2.1.2}
+\contentsline {subsubsection}{signalanalysis.general.get\_signal\_rms}{11}{subsubsection*.35}
+\contentsline {subsubsection}{signalanalysis.general.get\_twave\_end}{12}{subsubsection*.37}
+\contentsline {subsubsection}{signalanalysis.general.Signal}{13}{subsubsection*.39}
+\contentsline {subsection}{\numberline {2.1.3}signalanalysis.vcg}{15}{subsection.2.1.3}
+\contentsline {subsubsection}{signalanalysis.vcg.calculate\_delta\_dipole\_angle}{15}{subsubsection*.53}
+\contentsline {subsubsection}{signalanalysis.vcg.compare\_dipole\_angles}{16}{subsubsection*.55}
+\contentsline {subsubsection}{signalanalysis.vcg.get\_azimuth\_elevation}{17}{subsubsection*.57}
+\contentsline {subsubsection}{signalanalysis.vcg.get\_dipole\_magnitudes}{17}{subsubsection*.59}
+\contentsline {subsubsection}{signalanalysis.vcg.get\_qrs\_start\_end}{18}{subsubsection*.61}
+\contentsline {subsubsection}{signalanalysis.vcg.get\_single\_vcg\_azimuth\_elevation}{19}{subsubsection*.63}
+\contentsline {subsubsection}{signalanalysis.vcg.get\_spatial\_velocity}{19}{subsubsection*.65}
+\contentsline {subsubsection}{signalanalysis.vcg.get\_vcg\_area}{20}{subsubsection*.70}
+\contentsline {subsubsection}{signalanalysis.vcg.get\_vcg\_from\_ecg}{21}{subsubsection*.72}
+\contentsline {subsubsection}{signalanalysis.vcg.get\_weighted\_dipole\_angles}{21}{subsubsection*.74}
+\contentsline {subsubsection}{signalanalysis.vcg.plot\_density\_effect}{22}{subsubsection*.76}
+\contentsline {subsubsection}{signalanalysis.vcg.plot\_metric\_change}{22}{subsubsection*.78}
+\contentsline {subsubsection}{signalanalysis.vcg.plot\_metric\_change\_barplot}{22}{subsubsection*.80}
+\contentsline {subsubsection}{signalanalysis.vcg.Vcg}{23}{subsubsection*.82}
+\contentsline {section}{\numberline {2.2}signalplot}{24}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}signalplot.ecg}{24}{subsection.2.2.1}
+\contentsline {subsubsection}{signalplot.ecg.plot}{25}{subsubsection*.88}
+\contentsline {subsection}{\numberline {2.2.2}signalplot.general}{26}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}signalplot.vcg}{26}{subsection.2.2.3}
+\contentsline {subsubsection}{signalplot.vcg.add\_unit\_sphere}{26}{subsubsection*.90}
+\contentsline {subsubsection}{signalplot.vcg.animate\_3d}{27}{subsubsection*.92}
+\contentsline {subsubsection}{signalplot.vcg.plot\_2d}{27}{subsubsection*.94}
+\contentsline {subsubsection}{signalplot.vcg.plot\_3d}{28}{subsubsection*.96}
+\contentsline {subsubsection}{signalplot.vcg.plot\_arc3d}{29}{subsubsection*.98}
+\contentsline {subsubsection}{signalplot.vcg.plot\_density\_effect}{29}{subsubsection*.100}
+\contentsline {subsubsection}{signalplot.vcg.plot\_metric\_change}{30}{subsubsection*.102}
+\contentsline {subsubsection}{signalplot.vcg.plot\_metric\_change\_barplot}{31}{subsubsection*.104}
+\contentsline {subsubsection}{signalplot.vcg.plot\_spatial\_velocity}{32}{subsubsection*.106}
+\contentsline {subsubsection}{signalplot.vcg.plot\_xyz\_components}{33}{subsubsection*.108}
+\contentsline {subsubsection}{signalplot.vcg.plot\_xyz\_vector}{34}{subsubsection*.110}
+\contentsline {section}{\numberline {2.3}tools}{35}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}tools.maths}{35}{subsection.2.3.1}
+\contentsline {subsubsection}{tools.maths.acos2}{35}{subsubsection*.112}
+\contentsline {subsubsection}{tools.maths.asin2}{36}{subsubsection*.114}
+\contentsline {subsubsection}{tools.maths.filter\_butterworth}{36}{subsubsection*.116}
+\contentsline {subsubsection}{tools.maths.filter\_savitzkygolay}{36}{subsubsection*.118}
+\contentsline {subsubsection}{tools.maths.get\_median}{37}{subsubsection*.120}
+\contentsline {subsubsection}{tools.maths.normalise\_signal}{37}{subsubsection*.122}
+\contentsline {subsubsection}{tools.maths.simplex\_volume}{38}{subsubsection*.124}
+\contentsline {subsection}{\numberline {2.3.2}tools.plotting}{38}{subsection.2.3.2}
+\contentsline {subsubsection}{tools.plotting.add\_colourbar}{38}{subsubsection*.126}
+\contentsline {subsubsection}{tools.plotting.add\_xyz\_axes}{39}{subsubsection*.128}
+\contentsline {subsubsection}{tools.plotting.get\_plot\_colours}{39}{subsubsection*.130}
+\contentsline {subsubsection}{tools.plotting.get\_plot\_lines}{40}{subsubsection*.132}
+\contentsline {subsubsection}{tools.plotting.set\_axis\_limits}{40}{subsubsection*.134}
+\contentsline {subsubsection}{tools.plotting.set\_symmetrical\_axis\_limits}{40}{subsubsection*.136}
+\contentsline {subsubsection}{tools.plotting.write\_colourmap\_to\_xml}{41}{subsubsection*.138}
+\contentsline {subsection}{\numberline {2.3.3}tools.python}{41}{subsection.2.3.3}
+\contentsline {subsubsection}{tools.python.check\_list\_depth}{42}{subsubsection*.140}
+\contentsline {subsubsection}{tools.python.convert\_index\_to\_time}{42}{subsubsection*.142}
+\contentsline {subsubsection}{tools.python.convert\_input\_to\_list}{43}{subsubsection*.144}
+\contentsline {subsubsection}{tools.python.convert\_time\_to\_index}{44}{subsubsection*.146}
+\contentsline {subsubsection}{tools.python.deprecated\_convert\_time\_to\_index}{44}{subsubsection*.148}
+\contentsline {subsubsection}{tools.python.find\_list\_fraction}{45}{subsubsection*.150}
+\contentsline {subsubsection}{tools.python.get\_i\_colour}{45}{subsubsection*.152}
+\contentsline {subsubsection}{tools.python.get\_time}{45}{subsubsection*.154}
+\contentsline {subsubsection}{tools.python.recursive\_len}{46}{subsubsection*.156}
+\contentsline {chapter}{\numberline {3}Indices and tables}{47}{chapter.3}
+\contentsline {chapter}{Python Module Index}{49}{section*.158}

@@ -1,0 +1,158 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>signalanalysis.ecg &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.ecg.get_ecg_from_electrodes" href="signalanalysis.ecg.get_ecg_from_electrodes.html" />
+    <link rel="prev" title="signalanalysis" href="signalanalysis.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.ecg.get_ecg_from_electrodes.html" title="signalanalysis.ecg.get_ecg_from_electrodes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.html" title="signalanalysis"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" accesskey="U">signalanalysis</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.ecg</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-signalanalysis.ecg">
+<span id="signalanalysis-ecg"></span><h1>signalanalysis.ecg<a class="headerlink" href="#module-signalanalysis.ecg" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="signalanalysis.ecg.get_ecg_from_electrodes.html#signalanalysis.ecg.get_ecg_from_electrodes" title="signalanalysis.ecg.get_ecg_from_electrodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ecg_from_electrodes</span></code></a></p></td>
+<td><p>Converts electrode phi_e data to ECG lead data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="signalanalysis.ecg.get_electrode_phie.html#signalanalysis.ecg.get_electrode_phie" title="signalanalysis.ecg.get_electrode_phie"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_electrode_phie</span></code></a></p></td>
+<td><p>Extract phi_e data corresponding to ECG electrode locations</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="signalanalysis.ecg.get_qrs_start.html#signalanalysis.ecg.get_qrs_start" title="signalanalysis.ecg.get_qrs_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_qrs_start</span></code></a></p></td>
+<td><p>Calculates start of QRS complex using method of Hermans et al. (2017).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="signalanalysis.ecg.read_ecg_from_csv.html#signalanalysis.ecg.read_ecg_from_csv" title="signalanalysis.ecg.read_ecg_from_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_ecg_from_csv</span></code></a></p></td>
+<td><p>Extract ECG data from CSV file exported from St Jude Medical ECG recording</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="signalanalysis.ecg.read_ecg_from_dat.html#signalanalysis.ecg.read_ecg_from_dat" title="signalanalysis.ecg.read_ecg_from_dat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_ecg_from_dat</span></code></a></p></td>
+<td><p>Read ECG data from .dat file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="signalanalysis.ecg.read_ecg_from_igb.html#signalanalysis.ecg.read_ecg_from_igb" title="signalanalysis.ecg.read_ecg_from_igb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_ecg_from_igb</span></code></a></p></td>
+<td><p>Translate the phie.igb file(s) to 10-lead, 12-trace ECG data</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg" title="signalanalysis.ecg.Ecg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ecg</span></code></a></p></td>
+<td><p>Base ECG class to encapsulate data regarding an ECG recording, inheriting from signalanalysis.general.Signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="signalanalysis.html"
+                        title="previous chapter">signalanalysis</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signalanalysis.ecg.get_ecg_from_electrodes.html"
+                        title="next chapter">signalanalysis.ecg.get_ecg_from_electrodes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/signalanalysis.ecg.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.ecg.get_ecg_from_electrodes.html" title="signalanalysis.ecg.get_ecg_from_electrodes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="signalanalysis.html" title="signalanalysis"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">signalanalysis 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docutils.html" >docutils Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="signalanalysis.html" >signalanalysis</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">signalanalysis.ecg</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Philip Gemmell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>
