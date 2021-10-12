@@ -61,7 +61,7 @@
 
 
 \title{signalanalysis}
-\date{Oct 08, 2021}
+\date{Oct 12, 2021}
 \release{0.1}
 \author{Philip Gemmell}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -858,69 +858,58 @@ Reset all properties of the class
 \phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:id0}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_n\_beats}}}{\emph{\DUrole{n}{threshold}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.5}}, \emph{\DUrole{n}{min\_separation}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.2}}, \emph{\DUrole{n}{unipolar\_only}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{True}}, \emph{\DUrole{n}{plot}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}}{}
 \sphinxAtStartPar
 Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
-\begin{quote}
 
 \sphinxAtStartPar
 When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
 RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
 list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where ECG1={[}0:peak2{]}, ECG2={[}peak1:peak3{]},
 …, ECGn={[}peak(n\sphinxhyphen{}1):end{]}
-\begin{description}
-\item[{threshold}] \leavevmode{[}float \{0\textless{}1\}{]}
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
 \sphinxAtStartPar
-Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
+\sphinxstyleliteralstrong{\sphinxupquote{threshold}} (\sphinxstyleliteralemphasis{\sphinxupquote{float \{0\textless{}1\}}}) \textendash{} Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
 
-\item[{min\_separation}] \leavevmode{[}float{]}
+\item {} 
 \sphinxAtStartPar
-Minimum time (in s) that should be used to separate separate beats, default=0.2s
+\sphinxstyleliteralstrong{\sphinxupquote{min\_separation}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Minimum time (in s) that should be used to separate separate beats, default=0.2s
 
-\item[{unipolar\_only}] \leavevmode{[}bool, optional{]}
+\item {} 
 \sphinxAtStartPar
-Whether to use only unipolar ECG leads to calculate RMS, default=True
+\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Whether to use only unipolar ECG leads to calculate RMS, default=True
 
-\item[{plot}] \leavevmode{[}bool{]}
+\item {} 
 \sphinxAtStartPar
-Whether to plot results of beat detection, default=False
+\sphinxstyleliteralstrong{\sphinxupquote{plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to plot results of beat detection, default=False
 
-\end{description}
-\begin{description}
-\item[{self.n\_beats}] \leavevmode{[}int{]}
+\end{itemize}
+
+\item[{Returns}] \leavevmode
 \sphinxAtStartPar
-Number of beats detected in signal
+\sphinxstylestrong{self.n\_beats} \textendash{} Number of beats detected in signal
 
-\end{description}
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+int
+
+\end{description}\end{quote}
+\subsubsection*{Notes}
 
 \sphinxAtStartPar
 The scalar RMS is calculated according to
 \begin{equation*}
-\begin{split}\sqrt{\end{split}
-\end{equation*}\end{quote}
-
-\sphinxAtStartPar
-rac\{1\}\{n\}sum\_\{i=1\}\textasciicircum{}n (        extnormal\{ECG\}\_i\textasciicircum{}2(t))\}
-\begin{quote}
-
+\begin{split}\sqrt{ \frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t)) }\end{split}
+\end{equation*}
 \sphinxAtStartPar
 for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar\_only is set to true, then ECG RMS
 is calculated using only ‘unipolar’ leads. This uses V1\sphinxhyphen{}6, and the non\sphinxhyphen{}augmented limb leads (VF, VL and VR)
-
-\sphinxAtStartPar
-..math:: VF = LL\sphinxhyphen{}V\_\{WCT\} =
-\end{quote}
-\begin{description}
-\item[{rac\{2\}\{3\}aVF}] \leavevmode
-\sphinxAtStartPar
-..math:: VL = LA\sphinxhyphen{}V\_\{WCT\} =
-
-\item[{rac\{2\}\{3\}aVL}] \leavevmode
-\sphinxAtStartPar
-..math:: VR = RA\sphinxhyphen{}V\_\{WCT\} =
-
-\end{description}
-
-\sphinxAtStartPar
-rac\{2\}\{3\}aVR
-
+\begin{equation*}
+\begin{split}VF = LL-V_{WCT} = \frac{2}{3}aVF\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}VL = LA-V_{WCT} = \frac{2}{3}aVL\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}VR = RA-V_{WCT} = \frac{2}{3}aVR\end{split}
+\end{equation*}
 \end{fulllineitems}
 
 \index{get\_qrs\_start() (signalanalysis.ecg.Ecg method)@\spxentry{get\_qrs\_start()}\spxextra{signalanalysis.ecg.Ecg method}}
@@ -1000,18 +989,6 @@ for ECG data in the ECG routine)
 \sphinxstyleliteralstrong{\sphinxupquote{drop\_columns}} (\sphinxstyleliteralemphasis{\sphinxupquote{list of str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
 preprocess\_data
 
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{\#}}) \textendash{} 
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{RMS}} (\sphinxstyleliteralemphasis{\sphinxupquote{\#     Whether to use only unipolar ECG leads to calculate}}) \textendash{} 
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{default=True}} \textendash{} 
-
 \end{itemize}
 
 \end{description}\end{quote}
@@ -1082,6 +1059,10 @@ Return the time point at which it is estimated that the T\sphinxhyphen{}wave has
 \sphinxAtStartPar
 Calculate the ECG(RMS) of the ECG as a scalar
 \begin{quote}
+
+\sphinxAtStartPar
+\DUrole{versionmodified,deprecated}{Deprecated since version The: }use of this module is deprecated, and the internal class method should be used in preference (
+signalanalysis.general.Signal.get\_rms())
 \begin{description}
 \item[{signal: pd.DataFrame}] \leavevmode
 \sphinxAtStartPar
@@ -1515,18 +1496,6 @@ for ECG data in the ECG routine)
 \sphinxAtStartPar
 \sphinxstyleliteralstrong{\sphinxupquote{drop\_columns}} (\sphinxstyleliteralemphasis{\sphinxupquote{list of str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
 preprocess\_data
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{\#}}) \textendash{} 
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{RMS}} (\sphinxstyleliteralemphasis{\sphinxupquote{\#     Whether to use only unipolar ECG leads to calculate}}) \textendash{} 
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{default=True}} \textendash{} 
 
 \end{itemize}
 
@@ -2493,18 +2462,6 @@ for ECG data in the ECG routine)
 \sphinxAtStartPar
 \sphinxstyleliteralstrong{\sphinxupquote{drop\_columns}} (\sphinxstyleliteralemphasis{\sphinxupquote{list of str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
 preprocess\_data
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{\#}}) \textendash{} 
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{RMS}} (\sphinxstyleliteralemphasis{\sphinxupquote{\#     Whether to use only unipolar ECG leads to calculate}}) \textendash{} 
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{default=True}} \textendash{} 
 
 \end{itemize}
 

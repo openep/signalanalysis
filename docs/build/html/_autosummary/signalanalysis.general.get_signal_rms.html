@@ -61,7 +61,11 @@
 <span class="sig-prename descclassname"><span class="pre">signalanalysis.general.</span></span><span class="sig-name descname"><span class="pre">get_signal_rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#signalanalysis.general.get_signal_rms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the ECG(RMS) of the ECG as a scalar</p>
 <blockquote>
-<div><dl class="simple">
+<div><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version The: </span>use of this module is deprecated, and the internal class method should be used in preference (
+signalanalysis.general.Signal.get_rms())</p>
+</div>
+<dl class="simple">
 <dt>signal: pd.DataFrame</dt><dd><p>ECG or VCG data to process</p>
 </dd>
 <dt>unipolar_only<span class="classifier">bool, optional</span></dt><dd><p>Whether to use only unipolar ECG leads to calculate RMS, default=True</p>

@@ -188,7 +188,7 @@
 <td><p>Calculates start of QRS complex using method of Hermans et al. (2017).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.get_rms" title="signalanalysis.ecg.Ecg.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
-<td><p>Returns the RMS of the combined signal</p></td>
+<td><p>Supplement the <a class="reference internal" href="signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">unipolar_only</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.read" title="signalanalysis.ecg.Ecg.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a></p></td>
 <td><p></p></td>
@@ -278,18 +278,29 @@ PLoS ONE, 12(9), 1–14 (2017), <a class="reference external" href="https://doi.
 <dl class="py method">
 <dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.get_rms">
 <span class="sig-name descname"><span class="pre">get_rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_rms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the RMS of the combined signal</p>
+<dd><p>Supplement the <a class="reference internal" href="signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">unipolar_only</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>preprocess_data</strong> (<em>pd.DataFrame</em><em>, </em><em>optional</em>) – Only passed if there is some extant data that is to be used for getting the RMS (for example,
-if the unipolar data only from ECG is being used, and the data is thus preprocessed in a manner specific
-for ECG data in the ECG routine)</p></li>
-<li><p><strong>drop_columns</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
-preprocess_data</p></li>
+<li><p><strong>preprocess_data</strong> (<em>pd.DataFrame</em><em>, </em><em>optional</em>) – See <a class="reference internal" href="signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p></li>
+<li><p><strong>drop_columns</strong> (<em>list of str</em><em>, </em><em>optional</em>) – See <a class="reference internal" href="signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p></li>
+<li><p><strong>unipolar_only</strong> (<em>optional</em>) – Whether to use only unipolar ECG leads to calculate RMS, default=True</p></li>
 </ul>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">unipolar_only</span></code> is set to true, then ECG RMS is calculated using only ‘unipolar’ leads. This uses V1-6,
+and the non-augmented limb leads (VF, VL and VR)</p>
+<div class="math notranslate nohighlight">
+\[VF = LL-V_{WCT} = \frac{2}{3}aVF\]</div>
+<div class="math notranslate nohighlight">
+\[VL = LA-V_{WCT} = \frac{2}{3}aVL\]</div>
+<div class="math notranslate nohighlight">
+\[VR = RA-V_{WCT} = \frac{2}{3}aVR\]</div>
 </dd></dl>
 
 <dl class="py method">

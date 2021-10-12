@@ -134,7 +134,7 @@ class Ecg(signalanalysis.general.Signal):
         self.comments = data_full.comments
 
     def get_rms(self, preprocess_data: pd.DataFrame = None, drop_columns: List[str] = None, unipolar_only: bool = True):
-        """Supplement the RMS calculation :meth:`signalanalysis.general.Signal.get_rms` with a "unipolar_only" option
+        """Supplement the :meth:`signalanalysis.general.Signal.get_rms` with ``unipolar_only``
 
         Parameters
         ----------
@@ -147,11 +147,11 @@ class Ecg(signalanalysis.general.Signal):
 
         See Also
         --------
-        See documentation of :py:meth:`signalanalysis.general.Signal.get_rms` for full details
+        :py:meth:`signalanalysis.general.Signal.get_rms`
 
         Notes
         -----
-        If unipolar_only is set to true, then ECG RMS is calculated using only 'unipolar' leads. This uses V1-6,
+        If ``unipolar_only`` is set to true, then ECG RMS is calculated using only 'unipolar' leads. This uses V1-6,
         and the non-augmented limb leads (VF, VL and VR)
 
         .. math::

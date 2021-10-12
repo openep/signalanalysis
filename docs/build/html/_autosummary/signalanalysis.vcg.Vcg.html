@@ -156,7 +156,19 @@ for ECG data in the ECG routine)</p></li>
 preprocess_data</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self.rms</strong> – RMS signal of all combined leads</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.Series</p>
+</dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>The scalar RMS is calculated according to</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{ \frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t)) }\]</div>
+<p>for all leads available from the signal (12 for ECG, 3 for VCG), unless some leads are excluded via the
+drop_columns parameter.</p>
 </dd></dl>
 
 <dl class="py method">
