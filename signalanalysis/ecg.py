@@ -134,6 +134,33 @@ class Ecg(signalanalysis.general.Signal):
         self.comments = data_full.comments
 
     def get_rms(self, preprocess_data: pd.DataFrame = None, drop_columns: List[str] = None, unipolar_only: bool = True):
+        """Supplement the RMS calculation :meth:`signalanalysis.general.Signal.get_rms` with a "unipolar_only" option
+
+        Parameters
+        ----------
+        preprocess_data : pd.DataFrame, optional
+            See :meth:`signalanalysis.general.Signal.get_rms`
+        drop_columns : list of str, optional
+            See :meth:`signalanalysis.general.Signal.get_rms`
+        unipolar_only : optional
+            Whether to use only unipolar ECG leads to calculate RMS, default=True
+
+        See Also
+        --------
+        See documentation of :py:meth:`signalanalysis.general.Signal.get_rms` for full details
+
+        Notes
+        -----
+        If unipolar_only is set to true, then ECG RMS is calculated using only 'unipolar' leads. This uses V1-6,
+        and the non-augmented limb leads (VF, VL and VR)
+
+        .. math::
+            VF = LL-V_{WCT} = \\frac{2}{3}aVF
+        .. math::
+            VL = LA-V_{WCT} = \\frac{2}{3}aVL
+        .. math::
+            VR = RA-V_{WCT} = \\frac{2}{3}aVR
+        """
         signal_rms = self.data.copy()
         if unipolar_only and ('V1' in signal_rms.columns):
             signal_rms['VF'] = (2 / 3) * signal_rms['aVF']
@@ -175,7 +202,7 @@ class Ecg(signalanalysis.general.Signal):
         The scalar RMS is calculated according to
 
         .. math::
-            \sqrt{ \\frac{1}{n}\sum_{i=1}^n (\\textnormal{ECG}_i^2(t)) }
+            \\sqrt{ \\frac{1}{n}\\sum_{i=1}^n (\\textnormal{ECG}_i^2(t)) }
 
         for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
         is calculated using only 'unipolar' leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)

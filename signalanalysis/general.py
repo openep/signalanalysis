@@ -111,9 +111,25 @@ class Signal:
         drop_columns : list of str, optional
             List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
             preprocess_data
+
+        Returns
+        -------
+        self.rms : pd.Series
+            RMS signal of all combined leads
+
+        Notes
+        -----
+        The scalar RMS is calculated according to
+
+        .. math::
+            \\sqrt{ \\frac{1}{n}\\sum_{i=1}^n (\\textnormal{ECG}_i^2(t)) }
+
+        for all leads available from the signal (12 for ECG, 3 for VCG), unless some leads are excluded via the
+        drop_columns parameter.
         """
         if drop_columns is None:
             drop_columns = list()
+
         if preprocess_data is None:
             signal_rms = self.data.copy()
         else:
@@ -123,11 +139,7 @@ class Signal:
             assert all(drop_column in signal_rms for drop_column in drop_columns),\
                 "Values passed in drop_columns not valid"
             signal_rms.drop(drop_columns, axis=1, inplace=True)
-        # if unipolar_only and ('V1' in signal_rms.columns):
-        #     signal_rms['VF'] = (2 / 3) * signal_rms['aVF']
-        #     signal_rms['VL'] = (2 / 3) * signal_rms['aVL']
-        #     signal_rms['VR'] = (2 / 3) * signal_rms['aVR']
-        #     signal_rms.drop(['aVF', 'aVL', 'aVR', 'LI', 'LII', 'LIII'], axis=1, inplace=True)
+
         n_leads = len(signal_rms.columns)
         for key in signal_rms:
             signal_rms.loc[:, key] = signal_rms[key] ** 2
@@ -199,6 +211,10 @@ class Signal:
 def get_signal_rms(signal: pd.DataFrame,
                    unipolar_only: bool = True) -> List[float]:
     """Calculate the ECG(RMS) of the ECG as a scalar
+
+    .. deprecated::
+        The use of this module is deprecated, and the internal class method should be used in preference (
+        signalanalysis.general.Signal.get_rms())
 
     Parameters
     ----------
