@@ -57,17 +57,16 @@
 <h1>signalanalysis.ecg.get_electrode_phie<a class="headerlink" href="#signalanalysis-ecg-get-electrode-phie" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="signalanalysis.ecg.get_electrode_phie">
-<span class="sig-prename descclassname"><span class="pre">signalanalysis.ecg.</span></span><span class="sig-name descname"><span class="pre">get_electrode_phie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phie_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electrode_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#signalanalysis.ecg.get_electrode_phie" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">signalanalysis.ecg.</span></span><span class="sig-name descname"><span class="pre">get_electrode_phie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phie_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electrode_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#signalanalysis.ecg.get_electrode_phie" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract phi_e data corresponding to ECG electrode locations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>phie_data</strong> (<em>np.ndarray</em>) – Numpy array that holds all phie data for all nodes in a given mesh</p></li>
-<li><p><strong>electrode_file</strong> (<em>str</em><em>, </em><em>optional</em>) – File containing entries corresponding to the nodes of the mesh which determine the location of the 10 leads
+<li><p><strong>electrode_file</strong> (<em>str</em>) – File containing entries corresponding to the nodes of the mesh which determine the location of the 10 leads
 for the ECG. Will default to very project specific location. The input text file has each node on a separate
 line (zero-indexed), with the node locations given in order: V1, V2, V3, V4, V5, V6, RA, LA, RL,
-LL. Will default to ‘12LeadElectrodes.dat’, but this is almost certainly not going to right for an individual
-project</p></li>
+LL.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -77,6 +76,8 @@ project</p></li>
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>For the .igb data used thus far, the <cite>electrode_file</cite> can be found at <code class="docutils literal notranslate"><span class="pre">tests/12LeadElectrodes.dat</span></code></p>
 </dd></dl>
 
 </section>

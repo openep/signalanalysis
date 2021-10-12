@@ -17,26 +17,11 @@ sns.set()
 
 
 class Ecg(signalanalysis.general.Signal):
-    """Base ECG class to encapsulate data regarding an ECG recording, inheriting from signalanalysis.general.Signal
+    """Base class to encapsulate data regarding an ECG recording, inheriting from :class:`signalanalysis.general.Signal`
 
-    Attributes
-    ----------
-    data : pd.DataFrame
-        Raw ECG data for the different leads
-    filename : str
-        Filename for the location of the data
-    normalised : bool
-        Whether or not the data for the leads have been normalised
-    n_beats : int
-        Number of beats recorded in the trace. Set to 0 if not calculated
-    qrs_start : list of float
-        Times calculated for the start of the QRS complex
-    qrs_end : end
-        Times calculated for the end of the QRS complex
-    data_source : str
-        Source for the data, if known e.g. Staff III database, CARP simulation, etc.
-    comments : str
-        Any further details known about the data, e.g. sex, age, etc.
+    See Also
+    --------
+    :py:class:`signalanalysis.general.Signal`
 
     Methods
     -------
@@ -59,13 +44,19 @@ class Ecg(signalanalysis.general.Signal):
         ----------
         filename : str
             Location of data
-        normalise : str
-            Whether or not to normalise all ECG leads, default=False
+
+        Other Parameters
+        ----------------
+        electrode_file : str
+            File containing the identifiers for the electrode ECG placement. Required if and only if `filename` refers
+            to a .igb data file for a whole torso simulation, and the ECG needs to be derived from these data
         dt : float
             Time interval between recording data
-        electrode_file : str
-            File containing the indentifiers for the electrode ECG placement. Only useful if `filename` refers to a
-            .igb data file for a whole torso simulation, and the ECG needs to be derived from these data
+
+        See Also
+        --------
+        :py:meth:`signalanalysis.general.Signal.__init__` : Base initialisation method
+        :py:meth:`signalanalysis.ecg.Ecg.read` : Reads the data from the file into the object
         """
         super(Ecg, self).__init__(**kwargs)
 
@@ -73,10 +64,7 @@ class Ecg(signalanalysis.general.Signal):
         self.filename = filename
         self.read(filename, **kwargs)
         if self.filter is not None:
-            if self.filter == 'butterworth':
-                self.data = tools.maths.filter_butterworth(self.data, **kwargs)
-            elif self.filter == 'savitzky-golay':
-                self.data = tools.maths.filter_savitzkygolay(self.data, **kwargs)
+            self.apply_filter(**kwargs)
         self.get_n_beats()
 
     def read(self,
@@ -133,8 +121,11 @@ class Ecg(signalanalysis.general.Signal):
 
         self.comments = data_full.comments
 
-    def get_rms(self, preprocess_data: pd.DataFrame = None, drop_columns: List[str] = None, unipolar_only: bool = True):
-        """Supplement the :meth:`signalanalysis.general.Signal.get_rms` with ``unipolar_only``
+    def get_rms(self,
+                preprocess_data: pd.DataFrame = None,
+                drop_columns: List[str] = None,
+                unipolar_only: bool = True):
+        """Supplement the :meth:`signalanalysis.general.Signal.get_rms` with `unipolar_only`
 
         Parameters
         ----------
@@ -151,7 +142,7 @@ class Ecg(signalanalysis.general.Signal):
 
         Notes
         -----
-        If ``unipolar_only`` is set to true, then ECG RMS is calculated using only 'unipolar' leads. This uses V1-6,
+        If `unipolar_only` is set to true, then ECG RMS is calculated using only 'unipolar' leads. This uses V1-6,
         and the non-augmented limb leads (VF, VL and VR)
 
         .. math::
@@ -168,71 +159,6 @@ class Ecg(signalanalysis.general.Signal):
             signal_rms['VR'] = (2 / 3) * signal_rms['aVR']
             signal_rms.drop(['aVF', 'aVL', 'aVR', 'LI', 'LII', 'LIII'], axis=1, inplace=True)
         super(Ecg, self).get_rms(signal_rms, drop_columns=drop_columns)
-
-    def get_n_beats(self,
-                    threshold: float = 0.5,
-                    min_separation: float = 0.2,
-                    unipolar_only: bool = True,
-                    plot: bool = False):
-        """Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
-
-        When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
-        RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
-        list in a lossless manner, i.e. saved as [ECG1, ECG2, ..., ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
-        ..., ECGn=[peak(n-1):end]
-
-        Parameters
-        ----------
-        threshold : float {0<1}
-            Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
-        min_separation : float
-            Minimum time (in s) that should be used to separate separate beats, default=0.2s
-        unipolar_only : bool, optional
-            Whether to use only unipolar ECG leads to calculate RMS, default=True
-        plot : bool
-            Whether to plot results of beat detection, default=False
-
-        Returns
-        -------
-        self.n_beats : int
-            Number of beats detected in signal
-
-        Notes
-        -----
-        The scalar RMS is calculated according to
-
-        .. math::
-            \\sqrt{ \\frac{1}{n}\\sum_{i=1}^n (\\textnormal{ECG}_i^2(t)) }
-
-        for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
-        is calculated using only 'unipolar' leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)
-
-        .. math::
-            VF = LL-V_{WCT} = \\frac{2}{3}aVF
-        .. math::
-            VL = LA-V_{WCT} = \\frac{2}{3}aVL
-        .. math::
-            VR = RA-V_{WCT} = \\frac{2}{3}aVR
-        """
-
-        # Calculate locations of RMS peaks to determine number and locations of beats
-        rms = signalanalysis.general.get_signal_rms(self.data, unipolar_only=unipolar_only)
-        i_separation = self.data.index.get_loc(min_separation)
-        i_peaks, _ = scipy.signal.find_peaks(rms, height=threshold*max(rms), distance=i_separation)
-        self.n_beats = len(i_peaks)
-        self.n_beats_threshold = threshold
-
-        # Split the trace into individual beats
-        t_peaks = rms.index[i_peaks]
-        t_split = [self.data.index[0]]+list(t_peaks)+[self.data.index[-1]]
-        for i_split in range(self.n_beats):
-            self.beats.append(self.data.loc[t_split[i_split]:t_split[i_split+2], :])
-
-        if plot:
-            fig = plt.figure()
-            ax = fig.add_subplot(1, 1, 1)
-            ax.plot(rms)
-            ax.plot(t_peaks, rms[t_peaks], 'o', markerfacecolor='none')
 
     def get_qrs_start(self,
                       unipolar_only: bool = True,
@@ -308,32 +234,40 @@ class Ecg(signalanalysis.general.Signal):
 
 
 def read_ecg_from_igb(filename: str,
-                      electrode_file: Optional[str] = None,
-                      normalise: bool = False,
-                      dt: float = 0.002) -> pd.DataFrame:
+                      electrode_file,
+                      dt: float,
+                      normalise: bool = False) -> pd.DataFrame:
     """Translate the phie.igb file(s) to 10-lead, 12-trace ECG data
 
     Extracts the complete mesh data from the phie.igb file using CARPutils, which contains the data for the body
     surface potential for an entire human torso, before then extracting only those nodes that are relevant to the
     12-lead ECG, before converting to the ECG itself
-    https://carpentry.medunigraz.at/carputils/generated/carputils.carpio.igb.IGBFile.html#carputils.carpio.igb.IGBFile
 
     Parameters
     ----------
     filename : str
         Filename for the phie.igb data to extract
-    electrode_file : str, optional
+    electrode_file : str
         File which contains the node indices in the mesh that correspond to the placement of the leads for the
         10-lead ECG. Default given in get_electrode_phie function.
+    dt : float
+        Time interval from which to construct the time data to associate with the ECG, default=0.002s (2ms)
     normalise : bool, optional
         Whether or not to normalise the ECG signals on a per-lead basis, default=False
-    dt : float, optional
-        Time interval from which to construct the time data to associate with the ECG, default=0.002s (2ms)
 
     Returns
     -------
     ecgs : pd.DataFrame
         DataFrame with Vm data for each of the labelled leads (the dictionary keys are the names of the leads)
+
+    Notes
+    -----
+    For the .igb data used thus far, the `electrode_file` can be found at ``tests/12LeadElectrodes.dat``, and `dt` is
+    0.002s
+
+    References
+    ----------
+    https://carpentry.medunigraz.at/carputils/generated/carputils.carpio.igb.IGBFile.html#carputils.carpio.igb.IGBFile
     """
 
     data, _, _ = igb.read(filename)
@@ -409,6 +343,11 @@ def read_ecg_from_csv(filename: str,
     -------
     ecg : list of pd.DataFrame
         Extracted data for the 12-lead ECG
+
+    Notes
+    -----
+    Relies on the first line of the .csv labelling the 12 leads of the ECG, in the form ['I', 'II', 'III',  'aVR',
+    'aVL', 'aVF', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6'], and the time data under the label 't_ref'
     """
     line_count = 0
     with open(filename, 'r') as pFile:
@@ -451,29 +390,29 @@ def read_ecg_from_csv(filename: str,
     return ecg
 
 
-def get_electrode_phie(phie_data: np.ndarray, electrode_file: Optional[str] = None) -> pd.DataFrame:
+def get_electrode_phie(phie_data: np.ndarray,
+                       electrode_file: str) -> pd.DataFrame:
     """Extract phi_e data corresponding to ECG electrode locations
 
     Parameters
     ----------
     phie_data : np.ndarray
         Numpy array that holds all phie data for all nodes in a given mesh
-    electrode_file : str, optional
+    electrode_file : str
         File containing entries corresponding to the nodes of the mesh which determine the location of the 10 leads
         for the ECG. Will default to very project specific location. The input text file has each node on a separate
         line (zero-indexed), with the node locations given in order: V1, V2, V3, V4, V5, V6, RA, LA, RL,
-        LL. Will default to '12LeadElectrodes.dat', but this is almost certainly not going to right for an individual
-        project
+        LL.
 
     Returns
     -------
     electrode_data : pd.DataFrame
         Dataframe of phie data for each node, with the dictionary key labelling which node it is.
-    """
 
-    # Import default arguments
-    if electrode_file is None:
-        electrode_file = 'tests/12LeadElectrodes.dat'
+    Notes
+    -----
+    For the .igb data used thus far, the `electrode_file` can be found at ``tests/12LeadElectrodes.dat``
+    """
 
     # Extract node locations for ECG data, then pull data corresponding to those nodes
     pts_electrodes = np.loadtxt(electrode_file, usecols=(1,), dtype=int)

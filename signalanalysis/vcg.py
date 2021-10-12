@@ -19,22 +19,41 @@ class Vcg(signalanalysis.general.Signal):
 
     Attributes
     ----------
+    ecg_filter : {'butterworth', 'savitzky-golay'}, optional
+        Whether or not a filter was applied to the original ECG data before transformation to VCG
 
     Methods
     -------
+    get_from_ecg(ecg)
+        Converts ECG to VCG
+
+    See Also
+    --------
+    :py:class:`signalanalysis.general.Signal : Base class
+    :py:class:`signalanalysis.ecg.Ecg` : Related class, from which the VCG signal is obtained
     """
 
     def __init__(self,
                  ecg: signalanalysis.ecg.Ecg,
                  **kwargs):
+        """Sub-method for __init___
+
+        Parameters
+        ----------
+        ecg : signalanalysis.ecg.Ecg
+            Original ECG data object
+
+        See Also
+        --------
+        :py:meth:`signalanalysis.general.Signal.__init__ : Base __init__ method
+        :py:meth:`signalanalysis.vcg.Vcg.get_from_ecg : Method to convert ECG data to VCG data
+        :py:meth:`signalanalysis.general.Signal.apply_filter` : Filtering method
+        """
         super(Vcg, self).__init__(**kwargs)
-        self.ecg_filter = bool()
+        self.ecg_filter = ecg.filter
         self.get_from_ecg(ecg)
         if self.filter is not None:
-            if self.filter == 'butterworth':
-                self.data = tools.maths.filter_butterworth(self.data, **kwargs)
-            elif self.filter == 'savitzky-golay':
-                self.data = tools.maths.filter_savitzkygolay(self.data, **kwargs)
+            self.apply_filter(**kwargs)
 
     def get_from_ecg(self, ecg: signalanalysis.ecg.Ecg):
         """Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
@@ -73,6 +92,10 @@ class Vcg(signalanalysis.general.Signal):
 
 def get_vcg_from_ecg(ecgs: Union[List[pd.DataFrame], pd.DataFrame]) -> List[pd.DataFrame]:
     """Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
+
+    .. deprecated::
+        The use of this module is deprecated, and the internal class method should be used in preference (
+        signalanalysis.vcg.Vcg.get_from_ecg())
 
     Parameters
     ----------

@@ -59,6 +59,10 @@
 <dt class="sig sig-object py" id="signalanalysis.vcg.get_vcg_from_ecg">
 <span class="sig-prename descclassname"><span class="pre">signalanalysis.vcg.</span></span><span class="sig-name descname"><span class="pre">get_vcg_from_ecg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ecgs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#signalanalysis.vcg.get_vcg_from_ecg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version The: </span>use of this module is deprecated, and the internal class method should be used in preference (
+signalanalysis.vcg.Vcg.get_from_ecg())</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>ecgs</strong> (<em>list of pd.DataFrame</em><em> or </em><em>pd.DataFrame</em>) – List of ECG dataframe data, or ECG dataframe data directly, with dict keys corresponding to ECG outputs</p>

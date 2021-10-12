@@ -61,6 +61,28 @@
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">signalanalysis.vcg.</span></span><span class="sig-name descname"><span class="pre">Vcg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ecg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg" title="signalanalysis.ecg.Ecg"><span class="pre">signalanalysis.ecg.Ecg</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.vcg.Vcg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span></code></a></p>
 <p>Base class to encapsulate data from VCG</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="signalanalysis.vcg.Vcg.ecg_filter">
+<span class="sig-name descname"><span class="pre">ecg_filter</span></span><a class="headerlink" href="#signalanalysis.vcg.Vcg.ecg_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not a filter was applied to the original ECG data before transformation to VCG</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>{‘butterworth’, ‘savitzky-golay’}, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.vcg.Vcg.get_from_ecg">
+<span class="sig-name descname"><span class="pre">get_from_ecg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ecg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.vcg.Vcg.get_from_ecg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts ECG to VCG</p>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span> <span class="pre">:</span> <span class="pre">Base</span> <span class="pre">class</span>
+<span class="pre">:py:class:`signalanalysis.ecg.Ecg</span></code> : Related class, from which the VCG signal is obtained</p>
+</div>
 <p class="rubric">Methods</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -68,23 +90,41 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.vcg.Vcg.get_from_ecg" title="signalanalysis.vcg.Vcg.get_from_ecg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_from_ecg</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.vcg.Vcg.apply_filter" title="signalanalysis.vcg.Vcg.apply_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_filter</span></code></a></p></td>
+<td><p>Apply a given filter to the data, using their respective arguments as required</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="signalanalysis.vcg.Vcg.get_from_ecg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_from_ecg</span></code></a></p></td>
 <td><p>Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.vcg.Vcg.get_n_beats" title="signalanalysis.vcg.Vcg.get_n_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_beats</span></code></a></p></td>
-<td><p>Calculate the number of beats in an ECG trace, and save the individual beats to file for later use</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.vcg.Vcg.get_n_beats" title="signalanalysis.vcg.Vcg.get_n_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_beats</span></code></a></p></td>
+<td><p>Calculate the number of beats in a given signal, and save the individual beats to the object for later use</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.vcg.Vcg.get_rms" title="signalanalysis.vcg.Vcg.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.vcg.Vcg.get_rms" title="signalanalysis.vcg.Vcg.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
 <td><p>Returns the RMS of the combined signal</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.vcg.Vcg.reset" title="signalanalysis.vcg.Vcg.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.vcg.Vcg.reset" title="signalanalysis.vcg.Vcg.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
 <td><p>Reset all properties of the class</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.vcg.Vcg.get_from_ecg">
-<span class="sig-name descname"><span class="pre">get_from_ecg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ecg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg" title="signalanalysis.ecg.Ecg"><span class="pre">signalanalysis.ecg.Ecg</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.vcg.Vcg.get_from_ecg" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="signalanalysis.vcg.Vcg.apply_filter">
+<span class="sig-name descname"><span class="pre">apply_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.vcg.Vcg.apply_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a given filter to the data, using their respective arguments as required</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="tools.maths.filter_butterworth.html#tools.maths.filter_butterworth" title="tools.maths.filter_butterworth"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tools.maths.filter_butterworth()</span></code></a></dt><dd><p>Potential filter</p>
+</dd>
+<dt><a class="reference internal" href="tools.maths.filter_savitzkygolay.html#tools.maths.filter_savitzkygolay" title="tools.maths.filter_savitzkygolay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tools.maths.filter_savitzkygolay()</span></code></a></dt><dd><p>Potential filter</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">get_from_ecg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ecg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg" title="signalanalysis.ecg.Ecg"><span class="pre">signalanalysis.ecg.Ecg</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -102,44 +142,35 @@ Eur Heart J. 1990 Dec;11(12):1083-92.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="signalanalysis.vcg.Vcg.get_n_beats">
-<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.vcg.Vcg.get_n_beats" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the number of beats in an ECG trace, and save the individual beats to file for later use</p>
-<blockquote>
-<div><p>When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
-RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
-list in a lossless manner, i.e. saved as [ECG1, ECG2, …, ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
+<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.vcg.Vcg.get_n_beats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the number of beats in a given signal, and save the individual beats to the object for later use</p>
+<p>When given the raw data of a given signal (ECG or VCG), will estimate the number of beats recorded in the trace
+based on the RMS of the signal exceeding a threshold value. The estimated individual beats will then be saved in
+a list in a lossless manner, i.e. saved as [ECG1, ECG2, …, ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
 …, ECGn=[peak(n-1):end]</p>
-<dl class="simple">
-<dt>threshold<span class="classifier">float {0&lt;1}</span></dt><dd><p>Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float {0&lt;1}</em>) – Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5</p></li>
+<li><p><strong>min_separation</strong> (<em>float</em>) – Minimum time (in s) that should be used to separate separate beats, default=0.2s</p></li>
+<li><p><strong>plot</strong> (<em>bool</em>) – Whether to plot results of beat detection, default=False</p></li>
+<li><p><strong>unipolar_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – Only appropriate for ECG data. Whether to use only unipolar ECG leads to calculate RMS, default=True</p></li>
+</ul>
 </dd>
-<dt>min_separation<span class="classifier">float</span></dt><dd><p>Minimum time (in s) that should be used to separate separate beats, default=0.2s</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self.n_beats</strong> – Number of beats detected in signal</p>
 </dd>
-<dt>unipolar_only<span class="classifier">bool, optional</span></dt><dd><p>Whether to use only unipolar ECG leads to calculate RMS, default=True</p>
-</dd>
-<dt>plot<span class="classifier">bool</span></dt><dd><p>Whether to plot results of beat detection, default=False</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>self.n_beats<span class="classifier">int</span></dt><dd><p>Number of beats detected in signal</p>
-</dd>
-</dl>
-<p>The scalar RMS is calculated according to</p>
-<div class="math notranslate nohighlight">
-\[\sqrt{\]</div>
-</div></blockquote>
-<p>rac{1}{n}sum_{i=1}^n (        extnormal{ECG}_i^2(t))}</p>
-<blockquote>
-<div><p>for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
-is calculated using only ‘unipolar’ leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)</p>
-<p>..math:: VF = LL-V_{WCT} =</p>
-</div></blockquote>
-<dl class="simple">
-<dt>rac{2}{3}aVF</dt><dd><p>..math:: VL = LA-V_{WCT} =</p>
-</dd>
-<dt>rac{2}{3}aVL</dt><dd><p>..math:: VR = RA-V_{WCT} =</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
-<p>rac{2}{3}aVR</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="signalanalysis.general.Signal.html#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></dt><dd><p>RMS signal calculation required for getting n_beats</p>
+</dd>
+</dl>
+</div>
 </dd></dl>
 
 <dl class="py method">

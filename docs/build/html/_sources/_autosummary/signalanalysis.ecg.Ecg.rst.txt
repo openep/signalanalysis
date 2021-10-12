@@ -1,4 +1,4 @@
-signalanalysis.ecg.Ecg
+﻿signalanalysis.ecg.Ecg
 ======================
 
 .. currentmodule:: signalanalysis.ecg
@@ -16,6 +16,7 @@ signalanalysis.ecg.Ecg
    .. autosummary::
       :nosignatures:
    
+      ~Ecg.apply_filter
       ~Ecg.get_n_beats
       ~Ecg.get_qrs_start
       ~Ecg.get_rms

@@ -1,4 +1,4 @@
-signalanalysis.vcg.Vcg
+﻿signalanalysis.vcg.Vcg
 ======================
 
 .. currentmodule:: signalanalysis.vcg
@@ -16,6 +16,7 @@ signalanalysis.vcg.Vcg
    .. autosummary::
       :nosignatures:
    
+      ~Vcg.apply_filter
       ~Vcg.get_from_ecg
       ~Vcg.get_n_beats
       ~Vcg.get_rms

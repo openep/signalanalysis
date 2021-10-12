@@ -37,6 +37,8 @@ class Signal:
     -------
     get_rms(unipolar_only=True)
         Returns the RMS of the combined signal
+    get_n_beats(threshold=0.5, separation=0.2, plot=False, **kwargs)
+        Splits the full signal into individual beats
     """
     def __init__(self,
                  **kwargs):
@@ -99,6 +101,19 @@ class Signal:
         self.comments = None
         self.normalised = bool()
 
+    def apply_filter(self, **kwargs):
+        """Apply a given filter to the data, using their respective arguments as required
+
+        See Also
+        --------
+        :py:meth:`tools.maths.filter_butterworth` : Potential filter
+        :py:meth:`tools.maths.filter_savitzkygolay` : Potential filter
+        """
+        if self.filter == 'butterworth':
+            self.data = tools.maths.filter_butterworth(self.data, **kwargs)
+        elif self.filter == 'savitzky-golay':
+            self.data = tools.maths.filter_savitzkygolay(self.data, **kwargs)
+
     def get_rms(self, preprocess_data: pd.DataFrame = None, drop_columns: List[str] = None):
         """Returns the RMS of the combined signal
 
@@ -148,13 +163,13 @@ class Signal:
     def get_n_beats(self,
                     threshold: float = 0.5,
                     min_separation: float = 0.2,
-                    unipolar_only: bool = True,
-                    plot: bool = False):
-        """Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
+                    plot: bool = False,
+                    **kwargs):
+        """Calculate the number of beats in a given signal, and save the individual beats to the object for later use
 
-        When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
-        RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
-        list in a lossless manner, i.e. saved as [ECG1, ECG2, ..., ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
+        When given the raw data of a given signal (ECG or VCG), will estimate the number of beats recorded in the trace
+        based on the RMS of the signal exceeding a threshold value. The estimated individual beats will then be saved in
+        a list in a lossless manner, i.e. saved as [ECG1, ECG2, ..., ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
         ..., ECGn=[peak(n-1):end]
 
         Parameters
@@ -163,33 +178,27 @@ class Signal:
             Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
         min_separation : float
             Minimum time (in s) that should be used to separate separate beats, default=0.2s
-        unipolar_only : bool, optional
-            Whether to use only unipolar ECG leads to calculate RMS, default=True
         plot : bool
             Whether to plot results of beat detection, default=False
+
+        Other Parameters
+        ----------------
+        unipolar_only : bool, optional
+            Only appropriate for ECG data. Whether to use only unipolar ECG leads to calculate RMS, default=True
 
         Returns
         -------
         self.n_beats : int
             Number of beats detected in signal
 
-        Notes
-        -----
-        The scalar RMS is calculated according to
-
-        .. math:: \sqrt{\frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t))}
-
-        for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
-        is calculated using only 'unipolar' leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)
-
-        ..math:: VF = LL-V_{WCT} = \frac{2}{3}aVF
-        ..math:: VL = LA-V_{WCT} = \frac{2}{3}aVL
-        ..math:: VR = RA-V_{WCT} = \frac{2}{3}aVR
+        See Also
+        --------
+        :py:meth:`signalanalysis.general.Signal.get_rms` : RMS signal calculation required for getting n_beats
         """
 
         # Calculate locations of RMS peaks to determine number and locations of beats
         if not self.rms:
-            self.get_rms(unipolar_only=unipolar_only)
+            self.get_rms(**kwargs)
         i_separation = self.data.index.get_loc(min_separation)
         i_peaks, _ = scipy.signal.find_peaks(self.rms, height=threshold*max(self.rms), distance=i_separation)
         self.n_beats = len(i_peaks)

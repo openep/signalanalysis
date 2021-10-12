@@ -1,4 +1,4 @@
-signalanalysis.general.Signal
+﻿signalanalysis.general.Signal
 =============================
 
 .. currentmodule:: signalanalysis.general
@@ -16,6 +16,7 @@ signalanalysis.general.Signal
    .. autosummary::
       :nosignatures:
    
+      ~Signal.apply_filter
       ~Signal.get_n_beats
       ~Signal.get_rms
       ~Signal.reset

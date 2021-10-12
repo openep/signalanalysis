@@ -155,6 +155,12 @@
 <dd><p>Returns the RMS of the combined signal</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.get_n_beats">
+<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">threshold=0.5</span></em>, <em class="sig-param"><span class="pre">separation=0.2</span></em>, <em class="sig-param"><span class="pre">plot=False</span></em>, <em class="sig-param"><span class="pre">\*\*kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.general.Signal.get_n_beats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the full signal into individual beats</p>
+</dd></dl>
+
 <p class="rubric">Methods</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -162,62 +168,71 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.general.Signal.get_n_beats" title="signalanalysis.general.Signal.get_n_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_beats</span></code></a></p></td>
-<td><p>Calculate the number of beats in an ECG trace, and save the individual beats to file for later use</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.general.Signal.apply_filter" title="signalanalysis.general.Signal.apply_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_filter</span></code></a></p></td>
+<td><p>Apply a given filter to the data, using their respective arguments as required</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="signalanalysis.general.Signal.get_n_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_beats</span></code></a></p></td>
+<td><p>Calculate the number of beats in a given signal, and save the individual beats to the object for later use</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
 <td><p>Returns the RMS of the combined signal</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.general.Signal.reset" title="signalanalysis.general.Signal.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.general.Signal.reset" title="signalanalysis.general.Signal.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
 <td><p>Reset all properties of the class</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.general.Signal.get_n_beats">
-<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.general.Signal.get_n_beats" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the number of beats in an ECG trace, and save the individual beats to file for later use</p>
-<blockquote>
-<div><p>When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
-RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
-list in a lossless manner, i.e. saved as [ECG1, ECG2, …, ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
-…, ECGn=[peak(n-1):end]</p>
+<dt class="sig sig-object py" id="signalanalysis.general.Signal.apply_filter">
+<span class="sig-name descname"><span class="pre">apply_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.general.Signal.apply_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a given filter to the data, using their respective arguments as required</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
 <dl class="simple">
-<dt>threshold<span class="classifier">float {0&lt;1}</span></dt><dd><p>Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5</p>
+<dt><a class="reference internal" href="tools.maths.filter_butterworth.html#tools.maths.filter_butterworth" title="tools.maths.filter_butterworth"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tools.maths.filter_butterworth()</span></code></a></dt><dd><p>Potential filter</p>
 </dd>
-<dt>min_separation<span class="classifier">float</span></dt><dd><p>Minimum time (in s) that should be used to separate separate beats, default=0.2s</p>
-</dd>
-<dt>unipolar_only<span class="classifier">bool, optional</span></dt><dd><p>Whether to use only unipolar ECG leads to calculate RMS, default=True</p>
-</dd>
-<dt>plot<span class="classifier">bool</span></dt><dd><p>Whether to plot results of beat detection, default=False</p>
+<dt><a class="reference internal" href="tools.maths.filter_savitzkygolay.html#tools.maths.filter_savitzkygolay" title="tools.maths.filter_savitzkygolay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tools.maths.filter_savitzkygolay()</span></code></a></dt><dd><p>Potential filter</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>self.n_beats<span class="classifier">int</span></dt><dd><p>Number of beats detected in signal</p>
-</dd>
-</dl>
-<p>The scalar RMS is calculated according to</p>
-<div class="math notranslate nohighlight">
-\[\sqrt{\]</div>
-</div></blockquote>
-<p>rac{1}{n}sum_{i=1}^n (        extnormal{ECG}_i^2(t))}</p>
-<blockquote>
-<div><p>for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS
-is calculated using only ‘unipolar’ leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)</p>
-<p>..math:: VF = LL-V_{WCT} =</p>
-</div></blockquote>
-<dl class="simple">
-<dt>rac{2}{3}aVF</dt><dd><p>..math:: VL = LA-V_{WCT} =</p>
-</dd>
-<dt>rac{2}{3}aVL</dt><dd><p>..math:: VR = RA-V_{WCT} =</p>
-</dd>
-</dl>
-<p>rac{2}{3}aVR</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">get_rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the number of beats in a given signal, and save the individual beats to the object for later use</p>
+<p>When given the raw data of a given signal (ECG or VCG), will estimate the number of beats recorded in the trace
+based on the RMS of the signal exceeding a threshold value. The estimated individual beats will then be saved in
+a list in a lossless manner, i.e. saved as [ECG1, ECG2, …, ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
+…, ECGn=[peak(n-1):end]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float {0&lt;1}</em>) – Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5</p></li>
+<li><p><strong>min_separation</strong> (<em>float</em>) – Minimum time (in s) that should be used to separate separate beats, default=0.2s</p></li>
+<li><p><strong>plot</strong> (<em>bool</em>) – Whether to plot results of beat detection, default=False</p></li>
+<li><p><strong>unipolar_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – Only appropriate for ECG data. Whether to use only unipolar ECG leads to calculate RMS, default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self.n_beats</strong> – Number of beats detected in signal</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></dt><dd><p>RMS signal calculation required for getting n_beats</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">get_rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the RMS of the combined signal</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
