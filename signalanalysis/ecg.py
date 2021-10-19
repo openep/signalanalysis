@@ -1,19 +1,18 @@
+import ast
 import re
 import numpy as np
 import pandas as pd
-import scipy.signal
 import wfdb
-from typing import List, Union, Optional
-import warnings
+from typing import List, Union
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 from carputils.carpio import igb  # type: ignore
 
 import tools.maths
 import signalanalysis.general
+import signalplot.ecg
 
-sns.set()
+plt.style.use('seaborn')
 
 
 class Ecg(signalanalysis.general.Signal):
@@ -35,6 +34,7 @@ class Ecg(signalanalysis.general.Signal):
     get_qrs_start()
         Calculates the start of the QRS complex
     """
+
     def __init__(self,
                  filename: str,
                  **kwargs):
@@ -71,6 +71,21 @@ class Ecg(signalanalysis.general.Signal):
              filename: str,
              normalise: bool = False,
              **kwargs):
+        """Reads in the data from the original file. Called upon initialisation
+
+        Parameters
+        ----------
+        filename : str
+            Location for data (either filename or directory)
+        normalise : bool, optional
+            Whether or not to normalise the individual leads (no real biophysical rationale for doing this,
+            to be honest), default=False
+
+        See Also
+        --------
+        signalanalysis.ecg.Ecg.read_ecg_from_wfdb : underlying read method for wfdb files
+        """
+
         # Reset all other values to zero to prevent confusion if reading new data to an existing structure,
         # for some unknown reason
         super().reset()
@@ -82,44 +97,93 @@ class Ecg(signalanalysis.general.Signal):
         elif filename.endswith("dat"):
             self.data = read_ecg_from_dat(filename, normalise=normalise)
         else:
-            self.read_ecg_from_wfdb(filename, normalise=normalise)
+            self.read_ecg_from_wfdb(filename, normalise=normalise, **kwargs)
         self.normalised = normalise
 
     def read_ecg_from_wfdb(self,
                            filename: str,
+                           sample_rate: float,
+                           comments_file: str = None,
                            normalise: bool = False):
+        """Read data from a waveform database file format
+
+        Parameters
+        ----------
+        filename : str
+            Base filename for data (e.g. /path/to/data/1 will read /path/to/data/1.{avf, avl, avr, dat, hea}
+        sample_rate : float
+            Rate at which data is recorded, e.g. 500 Hz
+        comments_file : str, optional
+            .csv file containing additional data for the ECG, if available
+        normalise : bool, optional
+            Whether to normalise all individual leads, default=False
+
+        Notes
+        -----
+        The waveform database format is used by several different ECG repositories on www.physionet.org,
+        and the finer points of each import can be difficult to seamlessly integrate. Where values are subject to
+        change between datasets, they are not available as defaults. The required values are thus, but it should be
+        remembered that there remains a certain level of hard-coding (for example, in the use of `comments_file` to
+        extract data).
+
+        * Lobachevsky
+
+            * sample_rate = 500
+
+        * PTB-XL
+
+            * sample_rate = 100 if from records100/*/*_lr
+            * sample_rate = 500 if from records500/*/*_hr
+            * comments_file = 'ptbxl_database.csv'
+        """
         data_full = wfdb.rdrecord(filename)
 
         # Reformat the column names according to existing data patterns
-        columns_full = [w.replace('iii', 'LIII') for w in data_full.sig_name]
-        columns_full = [w.replace('ii', 'LII') for w in columns_full]
-        columns_full = [w.replace('i', 'LI') for w in columns_full]
-        columns_full = [w.replace('avr', 'aVR') for w in columns_full]
-        columns_full = [w.replace('avl', 'aVL') for w in columns_full]
-        columns_full = [w.replace('avf', 'aVF') for w in columns_full]
-        columns_full = [w.replace('v1', 'V1') for w in columns_full]
-        columns_full = [w.replace('v2', 'V2') for w in columns_full]
-        columns_full = [w.replace('v3', 'V3') for w in columns_full]
-        columns_full = [w.replace('v4', 'V4') for w in columns_full]
-        columns_full = [w.replace('v5', 'V5') for w in columns_full]
-        columns_full = [w.replace('v6', 'V6') for w in columns_full]
+        # Potential values for each lead
+        lead_poss = dict()
+        lead_poss['LI'] = ['LI', 'li', 'I', 'i']
+        lead_poss['LII'] = ['LII', 'lii', 'II', 'ii']
+        lead_poss['LIII'] = ['LIII', 'liii', 'III', 'iii']
+        lead_poss['aVR'] = ['aVR', 'avr', 'AVR']
+        lead_poss['aVL'] = ['aVL', 'avl', 'AVL']
+        lead_poss['aVF'] = ['aVF', 'avf', 'AVF']
+        lead_poss['V1'] = ['V1', 'v1']
+        lead_poss['V2'] = ['V2', 'v2']
+        lead_poss['V3'] = ['V3', 'v3']
+        lead_poss['V4'] = ['V4', 'v4']
+        lead_poss['V5'] = ['V5', 'v5']
+        lead_poss['V6'] = ['V6', 'v6']
+        columns_full = data_full.sig_name
+        for key in lead_poss:
+            # Find which of the possible entries matches the given data, then find the relevant index before
+            # replacing with the accepted value
+            lead_match = [temp_lead for temp_lead in lead_poss[key] if temp_lead in columns_full]
+            assert len(lead_match) == 1, "Too many lead matches found!"
+            lead_index = columns_full.index(lead_match[0])
+            columns_full[lead_index] = key
 
-        if 'lobachevsky' in filename:
-            sample_rate = 500
-        else:
-            warnings.warn('Unknown sample rate for data - assuming 500 Hz')
-            sample_rate = 500
-        interval = 1/sample_rate
-        end_val = data_full.p_signal.shape[0]*interval
+        interval = 1 / sample_rate
+        end_val = data_full.p_signal.shape[0] * interval
         t = np.arange(0, end_val, interval)
 
         data_temp = pd.DataFrame(data=data_full.p_signal, columns=columns_full, index=t)
         if normalise:
-            self.data = data_temp/data_temp.abs().max()
+            self.data = data_temp / data_temp.abs().max()
         else:
             self.data = data_temp
 
-        self.comments = data_full.comments
+        if comments_file is not None:
+            comments_data = pd.read_csv(comments_file, index_col='ecg_id')
+            comments_data.scp_codes = comments_data.scp_codes.apply(lambda x: ast.literal_eval(x))
+            if '_hr' in filename:
+                filename_key = 'filename_hr'
+            elif '_lr' in filename:
+                filename_key = 'filename_lr'
+            else:
+                raise ValueError("filename isn't working here...")
+            temp = [temp_name for temp_name in comments_data[filename_key] if temp_name in filename]
+            self.comments.append(comments_data.loc[comments_data[filename_key] == temp[0]])
+        self.comments.append(data_full.comments)
 
     def get_rms(self,
                 preprocess_data: pd.DataFrame = None,
@@ -208,12 +272,12 @@ class Ecg(signalanalysis.general.Signal):
         # Remove the requested sections from the beginning/end of the individual beat traces (which are originally
         # lossless, so extend to the peak of the prior and following beat RMS data)
         beats_short = self.beats.copy()
-        for i_beat in range(1, len(beats_short)-1):
+        for i_beat in range(1, len(beats_short) - 1):
             beat_short = beats_short[i_beat]
-            beat_start = beat_short.index[0]+min_separation
-            beat_end = beat_short.index[-1]-min_separation
-            i_start = np.argmin(abs(beat_short.index-beat_start).values)
-            i_end = np.argmin(abs(beat_short.index-beat_end).values)
+            beat_start = beat_short.index[0] + min_separation
+            beat_end = beat_short.index[-1] - min_separation
+            i_start = np.argmin(abs(beat_short.index - beat_start).values)
+            i_end = np.argmin(abs(beat_short.index - beat_end).values)
             beats_short[i_beat] = beats_short[i_beat].iloc[i_start:i_end, :]
 
         # Perform QRS detection on the individual beats
@@ -231,6 +295,42 @@ class Ecg(signalanalysis.general.Signal):
                 ax[1].set_ylabel('ECG Sec Der')
                 ax[0].axvline(qrs_start, color='k', linestyle='--')
                 ax[1].axvline(qrs_start, color='k', linestyle='--')
+
+    def plot(self,
+             separate_beats: bool = False,
+             separate_figs: bool = False):
+        """Method to plot the data of the ECG
+
+        Passes the function to the ECG plotting script, with the option to plot the individual beats instead of the
+        entire signal; also, to plot these on individual figures or overlaid on the same figure
+
+        Parameters
+        ----------
+        separate_beats : bool, optional
+            Whether to plot the entire signal (false), or to plot the individual detected beats one after the other,
+            default=False
+        separate_figs : bool, optional
+            When plotting the separate beats (if requested), whether to plot the individual beats one on top of the
+            other on a single figure (true), or on separate figures (false), default=False
+
+        Returns
+        -------
+        fig, ax
+        """
+        if separate_beats:
+            fig, ax = signalplot.ecg.plot(self.data)
+        else:
+            if separate_figs:
+                fig = list()
+                ax = list()
+                for beat in self.beats:
+                    fig_temp, ax_temp = signalplot.ecg.plot(beat)
+                    fig.append(fig_temp)
+                    ax.append(ax_temp)
+            else:
+                fig, ax = signalplot.ecg.plot(self.beats)
+
+        return fig, ax
 
 
 def read_ecg_from_igb(filename: str,
@@ -275,7 +375,7 @@ def read_ecg_from_igb(filename: str,
     ecg_data = get_ecg_from_electrodes(electrode_data)
 
     # Add time data
-    ecg_data['t'] = [i*dt for i in range(len(ecg_data))]
+    ecg_data['t'] = [i * dt for i in range(len(ecg_data))]
     ecg_data.set_index('t', inplace=True)
 
     if normalise:
@@ -515,7 +615,6 @@ def get_qrs_start(ecgs: Union[pd.DataFrame, List[pd.DataFrame]],
     qrs_starts = [ecg_grad[ecg_grad == ecg_grad.max()].index[0] for ecg_grad in ecgs_grad]
 
     if plot_result:
-        import matplotlib.pyplot as plt
         for (ecg_rms, ecg_grad, qrs_start) in zip(ecgs_rms, ecgs_grad, qrs_starts):
             fig, ax = plt.subplots(2, 1, sharex='all')
             ax[0].plot(ecg_rms)
