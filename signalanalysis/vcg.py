@@ -9,9 +9,12 @@ from typing import Union, List, Tuple, Optional, Iterable
 
 import signalanalysis.general
 import signalanalysis.ecg
+import signalplot.ecg
 import tools.maths
 import tools.python
 import tools.plotting
+
+plt.style.use('seaborn')
 
 
 class Vcg(signalanalysis.general.Signal):
@@ -38,6 +41,10 @@ class Vcg(signalanalysis.general.Signal):
                  **kwargs):
         """Sub-method for __init___
 
+        Will initialise a VCG object, based on an ECG object. When created, filters can be applied to the calculated
+        VCG data (which is separate to any filters applied to the ECG object beforehand), and the number of beats in
+        the signal will be calculated; for both, keyword arguments appropriate to the methods can be passed.
+
         Parameters
         ----------
         ecg : signalanalysis.ecg.Ecg
@@ -48,12 +55,16 @@ class Vcg(signalanalysis.general.Signal):
         :py:meth:`signalanalysis.general.Signal.__init__ : Base __init__ method
         :py:meth:`signalanalysis.vcg.Vcg.get_from_ecg : Method to convert ECG data to VCG data
         :py:meth:`signalanalysis.general.Signal.apply_filter` : Filtering method
+        :py:meth:`signalanalysis.general.Signal.get_n_beats` : Beat calculation method
         """
         super(Vcg, self).__init__(**kwargs)
         self.ecg_filter = ecg.filter
         self.get_from_ecg(ecg)
         if self.filter is not None:
             self.apply_filter(**kwargs)
+        self.get_n_beats(**kwargs)
+        if self.n_beats != ecg.n_beats:
+            warnings.warn('Number of beats detected in VCG different from number of beats detected in ECG.')
 
     def get_from_ecg(self, ecg: signalanalysis.ecg.Ecg):
         """Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
@@ -218,13 +229,11 @@ def get_qrs_start_end(vcgs: Union[List[pd.DataFrame], pd.DataFrame],
 
             i_qrs_start = np.where(sim_sv > threshold_start)[0][0]
             if sim_sv.index[0] > 50:
-                import matplotlib.pyplot as plt
                 # Figure won't plot if using the Qt5Agg backend, for some reason (see
                 # https://github.com/matplotlib/matplotlib/issues/9206 for discussion, but that says it's fixed).
                 # Unable to change backend in any meaningful way to resolve this dispute, so forced to use a block on
                 # the plt.show() command
-                import ecg_plot as ep
-                _ = ep.plot(ecgs[i_sim])
+                _ = signalplot.ecg.plot(ecgs[i_sim])
                 fig, ax = plt.subplots(1, 1)
                 ax.plot(sim_sv_orig)
                 ax.set_xlabel('Time')
@@ -280,9 +289,7 @@ def get_qrs_start_end(vcgs: Union[List[pd.DataFrame], pd.DataFrame],
                 # https://github.com/matplotlib/matplotlib/issues/9206 for discussion, but that says it's fixed).
                 # Unable to change backend in any meaningful way to resolve this dispute, so forced to use a block on
                 # the plt.show() command
-                import matplotlib.pyplot as plt
-                import ecg_plot as ep
-                _ = ep.plot(ecgs[i_sim])
+                _ = signalplot.ecg.plot(ecgs[i_sim])
                 fig, ax = plt.subplots(1, 1)
                 ax.plot(sim_sv)
                 ax.set_xlabel('Time')

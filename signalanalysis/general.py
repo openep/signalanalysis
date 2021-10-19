@@ -1,14 +1,15 @@
 import numpy as np
 import scipy.signal
+import scipy.stats
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 from typing import List, Union, Optional
 
+import signalplot.ecg
 import tools.maths
 import tools.python
 
-sns.set()
+plt.style.use('seaborn')
 
 
 class Signal:
@@ -39,6 +40,8 @@ class Signal:
         Returns the RMS of the combined signal
     get_n_beats(threshold=0.5, separation=0.2, plot=False, **kwargs)
         Splits the full signal into individual beats
+    plot(separate_beats=False)
+        Plot the ECG data
     """
     def __init__(self,
                  **kwargs):
@@ -66,7 +69,7 @@ class Signal:
         self.twave_end = list()
 
         self.data_source = None
-        self.comments = None
+        self.comments = list()
 
         # Keyword arguments (optional)
         if 'normalise' in kwargs:
@@ -98,7 +101,7 @@ class Signal:
         self.qrs_end = list()
         self.twave_end = list()
         self.data_source = None
-        self.comments = None
+        self.comments = list()
         self.normalised = bool()
 
     def apply_filter(self, **kwargs):
@@ -163,6 +166,7 @@ class Signal:
     def get_n_beats(self,
                     threshold: float = 0.5,
                     min_separation: float = 0.2,
+                    reset_index: bool = True,
                     plot: bool = False,
                     **kwargs):
         """Calculate the number of beats in a given signal, and save the individual beats to the object for later use
@@ -178,6 +182,9 @@ class Signal:
             Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
         min_separation : float
             Minimum time (in s) that should be used to separate separate beats, default=0.2s
+        reset_index : bool
+            Whether to reset the time index for the separated beats so that they all start from zero (true),
+            or whether to leave them with the original time index (false), default=True
         plot : bool
             Whether to plot results of beat detection, default=False
 
@@ -210,11 +217,21 @@ class Signal:
         for i_split in range(self.n_beats):
             self.beats.append(self.data.loc[t_split[i_split]:t_split[i_split+2], :])
 
+        if reset_index:
+            for i_beat in range(self.n_beats):
+                zeroed_index = self.beats[i_beat].index-self.beats[i_beat].index[0]
+                self.beats[i_beat].set_index(zeroed_index, inplace=True)
+                pass
+
         if plot:
             fig = plt.figure()
             ax = fig.add_subplot(1, 1, 1)
             ax.plot(self.rms)
             ax.plot(t_peaks, self.rms[t_peaks], 'o', markerfacecolor='none')
+
+    def get_twave_end(self):
+        print("Not coded yet! Don't use!")
+        pass
 
 
 def get_signal_rms(signal: pd.DataFrame,

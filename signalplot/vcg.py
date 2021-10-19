@@ -13,8 +13,7 @@ import tools.python
 import tools.plotting
 import signalanalysis.vcg
 
-# import matplotlib
-# matplotlib.use('Agg')
+plt.style.use('seaborn')
 
 __all__ = ['Axes3D']    # Workaround to prevent Axes3D import statement to be labelled as unused
 

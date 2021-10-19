@@ -1,8 +1,10 @@
-import matplotlib.pyplot as plt  # type: ignore
+import matplotlib.pyplot as plt
 import pandas as pd
 from typing import Union, Optional, List, Tuple
 
 import tools.python
+
+plt.style.use('seaborn')
 
 
 def plot(ecgs: Union[List[pd.DataFrame], pd.DataFrame],
