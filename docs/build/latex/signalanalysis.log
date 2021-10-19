@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2021.9.16)  12 OCT 2021 13:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2021.9.16)  19 OCT 2021 16:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1273,68 +1273,173 @@ alysis.vcg' on page 5 undefined on input line 285.
 
 [5
 
-] [6] [7]
+] [6] [7] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 606--608
+[][]$\T1/qtm/m/n/10 https : / / carpentry . medunigraz . at / carputils / gener
+ated / carputils . carpio . igb . IGBFile . html # carputils . carpio . igb .
+ []
+
 
 LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:sign
-alanalysis.general.Signal' on page 8 undefined on input line 631.
+alanalysis.general.Signal' on page 9 undefined on input line 635.
 
-[8]
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--637
+\T1/qtm/m/n/10 ing, in-her-it-ing from \T1/txtt/m/sl/10 signalanalysis.general.
+
+ []
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:sign
+alanalysis.general.Signal' on page 9 undefined on input line 647.
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:sign
+alanalysis.general.Signal' on page 9 undefined on input line 650.
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:sign
+alanalysis.general.Signal' on page 9 undefined on input line 658.
+
 
 LaTeX Warning: Hyper reference `_autosummary/signalanalysis.ecg.Ecg:signalanaly
-sis.ecg.Ecg.get_rms' on page 9 undefined on input line 827.
+sis.ecg.Ecg.apply_filter' on page 9 undefined on input line 719.
 
 
 LaTeX Warning: Hyper reference `_autosummary/signalanalysis.ecg.Ecg:signalanaly
-sis.ecg.Ecg.reset' on page 9 undefined on input line 848.
+sis.ecg.Ecg.get_rms' on page 9 undefined on input line 740.
 
-[9] [10]
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:id1'
+ on page 9 undefined on input line 743.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 742--745
+[]|\T1/qtm/m/n/10 Sup-ple-ment the \T1/txtt/m/sl/10 signalanalysis.general.
+ []
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.ecg.Ecg:signalanaly
+sis.ecg.Ecg.plot' on page 9 undefined on input line 754.
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.ecg.Ecg:id4' on pag
+e 9 undefined on input line 761.
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.ecg.Ecg:id5' on pag
+e 9 undefined on input line 768.
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.ecg.Ecg:signalanaly
+sis.ecg.Ecg.reset' on page 9 undefined on input line 775.
+
+[9]
+
+LaTeX Warning: Hyper reference `_autosummary/tools.maths.filter_butterworth:too
+ls.maths.filter_butterworth' on page 10 undefined on input line 794.
+
+LaTeX Font Info:    Font shape `T1/txtt/b/it' in size <10> not available
+(Font)              Font shape `T1/txtt/bx/it' tried instead on input line 794.
+
+LaTeX Font Info:    Font shape `T1/txtt/bx/it' in size <10> not available
+(Font)              Font shape `T1/txtt/bx/sl' tried instead on input line 794.
+
+
+LaTeX Warning: Hyper reference `_autosummary/tools.maths.filter_savitzkygolay:t
+ools.maths.filter_savitzkygolay' on page 10 undefined on input line 798.
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:id1'
+ on page 10 undefined on input line 860.
+
+[10]
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:id1'
+ on page 11 undefined on input line 933.
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:id1'
+ on page 11 undefined on input line 938.
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:id1'
+ on page 11 undefined on input line 942.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 941--943
+[]\T1/txtt/bx/n/10 drop_columns \T1/qtm/m/n/10 (\T1/txtt/m/sl/10 list of str, o
+ptional\T1/qtm/m/n/10 ) ^^U See \T1/txtt/m/sl/10 signalanalysis.general.
+ []
+
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.Signal:id1'
+ on page 11 undefined on input line 958.
+
+[11]
+
+LaTeX Warning: Hyper reference `_autosummary/signalanalysis.ecg.Ecg:id5' on pag
+e 12 undefined on input line 1037.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1056--1058
+[]\T1/txtt/bx/n/10 filename \T1/qtm/m/n/10 (\T1/txtt/m/sl/10 str\T1/qtm/m/n/10 
+) ^^U Base file-name for data (e.g. /path/to/data/1 will read
+ []
+
+[12]
 
 LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.get_signal_
-rms:signalanalysis.general.get_signal_rms' on page 11 undefined on input line 1
-038.
+rms:signalanalysis.general.get_signal_rms' on page 13 undefined on input line 1
+155.
 
 
 LaTeX Warning: Hyper reference `_autosummary/signalanalysis.general.get_twave_e
-nd:signalanalysis.general.get_twave_end' on page 11 undefined on input line 104
-5.
+nd:signalanalysis.general.get_twave_end' on page 13 undefined on input line 116
+2.
 
 Runaway argument?
 \sqrt {\end {split} \end {equation*}\end {quote} 
 ! Paragraph ended before \split was complete.
 <to be read again> 
                    \par 
-l.1088 
+l.1205 
        
 ? x
  
 Here is how much of TeX's memory you used:
- 14078 strings out of 494923
- 199192 string characters out of 6180742
+ 14091 strings out of 494923
+ 199684 string characters out of 6180742
  302749 words of memory out of 5000000
- 16973 multiletter control sequences out of 15000+600000
- 69422 words of font info for 71 fonts, out of 8000000 for 9000
+ 16982 multiletter control sequences out of 15000+600000
+ 69796 words of font info for 72 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 37i,18n,48p,757b,680s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,15n,48p,748b,681s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{section*.31} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.30} has been referenced but does not exist
+, replaced by a fixed one
+
 {/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ec.enc}{/usr/share/texmf/fonts/enc
 /dvips/tex-gyre/q-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf/fonts/type
-1/public/tex-gyre/qhvb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvbi.
-pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf/fo
-nts/type1/public/tex-gyre/qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyr
-e/qtmr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/txfonts/t1xtt.pfb>
-Output written on signalanalysis.pdf (14 pages, 248689 bytes).
+fonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/te
+xmf/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf/fonts/type1/public/t
+ex-gyre/qhvbi.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvr.pfb></usr/
+share/texmf/fonts/type1/public/tex-gyre/qtmb.pfb></usr/share/texmf/fonts/type1/
+public/tex-gyre/qtmr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmri.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/txfonts/t1xtt.pfb>
+Output written on signalanalysis.pdf (16 pages, 243120 bytes).
 PDF statistics:
- 274 PDF objects out of 1000 (max. 8388607)
+ 275 PDF objects out of 1000 (max. 8388607)
  233 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
+ 63 named destinations out of 1000 (max. 500000)
  133 words of extra memory for PDF output out of 10000 (max. 10000000)
 

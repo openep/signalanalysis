@@ -20,6 +20,8 @@
       ~Ecg.get_n_beats
       ~Ecg.get_qrs_start
       ~Ecg.get_rms
+      ~Ecg.get_twave_end
+      ~Ecg.plot
       ~Ecg.read
       ~Ecg.read_ecg_from_wfdb
       ~Ecg.reset

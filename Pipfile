@@ -10,9 +10,7 @@ scipy = "*"
 sklearn = "*"
 matplotlib = "*"
 carputils = {editable = true, git = "https://git.opencarp.org/openCARP/carputils.git"}
-wfdb = "*"
-pyqt5 = "*"
-seaborn = "*"
+wfdb = "==3.4.0"
 
 [dev-packages]
 pytest = "*"

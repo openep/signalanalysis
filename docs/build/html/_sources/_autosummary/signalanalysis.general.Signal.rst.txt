@@ -19,6 +19,7 @@
       ~Signal.apply_filter
       ~Signal.get_n_beats
       ~Signal.get_rms
+      ~Signal.get_twave_end
       ~Signal.reset
    
    

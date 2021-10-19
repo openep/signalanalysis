@@ -61,7 +61,7 @@
 
 
 \title{signalanalysis}
-\date{Oct 12, 2021}
+\date{Oct 19, 2021}
 \release{0.1}
 \author{Philip Gemmell}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -390,7 +390,7 @@ pd.DataFrame
 \label{\detokenize{_autosummary/signalanalysis.ecg.get_electrode_phie:signalanalysis-ecg-get-electrode-phie}}\label{\detokenize{_autosummary/signalanalysis.ecg.get_electrode_phie::doc}}\index{get\_electrode\_phie() (in module signalanalysis.ecg)@\spxentry{get\_electrode\_phie()}\spxextra{in module signalanalysis.ecg}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.get_electrode_phie:signalanalysis.ecg.get_electrode_phie}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{signalanalysis.ecg.}}\sphinxbfcode{\sphinxupquote{get\_electrode\_phie}}}{\emph{\DUrole{n}{phie\_data}\DUrole{p}{:} \DUrole{n}{numpy.ndarray}}, \emph{\DUrole{n}{electrode\_file}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}str\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}}{{ $\rightarrow$ pandas.core.frame.DataFrame}}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.get_electrode_phie:signalanalysis.ecg.get_electrode_phie}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{signalanalysis.ecg.}}\sphinxbfcode{\sphinxupquote{get\_electrode\_phie}}}{\emph{\DUrole{n}{phie\_data}\DUrole{p}{:} \DUrole{n}{numpy.ndarray}}, \emph{\DUrole{n}{electrode\_file}\DUrole{p}{:} \DUrole{n}{str}}}{{ $\rightarrow$ pandas.core.frame.DataFrame}}
 \sphinxAtStartPar
 Extract phi\_e data corresponding to ECG electrode locations
 \begin{quote}\begin{description}
@@ -401,11 +401,10 @@ Extract phi\_e data corresponding to ECG electrode locations
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{electrode\_file}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} File containing entries corresponding to the nodes of the mesh which determine the location of the 10 leads
+\sphinxstyleliteralstrong{\sphinxupquote{electrode\_file}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} File containing entries corresponding to the nodes of the mesh which determine the location of the 10 leads
 for the ECG. Will default to very project specific location. The input text file has each node on a separate
 line (zero\sphinxhyphen{}indexed), with the node locations given in order: V1, V2, V3, V4, V5, V6, RA, LA, RL,
-LL. Will default to ‘12LeadElectrodes.dat’, but this is almost certainly not going to right for an individual
-project
+LL.
 
 \end{itemize}
 
@@ -418,6 +417,10 @@ project
 pd.DataFrame
 
 \end{description}\end{quote}
+\subsubsection*{Notes}
+
+\sphinxAtStartPar
+For the .igb data used thus far, the \sphinxtitleref{electrode\_file} can be found at \sphinxcode{\sphinxupquote{tests/12LeadElectrodes.dat}}
 
 \end{fulllineitems}
 
@@ -508,6 +511,11 @@ Extract ECG data from CSV file exported from St Jude Medical ECG recording
 list of pd.DataFrame
 
 \end{description}\end{quote}
+\subsubsection*{Notes}
+
+\sphinxAtStartPar
+Relies on the first line of the .csv labelling the 12 leads of the ECG, in the form {[}‘I’, ‘II’, ‘III’,  ‘aVR’,
+‘aVL’, ‘aVF’, ‘V1’, ‘V2’, ‘V3’, ‘V4’, ‘V5’, ‘V6’{]}, and the time data under the label ‘t\_ref’
 
 \end{fulllineitems}
 
@@ -550,7 +558,7 @@ pd.DataFrame
 \label{\detokenize{_autosummary/signalanalysis.ecg.read_ecg_from_igb:signalanalysis-ecg-read-ecg-from-igb}}\label{\detokenize{_autosummary/signalanalysis.ecg.read_ecg_from_igb::doc}}\index{read\_ecg\_from\_igb() (in module signalanalysis.ecg)@\spxentry{read\_ecg\_from\_igb()}\spxextra{in module signalanalysis.ecg}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.read_ecg_from_igb:signalanalysis.ecg.read_ecg_from_igb}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{signalanalysis.ecg.}}\sphinxbfcode{\sphinxupquote{read\_ecg\_from\_igb}}}{\emph{\DUrole{n}{filename}\DUrole{p}{:} \DUrole{n}{str}}, \emph{\DUrole{n}{electrode\_file}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}str\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}, \emph{\DUrole{n}{normalise}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}, \emph{\DUrole{n}{dt}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.002}}}{{ $\rightarrow$ pandas.core.frame.DataFrame}}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.read_ecg_from_igb:signalanalysis.ecg.read_ecg_from_igb}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{signalanalysis.ecg.}}\sphinxbfcode{\sphinxupquote{read\_ecg\_from\_igb}}}{\emph{\DUrole{n}{filename}\DUrole{p}{:} \DUrole{n}{str}}, \emph{\DUrole{n}{electrode\_file}}, \emph{\DUrole{n}{dt}\DUrole{p}{:} \DUrole{n}{float}}, \emph{\DUrole{n}{normalise}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}}{{ $\rightarrow$ pandas.core.frame.DataFrame}}
 \sphinxAtStartPar
 Translate the phie.igb file(s) to 10\sphinxhyphen{}lead, 12\sphinxhyphen{}trace ECG data
 
@@ -558,7 +566,6 @@ Translate the phie.igb file(s) to 10\sphinxhyphen{}lead, 12\sphinxhyphen{}trace 
 Extracts the complete mesh data from the phie.igb file using CARPutils, which contains the data for the body
 surface potential for an entire human torso, before then extracting only those nodes that are relevant to the
 12\sphinxhyphen{}lead ECG, before converting to the ECG itself
-\sphinxurl{https://carpentry.medunigraz.at/carputils/generated/carputils.carpio.igb.IGBFile.html\#carputils.carpio.igb.IGBFile}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
@@ -567,16 +574,16 @@ surface potential for an entire human torso, before then extracting only those n
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{electrode\_file}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} File which contains the node indices in the mesh that correspond to the placement of the leads for the
+\sphinxstyleliteralstrong{\sphinxupquote{electrode\_file}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} File which contains the node indices in the mesh that correspond to the placement of the leads for the
 10\sphinxhyphen{}lead ECG. Default given in get\_electrode\_phie function.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{normalise}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Whether or not to normalise the ECG signals on a per\sphinxhyphen{}lead basis, default=False
+\sphinxstyleliteralstrong{\sphinxupquote{dt}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Time interval from which to construct the time data to associate with the ECG, default=0.002s (2ms)
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{dt}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Time interval from which to construct the time data to associate with the ECG, default=0.002s (2ms)
+\sphinxstyleliteralstrong{\sphinxupquote{normalise}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Whether or not to normalise the ECG signals on a per\sphinxhyphen{}lead basis, default=False
 
 \end{itemize}
 
@@ -589,6 +596,15 @@ surface potential for an entire human torso, before then extracting only those n
 pd.DataFrame
 
 \end{description}\end{quote}
+\subsubsection*{Notes}
+
+\sphinxAtStartPar
+For the .igb data used thus far, the \sphinxtitleref{electrode\_file} can be found at \sphinxcode{\sphinxupquote{tests/12LeadElectrodes.dat}}, and \sphinxtitleref{dt} is
+0.002s
+\subsubsection*{References}
+
+\sphinxAtStartPar
+\sphinxurl{https://carpentry.medunigraz.at/carputils/generated/carputils.carpio.igb.IGBFile.html\#carputils.carpio.igb.IGBFile}
 
 \end{fulllineitems}
 
@@ -616,7 +632,7 @@ pd.DataFrame
 {\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{Ecg}}}}}
 &
 \sphinxAtStartPar
-Base ECG class to encapsulate data regarding an ECG recording, inheriting from signalanalysis.general.Signal
+Base class to encapsulate data regarding an ECG recording, inheriting from {\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal}}}}}
 \\
 \hline
 \end{longtable}\sphinxatlongtableend\end{savenotes}
@@ -631,126 +647,16 @@ Base ECG class to encapsulate data regarding an ECG recording, inheriting from s
 Bases: {\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal}}}}}
 
 \sphinxAtStartPar
-Base ECG class to encapsulate data regarding an ECG recording, inheriting from signalanalysis.general.Signal
-\index{data (signalanalysis.ecg.Ecg attribute)@\spxentry{data}\spxextra{signalanalysis.ecg.Ecg attribute}}
+Base class to encapsulate data regarding an ECG recording, inheriting from {\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal}}}}}
 
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.data}}\pysigline{\sphinxbfcode{\sphinxupquote{data}}}
+
+\sphinxstrong{See also:}
+\nopagebreak
+
+
 \sphinxAtStartPar
-Raw ECG data for the different leads
-\begin{quote}\begin{description}
-\item[{Type}] \leavevmode
-\sphinxAtStartPar
-pd.DataFrame
+{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal}}}}}
 
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{filename (signalanalysis.ecg.Ecg attribute)@\spxentry{filename}\spxextra{signalanalysis.ecg.Ecg attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.filename}}\pysigline{\sphinxbfcode{\sphinxupquote{filename}}}
-\sphinxAtStartPar
-Filename for the location of the data
-\begin{quote}\begin{description}
-\item[{Type}] \leavevmode
-\sphinxAtStartPar
-str
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{normalised (signalanalysis.ecg.Ecg attribute)@\spxentry{normalised}\spxextra{signalanalysis.ecg.Ecg attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.normalised}}\pysigline{\sphinxbfcode{\sphinxupquote{normalised}}}
-\sphinxAtStartPar
-Whether or not the data for the leads have been normalised
-\begin{quote}\begin{description}
-\item[{Type}] \leavevmode
-\sphinxAtStartPar
-bool
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{n\_beats (signalanalysis.ecg.Ecg attribute)@\spxentry{n\_beats}\spxextra{signalanalysis.ecg.Ecg attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.n_beats}}\pysigline{\sphinxbfcode{\sphinxupquote{n\_beats}}}
-\sphinxAtStartPar
-Number of beats recorded in the trace. Set to 0 if not calculated
-\begin{quote}\begin{description}
-\item[{Type}] \leavevmode
-\sphinxAtStartPar
-int
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{qrs\_start (signalanalysis.ecg.Ecg attribute)@\spxentry{qrs\_start}\spxextra{signalanalysis.ecg.Ecg attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.qrs_start}}\pysigline{\sphinxbfcode{\sphinxupquote{qrs\_start}}}
-\sphinxAtStartPar
-Times calculated for the start of the QRS complex
-\begin{quote}\begin{description}
-\item[{Type}] \leavevmode
-\sphinxAtStartPar
-list of float
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{qrs\_end (signalanalysis.ecg.Ecg attribute)@\spxentry{qrs\_end}\spxextra{signalanalysis.ecg.Ecg attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.qrs_end}}\pysigline{\sphinxbfcode{\sphinxupquote{qrs\_end}}}
-\sphinxAtStartPar
-Times calculated for the end of the QRS complex
-\begin{quote}\begin{description}
-\item[{Type}] \leavevmode
-\sphinxAtStartPar
-end
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{data\_source (signalanalysis.ecg.Ecg attribute)@\spxentry{data\_source}\spxextra{signalanalysis.ecg.Ecg attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.data_source}}\pysigline{\sphinxbfcode{\sphinxupquote{data\_source}}}
-\sphinxAtStartPar
-Source for the data, if known e.g. Staff III database, CARP simulation, etc.
-\begin{quote}\begin{description}
-\item[{Type}] \leavevmode
-\sphinxAtStartPar
-str
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{comments (signalanalysis.ecg.Ecg attribute)@\spxentry{comments}\spxextra{signalanalysis.ecg.Ecg attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.comments}}\pysigline{\sphinxbfcode{\sphinxupquote{comments}}}
-\sphinxAtStartPar
-Any further details known about the data, e.g. sex, age, etc.
-\begin{quote}\begin{description}
-\item[{Type}] \leavevmode
-\sphinxAtStartPar
-str
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
 
 \index{read() (signalanalysis.ecg.Ecg method)@\spxentry{read()}\spxextra{signalanalysis.ecg.Ecg method}}
 
@@ -810,10 +716,17 @@ Calculates the start of the QRS complex
 \endlastfoot
 
 \sphinxAtStartPar
+{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.apply_filter}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{apply\_filter}}}}}
+&
+\sphinxAtStartPar
+Apply a given filter to the data, using their respective arguments as required
+\\
+\hline
+\sphinxAtStartPar
 {\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:id0}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_n\_beats}}}}}
 &
 \sphinxAtStartPar
-Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
+Calculate the number of beats in a given signal, and save the individual beats to the object for later use
 \\
 \hline
 \sphinxAtStartPar
@@ -827,21 +740,35 @@ Calculates start of QRS complex using method of Hermans et al. (2017).
 {\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.get_rms}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_rms}}}}}
 &
 \sphinxAtStartPar
-Returns the RMS of the combined signal
+Supplement the {\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal.get\_rms()}}}}} with \sphinxtitleref{unipolar\_only}
 \\
 \hline
 \sphinxAtStartPar
-{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.read}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{read}}}}}
+\sphinxcode{\sphinxupquote{get\_twave\_end}}
 &
 \sphinxAtStartPar
 
 \\
 \hline
 \sphinxAtStartPar
-{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.read_ecg_from_wfdb}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{read\_ecg\_from\_wfdb}}}}}
+{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.plot}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{plot}}}}}
 &
 \sphinxAtStartPar
-
+Method to plot the data of the ECG
+\\
+\hline
+\sphinxAtStartPar
+{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:id4}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{read}}}}}
+&
+\sphinxAtStartPar
+Reads in the data from the original file.
+\\
+\hline
+\sphinxAtStartPar
+{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:id5}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{read\_ecg\_from\_wfdb}}}}}
+&
+\sphinxAtStartPar
+Read data from a waveform database file format
 \\
 \hline
 \sphinxAtStartPar
@@ -852,17 +779,43 @@ Reset all properties of the class
 \\
 \hline
 \end{longtable}\sphinxatlongtableend\end{savenotes}
+\index{apply\_filter() (signalanalysis.ecg.Ecg method)@\spxentry{apply\_filter()}\spxextra{signalanalysis.ecg.Ecg method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.apply_filter}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{apply\_filter}}}{\emph{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
+\sphinxAtStartPar
+Apply a given filter to the data, using their respective arguments as required
+
+
+\sphinxstrong{See also:}
+\nopagebreak
+
+\begin{description}
+\item[{{\hyperref[\detokenize{_autosummary/tools.maths.filter_butterworth:tools.maths.filter_butterworth}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{tools.maths.filter\_butterworth()}}}}}}] \leavevmode
+\sphinxAtStartPar
+Potential filter
+
+\item[{{\hyperref[\detokenize{_autosummary/tools.maths.filter_savitzkygolay:tools.maths.filter_savitzkygolay}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{tools.maths.filter\_savitzkygolay()}}}}}}] \leavevmode
+\sphinxAtStartPar
+Potential filter
+
+\end{description}
+
+
+
+\end{fulllineitems}
+
 \index{get\_n\_beats() (signalanalysis.ecg.Ecg method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.ecg.Ecg method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:id0}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_n\_beats}}}{\emph{\DUrole{n}{threshold}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.5}}, \emph{\DUrole{n}{min\_separation}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.2}}, \emph{\DUrole{n}{unipolar\_only}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{True}}, \emph{\DUrole{n}{plot}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}}{}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:id0}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_n\_beats}}}{\emph{\DUrole{n}{threshold}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.5}}, \emph{\DUrole{n}{min\_separation}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.2}}, \emph{\DUrole{n}{reset\_index}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{True}}, \emph{\DUrole{n}{plot}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}, \emph{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
 \sphinxAtStartPar
-Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
+Calculate the number of beats in a given signal, and save the individual beats to the object for later use
 
 \sphinxAtStartPar
-When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
-RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
-list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where ECG1={[}0:peak2{]}, ECG2={[}peak1:peak3{]},
+When given the raw data of a given signal (ECG or VCG), will estimate the number of beats recorded in the trace
+based on the RMS of the signal exceeding a threshold value. The estimated individual beats will then be saved in
+a list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where ECG1={[}0:peak2{]}, ECG2={[}peak1:peak3{]},
 …, ECGn={[}peak(n\sphinxhyphen{}1):end{]}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -876,11 +829,16 @@ list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where EC
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Whether to use only unipolar ECG leads to calculate RMS, default=True
+\sphinxstyleliteralstrong{\sphinxupquote{reset\_index}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to reset the time index for the separated beats so that they all start from zero (true),
+or whether to leave them with the original time index (false), default=True
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstyleliteralstrong{\sphinxupquote{plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to plot results of beat detection, default=False
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Only appropriate for ECG data. Whether to use only unipolar ECG leads to calculate RMS, default=True
 
 \end{itemize}
 
@@ -893,23 +851,20 @@ list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where EC
 int
 
 \end{description}\end{quote}
-\subsubsection*{Notes}
 
+
+\sphinxstrong{See also:}
+\nopagebreak
+
+\begin{description}
+\item[{{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal.get\_rms()}}}}}}] \leavevmode
 \sphinxAtStartPar
-The scalar RMS is calculated according to
-\begin{equation*}
-\begin{split}\sqrt{ \frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t)) }\end{split}
-\end{equation*}
-\sphinxAtStartPar
-for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar\_only is set to true, then ECG RMS
-is calculated using only ‘unipolar’ leads. This uses V1\sphinxhyphen{}6, and the non\sphinxhyphen{}augmented limb leads (VF, VL and VR)
-\begin{equation*}
-\begin{split}VF = LL-V_{WCT} = \frac{2}{3}aVF\end{split}
-\end{equation*}\begin{equation*}
-\begin{split}VL = LA-V_{WCT} = \frac{2}{3}aVL\end{split}
-\end{equation*}\begin{equation*}
-\begin{split}VR = RA-V_{WCT} = \frac{2}{3}aVR\end{split}
-\end{equation*}
+RMS signal calculation required for getting n\_beats
+
+\end{description}
+
+
+
 \end{fulllineitems}
 
 \index{get\_qrs\_start() (signalanalysis.ecg.Ecg method)@\spxentry{get\_qrs\_start()}\spxextra{signalanalysis.ecg.Ecg method}}
@@ -975,23 +930,185 @@ indicated some edge problems that might throw off the results.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.get_rms}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_rms}}}{\emph{\DUrole{n}{preprocess\_data}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}pandas.core.frame.DataFrame\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}, \emph{\DUrole{n}{drop\_columns}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}List\DUrole{p}{{[}}str\DUrole{p}{{]}}\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}, \emph{\DUrole{n}{unipolar\_only}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{True}}}{}
 \sphinxAtStartPar
-Returns the RMS of the combined signal
+Supplement the {\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal.get\_rms()}}}}} with \sphinxtitleref{unipolar\_only}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{preprocess\_data}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Only passed if there is some extant data that is to be used for getting the RMS (for example,
-if the unipolar data only from ECG is being used, and the data is thus preprocessed in a manner specific
-for ECG data in the ECG routine)
+\sphinxstyleliteralstrong{\sphinxupquote{preprocess\_data}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} See {\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal.get\_rms()}}}}}
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{drop\_columns}} (\sphinxstyleliteralemphasis{\sphinxupquote{list of str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} List of any columns to drop from the raw data before calculating the RMS. Can be used in conjunction with
-preprocess\_data
+\sphinxstyleliteralstrong{\sphinxupquote{drop\_columns}} (\sphinxstyleliteralemphasis{\sphinxupquote{list of str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} See {\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal.get\_rms()}}}}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Whether to use only unipolar ECG leads to calculate RMS, default=True
 
 \end{itemize}
 
 \end{description}\end{quote}
+
+
+\sphinxstrong{See also:}
+\nopagebreak
+
+
+\sphinxAtStartPar
+{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal.get\_rms()}}}}}
+
+
+\subsubsection*{Notes}
+
+\sphinxAtStartPar
+If \sphinxtitleref{unipolar\_only} is set to true, then ECG RMS is calculated using only ‘unipolar’ leads. This uses V1\sphinxhyphen{}6,
+and the non\sphinxhyphen{}augmented limb leads (VF, VL and VR)
+\begin{equation*}
+\begin{split}VF = LL-V_{WCT} = \frac{2}{3}aVF\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}VL = LA-V_{WCT} = \frac{2}{3}aVL\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}VR = RA-V_{WCT} = \frac{2}{3}aVR\end{split}
+\end{equation*}
+\end{fulllineitems}
+
+\index{plot() (signalanalysis.ecg.Ecg method)@\spxentry{plot()}\spxextra{signalanalysis.ecg.Ecg method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg.plot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{plot}}}{\emph{\DUrole{n}{separate\_beats}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}, \emph{\DUrole{n}{separate\_figs}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}}{}
+\sphinxAtStartPar
+Method to plot the data of the ECG
+
+\sphinxAtStartPar
+Passes the function to the ECG plotting script, with the option to plot the individual beats instead of the
+entire signal; also, to plot these on individual figures or overlaid on the same figure
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{separate\_beats}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Whether to plot the entire signal (false), or to plot the individual detected beats one after the other,
+default=False
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{separate\_figs}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} When plotting the separate beats (if requested), whether to plot the individual beats one on top of the
+other on a single figure (true), or on separate figures (false), default=False
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+fig, ax
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{read() (signalanalysis.ecg.Ecg method)@\spxentry{read()}\spxextra{signalanalysis.ecg.Ecg method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:id4}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{read}}}{\emph{\DUrole{n}{filename}\DUrole{p}{:} \DUrole{n}{str}}, \emph{\DUrole{n}{normalise}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}, \emph{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
+\sphinxAtStartPar
+Reads in the data from the original file. Called upon initialisation
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{filename}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Location for data (either filename or directory)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{normalise}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Whether or not to normalise the individual leads (no real biophysical rationale for doing this,
+to be honest), default=False
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+
+\sphinxstrong{See also:}
+\nopagebreak
+
+\begin{description}
+\item[{{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:id5}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.ecg.Ecg.read\_ecg\_from\_wfdb}}}}}}] \leavevmode
+\sphinxAtStartPar
+underlying read method for wfdb files
+
+\end{description}
+
+
+
+\end{fulllineitems}
+
+\index{read\_ecg\_from\_wfdb() (signalanalysis.ecg.Ecg method)@\spxentry{read\_ecg\_from\_wfdb()}\spxextra{signalanalysis.ecg.Ecg method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.ecg.Ecg:id5}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{read\_ecg\_from\_wfdb}}}{\emph{\DUrole{n}{filename}\DUrole{p}{:} \DUrole{n}{str}}, \emph{\DUrole{n}{sample\_rate}\DUrole{p}{:} \DUrole{n}{float}}, \emph{\DUrole{n}{comments\_file}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}str\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}, \emph{\DUrole{n}{normalise}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}}{}
+\sphinxAtStartPar
+Read data from a waveform database file format
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{filename}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Base filename for data (e.g. /path/to/data/1 will read /path/to/data/1.\{avf, avl, avr, dat, hea\}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{sample\_rate}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Rate at which data is recorded, e.g. 500 Hz
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{comments\_file}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} .csv file containing additional data for the ECG, if available
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{normalise}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Whether to normalise all individual leads, default=False
+
+\end{itemize}
+
+\end{description}\end{quote}
+\subsubsection*{Notes}
+
+\sphinxAtStartPar
+The waveform database format is used by several different ECG repositories on www.physionet.org,
+and the finer points of each import can be difficult to seamlessly integrate. Where values are subject to
+change between datasets, they are not available as defaults. The required values are thus, but it should be
+remembered that there remains a certain level of hard\sphinxhyphen{}coding (for example, in the use of \sphinxtitleref{comments\_file} to
+extract data).
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Lobachevsky
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+sample\_rate = 500
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+PTB\sphinxhyphen{}XL
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+sample\_rate = 100 if from records100/{\color{red}\bfseries{}*}/{\color{red}\bfseries{}*}\_lr
+
+\item {} 
+\sphinxAtStartPar
+sample\_rate = 500 if from records500/{\color{red}\bfseries{}*}/{\color{red}\bfseries{}*}\_hr
+
+\item {} 
+\sphinxAtStartPar
+comments\_file = ‘ptbxl\_database.csv’
+
+\end{itemize}
+
+\end{itemize}
 
 \end{fulllineitems}
 
@@ -1365,6 +1482,24 @@ Returns the RMS of the combined signal
 
 \end{fulllineitems}
 
+\index{get\_n\_beats() (signalanalysis.general.Signal method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.general.Signal method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal.get_n_beats}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_n\_beats}}}{\emph{threshold=0.5}, \emph{separation=0.2}, \emph{plot=False}, \emph{\textbackslash{}*\textbackslash{}*kwargs}}{}
+\sphinxAtStartPar
+Splits the full signal into individual beats
+
+\end{fulllineitems}
+
+\index{plot() (signalanalysis.general.Signal method)@\spxentry{plot()}\spxextra{signalanalysis.general.Signal method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal.plot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{plot}}}{\emph{\DUrole{n}{separate\_beats}\DUrole{o}{=}\DUrole{default_value}{False}}}{}
+\sphinxAtStartPar
+Plot the ECG data
+
+\end{fulllineitems}
+
 \subsubsection*{Methods}
 
 
@@ -1386,17 +1521,31 @@ Returns the RMS of the combined signal
 \endlastfoot
 
 \sphinxAtStartPar
-{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal.get_n_beats}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_n\_beats}}}}}
+{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal.apply_filter}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{apply\_filter}}}}}
 &
 \sphinxAtStartPar
-Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
+Apply a given filter to the data, using their respective arguments as required
 \\
 \hline
 \sphinxAtStartPar
-{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id0}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_rms}}}}}
+{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id0}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_n\_beats}}}}}
+&
+\sphinxAtStartPar
+Calculate the number of beats in a given signal, and save the individual beats to the object for later use
+\\
+\hline
+\sphinxAtStartPar
+{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_rms}}}}}
 &
 \sphinxAtStartPar
 Returns the RMS of the combined signal
+\\
+\hline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{get\_twave\_end}}
+&
+\sphinxAtStartPar
+
 \\
 \hline
 \sphinxAtStartPar
@@ -1407,81 +1556,98 @@ Reset all properties of the class
 \\
 \hline
 \end{longtable}\sphinxatlongtableend\end{savenotes}
+\index{apply\_filter() (signalanalysis.general.Signal method)@\spxentry{apply\_filter()}\spxextra{signalanalysis.general.Signal method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal.apply_filter}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{apply\_filter}}}{\emph{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
+\sphinxAtStartPar
+Apply a given filter to the data, using their respective arguments as required
+
+
+\sphinxstrong{See also:}
+\nopagebreak
+
+\begin{description}
+\item[{{\hyperref[\detokenize{_autosummary/tools.maths.filter_butterworth:tools.maths.filter_butterworth}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{tools.maths.filter\_butterworth()}}}}}}] \leavevmode
+\sphinxAtStartPar
+Potential filter
+
+\item[{{\hyperref[\detokenize{_autosummary/tools.maths.filter_savitzkygolay:tools.maths.filter_savitzkygolay}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{tools.maths.filter\_savitzkygolay()}}}}}}] \leavevmode
+\sphinxAtStartPar
+Potential filter
+
+\end{description}
+
+
+
+\end{fulllineitems}
+
 \index{get\_n\_beats() (signalanalysis.general.Signal method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.general.Signal method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.general.Signal:signalanalysis.general.Signal.get_n_beats}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_n\_beats}}}{\emph{\DUrole{n}{threshold}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.5}}, \emph{\DUrole{n}{min\_separation}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.2}}, \emph{\DUrole{n}{unipolar\_only}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{True}}, \emph{\DUrole{n}{plot}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}}{}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.general.Signal:id0}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_n\_beats}}}{\emph{\DUrole{n}{threshold}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.5}}, \emph{\DUrole{n}{min\_separation}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.2}}, \emph{\DUrole{n}{reset\_index}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{True}}, \emph{\DUrole{n}{plot}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}, \emph{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
 \sphinxAtStartPar
-Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
-\begin{quote}
+Calculate the number of beats in a given signal, and save the individual beats to the object for later use
 
 \sphinxAtStartPar
-When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
-RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
-list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where ECG1={[}0:peak2{]}, ECG2={[}peak1:peak3{]},
+When given the raw data of a given signal (ECG or VCG), will estimate the number of beats recorded in the trace
+based on the RMS of the signal exceeding a threshold value. The estimated individual beats will then be saved in
+a list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where ECG1={[}0:peak2{]}, ECG2={[}peak1:peak3{]},
 …, ECGn={[}peak(n\sphinxhyphen{}1):end{]}
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{threshold}} (\sphinxstyleliteralemphasis{\sphinxupquote{float \{0\textless{}1\}}}) \textendash{} Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{min\_separation}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Minimum time (in s) that should be used to separate separate beats, default=0.2s
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{reset\_index}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to reset the time index for the separated beats so that they all start from zero (true),
+or whether to leave them with the original time index (false), default=True
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to plot results of beat detection, default=False
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Only appropriate for ECG data. Whether to use only unipolar ECG leads to calculate RMS, default=True
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+\sphinxstylestrong{self.n\_beats} \textendash{} Number of beats detected in signal
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+int
+
+\end{description}\end{quote}
+
+
+\sphinxstrong{See also:}
+\nopagebreak
+
 \begin{description}
-\item[{threshold}] \leavevmode{[}float \{0\textless{}1\}{]}
+\item[{{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal.get\_rms()}}}}}}] \leavevmode
 \sphinxAtStartPar
-Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
-
-\item[{min\_separation}] \leavevmode{[}float{]}
-\sphinxAtStartPar
-Minimum time (in s) that should be used to separate separate beats, default=0.2s
-
-\item[{unipolar\_only}] \leavevmode{[}bool, optional{]}
-\sphinxAtStartPar
-Whether to use only unipolar ECG leads to calculate RMS, default=True
-
-\item[{plot}] \leavevmode{[}bool{]}
-\sphinxAtStartPar
-Whether to plot results of beat detection, default=False
-
-\end{description}
-\begin{description}
-\item[{self.n\_beats}] \leavevmode{[}int{]}
-\sphinxAtStartPar
-Number of beats detected in signal
-
-\end{description}
-
-\sphinxAtStartPar
-The scalar RMS is calculated according to
-\begin{equation*}
-\begin{split}\sqrt{\end{split}
-\end{equation*}\end{quote}
-
-\sphinxAtStartPar
-rac\{1\}\{n\}sum\_\{i=1\}\textasciicircum{}n (        extnormal\{ECG\}\_i\textasciicircum{}2(t))\}
-\begin{quote}
-
-\sphinxAtStartPar
-for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar\_only is set to true, then ECG RMS
-is calculated using only ‘unipolar’ leads. This uses V1\sphinxhyphen{}6, and the non\sphinxhyphen{}augmented limb leads (VF, VL and VR)
-
-\sphinxAtStartPar
-..math:: VF = LL\sphinxhyphen{}V\_\{WCT\} =
-\end{quote}
-\begin{description}
-\item[{rac\{2\}\{3\}aVF}] \leavevmode
-\sphinxAtStartPar
-..math:: VL = LA\sphinxhyphen{}V\_\{WCT\} =
-
-\item[{rac\{2\}\{3\}aVL}] \leavevmode
-\sphinxAtStartPar
-..math:: VR = RA\sphinxhyphen{}V\_\{WCT\} =
+RMS signal calculation required for getting n\_beats
 
 \end{description}
 
-\sphinxAtStartPar
-rac\{2\}\{3\}aVR
+
 
 \end{fulllineitems}
 
 \index{get\_rms() (signalanalysis.general.Signal method)@\spxentry{get\_rms()}\spxextra{signalanalysis.general.Signal method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.general.Signal:id0}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_rms}}}{\emph{\DUrole{n}{preprocess\_data}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}pandas.core.frame.DataFrame\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}, \emph{\DUrole{n}{drop\_columns}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}List\DUrole{p}{{[}}str\DUrole{p}{{]}}\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}}{}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.general.Signal:id1}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_rms}}}{\emph{\DUrole{n}{preprocess\_data}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}pandas.core.frame.DataFrame\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}, \emph{\DUrole{n}{drop\_columns}\DUrole{p}{:} \DUrole{n}{Optional\DUrole{p}{{[}}List\DUrole{p}{{[}}str\DUrole{p}{{]}}\DUrole{p}{{]}}} \DUrole{o}{=} \DUrole{default_value}{None}}}{}
 \sphinxAtStartPar
 Returns the RMS of the combined signal
 \begin{quote}\begin{description}
@@ -1499,7 +1665,25 @@ preprocess\_data
 
 \end{itemize}
 
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+\sphinxstylestrong{self.rms} \textendash{} RMS signal of all combined leads
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+pd.Series
+
 \end{description}\end{quote}
+\subsubsection*{Notes}
+
+\sphinxAtStartPar
+The scalar RMS is calculated according to
+\begin{equation*}
+\begin{split}\sqrt{ \frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t)) }\end{split}
+\end{equation*}
+\sphinxAtStartPar
+for all leads available from the signal (12 for ECG, 3 for VCG), unless some leads are excluded via the
+drop\_columns parameter.
 
 \end{fulllineitems}
 
@@ -2146,6 +2330,10 @@ of the VCGs
 \phantomsection\label{\detokenize{_autosummary/signalanalysis.vcg.get_vcg_from_ecg:signalanalysis.vcg.get_vcg_from_ecg}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{signalanalysis.vcg.}}\sphinxbfcode{\sphinxupquote{get\_vcg\_from\_ecg}}}{\emph{\DUrole{n}{ecgs}\DUrole{p}{:} \DUrole{n}{Union\DUrole{p}{{[}}List\DUrole{p}{{[}}pandas.core.frame.DataFrame\DUrole{p}{{]}}\DUrole{p}{, }pandas.core.frame.DataFrame\DUrole{p}{{]}}}}}{{ $\rightarrow$ List\DUrole{p}{{[}}pandas.core.frame.DataFrame\DUrole{p}{{]}}}}
 \sphinxAtStartPar
 Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
+
+\sphinxAtStartPar
+\DUrole{versionmodified,deprecated}{Deprecated since version The: }use of this module is deprecated, and the internal class method should be used in preference (
+signalanalysis.vcg.Vcg.get\_from\_ecg())
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxAtStartPar
@@ -2300,6 +2488,41 @@ Bases: {\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:signala
 
 \sphinxAtStartPar
 Base class to encapsulate data from VCG
+\index{ecg\_filter (signalanalysis.vcg.Vcg attribute)@\spxentry{ecg\_filter}\spxextra{signalanalysis.vcg.Vcg attribute}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.ecg_filter}}\pysigline{\sphinxbfcode{\sphinxupquote{ecg\_filter}}}
+\sphinxAtStartPar
+Whether or not a filter was applied to the original ECG data before transformation to VCG
+\begin{quote}\begin{description}
+\item[{Type}] \leavevmode
+\sphinxAtStartPar
+\{‘butterworth’, ‘savitzky\sphinxhyphen{}golay’\}, optional
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{get\_from\_ecg() (signalanalysis.vcg.Vcg method)@\spxentry{get\_from\_ecg()}\spxextra{signalanalysis.vcg.Vcg method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.get_from_ecg}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_from\_ecg}}}{\emph{\DUrole{n}{ecg}}}{}
+\sphinxAtStartPar
+Converts ECG to VCG
+
+\end{fulllineitems}
+
+
+
+\sphinxstrong{See also:}
+\nopagebreak
+
+
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{signalanalysis.general.Signal : Base class
+:py:class:\textasciigrave{}signalanalysis.ecg.Ecg}} : Related class, from which the VCG signal is obtained
+
+
 \subsubsection*{Methods}
 
 
@@ -2321,7 +2544,14 @@ Base class to encapsulate data from VCG
 \endlastfoot
 
 \sphinxAtStartPar
-{\hyperref[\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.get_from_ecg}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_from\_ecg}}}}}
+{\hyperref[\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.apply_filter}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{apply\_filter}}}}}
+&
+\sphinxAtStartPar
+Apply a given filter to the data, using their respective arguments as required
+\\
+\hline
+\sphinxAtStartPar
+{\hyperref[\detokenize{_autosummary/signalanalysis.vcg.Vcg:id0}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_from\_ecg}}}}}
 &
 \sphinxAtStartPar
 Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
@@ -2331,7 +2561,7 @@ Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
 {\hyperref[\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.get_n_beats}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{get\_n\_beats}}}}}
 &
 \sphinxAtStartPar
-Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
+Calculate the number of beats in a given signal, and save the individual beats to the object for later use
 \\
 \hline
 \sphinxAtStartPar
@@ -2342,6 +2572,13 @@ Returns the RMS of the combined signal
 \\
 \hline
 \sphinxAtStartPar
+\sphinxcode{\sphinxupquote{get\_twave\_end}}
+&
+\sphinxAtStartPar
+
+\\
+\hline
+\sphinxAtStartPar
 {\hyperref[\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.reset}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{reset}}}}}
 &
 \sphinxAtStartPar
@@ -2349,10 +2586,36 @@ Reset all properties of the class
 \\
 \hline
 \end{longtable}\sphinxatlongtableend\end{savenotes}
+\index{apply\_filter() (signalanalysis.vcg.Vcg method)@\spxentry{apply\_filter()}\spxextra{signalanalysis.vcg.Vcg method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.apply_filter}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{apply\_filter}}}{\emph{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
+\sphinxAtStartPar
+Apply a given filter to the data, using their respective arguments as required
+
+
+\sphinxstrong{See also:}
+\nopagebreak
+
+\begin{description}
+\item[{{\hyperref[\detokenize{_autosummary/tools.maths.filter_butterworth:tools.maths.filter_butterworth}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{tools.maths.filter\_butterworth()}}}}}}] \leavevmode
+\sphinxAtStartPar
+Potential filter
+
+\item[{{\hyperref[\detokenize{_autosummary/tools.maths.filter_savitzkygolay:tools.maths.filter_savitzkygolay}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{tools.maths.filter\_savitzkygolay()}}}}}}] \leavevmode
+\sphinxAtStartPar
+Potential filter
+
+\end{description}
+
+
+
+\end{fulllineitems}
+
 \index{get\_from\_ecg() (signalanalysis.vcg.Vcg method)@\spxentry{get\_from\_ecg()}\spxextra{signalanalysis.vcg.Vcg method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.get_from_ecg}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_from\_ecg}}}{\emph{\DUrole{n}{ecg}\DUrole{p}{:} \DUrole{n}{{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg}]{\sphinxcrossref{signalanalysis.ecg.Ecg}}}}}}{}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.vcg.Vcg:id0}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_from\_ecg}}}{\emph{\DUrole{n}{ecg}\DUrole{p}{:} \DUrole{n}{{\hyperref[\detokenize{_autosummary/signalanalysis.ecg.Ecg:signalanalysis.ecg.Ecg}]{\sphinxcrossref{signalanalysis.ecg.Ecg}}}}}}{}
 \sphinxAtStartPar
 Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
 \begin{quote}\begin{description}
@@ -2376,71 +2639,62 @@ Eur Heart J. 1990 Dec;11(12):1083\sphinxhyphen{}92.
 \index{get\_n\_beats() (signalanalysis.vcg.Vcg method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.vcg.Vcg method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.get_n_beats}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_n\_beats}}}{\emph{\DUrole{n}{threshold}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.5}}, \emph{\DUrole{n}{min\_separation}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.2}}, \emph{\DUrole{n}{unipolar\_only}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{True}}, \emph{\DUrole{n}{plot}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}}{}
+\phantomsection\label{\detokenize{_autosummary/signalanalysis.vcg.Vcg:signalanalysis.vcg.Vcg.get_n_beats}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_n\_beats}}}{\emph{\DUrole{n}{threshold}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.5}}, \emph{\DUrole{n}{min\_separation}\DUrole{p}{:} \DUrole{n}{float} \DUrole{o}{=} \DUrole{default_value}{0.2}}, \emph{\DUrole{n}{reset\_index}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{True}}, \emph{\DUrole{n}{plot}\DUrole{p}{:} \DUrole{n}{bool} \DUrole{o}{=} \DUrole{default_value}{False}}, \emph{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
 \sphinxAtStartPar
-Calculate the number of beats in an ECG trace, and save the individual beats to file for later use
-\begin{quote}
+Calculate the number of beats in a given signal, and save the individual beats to the object for later use
 
 \sphinxAtStartPar
-When given the raw data of an ECG trace, will estimate the number of beats recorded in the trace based on the
-RMS of the ECG signal exceeding a threshold value. The estimated individual beats will then be saved in a
-list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where ECG1={[}0:peak2{]}, ECG2={[}peak1:peak3{]},
+When given the raw data of a given signal (ECG or VCG), will estimate the number of beats recorded in the trace
+based on the RMS of the signal exceeding a threshold value. The estimated individual beats will then be saved in
+a list in a lossless manner, i.e. saved as {[}ECG1, ECG2, …, ECG(n){]}, where ECG1={[}0:peak2{]}, ECG2={[}peak1:peak3{]},
 …, ECGn={[}peak(n\sphinxhyphen{}1):end{]}
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{threshold}} (\sphinxstyleliteralemphasis{\sphinxupquote{float \{0\textless{}1\}}}) \textendash{} Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{min\_separation}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Minimum time (in s) that should be used to separate separate beats, default=0.2s
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{reset\_index}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to reset the time index for the separated beats so that they all start from zero (true),
+or whether to leave them with the original time index (false), default=True
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to plot results of beat detection, default=False
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{unipolar\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Only appropriate for ECG data. Whether to use only unipolar ECG leads to calculate RMS, default=True
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+\sphinxstylestrong{self.n\_beats} \textendash{} Number of beats detected in signal
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+int
+
+\end{description}\end{quote}
+
+
+\sphinxstrong{See also:}
+\nopagebreak
+
 \begin{description}
-\item[{threshold}] \leavevmode{[}float \{0\textless{}1\}{]}
+\item[{{\hyperref[\detokenize{_autosummary/signalanalysis.general.Signal:id1}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{signalanalysis.general.Signal.get\_rms()}}}}}}] \leavevmode
 \sphinxAtStartPar
-Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
-
-\item[{min\_separation}] \leavevmode{[}float{]}
-\sphinxAtStartPar
-Minimum time (in s) that should be used to separate separate beats, default=0.2s
-
-\item[{unipolar\_only}] \leavevmode{[}bool, optional{]}
-\sphinxAtStartPar
-Whether to use only unipolar ECG leads to calculate RMS, default=True
-
-\item[{plot}] \leavevmode{[}bool{]}
-\sphinxAtStartPar
-Whether to plot results of beat detection, default=False
-
-\end{description}
-\begin{description}
-\item[{self.n\_beats}] \leavevmode{[}int{]}
-\sphinxAtStartPar
-Number of beats detected in signal
-
-\end{description}
-
-\sphinxAtStartPar
-The scalar RMS is calculated according to
-\begin{equation*}
-\begin{split}\sqrt{\end{split}
-\end{equation*}\end{quote}
-
-\sphinxAtStartPar
-rac\{1\}\{n\}sum\_\{i=1\}\textasciicircum{}n (        extnormal\{ECG\}\_i\textasciicircum{}2(t))\}
-\begin{quote}
-
-\sphinxAtStartPar
-for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar\_only is set to true, then ECG RMS
-is calculated using only ‘unipolar’ leads. This uses V1\sphinxhyphen{}6, and the non\sphinxhyphen{}augmented limb leads (VF, VL and VR)
-
-\sphinxAtStartPar
-..math:: VF = LL\sphinxhyphen{}V\_\{WCT\} =
-\end{quote}
-\begin{description}
-\item[{rac\{2\}\{3\}aVF}] \leavevmode
-\sphinxAtStartPar
-..math:: VL = LA\sphinxhyphen{}V\_\{WCT\} =
-
-\item[{rac\{2\}\{3\}aVL}] \leavevmode
-\sphinxAtStartPar
-..math:: VR = RA\sphinxhyphen{}V\_\{WCT\} =
+RMS signal calculation required for getting n\_beats
 
 \end{description}
 
-\sphinxAtStartPar
-rac\{2\}\{3\}aVR
+
 
 \end{fulllineitems}
 
@@ -2465,7 +2719,25 @@ preprocess\_data
 
 \end{itemize}
 
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+\sphinxstylestrong{self.rms} \textendash{} RMS signal of all combined leads
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+pd.Series
+
 \end{description}\end{quote}
+\subsubsection*{Notes}
+
+\sphinxAtStartPar
+The scalar RMS is calculated according to
+\begin{equation*}
+\begin{split}\sqrt{ \frac{1}{n}\sum_{i=1}^n (\textnormal{ECG}_i^2(t)) }\end{split}
+\end{equation*}
+\sphinxAtStartPar
+for all leads available from the signal (12 for ECG, 3 for VCG), unless some leads are excluded via the
+drop\_columns parameter.
 
 \end{fulllineitems}
 

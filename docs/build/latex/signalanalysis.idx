@@ -4,22 +4,19 @@
 \indexentry{signalanalysis.ecg@\spxentry{signalanalysis.ecg}!module@\spxentry{module}|hyperpage}{5}
 \indexentry{get\_ecg\_from\_electrodes() (in module signalanalysis.ecg)@\spxentry{get\_ecg\_from\_electrodes()}\spxextra{in module signalanalysis.ecg}|hyperpage}{6}
 \indexentry{get\_electrode\_phie() (in module signalanalysis.ecg)@\spxentry{get\_electrode\_phie()}\spxextra{in module signalanalysis.ecg}|hyperpage}{6}
-\indexentry{get\_qrs\_start() (in module signalanalysis.ecg)@\spxentry{get\_qrs\_start()}\spxextra{in module signalanalysis.ecg}|hyperpage}{6}
+\indexentry{get\_qrs\_start() (in module signalanalysis.ecg)@\spxentry{get\_qrs\_start()}\spxextra{in module signalanalysis.ecg}|hyperpage}{7}
 \indexentry{read\_ecg\_from\_csv() (in module signalanalysis.ecg)@\spxentry{read\_ecg\_from\_csv()}\spxextra{in module signalanalysis.ecg}|hyperpage}{7}
-\indexentry{read\_ecg\_from\_dat() (in module signalanalysis.ecg)@\spxentry{read\_ecg\_from\_dat()}\spxextra{in module signalanalysis.ecg}|hyperpage}{7}
+\indexentry{read\_ecg\_from\_dat() (in module signalanalysis.ecg)@\spxentry{read\_ecg\_from\_dat()}\spxextra{in module signalanalysis.ecg}|hyperpage}{8}
 \indexentry{read\_ecg\_from\_igb() (in module signalanalysis.ecg)@\spxentry{read\_ecg\_from\_igb()}\spxextra{in module signalanalysis.ecg}|hyperpage}{8}
-\indexentry{Ecg (class in signalanalysis.ecg)@\spxentry{Ecg}\spxextra{class in signalanalysis.ecg}|hyperpage}{8}
-\indexentry{data (signalanalysis.ecg.Ecg attribute)@\spxentry{data}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{8}
-\indexentry{filename (signalanalysis.ecg.Ecg attribute)@\spxentry{filename}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{8}
-\indexentry{normalised (signalanalysis.ecg.Ecg attribute)@\spxentry{normalised}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{8}
-\indexentry{n\_beats (signalanalysis.ecg.Ecg attribute)@\spxentry{n\_beats}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{8}
-\indexentry{qrs\_start (signalanalysis.ecg.Ecg attribute)@\spxentry{qrs\_start}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{9}
-\indexentry{qrs\_end (signalanalysis.ecg.Ecg attribute)@\spxentry{qrs\_end}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{9}
-\indexentry{data\_source (signalanalysis.ecg.Ecg attribute)@\spxentry{data\_source}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{9}
-\indexentry{comments (signalanalysis.ecg.Ecg attribute)@\spxentry{comments}\spxextra{signalanalysis.ecg.Ecg attribute}|hyperpage}{9}
+\indexentry{Ecg (class in signalanalysis.ecg)@\spxentry{Ecg}\spxextra{class in signalanalysis.ecg}|hyperpage}{9}
 \indexentry{read() (signalanalysis.ecg.Ecg method)@\spxentry{read()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
 \indexentry{read\_ecg\_from\_wfdb() (signalanalysis.ecg.Ecg method)@\spxentry{read\_ecg\_from\_wfdb()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
 \indexentry{get\_n\_beats() (signalanalysis.ecg.Ecg method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
 \indexentry{get\_qrs\_start() (signalanalysis.ecg.Ecg method)@\spxentry{get\_qrs\_start()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
-\indexentry{get\_n\_beats() (signalanalysis.ecg.Ecg method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{9}
+\indexentry{apply\_filter() (signalanalysis.ecg.Ecg method)@\spxentry{apply\_filter()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{10}
+\indexentry{get\_n\_beats() (signalanalysis.ecg.Ecg method)@\spxentry{get\_n\_beats()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{10}
 \indexentry{get\_qrs\_start() (signalanalysis.ecg.Ecg method)@\spxentry{get\_qrs\_start()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{10}
+\indexentry{get\_rms() (signalanalysis.ecg.Ecg method)@\spxentry{get\_rms()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{11}
+\indexentry{plot() (signalanalysis.ecg.Ecg method)@\spxentry{plot()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{11}
+\indexentry{read() (signalanalysis.ecg.Ecg method)@\spxentry{read()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{12}
+\indexentry{read\_ecg\_from\_wfdb() (signalanalysis.ecg.Ecg method)@\spxentry{read\_ecg\_from\_wfdb()}\spxextra{signalanalysis.ecg.Ecg method}|hyperpage}{12}
