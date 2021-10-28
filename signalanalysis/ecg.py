@@ -162,7 +162,7 @@ class Ecg(signalanalysis.general.Signal):
             lead_index = columns_full.index(lead_match[0])
             columns_full[lead_index] = key
 
-        interval = 1 / sample_rate
+        interval = (1 / sample_rate)*1000
         end_val = data_full.p_signal.shape[0] * interval
         t = np.arange(0, end_val, interval)
 
@@ -226,7 +226,7 @@ class Ecg(signalanalysis.general.Signal):
 
     def get_qrs_start(self,
                       unipolar_only: bool = True,
-                      min_separation: float = 0.05,
+                      min_separation: float = 50,
                       plot_result: bool = False):
         """Calculates start of QRS complex using method of Hermans et al. (2017)
 
@@ -240,7 +240,7 @@ class Ecg(signalanalysis.general.Signal):
         unipolar_only : bool, optional
             Whether to use only unipolar leads to calculate RMS, default=True
         min_separation : float, optional
-            Minimum separation from the peak used to detect various beats, default=0.05s
+            Minimum separation from the peak used to detect various beats, default=50ms
         plot_result : bool, optional
             Whether to plot the results for error-checking, default=False
 
@@ -351,7 +351,7 @@ def read_ecg_from_igb(filename: str,
         File which contains the node indices in the mesh that correspond to the placement of the leads for the
         10-lead ECG. Default given in get_electrode_phie function.
     dt : float
-        Time interval from which to construct the time data to associate with the ECG, default=0.002s (2ms)
+        Time interval from which to construct the time data to associate with the ECG
     normalise : bool, optional
         Whether or not to normalise the ECG signals on a per-lead basis, default=False
 
@@ -363,7 +363,7 @@ def read_ecg_from_igb(filename: str,
     Notes
     -----
     For the .igb data used thus far, the `electrode_file` can be found at ``tests/12LeadElectrodes.dat``, and `dt` is
-    0.002s
+    2ms
 
     References
     ----------

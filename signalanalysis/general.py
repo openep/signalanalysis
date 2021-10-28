@@ -25,10 +25,17 @@ class Signal:
         Whether or not the data for the leads have been normalised
     n_beats : int
         Number of beats recorded in the trace. Set to 0 if not calculated
+    n_beats_threshold : float (0, 1.0)
+        Threshold value used to determine number of beats in overall signal, expressed as a fraction of the maximum
+        signal strength detected, default=0.5
+    beats : list of pd.DataFrame
+        Raw data separated into individual beats
     qrs_start : list of float
         Times calculated for the start of the QRS complex
     qrs_end : end
         Times calculated for the end of the QRS complex
+    twave_end : end
+        Times calculated for the end of the T-wave
     data_source : str
         Source for the data, if known e.g. Staff III database, CARP simulation, etc.
     comments : str
@@ -117,7 +124,10 @@ class Signal:
         elif self.filter == 'savitzky-golay':
             self.data = tools.maths.filter_savitzkygolay(self.data, **kwargs)
 
-    def get_rms(self, preprocess_data: pd.DataFrame = None, drop_columns: List[str] = None):
+    def get_rms(self,
+                preprocess_data: pd.DataFrame = None,
+                drop_columns: List[str] = None,
+                **kwargs):
         """Returns the RMS of the combined signal
 
         Parameters
@@ -165,7 +175,7 @@ class Signal:
 
     def get_n_beats(self,
                     threshold: float = 0.5,
-                    min_separation: float = 0.2,
+                    min_separation: float = 200,
                     reset_index: bool = True,
                     plot: bool = False,
                     **kwargs):
@@ -181,7 +191,7 @@ class Signal:
         threshold : float {0<1}
             Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
         min_separation : float
-            Minimum time (in s) that should be used to separate separate beats, default=0.2s
+            Minimum time (in ms) that should be used to separate separate beats, default=200ms
         reset_index : bool
             Whether to reset the time index for the separated beats so that they all start from zero (true),
             or whether to leave them with the original time index (false), default=True

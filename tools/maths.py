@@ -82,13 +82,17 @@ def filter_butterworth(data: Union[np.ndarray, pd.DataFrame],
     -------
     filter_out : np.ndarray
         Output filtered data
+
+    Notes
+    -----
+    Data should be passed using milliseconds rather than seconds
     """
 
     # Define filter window (expressed as a fraction of the Nyquist frequency, which is half the sampling rate)
     if isinstance(data, pd.DataFrame):
         dt = np.mean(np.diff(data.index))
-        assert 0.001 <= dt <= 0.5, "dt seems to be a number that doesn't fit with seconds..."
-        sample_freq = 1/dt
+        assert 1 <= dt <= 50, "dt seems to be a number that doesn't fit with milliseconds..."
+        sample_freq = (1/dt)*1000
     window = freq_filter/(sample_freq*0.5)
 
     [b, a] = signal.butter(N=order, Wn=window, btype=filter_type)
@@ -102,7 +106,7 @@ def filter_butterworth(data: Union[np.ndarray, pd.DataFrame],
 
 
 def filter_savitzkygolay(data: pd.DataFrame,
-                         window_length: int = 0.05,
+                         window_length: int = 50,
                          order: int = 2,
                          deriv: int = 0,
                          delta: float = 1.0):
@@ -118,7 +122,7 @@ def filter_savitzkygolay(data: pd.DataFrame,
         Data to filter
     window_length : float, optional
         The length of the filter window in seconds. When passed to the scipy filter, will be converted to a
-        positive odd integer (i.e. the number of coefficients). Default=0.05
+        positive odd integer (i.e. the number of coefficients). Default=50ms
     order : int, optional
         The order of the polynomial used to fit the samples. polyorder must be less than window_length. Default=2
     deriv : int, optional
