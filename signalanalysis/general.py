@@ -173,9 +173,39 @@ class Signal:
             signal_rms.loc[:, key] = signal_rms[key] ** 2
         self.rms = np.sqrt(signal_rms.sum(axis=1) / n_leads)
 
+    def get_peaks(self,
+                  threshold: float = 0.5,
+                  min_separation: float = 200,
+                  **kwargs):
+        """ Get the peaks of the RMS signal.
+
+        It is often the case that, to determine the number of beats, the peaks in the signal must be determined. This is
+        usually done using the RMS of the signal, as demonstrated here. For alternative methods, this method is
+        overwritten.
+
+        Parameters
+        ----------
+        threshold : float {0<1}
+            Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
+        min_separation : float
+            Minimum separation (in ms) required between neighbouring peaks in a given signal (correlates to the minimum
+            pacing rate expected), default=200ms
+
+        Returns
+        -------
+        i_peaks
+        """
+
+        # Calculate locations of RMS peaks to determine number and locations of beats
+        if not self.rms:
+            self.get_rms(**kwargs)
+        i_separation = self.data.index.get_loc(min_separation)
+        i_peaks, _ = scipy.signal.find_peaks(self.rms, height=threshold*max(self.rms), distance=i_separation)
+        self.n_beats = len(i_peaks)
+        self.n_beats_threshold = threshold
+        return i_peaks
+
     def get_n_beats(self,
-                    threshold: float = 0.5,
-                    min_separation: float = 200,
                     reset_index: bool = True,
                     plot: bool = False,
                     **kwargs):
@@ -188,10 +218,6 @@ class Signal:
 
         Parameters
         ----------
-        threshold : float {0<1}
-            Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
-        min_separation : float
-            Minimum time (in ms) that should be used to separate separate beats, default=200ms
         reset_index : bool
             Whether to reset the time index for the separated beats so that they all start from zero (true),
             or whether to leave them with the original time index (false), default=True
@@ -210,16 +236,11 @@ class Signal:
 
         See Also
         --------
+        :py:meth:`signalanalysis.general.Signal.get_peaks` : Method to find peaks in the RMS signal
         :py:meth:`signalanalysis.general.Signal.get_rms` : RMS signal calculation required for getting n_beats
         """
 
-        # Calculate locations of RMS peaks to determine number and locations of beats
-        if not self.rms:
-            self.get_rms(**kwargs)
-        i_separation = self.data.index.get_loc(min_separation)
-        i_peaks, _ = scipy.signal.find_peaks(self.rms, height=threshold*max(self.rms), distance=i_separation)
-        self.n_beats = len(i_peaks)
-        self.n_beats_threshold = threshold
+        i_peaks = self.get_peaks(**kwargs)
 
         # Split the trace into individual beats
         t_peaks = self.rms.index[i_peaks]

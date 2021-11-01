@@ -375,6 +375,7 @@ def read_ecg_from_igb(filename: str,
     ecg_data = get_ecg_from_electrodes(electrode_data)
 
     # Add time data
+    assert 0.1 < dt < 50, "Looks like dt may not be set in ms..."
     ecg_data['t'] = [i * dt for i in range(len(ecg_data))]
     ecg_data.set_index('t', inplace=True)
 
