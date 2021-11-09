@@ -65,7 +65,7 @@ class Ecg(signalanalysis.general.Signal):
         self.read(filename, **kwargs)
         if self.filter is not None:
             self.apply_filter(**kwargs)
-        self.get_n_beats()
+        self.get_beats()
 
     def read(self,
              filename: str,
@@ -98,6 +98,7 @@ class Ecg(signalanalysis.general.Signal):
             self.data = read_ecg_from_dat(filename, normalise=normalise)
         else:
             self.read_ecg_from_wfdb(filename, normalise=normalise, **kwargs)
+        self.data_source = filename
         self.normalised = normalise
 
     def read_ecg_from_wfdb(self,
@@ -267,7 +268,7 @@ class Ecg(signalanalysis.general.Signal):
 
         # If individual beats not yet separated, do so now
         if not self.beats:
-            self.get_n_beats()
+            self.get_beats()
 
         # Remove the requested sections from the beginning/end of the individual beat traces (which are originally
         # lossless, so extend to the peak of the prior and following beat RMS data)

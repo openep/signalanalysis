@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import scipy.signal
 import scipy.stats
@@ -5,7 +6,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from typing import List, Union, Optional
 
-import signalplot.ecg
 import tools.maths
 import tools.python
 
@@ -28,8 +28,17 @@ class Signal:
     n_beats_threshold : float (0, 1.0)
         Threshold value used to determine number of beats in overall signal, expressed as a fraction of the maximum
         signal strength detected, default=0.5
+    t_peaks : list of float
+        Time at which peaks are detected in the overall signal
     beats : list of pd.DataFrame
         Raw data separated into individual beats
+    beat_index_reset : bool
+        Whether or not the individual data recorded in `beats` has had its time index zeroed (true) or not (false)
+    beat_start : list of float
+        Start times of the individual beats (allows conversion between individual beat data and overall signal data
+        regardless of value of `beat_index_reset`)
+    rms : pd.Series
+        Record of the RMS data for the signal
     qrs_start : list of float
         Times calculated for the start of the QRS complex
     qrs_end : end
@@ -68,8 +77,11 @@ class Signal:
 
         self.n_beats = 0
         self.n_beats_threshold = 0.5
+        self.t_peaks = None
         self.beats = list()
-        self.rms = list()
+        self.beat_index_reset = False
+        self.beat_start = None
+        self.rms = None
 
         self.qrs_start = list()
         self.qrs_end = list()
@@ -100,16 +112,24 @@ class Signal:
         """
         self.data = pd.DataFrame()
         self.filename = str()
+
         self.n_beats = 0
         self.n_beats_threshold = 0.5
+        self.t_peaks = None
         self.beats = list()
-        self.rms = list()
+        self.beat_index_reset = False
+        self.beat_start = None
+        self.rms = None
+
         self.qrs_start = list()
         self.qrs_end = list()
         self.twave_end = list()
+
         self.data_source = None
         self.comments = list()
+
         self.normalised = bool()
+        self.filter = None
 
     def apply_filter(self, **kwargs):
         """Apply a given filter to the data, using their respective arguments as required
@@ -176,6 +196,7 @@ class Signal:
     def get_peaks(self,
                   threshold: float = 0.5,
                   min_separation: float = 200,
+                  plot: bool = False,
                   **kwargs):
         """ Get the peaks of the RMS signal.
 
@@ -190,39 +211,60 @@ class Signal:
         min_separation : float
             Minimum separation (in ms) required between neighbouring peaks in a given signal (correlates to the minimum
             pacing rate expected), default=200ms
+        plot : bool
+            Whether to plot results of beat detection, default=False
 
         Returns
         -------
-        i_peaks
+        self.n_beats : int
+            Number of beats in signal
+        self.n_beats_threshold : int
+            A record of the threshold value used to determine when a peak in the signal could potentially be counted
+            as a 'peak'
+        self.t_peaks : list of float
+            Time at which peaks are detected
         """
 
         # Calculate locations of RMS peaks to determine number and locations of beats
-        if not self.rms:
+        if self.rms is None:
             self.get_rms(**kwargs)
         i_separation = self.data.index.get_loc(min_separation)
         i_peaks, _ = scipy.signal.find_peaks(self.rms, height=threshold*max(self.rms), distance=i_separation)
         self.n_beats = len(i_peaks)
         self.n_beats_threshold = threshold
-        return i_peaks
+        self.t_peaks = self.rms.index[i_peaks]
 
-    def get_n_beats(self,
-                    reset_index: bool = True,
-                    plot: bool = False,
-                    **kwargs):
+        if plot:
+            fig = plt.figure()
+            ax = fig.add_subplot(1, 1, 1)
+            ax.plot(self.rms)
+            ax.scatter(self.t_peaks, self.rms.loc[self.t_peaks],
+                       marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
+
+        return
+
+    def get_beats(self,
+                  reset_index: bool = True,
+                  offset_start: Optional[float] = None,
+                  offset_end: Optional[float] = None,
+                  plot: bool = False,
+                  **kwargs):
         """Calculate the number of beats in a given signal, and save the individual beats to the object for later use
 
         When given the raw data of a given signal (ECG or VCG), will estimate the number of beats recorded in the trace
         based on the RMS of the signal exceeding a threshold value. The estimated individual beats will then be saved in
-        a list in a lossless manner, i.e. saved as [ECG1, ECG2, ..., ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
-        ..., ECGn=[peak(n-1):end]
+        a list.
 
         Parameters
         ----------
         reset_index : bool
             Whether to reset the time index for the separated beats so that they all start from zero (true),
             or whether to leave them with the original time index (false), default=True
+        offset_start, offset_end : float, optional
+            Time in ms to offset from the prior peak (``offset_start``) and from the following peak (``offset_end``)
+            when extracting individual beats, default=None
         plot : bool
-            Whether to plot results of beat detection, default=False
+            Whether to plot the overall signal, showing where the demarcation between individual plots has been made
 
         Other Parameters
         ----------------
@@ -231,8 +273,20 @@ class Signal:
 
         Returns
         -------
-        self.n_beats : int
-            Number of beats detected in signal
+        self.beats : list of pd.DataFrame
+            Individual beats in signal
+        self.beat_start : list of float
+            Times at which the individual beats start in the overall signal data
+        self.beat_index_reset : bool
+            Whether or not the time index for each individual beat has been zeroed (true) or not (false)
+
+        Notes
+        -----
+        If ``offset_start`` and ``offset_end`` are set to 0ms, then the n-th beat will be recorded as starting from the
+        point of the (n-1)th peak, and concluding at the point of the (n+1)th peak. This will mean that the beats
+        will be saved in a lossless manner, i.e. saved as [ECG1, ECG2, ..., ECG(n)], where ECG1=[0:peak2],
+        ECG2=[peak1:peak3], ..., ECGn=[peak(n-1):end]; this will lead to excessive duplication of the data between the
+        various recorded peaks, but will ensure that the start of the QRS and T-wave are not accidentally excluded.
 
         See Also
         --------
@@ -240,25 +294,57 @@ class Signal:
         :py:meth:`signalanalysis.general.Signal.get_rms` : RMS signal calculation required for getting n_beats
         """
 
-        i_peaks = self.get_peaks(**kwargs)
+        if self.t_peaks is None:
+            self.get_peaks(**kwargs)
 
-        # Split the trace into individual beats
-        t_peaks = self.rms.index[i_peaks]
-        t_split = [self.data.index[0]]+list(t_peaks)+[self.data.index[-1]]
-        for i_split in range(self.n_beats):
-            self.beats.append(self.data.loc[t_split[i_split]:t_split[i_split+2], :])
+        # If only one beat is detected, can end here
+        self.beat_index_reset = reset_index
+        if self.n_beats == 1:
+            self.beats = [self.data]
+            self.beat_start = [self.data.index[0]]
+            beat_end = [self.data.index[-1]]
+        else:
+            # Calculate series of cycle length values, before then using this to estimate the start and end times of
+            # each beat. The offset from the previous peak will be assumed at 0.4*BCL, while the offset from the
+            # following peak will be 0.1*BCL (both with a minimum value of 30ms)
+            if offset_start is None:
+                bcls = np.diff(self.t_peaks)
+                offset_start_list = [max(0.6*bcl, 30) for bcl in bcls]
+            else:
+                offset_start_list = [offset_start]*self.n_beats
+            if offset_end is None:
+                bcls = np.diff(self.t_peaks)
+                offset_end_list = [max(0.1*bcl, 30) for bcl in bcls]
+            else:
+                offset_end_list = [offset_end]*self.n_beats
+            self.beat_start = [self.data.index[0]]+list(self.t_peaks[:-1]+offset_start_list)
+            beat_end = [t_p-offset for t_p, offset in zip(self.t_peaks[1:], offset_end_list)]+[self.data.index[-1]]
 
-        if reset_index:
-            for i_beat in range(self.n_beats):
-                zeroed_index = self.beats[i_beat].index-self.beats[i_beat].index[0]
-                self.beats[i_beat].set_index(zeroed_index, inplace=True)
-                pass
+            for t_s, t_e in zip(self.beat_start, beat_end):
+                self.beats.append(self.data.loc[t_s:t_e, :])
+
+            if reset_index:
+                for i_beat in range(self.n_beats):
+                    zeroed_index = self.beats[i_beat].index-self.beats[i_beat].index[0]
+                    self.beats[i_beat].set_index(zeroed_index, inplace=True)
 
         if plot:
             fig = plt.figure()
             ax = fig.add_subplot(1, 1, 1)
-            ax.plot(self.rms)
-            ax.plot(t_peaks, self.rms[t_peaks], 'o', markerfacecolor='none')
+            ax.plot(self.rms, color='C0', label='RMS')       # Plot RMS data
+            ax.scatter(self.t_peaks, self.rms.loc[self.t_peaks],
+                       marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
+            colours = tools.plotting.get_plot_colours(self.n_beats)
+            i_beat = 1
+            max_height = np.max(self.rms)
+            height_shift = (np.max(self.rms)-np.min(self.rms))*0.1
+            height_val = [max_height, max_height-height_shift]*math.ceil(self.n_beats/2)
+            for t_s, t_e, col, h in zip(self.beat_start, beat_end, colours, height_val):
+                ax.axvline(t_s, color=col)
+                ax.axvline(t_e, color=col)
+                ax.annotate(text='{}'.format(i_beat), xy=(t_s, h), xytext=(t_e, h),
+                            arrowprops=dict(arrowstyle='<->', linewidth=3))
+                i_beat = i_beat+1
 
     def get_twave_end(self):
         print("Not coded yet! Don't use!")

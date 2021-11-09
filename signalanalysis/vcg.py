@@ -7,7 +7,6 @@ from matplotlib import gridspec
 import warnings
 from typing import Union, List, Tuple, Optional, Iterable
 
-import signalanalysis.general
 import signalanalysis.ecg
 import signalplot.ecg
 import tools.maths
@@ -62,7 +61,7 @@ class Vcg(signalanalysis.general.Signal):
         self.get_from_ecg(ecg)
         if self.filter is not None:
             self.apply_filter(**kwargs)
-        self.get_n_beats(**kwargs)
+        self.get_beats(**kwargs)
         if self.n_beats != ecg.n_beats:
             warnings.warn('Number of beats detected in VCG different from number of beats detected in ECG.')
 
