@@ -15,6 +15,7 @@ wfdb = "==3.4.0"
 [dev-packages]
 pytest = "*"
 sphinx = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.8"
