@@ -32,6 +32,10 @@ def get_plot_colours(n: int = 10, colourmap: Optional[str] = None) -> List[Tuple
     if colourmap is None:
         if n < 11:
             colourmap = 'tab10'
+        elif n < 13:
+            colourmap = 'Set3'
+        elif n < 21:
+            colourmap = 'tab20'
         else:
             colourmap = 'viridis'
 
