@@ -235,13 +235,26 @@ class Signal:
         self.t_peaks = self.rms.index[i_peaks]
 
         if plot:
-            fig = plt.figure()
-            ax = fig.add_subplot(1, 1, 1)
-            ax.plot(self.rms)
-            ax.scatter(self.t_peaks, self.rms.loc[self.t_peaks],
-                       marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
+            _ = self.plot_peaks()
+            # fig = plt.figure()
+            # ax = fig.add_subplot(1, 1, 1)
+            # ax.plot(self.rms)
+            # ax.scatter(self.t_peaks, self.rms.loc[self.t_peaks],
+            #            marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
 
         return
+
+    def plot_peaks(self,
+                   **kwargs):
+        if self.t_peaks is None:
+            self.get_peaks(**kwargs)
+
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
+        ax.plot(self.rms)
+        ax.scatter(self.t_peaks, self.rms.loc[self.t_peaks],
+                   marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
+        return fig, ax
 
     def get_beats(self,
                   reset_index: bool = True,
@@ -345,6 +358,37 @@ class Signal:
                 ax.annotate(text='{}'.format(i_beat), xy=(t_s, h), xytext=(t_e, h),
                             arrowprops=dict(arrowstyle='<->', linewidth=3))
                 i_beat = i_beat+1
+
+    def plot_beats(self,
+                   offset_end: Optional[float] = None,
+                   **kwargs):
+        if self.beats is None:
+            self.get_beats(offset_end=offset_end, plot=False, **kwargs)
+
+        if offset_end is None:
+            bcls = np.diff(self.t_peaks)
+            offset_end_list = [max(0.1*bcl, 30) for bcl in bcls]
+        else:
+            offset_end_list = [offset_end]*self.n_beats
+        beat_end = [t_p-offset for t_p, offset in zip(self.t_peaks[1:], offset_end_list)]+[self.data.index[-1]]
+
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
+        ax.plot(self.rms, color='C0', label='RMS')       # Plot RMS data
+        ax.scatter(self.t_peaks, self.rms.loc[self.t_peaks],
+                   marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
+        colours = tools.plotting.get_plot_colours(self.n_beats)
+        i_beat = 1
+        max_height = np.max(self.rms)
+        height_shift = (np.max(self.rms)-np.min(self.rms))*0.1
+        height_val = [max_height, max_height-height_shift]*math.ceil(self.n_beats/2)
+        for t_s, t_e, col, h in zip(self.beat_start, beat_end, colours, height_val):
+            ax.axvline(t_s, color=col)
+            ax.axvline(t_e, color=col)
+            ax.annotate(text='{}'.format(i_beat), xy=(t_s, h), xytext=(t_e, h),
+                        arrowprops=dict(arrowstyle='<->', linewidth=3))
+            i_beat = i_beat+1
+        return fig, ax
 
     def get_twave_end(self):
         print("Not coded yet! Don't use!")
