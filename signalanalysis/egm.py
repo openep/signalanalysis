@@ -51,14 +51,18 @@ class Egm(signalanalysis.general.Signal):
         `.data_uni` attibute
         """
         super(Egm, self).__init__(**kwargs)
-        # delattr(self, 'data')
-        self.data_uni = None
-        self.data = self.data_uni
-        self.data_bi = None
 
-        self.beats_uni = None
+        self.t_peaks = pd.Series(dtype=float)
+        self.n_beats = pd.Series(dtype=int)
+
+        # delattr(self, 'data')
+        self.data_uni = pd.DataFrame(dtype=float)
+        self.data = self.data_uni
+        self.data_bi = pd.DataFrame(dtype=float)
+
+        self.beats_uni = dict()
         self.beats = self.beats_uni
-        self.beats_bi = None
+        self.beats_bi = dict()
 
         self.read(data_location_uni, data_location_bi, **kwargs)
         if self.filter is not None:
@@ -68,6 +72,7 @@ class Egm(signalanalysis.general.Signal):
     def read(self,
              data_location_uni: str,
              data_location_bi: str,
+             drop_empty_rows: bool = True,
              **kwargs):
         """ Read the DxL data for unipolar and bipolar data for EGMs
 
@@ -79,6 +84,8 @@ class Egm(signalanalysis.general.Signal):
             Location of unipolar data. Currently only coded to deal with a saved .csv file
         data_location_bi : str
             Location of bipolar data. Currently only coded to deal with a saved .csv file
+        drop_empty_rows : bool
+            Whether to drop empty data rows from the data, default=True
 
         See Also
         --------
@@ -90,6 +97,11 @@ class Egm(signalanalysis.general.Signal):
             self.read_from_csv(data_location_uni, data_location_bi, **kwargs)
         else:
             raise IOError("Not coded for this type of input")
+
+        if drop_empty_rows:
+            self.data_uni = self.data_uni.loc[:, ~(self.data_uni == 0).all()]
+            self.data_bi = self.data_bi.loc[:, ~(self.data_bi == 0).all()]
+            assert self.data_uni.shape == self.data_bi.shape, "Error in dropping rows"
 
     def read_from_csv(self,
                       data_location_uni: str,
@@ -136,75 +148,73 @@ class Egm(signalanalysis.general.Signal):
             self.data_source = data_location_uni
 
     def get_peaks(self,
-                  threshold: float = 0.5,
+                  threshold: float = 0.33,
                   min_separation: float = 200,
                   plot: bool = False,
                   **kwargs):
         """ Supermethod for get_peaks for EGM data, using the squared bipolar signal rather than RMS data
 
         """
-        if self.data_bi is None:
+        if self.data_bi.empty:
             super(Egm, self).get_peaks()
             return
 
         egm_bi_square = np.square(self.data_bi)
 
         i_separation = np.where(self.data_uni.index > min_separation)[0][0]
-        self.n_beats = list()
-        self.t_peaks = list()
+        self.n_beats = pd.Series(dtype=int, index=self.data_uni.columns)
+        self.t_peaks = pd.DataFrame(dtype=float, columns=self.data_uni.columns)
+        # self.t_peaks = dict()
         self.n_beats_threshold = threshold
         for i_signal in egm_bi_square:
             i_peaks, _ = scipy.signal.find_peaks(egm_bi_square.loc[:, i_signal],
                                                  height=threshold*egm_bi_square.loc[:, i_signal].max(),
                                                  distance=i_separation)
-            self.n_beats.append(len(i_peaks))
-            self.t_peaks.append(self.data_bi.index[i_peaks])
+            self.n_beats[i_signal] = len(i_peaks)
+            if len(i_peaks) == self.t_peaks.shape[0]:
+                self.t_peaks[i_signal] = self.data_bi.index[i_peaks]
+            elif len(i_peaks) < self.t_peaks.shape[0]:
+                self.t_peaks[i_signal] = np.pad(self.data_bi.index[i_peaks],
+                                                (0, self.t_peaks.shape[0]-len(i_peaks)),
+                                                constant_values=np.nan)
+            elif len(i_peaks) > self.t_peaks.shape[0]:
+                self.t_peaks = self.t_peaks.reindex(range(len(i_peaks)), fill_value=np.nan)
+                self.t_peaks[i_signal] = self.data_bi.index[i_peaks]
 
         if plot:
             _ = self.plot_peaks()
-            # # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
-            # import random
-            # i_plot = random.randint(0, len(self.n_beats))
-            # while self.n_beats[i_plot] == 0:
-            #     i_plot = random.randint(0, len(self.n_beats))
-            #
-            # fig = plt.figure()
-            # ax_labels = ['Unipolar', 'Bipolar', 'Bipolar^2']
-            # for i_ax, data in enumerate([self.data_uni, self.data_bi, egm_bi_square]):
-            #     ax = fig.add_subplot(3, 1, i_ax+1)
-            #     ax.plot(data.loc[:, i_plot], color='C0')
-            #     ax.scatter(self.t_peaks[i_plot], data.loc[:, i_plot][self.t_peaks[i_plot]],
-            #                marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2, label='Peaks')
-            #     ax.set_ylabel(ax_labels[i_ax])
-            # fig.suptitle('Trace {}'.format(i_plot))
 
     def plot_peaks(self,
                    i_plot: Optional[int] = None,
                    **kwargs):
-        if self.t_peaks is None:
+        if self.t_peaks.empty:
             self.get_peaks(**kwargs, plot=False)
 
         # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
         if i_plot is None:
-            import random
-            i_plot = random.randint(0, len(self.n_beats))
+            # import random
+            # i_plot = random.randint(0, len(self.n_beats))
+            i_plot = self.n_beats.sample().index[0]
             while self.n_beats[i_plot] == 0:
-                i_plot = random.randint(0, len(self.n_beats))
+                # i_plot = random.randint(0, len(self.n_beats))
+                i_plot = self.n_beats.sample().index[0]
         else:
             if self.n_beats[i_plot] == 0:
                 raise IOError("No beats detected in specified trace")
 
         egm_bi_square = np.square(self.data_bi)
         fig = plt.figure()
+        fig.suptitle('Trace {}'.format(i_plot))
         ax = dict()
         ax_labels = ['Unipolar', 'Bipolar', 'Bipolar^2']
         for i_ax, data in enumerate([self.data_uni, self.data_bi, egm_bi_square]):
             ax[ax_labels[i_ax]] = fig.add_subplot(3, 1, i_ax+1)
             ax[ax_labels[i_ax]].plot(data.loc[:, i_plot], color='C0')
-            ax[ax_labels[i_ax]].scatter(self.t_peaks[i_plot], data.loc[:, i_plot][self.t_peaks[i_plot]],
-                                        marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
+            ax[ax_labels[i_ax]].scatter(
+                self.t_peaks[i_plot].dropna(),
+                data.loc[:, i_plot][self.t_peaks[i_plot].dropna()],
+                marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
             ax[ax_labels[i_ax]].set_ylabel(ax_labels[i_ax])
-        fig.suptitle('Trace {}'.format(i_plot))
         return fig, ax
 
     def get_beats(self,
@@ -215,6 +225,8 @@ class Egm(signalanalysis.general.Signal):
                   **kwargs):
         """ Detects beats in individual EGM signals
 
+        TODO: Replace this with method based on finding AT and RT, then adding buffer round those values
+
         Supermethod for EGM beat detection, due to the fact that EGM beats are detected on a per signal basis
         rather than  a universal basis (RMS method)
 
@@ -222,13 +234,13 @@ class Egm(signalanalysis.general.Signal):
         --------
         :py:meth:`signalanalysis.general.Signal.get_beats` : Base method
         """
-        if self.t_peaks is None:
+        if self.t_peaks.empty:
             self.get_peaks(**kwargs)
 
         n_signals = len(self.data_uni.columns)
-        self.beat_start = list()
-        self.beats_uni = list()
-        self.beats_bi = list()
+        self.beat_start = pd.Series(dtype=pd.DataFrame, index=self.data_uni.columns)
+        self.beats_uni = dict.fromkeys(self.data_uni.columns)
+        self.beats_bi = dict.fromkeys(self.data_uni.columns)
         for i_signal in range(n_signals):
             # If only one beat is detected, can end here
             if self.n_beats[i_signal] == 1:
@@ -255,7 +267,10 @@ class Egm(signalanalysis.general.Signal):
 
             signal_beats_uni = list()
             signal_beats_bi = list()
-            for t_s, t_e in zip(self.beat_start[-1], beat_end):
+            for t_s, t_p, t_e in zip(self.beat_start[-1], self.t_peaks[i_signal], beat_end):
+                if i_signal == 474:
+                    pass
+                assert t_s < t_p < t_e, "Error in windowing process"
                 signal_beats_uni.append(self.data_uni.loc[t_s:t_e, :])
                 signal_beats_bi.append(self.data_bi.loc[t_s:t_e, :])
 
@@ -269,43 +284,7 @@ class Egm(signalanalysis.general.Signal):
             self.beats_bi.append(signal_beats_bi)
 
         if plot:
-            _ = self.plot_beats(offset_end=offset_end)
-            # # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
-            # import random
-            # i_plot = random.randint(0, len(self.n_beats))
-            # while self.n_beats[i_plot] == 0:
-            #     i_plot = random.randint(0, len(self.n_beats))
-            #
-            # # Recalculate offsets for the end of the beats for the signal to be plotted
-            # if offset_end is None:
-            #     bcls = np.diff(self.t_peaks[i_plot])
-            #     offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls]
-            # else:
-            #     offset_end_list = [offset_end] * self.n_beats[i_plot]
-            # beat_end = [t_p - offset for t_p, offset in zip(self.t_peaks[i_plot][1:], offset_end_list)] + \
-            #            [self.data_uni.index[-1]]
-            #
-            # fig = plt.figure()
-            # ax_labels = ['Unipolar', 'Bipolar', 'Bipolar^2']
-            # colours = tools.plotting.get_plot_colours(self.n_beats[i_plot])
-            # for i_ax, data in enumerate([self.data_uni, self.data_bi]):
-            #     ax = fig.add_subplot(2, 1, i_ax + 1)
-            #     ax.plot(data.loc[:, i_plot], color='C0')
-            #     ax.scatter(self.t_peaks[i_plot], data.loc[:, i_plot][self.t_peaks[i_plot]],
-            #                marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2, label='Peaks')
-            #     ax.set_ylabel(ax_labels[i_ax])
-            #
-            #     i_beat = 1
-            #     max_height = np.max(data.loc[:, i_plot])
-            #     height_shift = (np.max(data.loc[:, i_plot]) - np.min(data.loc[:, i_plot])) * 0.1
-            #     height_val = [max_height, max_height - height_shift] * math.ceil(self.n_beats[i_plot] / 2)
-            #     for t_s, t_e, col, h in zip(self.beat_start[i_plot], beat_end, colours, height_val):
-            #         ax.axvline(t_s, color=col)
-            #         ax.axvline(t_e, color=col)
-            #         ax.annotate(text='{}'.format(i_beat), xy=(t_s, h), xytext=(t_e, h),
-            #                     arrowprops=dict(arrowstyle='<->', linewidth=3))
-            #         i_beat = i_beat + 1
-            # fig.suptitle('Trace {}'.format(i_plot))
+            _ = self.plot_beats(offset_end=offset_end, **kwargs)
 
     def plot_beats(self,
                    offset_end: Optional[float] = None,
@@ -358,11 +337,42 @@ class Egm(signalanalysis.general.Signal):
         fig.suptitle('Trace {}'.format(i_plot))
         return fig, ax
 
-    def get_at(self):
-        """ Calculates the activation time for a given beat of EGM data"""
+    def get_at(self,
+               at_window: float = 30):
+        """ Calculates the activation time for a given beat of EGM data
 
-        if self.n_beats == 0:
-            self.get_beats()
+        Will calculate the activation times for an EGM signal, based on finding the peaks in the squared bipolar
+        trace, then finding the maximum downslope in the unipolar signal within a specified window of time around
+        those peaks.
 
-        if self.beat_index_reset:
+        Parameters
+        ----------
+        at_window : float
+            Time in milliseconds, around which the activation time will be searched for round the detected peaks
+
+        See also
+        --------
+        :py:meth:`signalanalysis.egm.Egm.get_peaks` : Method to calculate peaks in bipolar signal
+        """
+
+        if self.t_peaks == 0:
+            self.get_peaks()
+
+        egm_uni_grad_full = pd.DataFrame(np.gradient(self.data_uni, axis=0),
+                                         index=self.data_uni.index,
+                                         columns=self.data_uni.columns)
+        window_start = self.t_peaks-at_window
+        window_end = self.t_peaks+at_window
+        window_start = window_start.applymap(lambda y: min(self.data_uni.index, key=lambda x: abs(x-y)))
+        window_end = window_end.applymap(lambda y: min(self.data_uni.index, key=lambda x: abs(x-y)))
+        window_start = pd.DataFrame(columns=self.data_uni.columns)
+        window_end = pd.DataFrame(columns=self.data_uni.columns)
+        self.qrs_start = self.t_peaks.copy()
+        for key in egm_uni_grad_full:
+            window_start[key] = [min(self.data_uni.index,
+                                 key=lambda x: abs(x-(t_p-at_window))) for t_p in self.t_peaks[key]]
+            window_end[key] = [min(self.data_uni.index,
+                               key=lambda x: abs(x-(t_p+at_window))) for t_p in self.t_peaks[key]]
+            # t_at = [egm_uni_grad_full.loc[w_start:w_end, egm_uni_grad].min() for w_start, w_end in zip(window_start,
+            #                                                                                            window_end)]
             pass
