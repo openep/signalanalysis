@@ -72,7 +72,7 @@ class Signal:
             each filter can then be passed (see filters in tools.maths for details)
         """
         # Properties that can be derived subsequently to opening the file
-        self.data = pd.DataFrame()
+        self.data = pd.DataFrame(dtype=float)
         self.filename = str()
 
         self.n_beats = 0
@@ -110,7 +110,7 @@ class Signal:
         Function called when reading in new data into an existing class (for some reason), which would make these
         properties and attributes clash with the other data
         """
-        self.data = pd.DataFrame()
+        self.data = pd.DataFrame(dtype=float)
         self.filename = str()
 
         self.n_beats = 0
@@ -194,7 +194,7 @@ class Signal:
         self.rms = np.sqrt(signal_rms.sum(axis=1) / n_leads)
 
     def get_peaks(self,
-                  threshold: float = 0.5,
+                  threshold: float = 0.33,
                   min_separation: float = 200,
                   plot: bool = False,
                   **kwargs):
@@ -236,11 +236,6 @@ class Signal:
 
         if plot:
             _ = self.plot_peaks()
-            # fig = plt.figure()
-            # ax = fig.add_subplot(1, 1, 1)
-            # ax.plot(self.rms)
-            # ax.scatter(self.t_peaks, self.rms.loc[self.t_peaks],
-            #            marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
 
         return
 
@@ -342,22 +337,7 @@ class Signal:
                     self.beats[i_beat].set_index(zeroed_index, inplace=True)
 
         if plot:
-            fig = plt.figure()
-            ax = fig.add_subplot(1, 1, 1)
-            ax.plot(self.rms, color='C0', label='RMS')       # Plot RMS data
-            ax.scatter(self.t_peaks, self.rms.loc[self.t_peaks],
-                       marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
-            colours = tools.plotting.get_plot_colours(self.n_beats)
-            i_beat = 1
-            max_height = np.max(self.rms)
-            height_shift = (np.max(self.rms)-np.min(self.rms))*0.1
-            height_val = [max_height, max_height-height_shift]*math.ceil(self.n_beats/2)
-            for t_s, t_e, col, h in zip(self.beat_start, beat_end, colours, height_val):
-                ax.axvline(t_s, color=col)
-                ax.axvline(t_e, color=col)
-                ax.annotate(text='{}'.format(i_beat), xy=(t_s, h), xytext=(t_e, h),
-                            arrowprops=dict(arrowstyle='<->', linewidth=3))
-                i_beat = i_beat+1
+            _ = self.plot_beats(offset_end=offset_end, **kwargs)
 
     def plot_beats(self,
                    offset_end: Optional[float] = None,
