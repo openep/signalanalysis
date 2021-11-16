@@ -154,6 +154,9 @@ class Egm(signalanalysis.general.Signal):
                   **kwargs):
         """ Supermethod for get_peaks for EGM data, using the squared bipolar signal rather than RMS data
 
+        See also
+        --------
+        :py:meth:`signalanalysis.egm.Egm.plot_signal` : Method to plot the calculated AT
         """
         if self.data_bi.empty:
             super(Egm, self).get_peaks()
@@ -181,15 +184,19 @@ class Egm(signalanalysis.general.Signal):
                 self.t_peaks[i_signal] = self.data_bi.index[i_peaks]
 
         if plot:
-            _ = self.plot_peaks()
+            _ = self.plot_signal(plot_peaks=True, plot_bipolar_square=True, **kwargs)
 
     def plot_signal(self,
                     i_plot: Optional[int] = None,
-                    plot_bipolar_square: bool = False):
+                    plot_bipolar_square: bool = False,
+                    plot_peaks: bool = False,
+                    plot_at: bool = False):
         """General use function to plot the unipolar and bipolar signals, and maybe EGM
 
         Will plot the unipolar and bipolar EGM signals on the same figure, and if requested, also the RMS trace at
         the same time.
+
+        TODO: Move this functionality to a general plotting routine, rather than an internal module for a single object
 
         Parameters
         ----------
@@ -197,6 +204,8 @@ class Egm(signalanalysis.general.Signal):
             Which signal from the data to plot, default=random
         plot_bipolar_square : bool, optional
             Whether to plot the squared bipolar data on the figure as well, default=False
+        plot_peaks, plot_at : bool, optional
+            Whether to plot the points of the bipolar peak/AT on the figure, default=False
 
         Returns
         -------
@@ -227,7 +236,20 @@ class Egm(signalanalysis.general.Signal):
             ax[ax_labels[i_ax]].plot(data.loc[:, i_plot], color='C0')
             ax[ax_labels[i_ax]].set_ylabel(ax_labels[i_ax])
 
-        return fig, ax, i_plot
+            if plot_peaks:
+                ax[ax_labels[i_ax]].scatter(self.t_peaks[i_plot].dropna(),
+                                            data.loc[:, i_plot][self.t_peaks[i_plot].dropna()],
+                                            marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
+                if ax_labels[i_ax] == 'Bipolar^2':
+                    ax[ax_labels[i_ax]].axhline(self.n_beats_threshold*data.loc[:, i_plot].max(),
+                                                color='tab:orange', linestyle='--')
+
+            if plot_at:
+                ax[ax_labels[i_ax]].scatter(self.qrs_start[i_plot].dropna(),
+                                            data.loc[:, i_plot][self.qrs_start[i_plot].dropna()],
+                                            marker='d', edgecolor='tab:green', facecolor='none', linewidths=2)
+
+        return fig, ax
 
     def plot_peaks(self,
                    i_plot: Optional[int] = None,
@@ -235,8 +257,7 @@ class Egm(signalanalysis.general.Signal):
         if self.t_peaks.empty:
             self.get_peaks(**kwargs, plot=False)
 
-        # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
-        fig, ax, i_plot = self.plot_signal(i_plot=i_plot, plot_bipolar_square=True)
+        fig, ax = self.plot_signal(i_plot=i_plot, plot_bipolar_square=True)
 
         for key in ax:
             ydata = pd.Series(ax[key].get_lines()[0].get_ydata(), index=self.data_uni.index)
@@ -405,7 +426,4 @@ class Egm(signalanalysis.general.Signal):
                 self.qrs_start.loc[i_row, key] = egm_uni_grad_full.loc[t_s:t_e, key].idxmin()
 
         if plot:
-            _ = self.plot_at()
-
-    def plot_at(self):
-        pass
+            _ = self.plot_signal(plot_at=True, **kwargs)
