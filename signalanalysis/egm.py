@@ -52,7 +52,7 @@ class Egm(signalanalysis.general.Signal):
         """
         super(Egm, self).__init__(**kwargs)
 
-        self.t_peaks = pd.Series(dtype=float)
+        self.t_peaks = pd.DataFrame(dtype=float)
         self.n_beats = pd.Series(dtype=int)
 
         # delattr(self, 'data')
@@ -164,7 +164,6 @@ class Egm(signalanalysis.general.Signal):
         i_separation = np.where(self.data_uni.index > min_separation)[0][0]
         self.n_beats = pd.Series(dtype=int, index=self.data_uni.columns)
         self.t_peaks = pd.DataFrame(dtype=float, columns=self.data_uni.columns)
-        # self.t_peaks = dict()
         self.n_beats_threshold = threshold
         for i_signal in egm_bi_square:
             i_peaks, _ = scipy.signal.find_peaks(egm_bi_square.loc[:, i_signal],
@@ -183,6 +182,9 @@ class Egm(signalanalysis.general.Signal):
 
         if plot:
             _ = self.plot_peaks()
+
+    def plot_signal(self):
+        pass
 
     def plot_peaks(self,
                    i_plot: Optional[int] = None,
@@ -237,51 +239,48 @@ class Egm(signalanalysis.general.Signal):
         if self.t_peaks.empty:
             self.get_peaks(**kwargs)
 
-        n_signals = len(self.data_uni.columns)
         self.beat_start = pd.Series(dtype=pd.DataFrame, index=self.data_uni.columns)
         self.beats_uni = dict.fromkeys(self.data_uni.columns)
         self.beats_bi = dict.fromkeys(self.data_uni.columns)
-        for i_signal in range(n_signals):
+        for key in self.data_uni:
             # If only one beat is detected, can end here
-            if self.n_beats[i_signal] == 1:
-                self.beats_uni.append([self.data_uni.loc[:, i_signal]])
-                self.beats_bi.append([self.data_bi.loc[:, i_signal]])
+            if self.n_beats[key] == 1:
+                self.beats_uni[key] = [self.data_uni.loc[:, key]]
+                self.beats_bi[key] = [self.data_bi.loc[:, key]]
                 continue
 
             # Calculate series of cycle length values, before then using this to estimate the start and end times of
             # each beat. The offset from the previous peak will be assumed at 0.4*BCL, while the offset from the
             # following peak will be 0.1*BCL (both with a minimum value of 30ms)
             if offset_start is None:
-                bcls = np.diff(self.t_peaks[i_signal])
+                bcls = np.diff(self.t_peaks[key])
                 offset_start_list = [max(0.6 * bcl, 30) for bcl in bcls]
             else:
-                offset_start_list = [offset_start] * self.n_beats[i_signal]
+                offset_start_list = [offset_start] * self.n_beats[key]
             if offset_end is None:
-                bcls = np.diff(self.t_peaks[i_signal])
+                bcls = np.diff(self.t_peaks[key])
                 offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls]
             else:
-                offset_end_list = [offset_end] * self.n_beats[i_signal]
-            self.beat_start.append([self.data_uni.index[0]] + list(self.t_peaks[i_signal][:-1] + offset_start_list))
-            beat_end = [t_p - offset for t_p, offset in zip(self.t_peaks[i_signal][1:], offset_end_list)] + \
+                offset_end_list = [offset_end] * self.n_beats[key]
+            self.beat_start.append([self.data_uni.index[0]] + list(self.t_peaks[key][:-1] + offset_start_list))
+            beat_end = [t_p - offset for t_p, offset in zip(self.t_peaks[key][1:], offset_end_list)] + \
                        [self.data_uni.index[-1]]
 
             signal_beats_uni = list()
             signal_beats_bi = list()
-            for t_s, t_p, t_e in zip(self.beat_start[-1], self.t_peaks[i_signal], beat_end):
-                if i_signal == 474:
-                    pass
+            for t_s, t_p, t_e in zip(self.beat_start[-1], self.t_peaks[key], beat_end):
                 assert t_s < t_p < t_e, "Error in windowing process"
                 signal_beats_uni.append(self.data_uni.loc[t_s:t_e, :])
                 signal_beats_bi.append(self.data_bi.loc[t_s:t_e, :])
 
             self.beat_index_reset = reset_index
             if reset_index:
-                for i_beat in range(self.n_beats[i_signal]):
+                for i_beat in range(self.n_beats[key]):
                     zeroed_index = signal_beats_uni[i_beat].index - signal_beats_uni[i_beat].index[0]
                     signal_beats_uni[i_beat].set_index(zeroed_index, inplace=True)
                     signal_beats_bi[i_beat].set_index(zeroed_index, inplace=True)
-            self.beats_uni.append(signal_beats_uni)
-            self.beats_bi.append(signal_beats_bi)
+            self.beats_uni[key] = signal_beats_uni
+            self.beats_bi[key] = signal_beats_bi
 
         if plot:
             _ = self.plot_beats(offset_end=offset_end, **kwargs)
@@ -338,7 +337,9 @@ class Egm(signalanalysis.general.Signal):
         return fig, ax
 
     def get_at(self,
-               at_window: float = 30):
+               at_window: float = 30,
+               plot: bool = False,
+               **kwargs):
         """ Calculates the activation time for a given beat of EGM data
 
         Will calculate the activation times for an EGM signal, based on finding the peaks in the squared bipolar
@@ -349,13 +350,16 @@ class Egm(signalanalysis.general.Signal):
         ----------
         at_window : float
             Time in milliseconds, around which the activation time will be searched for round the detected peaks
+        plot : bool
+            Whether to plot a random signal example of the ATs found
 
         See also
         --------
         :py:meth:`signalanalysis.egm.Egm.get_peaks` : Method to calculate peaks in bipolar signal
+        :py:meth:`signalanalysis.egm.Egm.plot_at` : Method to plot the calculated AT
         """
 
-        if self.t_peaks == 0:
+        if self.t_peaks.empty:
             self.get_peaks()
 
         egm_uni_grad_full = pd.DataFrame(np.gradient(self.data_uni, axis=0),
@@ -365,14 +369,16 @@ class Egm(signalanalysis.general.Signal):
         window_end = self.t_peaks+at_window
         window_start = window_start.applymap(lambda y: min(self.data_uni.index, key=lambda x: abs(x-y)))
         window_end = window_end.applymap(lambda y: min(self.data_uni.index, key=lambda x: abs(x-y)))
-        window_start = pd.DataFrame(columns=self.data_uni.columns)
-        window_end = pd.DataFrame(columns=self.data_uni.columns)
         self.qrs_start = self.t_peaks.copy()
-        for key in egm_uni_grad_full:
-            window_start[key] = [min(self.data_uni.index,
-                                 key=lambda x: abs(x-(t_p-at_window))) for t_p in self.t_peaks[key]]
-            window_end[key] = [min(self.data_uni.index,
-                               key=lambda x: abs(x-(t_p+at_window))) for t_p in self.t_peaks[key]]
-            # t_at = [egm_uni_grad_full.loc[w_start:w_end, egm_uni_grad].min() for w_start, w_end in zip(window_start,
-            #                                                                                            window_end)]
-            pass
+        # Current brute force method
+        for key in window_start:
+            for i_row, _ in window_start[key].iteritems():
+                t_s = window_start.loc[i_row, key]
+                t_e = window_end.loc[i_row, key]
+                self.qrs_start.loc[i_row, key] = egm_uni_grad_full.loc[t_s:t_e, key].idxmin()
+
+        if plot:
+            _ = self.plot_at()
+
+    def plot_at(self):
+        pass

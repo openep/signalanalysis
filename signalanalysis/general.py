@@ -310,7 +310,6 @@ class Signal:
         if self.n_beats == 1:
             self.beats = [self.data]
             self.beat_start = [self.data.index[0]]
-            beat_end = [self.data.index[-1]]
         else:
             # Calculate series of cycle length values, before then using this to estimate the start and end times of
             # each beat. The offset from the previous peak will be assumed at 0.4*BCL, while the offset from the
@@ -625,4 +624,3 @@ def get_twave_end(ecgs: Union[List[pd.DataFrame], pd.DataFrame],
                     axes[lead].set_ylabel('VCG ('+lead+')', color='r')
 
     return twave_ends
-
