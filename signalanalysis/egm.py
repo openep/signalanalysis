@@ -183,8 +183,51 @@ class Egm(signalanalysis.general.Signal):
         if plot:
             _ = self.plot_peaks()
 
-    def plot_signal(self):
-        pass
+    def plot_signal(self,
+                    i_plot: Optional[int] = None,
+                    plot_bipolar_square: bool = False):
+        """General use function to plot the unipolar and bipolar signals, and maybe EGM
+
+        Will plot the unipolar and bipolar EGM signals on the same figure, and if requested, also the RMS trace at
+        the same time.
+
+        Parameters
+        ----------
+        i_plot : int, optional
+            Which signal from the data to plot, default=random
+        plot_bipolar_square : bool, optional
+            Whether to plot the squared bipolar data on the figure as well, default=False
+
+        Returns
+        -------
+        fig, ax
+            Handles to the figure and axis data, respectively
+        """
+
+        # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
+        if i_plot is None:
+            i_plot = self.n_beats.sample().index[0]
+            while self.n_beats[i_plot] == 0:
+                i_plot = self.n_beats.sample().index[0]
+        else:
+            if self.n_beats[i_plot] == 0:
+                raise IOError("No beats detected in specified trace")
+
+        fig = plt.figure()
+        fig.suptitle('Trace {}'.format(i_plot))
+        ax = dict()
+        ax_labels = ['Unipolar', 'Bipolar']
+        plot_data = [self.data_uni, self.data_bi]
+        if plot_bipolar_square:
+            ax_labels.append('Bipolar^2')
+            plot_data.append(np.square(self.data_bi))
+
+        for i_ax, data in enumerate(plot_data):
+            ax[ax_labels[i_ax]] = fig.add_subplot(len(plot_data), 1, i_ax + 1)
+            ax[ax_labels[i_ax]].plot(data.loc[:, i_plot], color='C0')
+            ax[ax_labels[i_ax]].set_ylabel(ax_labels[i_ax])
+
+        return fig, ax, i_plot
 
     def plot_peaks(self,
                    i_plot: Optional[int] = None,
@@ -193,30 +236,14 @@ class Egm(signalanalysis.general.Signal):
             self.get_peaks(**kwargs, plot=False)
 
         # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
-        if i_plot is None:
-            # import random
-            # i_plot = random.randint(0, len(self.n_beats))
-            i_plot = self.n_beats.sample().index[0]
-            while self.n_beats[i_plot] == 0:
-                # i_plot = random.randint(0, len(self.n_beats))
-                i_plot = self.n_beats.sample().index[0]
-        else:
-            if self.n_beats[i_plot] == 0:
-                raise IOError("No beats detected in specified trace")
+        fig, ax, i_plot = self.plot_signal(i_plot=i_plot, plot_bipolar_square=True)
 
-        egm_bi_square = np.square(self.data_bi)
-        fig = plt.figure()
-        fig.suptitle('Trace {}'.format(i_plot))
-        ax = dict()
-        ax_labels = ['Unipolar', 'Bipolar', 'Bipolar^2']
-        for i_ax, data in enumerate([self.data_uni, self.data_bi, egm_bi_square]):
-            ax[ax_labels[i_ax]] = fig.add_subplot(3, 1, i_ax+1)
-            ax[ax_labels[i_ax]].plot(data.loc[:, i_plot], color='C0')
-            ax[ax_labels[i_ax]].scatter(
+        for key in ax:
+            ydata = pd.Series(ax[key].get_lines()[0].get_ydata(), index=self.data_uni.index)
+            ax[key].scatter(
                 self.t_peaks[i_plot].dropna(),
-                data.loc[:, i_plot][self.t_peaks[i_plot].dropna()],
+                ydata[self.t_peaks[i_plot].dropna()],
                 marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
-            ax[ax_labels[i_ax]].set_ylabel(ax_labels[i_ax])
         return fig, ax
 
     def get_beats(self,
