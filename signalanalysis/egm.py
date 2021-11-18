@@ -64,6 +64,8 @@ class Egm(signalanalysis.general.Signal):
         self.beats = self.beats_uni
         self.beats_bi = dict()
 
+        self.at = pd.DataFrame(dtype=float)
+
         self.read(data_location_uni, data_location_bi, **kwargs)
         if self.filter is not None:
             self.apply_filter(**kwargs)
@@ -239,15 +241,20 @@ class Egm(signalanalysis.general.Signal):
             if plot_peaks:
                 ax[ax_labels[i_ax]].scatter(self.t_peaks[i_plot].dropna(),
                                             data.loc[:, i_plot][self.t_peaks[i_plot].dropna()],
+                                            label='Peaks',
                                             marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
                 if ax_labels[i_ax] == 'Bipolar^2':
                     ax[ax_labels[i_ax]].axhline(self.n_beats_threshold*data.loc[:, i_plot].max(),
                                                 color='tab:orange', linestyle='--')
 
             if plot_at:
-                ax[ax_labels[i_ax]].scatter(self.qrs_start[i_plot].dropna(),
-                                            data.loc[:, i_plot][self.qrs_start[i_plot].dropna()],
+                ax[ax_labels[i_ax]].scatter(self.at[i_plot].dropna(),
+                                            data.loc[:, i_plot][self.at[i_plot].dropna()],
+                                            label='AT',
                                             marker='d', edgecolor='tab:green', facecolor='none', linewidths=2)
+
+        # Add legend to top axis
+        ax[ax_labels[0]].legend()
 
         return fig, ax
 
@@ -413,17 +420,51 @@ class Egm(signalanalysis.general.Signal):
         egm_uni_grad_full = pd.DataFrame(np.gradient(self.data_uni, axis=0),
                                          index=self.data_uni.index,
                                          columns=self.data_uni.columns)
+
+        # Calculate and adjust the start and end point for window searches
         window_start = self.t_peaks-at_window
         window_end = self.t_peaks+at_window
+        window_start[window_start < 0] = 0
+        window_end[window_end > self.data_uni.index[-1]] = self.data_uni.index[-1]
         window_start = window_start.applymap(lambda y: min(self.data_uni.index, key=lambda x: abs(x-y)))
         window_end = window_end.applymap(lambda y: min(self.data_uni.index, key=lambda x: abs(x-y)))
-        self.qrs_start = self.t_peaks.copy()
+        window_start[pd.isna(self.t_peaks)] = float("nan")
+        window_end[pd.isna(self.t_peaks)] = float("nan")
+
+        self.at = self.t_peaks.copy()
         # Current brute force method
         for key in window_start:
             for i_row, _ in window_start[key].iteritems():
                 t_s = window_start.loc[i_row, key]
+                if pd.isna(t_s):
+                    continue
                 t_e = window_end.loc[i_row, key]
-                self.qrs_start.loc[i_row, key] = egm_uni_grad_full.loc[t_s:t_e, key].idxmin()
+                self.at.loc[i_row, key] = egm_uni_grad_full.loc[t_s:t_e, key].idxmin()
 
         if plot:
             _ = self.plot_signal(plot_at=True, **kwargs)
+
+    def get_rt(self):
+        """ Calculate the repolarisation time
+
+        Calculates the repolarisation time of an action potential from the EGM, based on the Wyatt method of the
+        maximum upslope of the T-wave
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        self.rt : pd.DataFrame
+            Repolarisation times for each signal in the trace
+
+        References
+        ----------
+        .. [1] Porter B, Bishop MJ, Claridge S, Behar J, Sieniewicz BJ, Webb J, Gould J, O’Neill M, Rinaldi CA,
+               Razavi R, Gill JS, Taggart P, "Autonomic modulation in patients with heart failure increases
+               beat-to-beat variability of ventricular action potential duration. Frontiers in Physiology, 8(MAY 2017).
+               https://doi.org/10.3389/fphys.2017.00328
+        """
+
+        # Estimate BCL from AT, with the BCL for the last AT being assumed to be identical to the prior BCL
+        pass
