@@ -373,6 +373,22 @@ class Signal:
         print("Not coded yet! Don't use!")
         pass
 
+    def return_to_index(self,
+                        original_sequence: pd.DataFrame):
+        """Aligns a given sequence of time values to those in the index
+
+        When manipulating time data, it can often fall out of sync with the time values for the data, e.g. the data
+        are recorded every 2ms, then searching for a value at 5ms will be difficult. This function realigns a
+        sequence of time data to the possible values.
+        """
+
+        original_sequence[original_sequence < 0] = 0
+        original_sequence[original_sequence > self.data.index[-1]] = self.data.index[-1]
+        new_sequence = original_sequence.applymap(lambda y: min(self.data.index, key=lambda x: abs(x-y)))
+        new_sequence[pd.isna(original_sequence)] = float("nan")
+
+        return new_sequence
+
 
 def get_signal_rms(signal: pd.DataFrame,
                    unipolar_only: bool = True) -> List[float]:
@@ -429,6 +445,31 @@ def get_signal_rms(signal: pd.DataFrame,
     signal_rms = np.sqrt(signal_rms.sum(axis=1)/n_leads)
 
     return signal_rms
+
+
+def get_bcl(signal_markers: pd.DataFrame):
+    """Function to return estimates of the cycle length for a recording
+
+    For a given train of signal markers (either QRS start, AT, or other), will estimate the cycle length as the
+    difference between successive markers, with an estimate made that the last cycle length is identical to the
+    preceding beat
+
+    Parameters
+    ----------
+    signal_markers : pd.DataFrame
+        Data for the markers to use (usually QRS start for ECG/VCG, or AT for EGM)
+
+    Returns
+    -------
+    bcl : pd.DataFrame
+        Data for estimated BCL for each signal
+    """
+    bcl = signal_markers.diff(axis=0)
+    bcl.drop(0, inplace=True)
+    bcl = bcl.append(pd.DataFrame(bcl[-1:].values, columns=bcl.columns))
+    bcl.fillna(axis=0, method='ffill', limit=1, inplace=True)
+    bcl.reset_index(drop=True, inplace=True)
+    return bcl
 
 
 def get_twave_end(ecgs: Union[List[pd.DataFrame], pd.DataFrame],
