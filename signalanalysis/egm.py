@@ -440,7 +440,7 @@ class Egm(signalanalysis.general.Signal):
 
     def get_rt(self,
                lower_window_limit: float = 140,
-               unipolar_threshold: float = None,
+               # unipolar_threshold: float = None,
                plot: bool = False,
                **kwargs):
         """ Calculate the repolarisation time
@@ -511,7 +511,7 @@ class Egm(signalanalysis.general.Signal):
         window_start[window_start > window_start_max] = float("nan")
         window_start = self.return_to_index(window_start)
 
-        window_end_max = window_max_generator(25)
+        window_end_max = window_max_generator(20)
         window_end[window_end > window_end_max] = window_end_max
         window_end = self.return_to_index(window_end)
 
@@ -548,11 +548,11 @@ class Egm(signalanalysis.general.Signal):
                 # ax['Unipolar'].plot(self.data_uni.loc[:, key])
                 # ax['Bipolar'].plot(self.data_bi.loc[:, key])
 
-                fig, ax = self.plot_signal(plot_peaks=True, plot_at=True, i_plot=key)
-                ax_labels = ['Unipolar', 'Bipolar']
-                for axkey in ax_labels:
-                    ax[axkey].axvline(t_start, linestyle='--')
-                    ax[axkey].axvline(t_end, linestyle='--')
+                # fig, ax = self.plot_signal(plot_peaks=True, plot_at=True, i_plot=key)
+                # # ax_labels = ['Unipolar', 'Bipolar']
+                # for axkey in ax:
+                #     ax[axkey].axvline(t_start, linestyle='--')
+                #     ax[axkey].axvline(t_end, linestyle='--')
                 ##############
 
                 i_ts = np.where(self.data_uni.index.values == t_start)[0]
@@ -595,14 +595,21 @@ class Egm(signalanalysis.general.Signal):
                         # t_peak = self.data_uni.loc[t_start:t_end, key].idxmax()
                         uni_peak = self.data_uni.loc[t_start:t_end, key].max()
                         uni_end_diff = abs(uni_end-uni_peak)
-                if window_error:
-                    break
+                # if window_error:
+                #     break
 
                 ##############
-                if t_start != window_start.loc[i_row, key] or t_end != window_end.loc[i_row, key]:
-                    for axkey in ax_labels:
-                        ax[axkey].axvline(t_start, linestyle=':')
-                        ax[axkey].axvline(t_end, linestyle=':')
+                # if t_start != window_start.loc[i_row, key] or t_end != window_end.loc[i_row, key]:
+                #     if t_start != window_start.loc[i_row, key]:
+                #         print('t_start changed')
+                #     if t_end != window_end.loc[i_row, key]:
+                #         print('t_end changed')
+                #     print('t_start = {}, t_end = {}'.format(t_start, t_end))
+                #     for axkey in ax:
+                #         ax[axkey].axvline(t_start, linestyle=':')
+                #         ax[axkey].axvline(t_end, linestyle=':')
+                # else:
+                #     print('\nNo change to t_start or t_end')
                 ##############
 
                 # If it is impossible to narrow the search window as above and find a positive peak for the T-wave,
@@ -622,50 +629,52 @@ class Egm(signalanalysis.general.Signal):
                     pass
 
                 ##############
-                ax['Unipolar'].scatter(t_peak, self.data_uni.loc[t_peak, key], marker='P', edgecolor='tab:purple',
-                                       facecolor='none', linewidths=2)
-                ax['Bipolar'].scatter(t_peak, self.data_bi.loc[t_peak, key], marker='P', edgecolor='tab:purple',
-                                      facecolor='none', linewidths=2)
+                # ax['Unipolar'].scatter(t_peak, self.data_uni.loc[t_peak, key], marker='P', edgecolor='tab:purple',
+                #                        facecolor='none', linewidths=2)
+                # ax['Bipolar'].scatter(t_peak, self.data_bi.loc[t_peak, key], marker='P', edgecolor='tab:purple',
+                #                       facecolor='none', linewidths=2)
                 ##############
 
                 # FIND REPOLARISATION TIME
 
-                if unipolar_threshold is None:
-                    min_val = self.data_uni.loc[:, key].min()
-                    max_val = self.data_uni.loc[:, key].max()
-                    thresh = min([0, (2/3)*(max_val-min_val)])
+                # if unipolar_threshold is None:
+                #     min_val = self.data_uni.loc[:, key].min()
+                #     max_val = self.data_uni.loc[:, key].max()
+                #     thresh = min([0, (2/3)*(max_val-min_val)])
 
                 max_grad = -100
                 t_max_grad = -1
                 window_data = egm_uni_grad.loc[t_start:t_end, key]
                 for uni_val in window_data:
                     # Look for maximum gradient in the search window thus far
+                    t_window = window_data.index[window_data == uni_val][0]
                     if uni_val > max_grad:
                         max_grad = uni_val
-                        t_max_grad = window_data.index[window_data == max_grad][0]
+                        t_max_grad = t_window
 
                     # Perform check to see if we've exited the current T-wave (if we're after the total max peak
                     # (apex) and have negative gradient)
                     if negative_t_wave:
                         self.rt.loc[i_row, key] = t_max_grad
                     else:
-                        i_tm = np.where(self.data_uni.index.values == t_max_grad)[0][0]
+                        i_tm = np.where(self.data_uni.index.values == t_window)[0][0]
                         t1 = self.data_uni.index[i_tm-1]
                         t2 = self.data_uni.index[i_tm+2]    # Adding 2 to ensure that the limit is taken at +1, not i_tm
-                        if (window_data.loc[t1:t2] < 0).all() and t_max_grad > t_peak:
+                        if (window_data.loc[t1:t2] < 0).all() and t_window > t_peak:
                             self.rt.loc[i_row, key] = t_max_grad
                             break
 
                 ##############
-                try:
-                    ax['Unipolar'].scatter(self.rt.loc[i_row, key], self.data_uni.loc[self.rt.loc[i_row, key], key],
-                                           marker='^', edgecolor='tab:purple', facecolor='none', linewidths=2)
-                    ax['Bipolar'].scatter(self.rt.loc[i_row, key], self.data_bi.loc[self.rt.loc[i_row, key], key],
-                                          marker='^', edgecolor='tab:purple', facecolor='none', linewidths=2)
-                except KeyError:
-                    pass
-                break
-            break
+            #     try:
+            #         ax['Unipolar'].scatter(self.rt.loc[i_row, key], self.data_uni.loc[self.rt.loc[i_row, key], key],
+            #                                marker='^', edgecolor='tab:purple', facecolor='none', linewidths=2)
+            #         ax['Bipolar'].scatter(self.rt.loc[i_row, key], self.data_bi.loc[self.rt.loc[i_row, key], key],
+            #                               marker='^', edgecolor='tab:purple', facecolor='none', linewidths=2)
+            #     except KeyError:
+            #         print('Balls')
+            #         pass
+            #     break
+            # break
             ##############
 
         if plot:
