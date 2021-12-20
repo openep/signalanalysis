@@ -11,11 +11,13 @@ sklearn = "*"
 matplotlib = "*"
 carputils = {editable = true, git = "https://git.opencarp.org/openCARP/carputils.git"}
 wfdb = "==3.4.0"
+tqdm = "*"
 
 [dev-packages]
 pytest = "*"
 sphinx = "*"
 ipython = "*"
+tqdm = "*"
 
 [requires]
 python_version = "3.8"
