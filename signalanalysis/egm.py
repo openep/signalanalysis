@@ -483,12 +483,10 @@ class Egm(signalanalysis.general.Signal):
         window_start = 0.75*bcl-125
         window_start[window_start < lower_window_limit] = lower_window_limit
         window_start = self.at+window_start
-        # window_start = self.return_to_index(window_start)
 
         window_end = 0.9*bcl-50
         window_end = self.at+window_end
         window_end[window_end-window_start < 0.1] = window_start+0.1
-        # window_end = self.return_to_index(window_end)
 
         # If the end of the search window is within 20ms of the next AT/end of the recording, shorten the end of the
         # window accordingly
@@ -516,8 +514,6 @@ class Egm(signalanalysis.general.Signal):
         window_end = self.return_to_index(window_end)
 
         # Brute force method!
-        # window_error = pd.DataFrame(False, dtype=bool, index=self.at.index, columns=self.at.columns)
-        # negative_t_wave = pd.DataFrame(dtype=bool, index=self.at.index, columns=self.at.columns)
         egm_uni_grad = pd.DataFrame(np.gradient(self.data_uni, axis=0),
                                     index=self.data_uni.index,
                                     columns=self.data_uni.columns)
@@ -539,29 +535,12 @@ class Egm(signalanalysis.general.Signal):
                 if pd.isna(t_start) or pd.isna(t_end):
                     continue
 
-                ##############
-                # fig = plt.figure()
-                # ax = dict()
-                # ax['Unipolar'] = fig.add_subplot(2, 1, 1)
-                # ax['Bipolar'] = fig.add_subplot(2, 1, 2)
-                #
-                # ax['Unipolar'].plot(self.data_uni.loc[:, key])
-                # ax['Bipolar'].plot(self.data_bi.loc[:, key])
-
-                # fig, ax = self.plot_signal(plot_peaks=True, plot_at=True, i_plot=key)
-                # # ax_labels = ['Unipolar', 'Bipolar']
-                # for axkey in ax:
-                #     ax[axkey].axvline(t_start, linestyle='--')
-                #     ax[axkey].axvline(t_end, linestyle='--')
-                ##############
-
                 i_ts = np.where(self.data_uni.index.values == t_start)[0]
                 i_te = np.where(self.data_uni.index.values == t_end)[0]
                 uni_start = self.data_uni.loc[t_start, key]
                 uni_end = self.data_uni.loc[t_end, key]
 
                 uni_peak = self.data_uni.loc[t_start:t_end, key].max()
-                # t_peak = self.data_uni.loc[t_start:t_end, key].idxmax()
                 uni_start_diff = abs(uni_start-uni_peak)
                 uni_end_diff = abs(uni_end-uni_peak)
                 while uni_start_diff <= 0.03 or uni_end_diff <= 0.03:
@@ -572,11 +551,9 @@ class Egm(signalanalysis.general.Signal):
                         except IndexError:
                             pass
                         if t_start >= t_end:
-                            # window_error.loc[i_row, key] = True
                             window_error = True
                             break
                         uni_start = self.data_uni.loc[t_start, key]
-                        # t_peak = self.data_uni.loc[t_start:t_end, key].idxmax()
                         uni_peak = self.data_uni.loc[t_start:t_end, key].max()
                         uni_start_diff = abs(uni_start-uni_peak)
                     if window_error:
@@ -588,29 +565,11 @@ class Egm(signalanalysis.general.Signal):
                         except IndexError:
                             pass
                         if t_start >= t_end:
-                            # window_error.loc[i_row, key] = True
                             window_error = True
                             break
                         uni_end = self.data_uni.loc[t_end, key]
-                        # t_peak = self.data_uni.loc[t_start:t_end, key].idxmax()
                         uni_peak = self.data_uni.loc[t_start:t_end, key].max()
                         uni_end_diff = abs(uni_end-uni_peak)
-                # if window_error:
-                #     break
-
-                ##############
-                # if t_start != window_start.loc[i_row, key] or t_end != window_end.loc[i_row, key]:
-                #     if t_start != window_start.loc[i_row, key]:
-                #         print('t_start changed')
-                #     if t_end != window_end.loc[i_row, key]:
-                #         print('t_end changed')
-                #     print('t_start = {}, t_end = {}'.format(t_start, t_end))
-                #     for axkey in ax:
-                #         ax[axkey].axvline(t_start, linestyle=':')
-                #         ax[axkey].axvline(t_end, linestyle=':')
-                # else:
-                #     print('\nNo change to t_start or t_end')
-                ##############
 
                 # If it is impossible to narrow the search window as above and find a positive peak for the T-wave,
                 # set the window to the original values and assume that the T-wave is negative
@@ -618,29 +577,13 @@ class Egm(signalanalysis.general.Signal):
                     t_start = window_start.loc[i_row, key]
                     t_end = window_start.loc[i_row, key]
                     t_peak = self.data_uni.loc[t_start:t_end, key].idxmin()
-                    # negative_t_wave.loc[i_row, key] = True
                     negative_t_wave = True
                 else:
                     t_peak = self.data_uni.loc[t_start:t_end, key].idxmax()
 
-                try:
-                    assert t_start <= t_peak <= t_end, "Problem setting window values"
-                except AssertionError:
-                    pass
-
-                ##############
-                # ax['Unipolar'].scatter(t_peak, self.data_uni.loc[t_peak, key], marker='P', edgecolor='tab:purple',
-                #                        facecolor='none', linewidths=2)
-                # ax['Bipolar'].scatter(t_peak, self.data_bi.loc[t_peak, key], marker='P', edgecolor='tab:purple',
-                #                       facecolor='none', linewidths=2)
-                ##############
+                assert t_start <= t_peak <= t_end, "Problem setting window values"
 
                 # FIND REPOLARISATION TIME
-
-                # if unipolar_threshold is None:
-                #     min_val = self.data_uni.loc[:, key].min()
-                #     max_val = self.data_uni.loc[:, key].max()
-                #     thresh = min([0, (2/3)*(max_val-min_val)])
 
                 max_grad = -100
                 t_max_grad = -1
@@ -663,19 +606,6 @@ class Egm(signalanalysis.general.Signal):
                         if (window_data.loc[t1:t2] < 0).all() and t_window > t_peak:
                             self.rt.loc[i_row, key] = t_max_grad
                             break
-
-                ##############
-            #     try:
-            #         ax['Unipolar'].scatter(self.rt.loc[i_row, key], self.data_uni.loc[self.rt.loc[i_row, key], key],
-            #                                marker='^', edgecolor='tab:purple', facecolor='none', linewidths=2)
-            #         ax['Bipolar'].scatter(self.rt.loc[i_row, key], self.data_bi.loc[self.rt.loc[i_row, key], key],
-            #                               marker='^', edgecolor='tab:purple', facecolor='none', linewidths=2)
-            #     except KeyError:
-            #         print('Balls')
-            #         pass
-            #     break
-            # break
-            ##############
 
         if plot:
             self.plot_signal(plot_rt=True, **kwargs)
