@@ -67,6 +67,7 @@ class Egm(signalanalysis.general.Signal):
 
         self.at = pd.DataFrame(dtype=float)
         self.rt = pd.DataFrame(dtype=float)
+        self.ari = pd.DataFrame(dtype=float)
 
         self.read(data_location_uni, data_location_bi, **kwargs)
         if self.filter is not None:
@@ -104,8 +105,12 @@ class Egm(signalanalysis.general.Signal):
             raise IOError("Not coded for this type of input")
 
         if drop_empty_rows:
-            self.data_uni = self.data_uni.loc[:, ~(self.data_uni == 0).all()]
-            self.data_bi = self.data_bi.loc[:, ~(self.data_bi == 0).all()]
+            # PyCharm highlights an error below (bool doesn't have a .all() method), but I'll be damned if I can
+            # figure out how to fix it - the below option replaces *all* 0.00 values, so will put NaN in an otherwise
+            # normal trace where it happens to reach 0.00, which is not what we want.
+            # self.data_uni = (self.data_uni.where(self.data_uni != 0, axis=0)).dropna(axis=1, how='all')
+            self.data_uni = self.data_uni.loc[:, ~(self.data_uni == 0).all(axis=0)]
+            self.data_bi = self.data_bi.loc[:, ~(self.data_bi == 0).all(axis=0)]
             assert self.data_uni.shape == self.data_bi.shape, "Error in dropping rows"
 
     def read_from_csv(self,
@@ -342,8 +347,8 @@ class Egm(signalanalysis.general.Signal):
                                          columns=self.data_uni.columns)
 
         # Calculate and adjust the start and end point for window searches
-        window_start = self.return_to_index(self.t_peaks-at_window)
-        window_end = self.return_to_index(self.t_peaks+at_window)
+        window_start = self.return_to_index(self.t_peaks.sub(at_window))
+        window_end = self.return_to_index(self.t_peaks.add(at_window))
 
         self.at = self.t_peaks.copy()
         # Current brute force method
@@ -361,7 +366,6 @@ class Egm(signalanalysis.general.Signal):
 
     def get_rt(self,
                lower_window_limit: float = 140,
-               # unipolar_threshold: float = None,
                plot: bool = False,
                **kwargs):
         """ Calculate the repolarisation time
@@ -375,9 +379,6 @@ class Egm(signalanalysis.general.Signal):
         ----------
         lower_window_limit : float, optional
             Minimum time after the AT to have passed before repolarisation can potentially happen, default=150ms
-        unipolar_threshold : float, optional
-            Lower threshold for which the EGM will be considered for whether RT has been reached. If set to None,
-            will default to min(0, (2/3)*(max+min))
         plot : bool, optional
             Whether to plot a random signal example of the ATs found, default=False
 
@@ -385,6 +386,8 @@ class Egm(signalanalysis.general.Signal):
         -------
         self.rt : pd.DataFrame
             Repolarisation times for each signal in the trace
+        self.ari : pd.DataFrame
+            Activation repolarisation intervals for each AT/RT pair
 
         References
         ----------
@@ -401,11 +404,11 @@ class Egm(signalanalysis.general.Signal):
 
         # INITIALISE WINDOWS WITHIN WHICH TO SEARCH FOR RT
 
-        window_start = 0.75*bcl-125
+        window_start = (bcl.mul(0.75)).sub(125)   # Equivalent to 0.75*bcl-125
         window_start[window_start < lower_window_limit] = lower_window_limit
         window_start = self.at+window_start
 
-        window_end = 0.9*bcl-50
+        window_end = (bcl.mul(0.9)).sub(50)     # Equivalent to 0.9*bcl-50
         window_end = self.at+window_end
         window_end[window_end-window_start < 0.1] = window_start+0.1
 
@@ -439,6 +442,7 @@ class Egm(signalanalysis.general.Signal):
                                     index=self.data_uni.index,
                                     columns=self.data_uni.columns)
         self.rt = pd.DataFrame(index=self.at.index, columns=self.at.columns)
+        self.ari = pd.DataFrame(index=self.at.index, columns=self.at.columns)
         for key in tqdm(window_start, desc='Finding RT...', total=len(window_start.columns)):
             for i_row, _ in enumerate(window_start[key]):
 
@@ -520,12 +524,14 @@ class Egm(signalanalysis.general.Signal):
                     # (apex) and have negative gradient)
                     if negative_t_wave:
                         self.rt.loc[i_row, key] = t_max_grad
+                        self.ari.loc[i_row, key] = t_max_grad - self.at.loc[i_row, key]
                     else:
                         i_tm = np.where(self.data_uni.index.values == t_window)[0][0]
                         t1 = self.data_uni.index[i_tm-1]
                         t2 = self.data_uni.index[i_tm+2]    # Adding 2 to ensure that the limit is taken at +1, not i_tm
                         if (window_data.loc[t1:t2] < 0).all() and t_window > t_peak:
                             self.rt.loc[i_row, key] = t_max_grad
+                            self.ari.loc[i_row, key] = t_max_grad - self.at.loc[i_row, key]
                             break
 
         if plot:
