@@ -7,6 +7,7 @@ from typing import Optional
 from tqdm import tqdm
 
 import signalanalysis.general
+import signalplot.egm
 import tools.plotting
 
 
@@ -190,87 +191,7 @@ class Egm(signalanalysis.general.Signal):
                 self.t_peaks[i_signal] = self.data_bi.index[i_peaks]
 
         if plot:
-            _ = self.plot_signal(plot_peaks=True, plot_bipolar_square=True, **kwargs)
-
-    def plot_signal(self,
-                    i_plot: Optional[int] = None,
-                    plot_bipolar_square: bool = False,
-                    plot_peaks: bool = False,
-                    plot_at: bool = False,
-                    plot_rt: bool = False):
-        """General use function to plot the unipolar and bipolar signals, and maybe EGM
-
-        Will plot the unipolar and bipolar EGM signals on the same figure, and if requested, also the RMS trace at
-        the same time.
-
-        TODO: Move this functionality to a general plotting routine, rather than an internal module for a single object
-
-        Parameters
-        ----------
-        i_plot : int, optional
-            Which signal from the data to plot, default=random
-        plot_bipolar_square : bool, optional
-            Whether to plot the squared bipolar data on the figure as well, default=False
-        plot_peaks, plot_at, plot_rt : bool, optional
-            Whether to plot the points of the bipolar peak/AT/RT on the figure, default=False
-
-        Returns
-        -------
-        fig, ax
-            Handles to the figure and axis data, respectively
-        """
-
-        # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
-        if i_plot is None:
-            i_plot = self.n_beats.sample().index[0]
-            while self.n_beats[i_plot] == 0:
-                i_plot = self.n_beats.sample().index[0]
-        else:
-            if self.n_beats[i_plot] == 0:
-                raise IOError("No beats detected in specified trace")
-
-        fig = plt.figure()
-        fig.suptitle('Trace {}'.format(i_plot))
-        ax = dict()
-        ax_labels = ['Unipolar', 'Bipolar']
-        plot_data = [self.data_uni, self.data_bi]
-        if plot_bipolar_square:
-            ax_labels.append('Bipolar^2')
-            plot_data.append(np.square(self.data_bi))
-
-        for i_ax, data in enumerate(plot_data):
-            ax[ax_labels[i_ax]] = fig.add_subplot(len(plot_data), 1, i_ax + 1)
-            ax[ax_labels[i_ax]].plot(data.loc[:, i_plot], color='C0')
-            ax[ax_labels[i_ax]].set_ylabel(ax_labels[i_ax])
-
-            if plot_peaks:
-                ax[ax_labels[i_ax]].scatter(self.t_peaks[i_plot].dropna(),
-                                            data.loc[:, i_plot][self.t_peaks[i_plot].dropna()],
-                                            label='Peaks',
-                                            marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
-                if ax_labels[i_ax] == 'Bipolar^2':
-                    ax[ax_labels[i_ax]].axhline(self.n_beats_threshold*data.loc[:, i_plot].max(),
-                                                color='tab:orange', linestyle='--')
-
-            if plot_at:
-                ax[ax_labels[i_ax]].scatter(self.at[i_plot].dropna(),
-                                            data.loc[:, i_plot][self.at[i_plot].dropna()],
-                                            label='AT',
-                                            marker='d', edgecolor='tab:green', facecolor='none', linewidths=2)
-
-            if plot_rt:
-                try:
-                    ax[ax_labels[i_ax]].scatter(self.rt[i_plot].dropna(),
-                                                data.loc[:, i_plot][self.rt[i_plot].dropna()],
-                                                label='RT',
-                                                marker='s', edgecolor='tab:red', facecolor='none', linewidths=2)
-                except KeyError:
-                    pass
-
-        # Add legend to top axis
-        ax[ax_labels[0]].legend()
-
-        return fig, ax
+            _ = signalplot.egm.plot_signal(self, plot_peaks=True, plot_bipolar_square=True, **kwargs)
 
     def get_beats(self,
                   reset_index: bool = True,
@@ -436,7 +357,7 @@ class Egm(signalanalysis.general.Signal):
                 self.at.loc[i_row, key] = egm_uni_grad_full.loc[t_s:t_e, key].idxmin()
 
         if plot:
-            _ = self.plot_signal(plot_at=True, **kwargs)
+            _ = signalplot.egm.plot_signal(self, plot_at=True, **kwargs)
 
     def get_rt(self,
                lower_window_limit: float = 140,
@@ -608,4 +529,4 @@ class Egm(signalanalysis.general.Signal):
                             break
 
         if plot:
-            self.plot_signal(plot_rt=True, **kwargs)
+            _ = signalplot.egm.plot_signal(self, plot_rt=True, **kwargs)
