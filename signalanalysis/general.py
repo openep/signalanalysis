@@ -380,8 +380,14 @@ class Signal:
         When manipulating time data, it can often fall out of sync with the time values for the data, e.g. the data
         are recorded every 2ms, then searching for a value at 5ms will be difficult. This function realigns a
         sequence of time data to the possible values.
+
+        Parameters
+        ----------
+        original_sequence : pd.DataFrame
+            The sequence of numbers to be returned to the correct time index
         """
 
+        # Reset all values that are less than 0 or greater than the index to be compared against
         original_sequence[original_sequence < 0] = 0
         original_sequence[original_sequence > self.data.index[-1]] = self.data.index[-1]
         new_sequence = original_sequence.applymap(lambda y: min(self.data.index, key=lambda x: abs(x-y)))
