@@ -647,7 +647,7 @@ class Egm(signalanalysis.general.Signal):
                 self.qrs_duration.loc[i_row, key] = self.qrs_end.loc[i_row, key] - self.qrs_start.loc[i_row, key]
 
         if plot:
-            signalplot.egm.plot_signal(plot_qrsd=True, **kwargs)
+            signalplot.egm.plot_signal(self, plot_qrsd=True, **kwargs)
         return None
 
     def calculate_dvdt(self,

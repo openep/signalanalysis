@@ -32,8 +32,8 @@ def plot_signal(data: "Egm",
     plot_markers : bool, optional
         Whether to plot all the various markers available, i.e. will set plot_peaks, plot_at, etc., to True,
         default=False
-    plot_peaks, plot_at, plot_rt : bool, optional
-        Whether to plot the points of the bipolar peak/AT/RT on the figure, default=False
+    plot_peaks, plot_at, plot_rt, plot_qrsd : bool, optional
+        Whether to plot the points of the bipolar peak/AT/RT/QRSd on the figure, default=False
 
     Returns
     -------
