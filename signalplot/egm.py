@@ -45,6 +45,7 @@ def plot_signal(data: "Egm",
         plot_peaks = True
         plot_at = True
         plot_rt = True
+        plot_qrsd = True
 
     # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
     if i_plot is None:
