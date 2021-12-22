@@ -1,9 +1,11 @@
 import math
+import warnings
+
 import numpy as np
 import pandas as pd
 import scipy.signal
 import matplotlib.pyplot as plt
-from typing import Optional
+from typing import Optional, Union, List
 from tqdm import tqdm
 
 import signalanalysis.general
@@ -50,7 +52,7 @@ class Egm(signalanalysis.general.Signal):
         This used to break the `Liskov substitution principle
         <https://en.wikipedia.org/wiki/Liskov_substitution_principle>`_, removing the single `data` attribute to be
         replaced by `data_uni` and `data_bi`, but now instead (aims to) just point the `.data` attribute to the
-        `.data_uni` attibute
+        `.data_uni` attribute
         """
         super(Egm, self).__init__(**kwargs)
 
@@ -68,6 +70,8 @@ class Egm(signalanalysis.general.Signal):
         self.at = pd.DataFrame(dtype=float)
         self.rt = pd.DataFrame(dtype=float)
         self.ari = pd.DataFrame(dtype=float)
+        self.dvdt = pd.DataFrame(dtype=float)
+        self.qrsd = pd.DataFrame(dtype=float)
 
         self.read(data_location_uni, data_location_bi, **kwargs)
         if self.filter is not None:
@@ -113,6 +117,8 @@ class Egm(signalanalysis.general.Signal):
             self.data_bi = self.data_bi.loc[:, ~(self.data_bi == 0).all(axis=0)]
             assert self.data_uni.shape == self.data_bi.shape, "Error in dropping rows"
 
+        return None
+
     def read_from_csv(self,
                       data_location_uni: str,
                       data_location_bi: str,
@@ -157,6 +163,8 @@ class Egm(signalanalysis.general.Signal):
             self.data_bi = None
             self.data_source = data_location_uni
 
+        return None
+
     def get_peaks(self,
                   threshold: float = 0.33,
                   min_separation: float = 200,
@@ -197,6 +205,8 @@ class Egm(signalanalysis.general.Signal):
 
         if plot:
             _ = signalplot.egm.plot_signal(self, plot_peaks=True, plot_bipolar_square=True, **kwargs)
+
+        return None
 
     def get_beats(self,
                   reset_index: bool = True,
@@ -268,6 +278,11 @@ class Egm(signalanalysis.general.Signal):
                    offset_end: Optional[float] = None,
                    i_plot: Optional[int] = None,
                    **kwargs):
+        """
+        ..deprecated::
+            Need to move this to signalplot.egm (if this even works!)
+        """
+
         # Calculate beats (if not done already)
         if self.beats_uni is None:
             self.get_beats(offset_end=offset_end, plot=False, **kwargs)
@@ -360,9 +375,12 @@ class Egm(signalanalysis.general.Signal):
                     continue
                 t_e = window_end.loc[i_row, key]
                 self.at.loc[i_row, key] = egm_uni_grad_full.loc[t_s:t_e, key].idxmin()
+                self.dvdt.loc[i_row, key] = egm_uni_grad_full.loc[t_s:t_e, key].min()
 
         if plot:
             _ = signalplot.egm.plot_signal(self, plot_at=True, **kwargs)
+
+        return None
 
     def get_rt(self,
                lower_window_limit: float = 140,
@@ -536,3 +554,131 @@ class Egm(signalanalysis.general.Signal):
 
         if plot:
             _ = signalplot.egm.plot_signal(self, plot_rt=True, **kwargs)
+
+        return None
+
+    def get_ari(self,
+                plot: bool = False,
+                **kwargs):
+        """Dummy function to calculate ARI
+
+        TODO: check that `plot` keyword is correctly over-ridden (if that is possible)
+
+        ARI is calculated as part of self.get_rt, so this module serves just as useful syntax.
+
+        See also
+        --------
+        :py:meth:`signalanalysis.egm.Egm.get_rt` : Actual method called
+        """
+        if self.ari.empty:
+            self.get_rt(plot=False, **kwargs)
+
+        if plot:
+            signalplot.egm.plot_signal(plot_at=True, plot_rt=True, **kwargs)
+        return None
+
+    def get_qrsd(self,
+                 lower_window: float = 30,
+                 upper_window: float = 60,
+                 threshold: float = 0.1,
+                 plot: bool = True,
+                 **kwargs):
+        """Calculates the QRS duration for EGM data
+
+        TODO: See if this can be improved beyond the current brute force method
+
+        The start and end of the QRS complex is calculated as the duration for which the energy of the bipolar signal
+        (defined as the bipolar signal squared) exceeds a threshold value. The 'window' over which to search for this
+        complex is defined from the detected activation times, plus/minus specified values (`lower_window` and
+        `upper_window`)
+
+        Parameters
+        ----------
+        lower_window, upper_window : float, optional
+            Window before/after AT to search for QRS start/end, respectively, given in milliseconds, default=30/60ms
+        threshold : float, optional
+            Fractional threshold of maximum energy used to define the start and end of the QRS complex, default=0.1
+        plot : bool, optional
+            Whether or not to plot an example trace
+
+        Returns
+        -------
+        self.qrsd : pd.DataFrame
+            QRS durations for each signal
+
+        See also
+        --------
+        :py:meth:`signalanalysis.egm.Egm.get_at` : Method used to calculate AT, that uses this method implicitly
+        :py:meth:`signalplot.egm.plot_signal` : Plotting function, with options that can be passed in **kwargs
+        """
+
+        # Sanitise inputs and make sure they make sense
+        if lower_window < 0.5:
+            warnings.warn('Assuming that lWindow has been entered in seconds rather than milliseconds: correcting...')
+            lower_window = lower_window * 1000
+        if upper_window < 0.5:
+            warnings.warn('Assuming that uWindow has been entered in seconds rather than milliseconds: correcting...')
+            upper_window = upper_window * 1000
+        assert 0.0 < threshold < 1.0, "threshold must be set between 0 and 1"
+
+        if self.at.empty:
+            self.get_at(**kwargs)
+
+        window_start = self.return_to_index(self.at.sub(lower_window))
+        window_end = self.return_to_index(self.at.add(upper_window))
+        for key in tqdm(self.at, desc='Finding QRSd...', total=len(self.at.columns)):
+            for i_row, _ in enumerate(self.at[key]):
+                # Only continue if the window values aren't NaN
+                if pd.isna(window_start.loc[i_row, key]) or pd.isna(window_end.loc[i_row, key]):
+                    continue
+
+                # Calculate EGM energy within the window of concern
+                energy = np.square(self.data_bi.loc[window_start.loc[i_row, key]:window_end.loc[i_row, key], key])
+
+                # Find threshold values within this window
+                energy_threshold = energy.max()*threshold
+
+                i_qrs = np.where(energy > energy_threshold)
+                qrs_start = energy.index[i_qrs[0][0]]
+                qrs_end = energy.index[i_qrs[0][-1]]
+                self.qrsd.loc[i_row, key] = qrs_end-qrs_start
+
+        if plot:
+            signalplot.egm.plot_signal(plot_qrsd=True, **kwargs)
+        return None
+
+    def calculate_dvdt(self,
+                       time_points: Union[float, List[float], pd.DataFrame] = None,
+                       dvdt_normalise: bool = False,
+                       dvdt_rescale: bool = False):
+        """Return dV/dt values at specified time points
+
+        TODO: Write this function, if useful - currently simpler to just calculate dV/dt for AT directly in method
+
+        Will return the value of dV/dt at specified time points.
+
+        Parameters
+        ----------
+        time_points : list of float
+            List of time points at which to calculate dV/dt for the signal
+        dvdt_normalise : bool, optional
+            Whether to normalise the ECG trace to a [-1, 1] range prior to calculating the dVdt value - will only adjust
+            the values relative to a maximum, and not necessarily rescale within the entire range, i.e. an EGM from [0,
+            10] will rescale to [0, 1]. This will not affect any other part of the calculations, default=False
+        dvdt_rescale : bool, optional
+            Whether to normalise the ECG trace to a [-1, 1] range prior to calculating the dVdt value - will adjust
+            the values relative cover the entire new range, i.e. an EGM from [0, 10] will rescale to [-1,
+            1]. This will not affect any other part of the calculations, default=false
+
+        Returns
+        -------
+        self.dvdt : pd.DataFrame
+            dV/dt values for each point of the AT
+
+        See also
+        --------
+        :py:meth:`signalanalysis.egm.Egm.get_at` : Method used to calculate AT, that uses this method implicitly
+        """
+
+        time_points = self.return_to_index(time_points)
+        return None
