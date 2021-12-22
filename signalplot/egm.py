@@ -14,7 +14,8 @@ def plot_signal(data: "Egm",
                 plot_markers: bool = False,
                 plot_peaks: bool = False,
                 plot_at: bool = False,
-                plot_rt: bool = False):
+                plot_rt: bool = False,
+                plot_qrsd: bool = False):
     """General use function to plot EGM data with flags for various markers as required
 
     Will plot the unipolar and bipolar EGM signals on the same figure, and if requested, also the RMS trace at
@@ -91,6 +92,11 @@ def plot_signal(data: "Egm",
                                             marker='s', edgecolor='tab:red', facecolor='none', linewidths=2)
             except KeyError:
                 pass
+
+        if plot_qrsd:
+            for t_start, t_end in zip(data.qrs_start[i_plot], data.qrs_end[i_plot]):
+                ax[ax_labels[i_ax]].axvspan(t_start, t_end,
+                                            color='tab:purple', alpha=0.5)
 
     # Add legend to top axis
     ax[ax_labels[0]].legend()
