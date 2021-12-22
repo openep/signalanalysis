@@ -71,7 +71,6 @@ class Egm(signalanalysis.general.Signal):
         self.rt = pd.DataFrame(dtype=float)
         self.ari = pd.DataFrame(dtype=float)
         self.dvdt = pd.DataFrame(dtype=float)
-        self.qrsd = pd.DataFrame(dtype=float)
 
         self.read(data_location_uni, data_location_bi, **kwargs)
         if self.filter is not None:
@@ -603,7 +602,7 @@ class Egm(signalanalysis.general.Signal):
 
         Returns
         -------
-        self.qrsd : pd.DataFrame
+        self.qrs_duration : pd.DataFrame
             QRS durations for each signal
 
         See also
@@ -639,9 +638,9 @@ class Egm(signalanalysis.general.Signal):
                 energy_threshold = energy.max()*threshold
 
                 i_qrs = np.where(energy > energy_threshold)
-                qrs_start = energy.index[i_qrs[0][0]]
-                qrs_end = energy.index[i_qrs[0][-1]]
-                self.qrsd.loc[i_row, key] = qrs_end-qrs_start
+                self.qrs_start.loc[i_row, key] = energy.index[i_qrs[0][0]]
+                self.qrs_end.loc[i_row, key] = energy.index[i_qrs[0][-1]]
+                self.qrs_duration.loc[i_row, key] = self.qrs_end.loc[i_row, key] - self.qrs_start.loc[i_row, key]
 
         if plot:
             signalplot.egm.plot_signal(plot_qrsd=True, **kwargs)

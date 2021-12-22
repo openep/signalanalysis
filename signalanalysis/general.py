@@ -85,6 +85,7 @@ class Signal:
 
         self.qrs_start = list()
         self.qrs_end = list()
+        self.qrs_duration = list()
         self.twave_end = list()
 
         self.data_source = None
@@ -123,6 +124,7 @@ class Signal:
 
         self.qrs_start = list()
         self.qrs_end = list()
+        self.qrs_duration = pd.DataFrame(dtype=float)
         self.twave_end = list()
 
         self.data_source = None
