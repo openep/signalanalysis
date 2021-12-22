@@ -72,6 +72,10 @@ class Egm(signalanalysis.general.Signal):
         self.ari = pd.DataFrame(dtype=float)
         self.dvdt = pd.DataFrame(dtype=float)
 
+        self.qrs_start = pd.DataFrame(dtype=float)
+        self.qrs_end = pd.DataFrame(dtype=float)
+        self.qrs_duration = pd.DataFrame(dtype=float)
+
         self.read(data_location_uni, data_location_bi, **kwargs)
         if self.filter is not None:
             self.apply_filter(**kwargs)
