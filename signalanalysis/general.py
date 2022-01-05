@@ -208,12 +208,12 @@ class Signal:
 
         Parameters
         ----------
-        threshold : float {0<1}
-            Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5
-        min_separation : float
+        threshold : float {0<1}, optional
+            Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.33
+        min_separation : float, optional
             Minimum separation (in ms) required between neighbouring peaks in a given signal (correlates to the minimum
             pacing rate expected), default=200ms
-        plot : bool
+        plot : bool, optional
             Whether to plot results of beat detection, default=False
 
         Returns
@@ -230,6 +230,7 @@ class Signal:
         # Calculate locations of RMS peaks to determine number and locations of beats
         if self.rms is None:
             self.get_rms(**kwargs)
+        min_separation = self.return_to_index(min_separation)
         i_separation = self.data.index.get_loc(min_separation)
         i_peaks, _ = scipy.signal.find_peaks(self.rms, height=threshold*max(self.rms), distance=i_separation)
         self.n_beats = len(i_peaks)
@@ -376,7 +377,7 @@ class Signal:
         pass
 
     def return_to_index(self,
-                        original_sequence: pd.DataFrame):
+                        original_sequence: Union[pd.DataFrame, list, float, int]):
         """Aligns a given sequence of time values to those in the index
 
         When manipulating time data, it can often fall out of sync with the time values for the data, e.g. the data
@@ -385,15 +386,36 @@ class Signal:
 
         Parameters
         ----------
-        original_sequence : pd.DataFrame
+        original_sequence : pd.DataFrame or list or float or int
             The sequence of numbers to be returned to the correct time index
+
+        Returns
+        -------
+        new_sequence : pd.DataFrame or list or float or int
+            The sequence of numbers now corrected to match the time index for the data, returned in the same format
+            as the original sequence was provided, i.e. pd.DataFrame will return pd.DataFrame, int will return int,
+            and so on.
         """
 
-        # Reset all values that are less than 0 or greater than the index to be compared against
-        original_sequence[original_sequence < 0] = 0
-        original_sequence[original_sequence > self.data.index[-1]] = self.data.index[-1]
-        new_sequence = original_sequence.applymap(lambda y: min(self.data.index, key=lambda x: abs(x-y)))
-        new_sequence[pd.isna(original_sequence)] = float("nan")
+        if isinstance(original_sequence, pd.DataFrame):
+            # Reset all values that are less than 0 or greater than the index to be compared against
+            original_sequence[original_sequence < 0] = 0
+            original_sequence[original_sequence > self.data.index[-1]] = self.data.index[-1]
+            new_sequence = original_sequence.applymap(lambda y: min(self.data.index, key=lambda x: abs(x-y)))
+            new_sequence[pd.isna(original_sequence)] = float("nan")
+        elif isinstance(original_sequence, list):
+            # This will technically always find the index greater than the requested value, which may be one step
+            # higher than the *actual* closest value, but the difference is judged to be marginal for an approx. five
+            # times faster find!
+            new_sequence = list()
+            for element in original_sequence:
+                if element > self.data.index[-1]:
+                    element = self.data.index[-1]
+                new_sequence.append(np.where(self.data.index > element)[0][0])
+        else:
+            if original_sequence > self.data.index[-1]:
+                original_sequence = self.data.index[-1]
+            new_sequence = np.where(self.data.index > original_sequence)[0][0]
 
         return new_sequence
 

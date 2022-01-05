@@ -84,7 +84,7 @@ class Egm(signalanalysis.general.Signal):
 
     def read(self,
              data_location_uni: str,
-             data_location_bi: str,
+             data_location_bi: Optional[str] = None,
              drop_empty_rows: bool = True,
              **kwargs):
         """ Read the DxL data for unipolar and bipolar data for EGMs
@@ -95,9 +95,10 @@ class Egm(signalanalysis.general.Signal):
         ----------
         data_location_uni : str
             Location of unipolar data. Currently only coded to deal with a saved .csv file
-        data_location_bi : str
-            Location of bipolar data. Currently only coded to deal with a saved .csv file
-        drop_empty_rows : bool
+        data_location_bi : str, optional
+            Location of bipolar data. Currently only coded to deal with a saved .csv file. Doesn't need to be passed,
+            default=None
+        drop_empty_rows : bool, optional
             Whether to drop empty data rows from the data, default=True
 
         See Also
@@ -106,7 +107,8 @@ class Egm(signalanalysis.general.Signal):
         """
 
         if data_location_uni.endswith('.csv'):
-            assert data_location_bi.endswith('.csv')
+            if data_location_bi is not None:
+                assert data_location_bi.endswith('.csv')
             self.read_from_csv(data_location_uni, data_location_bi, **kwargs)
         else:
             raise IOError("Not coded for this type of input")
@@ -117,14 +119,15 @@ class Egm(signalanalysis.general.Signal):
             # normal trace where it happens to reach 0.00, which is not what we want.
             # self.data_uni = (self.data_uni.where(self.data_uni != 0, axis=0)).dropna(axis=1, how='all')
             self.data_uni = self.data_uni.loc[:, ~(self.data_uni == 0).all(axis=0)]
-            self.data_bi = self.data_bi.loc[:, ~(self.data_bi == 0).all(axis=0)]
-            assert self.data_uni.shape == self.data_bi.shape, "Error in dropping rows"
+            if not self.data_bi.empty:
+                self.data_bi = self.data_bi.loc[:, ~(self.data_bi == 0).all(axis=0)]
+                assert self.data_uni.shape == self.data_bi.shape, "Error in dropping rows"
 
         return None
 
     def read_from_csv(self,
                       data_location_uni: str,
-                      data_location_bi: str,
+                      data_location_bi: Optional[str],
                       frequency: float):
         """ Read EGM data that has been saved from Matlab
 
@@ -132,13 +135,17 @@ class Egm(signalanalysis.general.Signal):
         ----------
         data_location_uni : str
             Name of the .csv file containing the unipolar data
-        data_location_bi : str
+        data_location_bi : str, optional
             Name of the .csv file containing the bipolar data
         frequency : float
             The frequency of the data recording in Hz
 
         Notes
         -----
+        It is not technically required to pass the bipolar data, but it is presented here as a required keyword to
+        preserve the usage of calling as `read_from_csv(unipolar, bipolar, frequency)`, rather than breaking the data
+        files arguments up or requiring keywords.
+
         The .csv file should be saved with column representing an individual EGM trace, and each row representing a
         single instance in time, i.e.
 
@@ -163,7 +170,7 @@ class Egm(signalanalysis.general.Signal):
             self.data_bi.set_index(t, inplace=True)
             self.data_source = [data_location_uni, data_location_bi]
         else:
-            self.data_bi = None
+            self.data_bi = pd.DataFrame()
             self.data_source = data_location_uni
 
         return None
@@ -180,10 +187,10 @@ class Egm(signalanalysis.general.Signal):
         :py:meth:`signalanalysis.egm.Egm.plot_signal` : Method to plot the calculated AT
         """
         if self.data_bi.empty:
-            super(Egm, self).get_peaks()
-            return
-
-        egm_bi_square = np.square(self.data_bi)
+            # super(Egm, self).get_peaks()
+            egm_bi_square = np.abs(self.data_uni)
+        else:
+            egm_bi_square = np.square(self.data_bi)
 
         i_separation = np.where(self.data_uni.index > min_separation)[0][0]
         self.n_beats = pd.Series(dtype=int, index=self.data_uni.columns)
