@@ -15,7 +15,7 @@ Futher details of how to use these functions are in :doc:`usage`, with the finer
 function within the files themselves.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
    :glob:
    
