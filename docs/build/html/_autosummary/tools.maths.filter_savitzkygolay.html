@@ -4,19 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tools.maths.filter_savitzkygolay &#8212; signalanalysis 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tools.maths.get_median" href="tools.maths.get_median.html" />
-    <link rel="prev" title="tools.maths.filter_butterworth" href="tools.maths.filter_butterworth.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,44 +30,9 @@
 
           <div class="body" role="main">
             
-  <section id="tools-maths-filter-savitzkygolay">
+  <div class="section" id="tools-maths-filter-savitzkygolay">
 <h1>tools.maths.filter_savitzkygolay<a class="headerlink" href="#tools-maths-filter-savitzkygolay" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="tools.maths.filter_savitzkygolay">
-<span class="sig-prename descclassname"><span class="pre">tools.maths.</span></span><span class="sig-name descname"><span class="pre">filter_savitzkygolay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deriv</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tools.maths.filter_savitzkygolay" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filter EGM data using a Savitzky-Golay filter</p>
-<p>Filter a given set of data using a Savitzky-Golay filter, designed to smooth data using a convolution process
-fitting to a low-degree polynomial within a given window. Default values are either taken from scipy
-documentation (not all options are provided here), or adapted to match Hermans et al.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – Data to filter</p></li>
-<li><p><strong>window_length</strong> (<em>float</em><em>, </em><em>optional</em>) – The length of the filter window in seconds. When passed to the scipy filter, will be converted to a
-positive odd integer (i.e. the number of coefficients). Default=0.05</p></li>
-<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – The order of the polynomial used to fit the samples. polyorder must be less than window_length. Default=2</p></li>
-<li><p><strong>deriv</strong> (<em>int</em><em>, </em><em>optional</em>) – The order of the derivative to compute. This must be a nonnegative integer. The default is 0, which means to
-filter the data without differentiating.</p></li>
-<li><p><strong>delta</strong> (<em>float</em><em>, </em><em>optional</em>) – The spacing of the samples to which the filter will be applied. This is only used if deriv &gt; 0. Default=1.0</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>data</strong> – Output filtered data</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<dl class="simple">
-<dt>The development and validation of an easy to use automatic QT-interval algorithm</dt><dd><p>Hermans BJM, Vink AS, Bennis FC, Filippini LH, Meijborg VMF, Wilde AAM, Pison L, Postema PG, Delhaas T
-PLoS ONE, 12(9), 1–14 (2017)
-<a class="reference external" href="https://doi.org/10.1371/journal.pone.0184352">https://doi.org/10.1371/journal.pone.0184352</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
+</div>
 
 
           </div>
@@ -89,29 +51,17 @@ PLoS ONE, 12(9), 1–14 (2017)
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="signalanalysis.html">signalanalysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="signalplot.html">signalplot</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="tools.html">tools</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../docutils.html">docutils Documentation</a><ul>
-  <li><a href="tools.html">tools</a><ul>
-  <li><a href="tools.maths.html">tools.maths</a><ul>
-      <li>Previous: <a href="tools.maths.filter_butterworth.html" title="previous chapter">tools.maths.filter_butterworth</a></li>
-      <li>Next: <a href="tools.maths.get_median.html" title="next chapter">tools.maths.get_median</a></li>
-  </ul></li>
-  </ul></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -119,7 +69,7 @@ PLoS ONE, 12(9), 1–14 (2017)
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -138,10 +88,10 @@ PLoS ONE, 12(9), 1–14 (2017)
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Philip Gemmell.
+      &copy;2022, Philip Gemmell.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

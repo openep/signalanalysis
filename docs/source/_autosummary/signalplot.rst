@@ -27,6 +27,7 @@
    :recursive:
 
    signalplot.ecg
+   signalplot.egm
    signalplot.general
    signalplot.vcg
 

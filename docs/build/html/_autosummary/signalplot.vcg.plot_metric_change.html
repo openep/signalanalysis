@@ -4,19 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>signalplot.vcg.plot_metric_change &#8212; signalanalysis 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="signalplot.vcg.plot_metric_change_barplot" href="signalplot.vcg.plot_metric_change_barplot.html" />
-    <link rel="prev" title="signalplot.vcg.plot_density_effect" href="signalplot.vcg.plot_density_effect.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,48 +30,9 @@
 
           <div class="body" role="main">
             
-  <section id="signalplot-vcg-plot-metric-change">
+  <div class="section" id="signalplot-vcg-plot-metric-change">
 <h1>signalplot.vcg.plot_metric_change<a class="headerlink" href="#signalplot-vcg-plot-metric-change" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="signalplot.vcg.plot_metric_change">
-<span class="sig-prename descclassname"><span class="pre">signalplot.vcg.</span></span><span class="sig-name descname"><span class="pre">plot_metric_change</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics_phi</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics_rho</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics_z</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics_lv</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scattermarkers</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linemarkers</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colours</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linestyles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_match</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#signalplot.vcg.plot_metric_change" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function to plot all the various figures for trend analysis in one go.</p>
-<p>TODO: labels parameter seems redundant - potentially remove</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>metrics</strong> (<em>list of list of list of float</em>) – Complete list of all metric data recorded
-[phi+rho+z+size+other]</p></li>
-<li><p><strong>metrics_phi</strong> (<em>list of list of list of float</em>) – Metric data recorded for scar size variations in phi UVC</p></li>
-<li><p><strong>metrics_rho</strong> (<em>list of list of list of float</em>) – Metric data recorded for scar size variations in rho UVC</p></li>
-<li><p><strong>metrics_z</strong> (<em>list of list of list of float</em>) – Metric data recorded for scar size variations in z UVC</p></li>
-<li><p><strong>metric_name</strong> (<em>str</em>) – Name of metric being plotted (for labelling purposes). Can incorporate LaTeX typesetting.</p></li>
-<li><p><strong>metrics_lv</strong> (<em>list of bool</em><em>, </em><em>optional</em>) – Boolean to distinguish whether metrics being plotted are for LV or septal data, default=[True, False]</p></li>
-<li><p><strong>labels</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Labels for the data sets being plotted, default=[‘LV’, ‘Septum’]</p></li>
-<li><p><strong>scattermarkers</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Markers to use to plot the data on the scatterplots, default=[‘+’, ‘o’, ‘D’, ‘v’, ‘^’, ‘s’, ‘*’, ‘x’]</p></li>
-<li><p><strong>linemarkers</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Markers to use on the line plots to indicate discrete data points, required to be at least as long as
-the longest line plot to be drawn (rho), default=[‘.’ for _ in range(len(metrics_rho))]</p></li>
-<li><p><strong>colours</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Sequence of colours to plot data (if plotting LV and septal data, will require two different colours to allow
-them to be distinguished), default=common_analysis.get_plot_colours(len(metrics_rho))</p></li>
-<li><p><strong>linestyles</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Linestyles to be used for plotting the data on lineplots, default=[‘-’ for _ in range(len(metrics_rho))]</p></li>
-<li><p><strong>layout</strong> (<em>{'combined'</em><em>, </em><em>'figures'}</em><em>, </em><em>optional</em>) – String specifying the output, whether all plots should be combined into one figure window (default), or whether
-individual figure windows should be plotted for each plot</p></li>
-<li><p><strong>axis_match</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to make sure all plotted figures share the same axis ranges, default=True</p></li>
-<li><p><strong>no_labels</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to have labels on the figures, or not - having no labels can make it far easier to ‘prettify’ the
-figures manually later in Inkscape, default=False</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>fig</strong> (<em>plt.figure or dict of plt.figure</em>) – Handle to figure(s)</p></li>
-<li><p><strong>ax</strong> (<em>dict</em>) – Handles to axes</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
+</div>
 
 
           </div>
@@ -93,29 +51,17 @@ figures manually later in Inkscape, default=False</p></li>
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="signalanalysis.html">signalanalysis</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="signalplot.html">signalplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html">tools</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../docutils.html">docutils Documentation</a><ul>
-  <li><a href="signalplot.html">signalplot</a><ul>
-  <li><a href="signalplot.vcg.html">signalplot.vcg</a><ul>
-      <li>Previous: <a href="signalplot.vcg.plot_density_effect.html" title="previous chapter">signalplot.vcg.plot_density_effect</a></li>
-      <li>Next: <a href="signalplot.vcg.plot_metric_change_barplot.html" title="next chapter">signalplot.vcg.plot_metric_change_barplot</a></li>
-  </ul></li>
-  </ul></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -123,7 +69,7 @@ figures manually later in Inkscape, default=False</p></li>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -142,10 +88,10 @@ figures manually later in Inkscape, default=False</p></li>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Philip Gemmell.
+      &copy;2022, Philip Gemmell.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

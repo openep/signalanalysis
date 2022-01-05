@@ -27,6 +27,7 @@
    :recursive:
 
    signalanalysis.ecg
+   signalanalysis.egm
    signalanalysis.general
    signalanalysis.vcg
 

@@ -4,12 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Usage &#8212; signalanalysis 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -33,59 +32,72 @@
 
           <div class="body" role="main">
             
-  <section id="usage">
+  <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<section id="installation-getting-started">
+<div class="section" id="installation-getting-started">
 <span id="installation"></span><h2>Installation &amp; Getting Started<a class="headerlink" href="#installation-getting-started" title="Permalink to this headline">¶</a></h2>
-<p>To use signalanalysis, it is highly recommended to install using <code class="docutils literal notranslate"><span class="pre">pipenv</span></code>, the virtual environment, to ensure that dependencies are where possible maintained. Clone the repository, then install the requirements as follows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@home:~$ </span>git clone git@github.com:philip-gemmell/signalanalysis.git
-<span class="gp">user@home:~$ </span><span class="nb">cd</span> signalanalysis
-<span class="gp">user@home:~/signalanalysis$ </span>pipenv install
+<p>To use signalanalysis, it is highly recommended to install using <code class="docutils literal notranslate"><span class="pre">pipenv</span></code>, the virtual environment, to ensure that
+dependencies are where possible maintained. Clone the repository, then install the requirements as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@home:~$</span> git clone git@github.com:philip-gemmell/signalanalysis.git
+<span class="gp">user@home:~$</span> <span class="nb">cd</span> signalanalysis
+<span class="gp">user@home:~/signalanalysis$</span> pipenv install
 </pre></div>
 </div>
-<p>Once the repository is cloned, it is currently the case that all work must be done within the Python3 environment. However, it is recommended to use the virtual environment from pipenv rather than the system-wide Python3 (after entering a pipenv shell, it is quit using the <code class="docutils literal notranslate"><span class="pre">exit</span></code> command as shown)</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@home:~/signalanalysis$ </span>pipenv shell
-<span class="gp gp-VirtualEnv">(signalanalysis)</span> <span class="gp">user@home:~/signalanalysis$ </span>python3
-<span class="go">&gt;&gt;&gt; import signalanalysis</span>
-<span class="go">&gt;&gt;&gt; quit()</span>
-<span class="gp gp-VirtualEnv">(signalanalysis)</span> <span class="gp">user@home:~/signalanalysis$ </span><span class="nb">exit</span>
+<p>Once the repository is cloned, it is currently the case that all work must be done within the Python3 environment.
+However, it is recommended to use the virtual environment from pipenv rather than the system-wide Python3 (after
+entering a pipenv shell, it is quit using the <code class="docutils literal notranslate"><span class="pre">exit</span></code> command as shown)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@home:~/signalanalysis$</span> pipenv shell
+<span class="gp gp-VirtualEnv">(signalanalysis)</span> <span class="gp">user@home:~/signalanalysis$</span> python3
+<span class="gp">&gt;</span>&gt;&gt; import signalanalysis
+<span class="gp">&gt;</span>&gt;&gt; quit<span class="o">()</span>
+<span class="gp gp-VirtualEnv">(signalanalysis)</span> <span class="gp">user@home:~/signalanalysis$</span> <span class="nb">exit</span>
 <span class="gp">user@home:~/signalanalysis$</span>
 </pre></div>
 </div>
-<p>The project is arranged into various subdivisions. The required analysis/plotting packages for the ECG/VCG are separated out, and require separate importing. See the next section, and individual help files for further details.</p>
+<p>The project is arranged into various subdivisions. The required analysis/plotting packages for the ECG/VCG are
+separated out, and require separate importing. The individual functions must be imported and used
+separately—further details for each function can be found within each files documentation.</p>
 <ul class="simple">
-<li><p>signalanalysis</p>
+<li><p><a class="reference internal" href="signalanalysis.html"><span class="doc">signalanalysis</span></a></p>
 <ul>
 <li><p>signalanalysis.general</p></li>
-<li><p>signalanalysis.ecg</p></li>
-<li><p>signalanalysis.vcg</p></li>
+<li><p><a class="reference internal" href="signalanalysis-ecg.html"><span class="doc">signalanalysis.ecg</span></a></p></li>
+<li><p><a class="reference internal" href="signalanalysis-vcg.html"><span class="doc">signalanalysis.vcg</span></a></p></li>
+<li><p><a class="reference internal" href="signalanalysis-egm.html"><span class="doc">signalanalysis.egm</span></a></p></li>
 </ul>
 </li>
-<li><p>signalplot</p></li>
-<li><p>tools</p></li>
+<li><p>signalplot</p>
+<ul>
+<li><p>signalplot.general</p></li>
+<li><p>signalplot.ecg</p></li>
+<li><p>signalplot.vcg</p></li>
+<li><p>signalplot.egm</p></li>
 </ul>
-</section>
-<section id="reading-ecg-vcg-data">
-<span id="reading"></span><h2>Reading ECG/VCG data<a class="headerlink" href="#reading-ecg-vcg-data" title="Permalink to this headline">¶</a></h2>
-<p>Currently, only ECG reading is supported; VCG data is calculated from ECG data using the Kors method (see method). ECG files are read upon the instantiation of the ECG class, though it is possible to re-read data if required for some reason.</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">signalanalysis.ecg</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">signalanalysis.vcg</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ecg_example</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">ecg</span><span class="o">.</span><span class="n">Ecg</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vcg_example</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">vcg</span><span class="o">.</span><span class="n">Vcg</span><span class="p">(</span><span class="n">ecg_example</span><span class="p">)</span>
-</pre></div>
+</li>
+<li><p>tools</p>
+<ul>
+<li><p>tools.maths</p></li>
+<li><p>tools.plotting</p></li>
+<li><p>tools.python</p></li>
+</ul>
+</li>
+</ul>
 </div>
-</section>
-<section id="shifting-to-classes-from-methods">
+<div class="section" id="shifting-to-classes-from-methods">
 <span id="classplan"></span><h2>Shifting to classes from methods<a class="headerlink" href="#shifting-to-classes-from-methods" title="Permalink to this headline">¶</a></h2>
-<p>Previously, all ECG/VCG data was extracted and stored in DataFrames, and most of the modules in this code currently support this format. However, it is planned to shift the main focus of the project to use classes, which allow encapsulation of linked data in one data structure. While the focus of this documentation will be future-facing, and look at using the classes, note that sometimes access to the raw, underlying DataFrames will still be required. To that end, the raw data can be accessed as the .data attribute:</p>
+<p>Previously, all ECG/VCG data was extracted and stored in DataFrames, and most of the modules in this code currently
+support this format. However, it is planned to shift the main focus of the project to use classes, which allow
+encapsulation of linked data in one data structure. While the focus of this documentation will be future-facing, and
+look at using the classes, note that sometimes access to the raw, underlying DataFrames will still be required. To
+that end, the raw data can be accessed as the <code class="docutils literal notranslate"><span class="pre">.data</span></code> attribute:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ecg_class</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">ecg</span><span class="o">.</span><span class="n">Ecg</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">)</span> <span class="c1"># Returns an Ecg class</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vcg_class</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">vcg</span><span class="o">.</span><span class="n">Vcg</span><span class="p">(</span><span class="n">ecg_class</span><span class="p">)</span>  <span class="c1"># Returns a Vcg class</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ecg_data</span> <span class="o">=</span> <span class="n">ecg_class</span><span class="o">.</span><span class="n">data</span>                      <span class="c1"># Returns a Pandas DataFrame of the underlying data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vcg_data</span> <span class="o">=</span> <span class="n">vcg_class</span><span class="o">.</span><span class="n">data</span>                      <span class="c1"># Returns a Pandas DataFrame of the underlying data</span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -104,11 +116,10 @@
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation-getting-started">Installation &amp; Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#reading-ecg-vcg-data">Reading ECG/VCG data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shifting-to-classes-from-methods">Shifting to classes from methods</a></li>
 </ul>
 </li>
@@ -128,7 +139,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -147,10 +158,10 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Philip Gemmell.
+      &copy;2022, Philip Gemmell.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
