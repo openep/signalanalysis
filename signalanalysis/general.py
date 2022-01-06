@@ -196,7 +196,7 @@ class Signal:
         self.rms = np.sqrt(signal_rms.sum(axis=1) / n_leads)
 
     def get_peaks(self,
-                  threshold: float = 0.33,
+                  threshold: float = 0.4,
                   min_separation: float = 200,
                   plot: bool = False,
                   **kwargs):
@@ -411,11 +411,16 @@ class Signal:
             for element in original_sequence:
                 if element > self.data.index[-1]:
                     element = self.data.index[-1]
-                new_sequence.append(np.where(self.data.index > element)[0][0])
+                # Below expression is recommended instead of np.where(self.data.index >= original_sequence)[0][0]
+                # https://numpy.org/doc/stable/reference/generated/numpy.where.html
+                new_sequence.append(self.data.index[np.asarray(self.data.index >= original_sequence).nonzero()[0][0]])
         else:
             if original_sequence > self.data.index[-1]:
                 original_sequence = self.data.index[-1]
-            new_sequence = np.where(self.data.index > original_sequence)[0][0]
+            try:
+                new_sequence = self.data.index[np.asarray(self.data.index >= original_sequence).nonzero()[0][0]]
+            except IndexError:
+                pass
 
         return new_sequence
 
