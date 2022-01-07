@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Optional, TYPE_CHECKING
@@ -46,6 +48,10 @@ def plot_signal(data: "Egm",
         plot_at = True
         plot_rt = True
         plot_qrsd = True
+
+    if data.data_bi.empty and plot_qrsd:
+        warnings.warn('Cannot plot QRSd for unipolar only data')
+        plot_qrsd = False
 
     # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
     if i_plot is None:
