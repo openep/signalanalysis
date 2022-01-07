@@ -59,11 +59,14 @@ def plot_signal(data: "Egm",
     fig = plt.figure()
     fig.suptitle('Trace {}'.format(i_plot))
     ax = dict()
-    ax_labels = ['Unipolar', 'Bipolar']
-    plot_data = [data.data_uni, data.data_bi]
-    if plot_bipolar_square:
-        ax_labels.append('Bipolar^2')
-        plot_data.append(np.square(data.data_bi))
+    ax_labels = ['Unipolar']
+    plot_data = [data.data_uni]
+    if not data.data_bi.empty:
+        ax_labels.append('Bipolar')
+        plot_data.append(data.data_bi)
+        if plot_bipolar_square:
+            ax_labels.append('Bipolar^2')
+            plot_data.append(np.square(data.data_bi))
 
     for i_ax, ax_data in enumerate(plot_data):
         ax[ax_labels[i_ax]] = fig.add_subplot(len(plot_data), 1, i_ax + 1)
@@ -86,13 +89,10 @@ def plot_signal(data: "Egm",
                                         marker='d', edgecolor='tab:green', facecolor='none', linewidths=2)
 
         if plot_rt:
-            try:
-                ax[ax_labels[i_ax]].scatter(data.rt[i_plot].dropna(),
-                                            ax_data.loc[:, i_plot][data.rt[i_plot].dropna()],
-                                            label='RT',
-                                            marker='s', edgecolor='tab:red', facecolor='none', linewidths=2)
-            except KeyError:
-                pass
+            ax[ax_labels[i_ax]].scatter(data.rt[i_plot].dropna(),
+                                        ax_data.loc[:, i_plot][data.rt[i_plot].dropna()],
+                                        label='RT',
+                                        marker='s', edgecolor='tab:red', facecolor='none', linewidths=2)
 
         if plot_qrsd:
             for t_start, t_end in zip(data.qrs_start[i_plot], data.qrs_end[i_plot]):
