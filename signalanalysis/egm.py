@@ -204,14 +204,14 @@ class Egm(signalanalysis.general.Signal):
 
             # Pad the peaks data or t_peaks dataframe with NaN as appropriate
             if len(i_peaks) == self.t_peaks.shape[0]:
-                self.t_peaks[i_signal] = self.data_bi.index[i_peaks]
+                self.t_peaks[i_signal] = self.data_uni.index[i_peaks]
             elif len(i_peaks) < self.t_peaks.shape[0]:
-                self.t_peaks[i_signal] = np.pad(self.data_bi.index[i_peaks],
+                self.t_peaks[i_signal] = np.pad(self.data_uni.index[i_peaks],
                                                 (0, self.t_peaks.shape[0]-len(i_peaks)),
                                                 constant_values=float("nan"))
             elif len(i_peaks) > self.t_peaks.shape[0]:
                 self.t_peaks = self.t_peaks.reindex(range(len(i_peaks)), fill_value=float("nan"))
-                self.t_peaks[i_signal] = self.data_bi.index[i_peaks]
+                self.t_peaks[i_signal] = self.data_uni.index[i_peaks]
 
         if plot:
             _ = signalplot.egm.plot_signal(self, plot_peaks=True, plot_bipolar_square=True, **kwargs)
@@ -342,25 +342,32 @@ class Egm(signalanalysis.general.Signal):
 
     def get_at(self,
                at_window: float = 30,
+               unipolar_delay: float = 50,
                plot: bool = False,
                **kwargs):
         """ Calculates the activation time for a given beat of EGM data
 
         Will calculate the activation times for an EGM signal, based on finding the peaks in the squared bipolar
         trace, then finding the maximum downslope in the unipolar signal within a specified window of time around
-        those peaks.
+        those peaks. Note that, if bipolar data are not present, then the squared unipolar signal will be used,
+        which will invariably find the pacing artefact. As such, when unipolar peaks are used, a 'delay' will be
+        applied to the window to avoid the pacing artefact.
 
         Parameters
         ----------
         at_window : float, optional
             Time in milliseconds, around which the activation time will be searched for round the detected peaks,
-            default=30ms
+            i.e. the EGM trace will be searched in the window t_peak +/- at_window. Default=30ms
+        unipolar_delay : float, optional
+            Time in milliseconds to delay the search window after the peak time, if only unipolar data are being
+            used, to avoid getting confused with the far-field pacing artefact. Will thus have the search window
+            adapted to (t_peak+unipolar_delay) +/- at_window. Default=50ms
         plot : bool, optional
             Whether to plot a random signal example of the ATs found, default=False
 
         See also
         --------
-        :py:meth:`signalanalysis.egm.Egm.get_peaks` : Method to calculate peaks in bipolar signal
+        :py:meth:`signalanalysis.egm.Egm.get_peaks` : Method to calculate peaks
         :py:meth:`signalanalysis.egm.Egm.plot_signal` : Method to plot the signal
         """
 
@@ -372,8 +379,10 @@ class Egm(signalanalysis.general.Signal):
                                          columns=self.data_uni.columns)
 
         # Calculate and adjust the start and end point for window searches
-        window_start = self.return_to_index(self.t_peaks.sub(at_window))
-        window_end = self.return_to_index(self.t_peaks.add(at_window))
+        if not self.data_bi.empty:
+            unipolar_delay = 0
+        window_start = self.return_to_index(self.t_peaks.sub(at_window).add(unipolar_delay))
+        window_end = self.return_to_index(self.t_peaks.add(at_window).add(unipolar_delay))
 
         self.at = self.t_peaks.copy()
         # Current brute force method
@@ -600,7 +609,8 @@ class Egm(signalanalysis.general.Signal):
         The start and end of the QRS complex is calculated as the duration for which the energy of the bipolar signal
         (defined as the bipolar signal squared) exceeds a threshold value. The 'window' over which to search for this
         complex is defined from the detected activation times, plus/minus specified values (`lower_window` and
-        `upper_window`)
+        `upper_window`). Note that, due to the calculation method, this cannot be calculated for instances where no
+        bipolar data are available.
 
         Parameters
         ----------
@@ -622,6 +632,9 @@ class Egm(signalanalysis.general.Signal):
         :py:meth:`signalplot.egm.plot_signal` : Plotting function, with options that can be passed in **kwargs
         """
 
+        if self.data_bi.empty:
+            raise IOError('Cannot calculate QRSd for unipolar only data')
+        
         # Sanitise inputs and make sure they make sense
         if lower_window < 0.5:
             warnings.warn('Assuming that lWindow has been entered in seconds rather than milliseconds: correcting...')
