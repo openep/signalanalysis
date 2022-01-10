@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tools.plotting.write_colourmap_to_xml &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tools-plotting-write-colourmap-to-xml">
+<h1>tools.plotting.write_colourmap_to_xml<a class="headerlink" href="#tools-plotting-write-colourmap-to-xml" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="tools.plotting.write_colourmap_to_xml">
+<code class="sig-prename descclassname">tools.plotting.</code><code class="sig-name descname">write_colourmap_to_xml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start_data</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">end_data</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">start_highlight</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">end_highlight</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">opacity_data</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">opacity_highlight</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">n_tags</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">20</span></em>, <em class="sig-param"><span class="n">colourmap</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'viridis'</span></em>, <em class="sig-param"><span class="n">outfile</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'colourmap.xml'</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#tools.plotting.write_colourmap_to_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Paraview friendly colourmap useful for highlighting a particular range</p>
+<p>Creates a colourmap that is entirely gray, save for a specified region of interest that will vary according to the
+specified colourmap</p>
+<dl class="simple">
+<dt>start_data                      start value for overall data (can’t just use data for region of interest -</dt><dd><p>Paraview will scale)</p>
+</dd>
+</dl>
+<p>end_data                        end value for overall data
+start_highlight                 start value for region of interest
+end_highlight                   end value for region of interest</p>
+<p>opacity_data        1.0                 overall opacity to use for all data
+opacity_highlight   1.0                 opacity for region of interest
+colourmap           ‘viridis’           colourmap to use
+outfile             ‘colourmap.xml’     filename to save .xml file under</p>
+<p>None</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">signalanalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Philip Gemmell.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary_bak/tools.plotting.write_colourmap_to_xml.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

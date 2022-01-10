@@ -12,6 +12,7 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="VCG Analysis" href="signalanalysis-vcg.html" />
@@ -35,11 +36,11 @@
   <div class="section" id="egm-analysis">
 <h1>EGM Analysis<a class="headerlink" href="#egm-analysis" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="example-data">
-<span id="reading"></span><h2>Example data<a class="headerlink" href="#example-data" title="Permalink to this headline">¶</a></h2>
+<span id="egm-example"></span><h2>Example data<a class="headerlink" href="#example-data" title="Permalink to this headline">¶</a></h2>
 <p>Sample EGM data are stored in <code class="docutils literal notranslate"><span class="pre">test/egm_unipolar.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">tests/egm_bipolar.csv</span></code>.</p>
 </div>
 <div class="section" id="reading-egm-data">
-<h2>Reading EGM data<a class="headerlink" href="#reading-egm-data" title="Permalink to this headline">¶</a></h2>
+<span id="egm-reading"></span><h2>Reading EGM data<a class="headerlink" href="#reading-egm-data" title="Permalink to this headline">¶</a></h2>
 <p>Currently, this software is only able to read EGM data saved in a .csv format. In this format, each new line
 represents a fresh timepoint, and each comma-separated value on each line represents a different recording, i.e. a
 file containing 1000 lines of individual values will be for one EGM trace of 1000 timepoints.</p>
@@ -47,11 +48,14 @@ file containing 1000 lines of individual values will be for one EGM trace of 100
 frequency of the data when reading the data.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">signalanalysis.egm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">example_egm</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">egm</span><span class="o">.</span><span class="n">Egm</span><span class="p">(</span><span class="s1">&#39;unipolar.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;bipolar.csv&#39;</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mf">2034.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example_egm_nobipolar</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">egm</span><span class="o">.</span><span class="n">Egm</span><span class="p">(</span><span class="s1">&#39;unipolar.csv&#39;</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mf">2034.5</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>From this point on, the code should automatically adapt what methods it uses - no change in calls are required in
+subsequent calculations depending on whether bipolar data are present.</p>
 </div>
 <div class="section" id="getting-activation-time">
-<h2>Getting activation time<a class="headerlink" href="#getting-activation-time" title="Permalink to this headline">¶</a></h2>
+<span id="egm-activation"></span><h2>Getting activation time<a class="headerlink" href="#getting-activation-time" title="Permalink to this headline">¶</a></h2>
 <p>Activation time is calculated based on peaks in the EGM data. Where bipolar data are available, the peaks in the
 squared bipolar signal are found (with minimum separation between peaks, and the threshold that must be passed before
 it counts as a peak, being able to be set manually if desired). These peaks provide a ‘search window’, within which
@@ -70,7 +74,7 @@ maximum number of ATs detected. For those signals where fewer than <cite>n</cite
 fill in the blanks.</p>
 </div>
 <div class="section" id="getting-repolarisation-time">
-<h2>Getting repolarisation time<a class="headerlink" href="#getting-repolarisation-time" title="Permalink to this headline">¶</a></h2>
+<span id="egm-repolarisation"></span><h2>Getting repolarisation time<a class="headerlink" href="#getting-repolarisation-time" title="Permalink to this headline">¶</a></h2>
 <p>The repolarisation time is calculated based on the activation times - if AT has not been calculated prior to
 calculating RT, it is automatically included in the process.</p>
 <p>The cycle length of the signal is calculated based on the AT, and from that, a search window is estimated within
@@ -86,12 +90,12 @@ been passed, as determined by the unipolar gradient moving to negative values, t
 <p>Repolarisation time is calculated as <code class="docutils literal notranslate"><span class="pre">example_egm.get_rt()</span></code>, with the result stored in <code class="docutils literal notranslate"><span class="pre">example_egm.rt</span></code>.</p>
 </div>
 <div class="section" id="getting-dv-dt-max">
-<h2>Getting (dV/dt)max<a class="headerlink" href="#getting-dv-dt-max" title="Permalink to this headline">¶</a></h2>
+<span id="egm-dvdt"></span><h2>Getting (dV/dt)max<a class="headerlink" href="#getting-dv-dt-max" title="Permalink to this headline">¶</a></h2>
 <p>The value of (dV/dt) at the point of AT is automatically stored in the <code class="docutils literal notranslate"><span class="pre">example_egm.dvdt</span></code> attribute when AT is being
 calculated.</p>
 </div>
 <div class="section" id="getting-qrs-duration">
-<h2>Getting QRS duration<a class="headerlink" href="#getting-qrs-duration" title="Permalink to this headline">¶</a></h2>
+<span id="egm-qrsd"></span><h2>Getting QRS duration<a class="headerlink" href="#getting-qrs-duration" title="Permalink to this headline">¶</a></h2>
 <p>QRS duration can only be calculated when bipolar data are given. A search window based on the AT is isolated, and the
 squared bipolar signal is calculated within that window. The time at which this signal exceeds a threshold value
 (itself based on the maximum value within the search window) is used as the start of the QRS complex, and the last

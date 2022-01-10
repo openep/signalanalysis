@@ -12,10 +12,11 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="tools.plotting.add_colourbar" href="tools.plotting.add_colourbar.html" />
-    <link rel="prev" title="tools" href="tools.html" />
+    <link rel="prev" title="tools.maths.simplex_volume" href="tools.maths.simplex_volume.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -41,25 +42,25 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="tools.plotting.add_colourbar.html#tools.plotting.add_colourbar" title="tools.plotting.add_colourbar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_colourbar</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/tools.plotting.add_colourbar.html#tools.plotting.add_colourbar" title="tools.plotting.add_colourbar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_colourbar</span></code></a></p></td>
 <td><p>Add arbitrary colourbar to a figure, for instances when an automatic colorbar isn’t available</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tools.plotting.add_xyz_axes.html#tools.plotting.add_xyz_axes" title="tools.plotting.add_xyz_axes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_xyz_axes</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_autosummary_bak/tools.plotting.add_xyz_axes.html#tools.plotting.add_xyz_axes" title="tools.plotting.add_xyz_axes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_xyz_axes</span></code></a></p></td>
 <td><p>Plot dummy axes (can’t move splines in 3D plots)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tools.plotting.get_plot_colours.html#tools.plotting.get_plot_colours" title="tools.plotting.get_plot_colours"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_plot_colours</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/tools.plotting.get_plot_colours.html#tools.plotting.get_plot_colours" title="tools.plotting.get_plot_colours"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_plot_colours</span></code></a></p></td>
 <td><p>Return iterable list of RGB colour values that can be used for custom plotting functions</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tools.plotting.get_plot_lines.html#tools.plotting.get_plot_lines" title="tools.plotting.get_plot_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_plot_lines</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_autosummary_bak/tools.plotting.get_plot_lines.html#tools.plotting.get_plot_lines" title="tools.plotting.get_plot_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_plot_lines</span></code></a></p></td>
 <td><p>Returns different line-styles for plotting</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tools.plotting.set_axis_limits.html#tools.plotting.set_axis_limits" title="tools.plotting.set_axis_limits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_axis_limits</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/tools.plotting.set_axis_limits.html#tools.plotting.set_axis_limits" title="tools.plotting.set_axis_limits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_axis_limits</span></code></a></p></td>
 <td><p>Set axis limits (not automatic for line collections, so needs to be done manually)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tools.plotting.set_symmetrical_axis_limits.html#tools.plotting.set_symmetrical_axis_limits" title="tools.plotting.set_symmetrical_axis_limits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_symmetrical_axis_limits</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_autosummary_bak/tools.plotting.set_symmetrical_axis_limits.html#tools.plotting.set_symmetrical_axis_limits" title="tools.plotting.set_symmetrical_axis_limits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_symmetrical_axis_limits</span></code></a></p></td>
 <td><p>Sets symmetrical limits for a series of axes</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tools.plotting.write_colourmap_to_xml.html#tools.plotting.write_colourmap_to_xml" title="tools.plotting.write_colourmap_to_xml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_colourmap_to_xml</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/tools.plotting.write_colourmap_to_xml.html#tools.plotting.write_colourmap_to_xml" title="tools.plotting.write_colourmap_to_xml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_colourmap_to_xml</span></code></a></p></td>
 <td><p>Create a Paraview friendly colourmap useful for highlighting a particular range</p></td>
 </tr>
 </tbody>
@@ -86,10 +87,17 @@
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="signalanalysis.html">signalanalysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="signalplot.html">signalplot</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="tools.html">tools</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tools.html">tools</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tools.maths.html">tools.maths</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tools.plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.python.html">tools.python</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -100,7 +108,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../docutils.html">docutils Documentation</a><ul>
   <li><a href="tools.html">tools</a><ul>
-      <li>Previous: <a href="tools.html" title="previous chapter">tools</a></li>
+      <li>Previous: <a href="tools.maths.simplex_volume.html" title="previous chapter">tools.maths.simplex_volume</a></li>
       <li>Next: <a href="tools.plotting.add_colourbar.html" title="next chapter">tools.plotting.add_colourbar</a></li>
   </ul></li>
   </ul></li>

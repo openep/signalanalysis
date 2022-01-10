@@ -12,8 +12,11 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.general.get_bcl" href="signalanalysis.general.get_bcl.html" />
+    <link rel="prev" title="signalanalysis.egm.Egm" href="signalanalysis.egm.Egm.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -30,8 +33,38 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="signalanalysis-general">
-<h1>signalanalysis.general<a class="headerlink" href="#signalanalysis-general" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-signalanalysis.general">
+<span id="signalanalysis-general"></span><h1>signalanalysis.general<a class="headerlink" href="#module-signalanalysis.general" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.general.get_bcl.html#signalanalysis.general.get_bcl" title="signalanalysis.general.get_bcl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bcl</span></code></a></p></td>
+<td><p>Function to return estimates of the cycle length for a recording</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.general.get_signal_rms.html#signalanalysis.general.get_signal_rms" title="signalanalysis.general.get_signal_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_signal_rms</span></code></a></p></td>
+<td><p>Calculate the ECG(RMS) of the ECG as a scalar</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.general.get_twave_end.html#signalanalysis.general.get_twave_end" title="signalanalysis.general.get_twave_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_twave_end</span></code></a></p></td>
+<td><p>Return the time point at which it is estimated that the T-wave has been completed</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Signal</span></code></a></p></td>
+<td><p>Base class for general signal, either ECG or VCG</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -52,17 +85,34 @@
 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="signalanalysis.html">signalanalysis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.ecg.html">signalanalysis.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.egm.html">signalanalysis.egm</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">signalanalysis.general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.vcg.html">signalanalysis.vcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="signalplot.html">signalplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docutils.html">docutils Documentation</a><ul>
+  <li><a href="signalanalysis.html">signalanalysis</a><ul>
+      <li>Previous: <a href="signalanalysis.egm.Egm.html" title="previous chapter">signalanalysis.egm.Egm</a></li>
+      <li>Next: <a href="signalanalysis.general.get_bcl.html" title="next chapter">signalanalysis.general.get_bcl</a></li>
+  </ul></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

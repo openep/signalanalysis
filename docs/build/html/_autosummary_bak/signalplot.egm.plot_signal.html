@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signalplot.egm.plot_signal &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="signalplot-egm-plot-signal">
+<h1>signalplot.egm.plot_signal<a class="headerlink" href="#signalplot-egm-plot-signal" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalplot.egm.plot_signal">
+<code class="sig-prename descclassname">signalplot.egm.</code><code class="sig-name descname">plot_signal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Egm</span></em>, <em class="sig-param"><span class="n">i_plot</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">plot_bipolar_square</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plot_markers</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plot_peaks</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plot_at</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plot_rt</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plot_qrsd</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalplot.egm.plot_signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>General use function to plot EGM data with flags for various markers as required</p>
+<p>Will plot the unipolar and bipolar EGM signals on the same figure, and if requested, also the RMS trace at
+the same time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="signalanalysis.egm.Egm.html#signalanalysis.egm.Egm" title="signalanalysis.egm.Egm"><em>signalanalysis.egm.Egm</em></a>) – EGM data</p></li>
+<li><p><strong>i_plot</strong> (<em>int</em><em>, </em><em>optional</em>) – Which signal from the data to plot, default=random</p></li>
+<li><p><strong>plot_bipolar_square</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the squared bipolar data on the figure as well, default=False</p></li>
+<li><p><strong>plot_markers</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot all the various markers available, i.e. will set plot_peaks, plot_at, etc., to True,
+default=False</p></li>
+<li><p><strong>plot_peaks</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the points of the bipolar peak/AT/RT/QRSd on the figure, default=False</p></li>
+<li><p><strong>plot_at</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the points of the bipolar peak/AT/RT/QRSd on the figure, default=False</p></li>
+<li><p><strong>plot_rt</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the points of the bipolar peak/AT/RT/QRSd on the figure, default=False</p></li>
+<li><p><strong>plot_qrsd</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the points of the bipolar peak/AT/RT/QRSd on the figure, default=False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Handles to the figure and axis data, respectively</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fig, ax</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">signalanalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Philip Gemmell.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary_bak/signalplot.egm.plot_signal.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

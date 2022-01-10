@@ -12,8 +12,11 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.vcg.get_dipole_magnitudes" href="signalanalysis.vcg.get_dipole_magnitudes.html" />
+    <link rel="prev" title="signalanalysis.vcg.compare_dipole_angles" href="signalanalysis.vcg.compare_dipole_angles.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,6 +35,32 @@
             
   <div class="section" id="signalanalysis-vcg-get-azimuth-elevation">
 <h1>signalanalysis.vcg.get_azimuth_elevation<a class="headerlink" href="#signalanalysis-vcg-get-azimuth-elevation" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalanalysis.vcg.get_azimuth_elevation">
+<code class="sig-prename descclassname">signalanalysis.vcg.</code><code class="sig-name descname">get_azimuth_elevation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vcgs</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span><span class="p">, </span>pandas.core.frame.DataFrame<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">t_start</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">t_end</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>List<span class="p">[</span>Iterable<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">, </span>List<span class="p">[</span>Iterable<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#signalanalysis.vcg.get_azimuth_elevation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate azimuth and elevation angles for a specified section of the VCG.</p>
+<p>Will calculate the azimuth and elevation angles for the VCG at each recorded point, potentially within specified
+limits (e.g. start/end of QRS)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vcgs</strong> (<em>pd.DataFrame</em><em> or </em><em>list of pd.DataFrame</em>) – VCG data to calculate</p></li>
+<li><p><strong>t_start</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Start time from which to calculate the angles, default=0</p></li>
+<li><p><strong>t_end</strong> (<em>list of float</em><em>, </em><em>optional</em>) – End time until which to calculate the angles, default=end</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>azimuth</strong> (<em>list of list of float</em>) – List (one entry for each passed VCG) of azimuth angles (in radians) for the dipole for every time point during
+the specified range</p></li>
+<li><p><strong>elevation</strong> (<em>list of list of float</em>) – List (one entry for each passed VCG) of elevation angles (in radians) for the dipole for every time point during
+the specified range</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -52,17 +81,36 @@
 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="signalanalysis.html">signalanalysis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.ecg.html">signalanalysis.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.egm.html">signalanalysis.egm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.general.html">signalanalysis.general</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="signalanalysis.vcg.html">signalanalysis.vcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="signalplot.html">signalplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docutils.html">docutils Documentation</a><ul>
+  <li><a href="signalanalysis.html">signalanalysis</a><ul>
+  <li><a href="signalanalysis.vcg.html">signalanalysis.vcg</a><ul>
+      <li>Previous: <a href="signalanalysis.vcg.compare_dipole_angles.html" title="previous chapter">signalanalysis.vcg.compare_dipole_angles</a></li>
+      <li>Next: <a href="signalanalysis.vcg.get_dipole_magnitudes.html" title="next chapter">signalanalysis.vcg.get_dipole_magnitudes</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

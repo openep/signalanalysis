@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signalanalysis.ecg.get_qrs_start &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="signalanalysis-ecg-get-qrs-start">
+<h1>signalanalysis.ecg.get_qrs_start<a class="headerlink" href="#signalanalysis-ecg-get-qrs-start" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalanalysis.ecg.get_qrs_start">
+<code class="sig-prename descclassname">signalanalysis.ecg.</code><code class="sig-name descname">get_qrs_start</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ecgs</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">, </span>List<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">unipolar_only</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">plot_result</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#signalanalysis.ecg.get_qrs_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates start of QRS complex using method of Hermans et al. (2017)</p>
+<p>Calculates the start of the QRS complex by a simplified version of the work presented in <a class="footnote-reference brackets" href="#id2" id="id1">1</a>, wherein the point of
+maximum second derivative of the ECG RMS signal is used as the start of the QRS complex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ecgs</strong> (<em>pd.DataFrame</em><em> or </em><em>list of pd.DataFrame</em>) – ECG data to analyse</p></li>
+<li><p><strong>unipolar_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use only unipolar leads to calculate RMS, default=True</p></li>
+<li><p><strong>plot_result</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the results for error-checking, default=False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>qrs_starts</strong> – QRS start times</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For further details of the action of unipolar_only, see general_analysis.get_signal_rms</p>
+<p>It is faster to use scipy.ndimage.laplace() rather than np.gradient(np.gradient)), but preliminary checks
+indicated some edge problems that might throw off the results.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Hermans BJM, Vink AS, Bennis FC, Filippini LH, Meijborg VMF, Wilde AAM, Pison L, Postema PG, Delhaas T,
+“The development and validation of an easy to use automatic QT-interval algorithm,”
+PLoS ONE, 12(9), 1–14 (2017), <a class="reference external" href="https://doi.org/10.1371/journal.pone.0184352">https://doi.org/10.1371/journal.pone.0184352</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">signalanalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Philip Gemmell.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary_bak/signalanalysis.ecg.get_qrs_start.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

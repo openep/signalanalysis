@@ -12,8 +12,11 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.vcg.compare_dipole_angles" href="signalanalysis.vcg.compare_dipole_angles.html" />
+    <link rel="prev" title="signalanalysis.vcg" href="signalanalysis.vcg.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,6 +35,30 @@
             
   <div class="section" id="signalanalysis-vcg-calculate-delta-dipole-angle">
 <h1>signalanalysis.vcg.calculate_delta_dipole_angle<a class="headerlink" href="#signalanalysis-vcg-calculate-delta-dipole-angle" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalanalysis.vcg.calculate_delta_dipole_angle">
+<code class="sig-prename descclassname">signalanalysis.vcg.</code><code class="sig-name descname">calculate_delta_dipole_angle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">azimuth1</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">elevation1</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">azimuth2</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">elevation2</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">convert_to_degrees</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#signalanalysis.vcg.calculate_delta_dipole_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the angular difference between two VCGs based on difference in azimuthal and elevation angles.</p>
+<p>Useful for calculating difference between weighted averages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>azimuth1</strong> (<em>list of float</em>) – Azimuth angles for the first dipole</p></li>
+<li><p><strong>elevation1</strong> (<em>list of float</em>) – Elevation angles for the first dipole</p></li>
+<li><p><strong>azimuth2</strong> (<em>list of float</em>) – Azimuth angles for the second dipole</p></li>
+<li><p><strong>elevation2</strong> (<em>list of float</em>) – Elevation angles for the second dipole</p></li>
+<li><p><strong>convert_to_degrees</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to convert the angle from radians to degrees, default=False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dt</strong> – List of angles between a series of dipoles, either in radians (default) or degrees depending on input argument</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -52,17 +79,36 @@
 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="signalanalysis.html">signalanalysis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.ecg.html">signalanalysis.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.egm.html">signalanalysis.egm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.general.html">signalanalysis.general</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="signalanalysis.vcg.html">signalanalysis.vcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="signalplot.html">signalplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docutils.html">docutils Documentation</a><ul>
+  <li><a href="signalanalysis.html">signalanalysis</a><ul>
+  <li><a href="signalanalysis.vcg.html">signalanalysis.vcg</a><ul>
+      <li>Previous: <a href="signalanalysis.vcg.html" title="previous chapter">signalanalysis.vcg</a></li>
+      <li>Next: <a href="signalanalysis.vcg.compare_dipole_angles.html" title="next chapter">signalanalysis.vcg.compare_dipole_angles</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

@@ -12,8 +12,11 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalplot.vcg.plot_xyz_vector" href="signalplot.vcg.plot_xyz_vector.html" />
+    <link rel="prev" title="signalplot.vcg.plot_spatial_velocity" href="signalplot.vcg.plot_spatial_velocity.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,6 +35,47 @@
             
   <div class="section" id="signalplot-vcg-plot-xyz-components">
 <h1>signalplot.vcg.plot_xyz_components<a class="headerlink" href="#signalplot-vcg-plot-xyz-components" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalplot.vcg.plot_xyz_components">
+<code class="sig-prename descclassname">signalplot.vcg.</code><code class="sig-name descname">plot_xyz_components</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vcgs</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">, </span>List<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">legend</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colours</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linestyles</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legend_location</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limits</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limits_legend</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limits_colours</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limits_linestyles</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limits_legend_location</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'lower right'</span></em>, <em class="sig-param"><span class="n">layout</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'grid'</span></em><span class="sig-paren">)</span> &#x2192; tuple<a class="headerlink" href="#signalplot.vcg.plot_xyz_components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot x, y, z components of VCG data</p>
+<p>Multiple options given for layout of resulting plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vcgs</strong> (<em>list of pd.DataFrame</em><em> or </em><em>pd.DataFrame</em>) – List of vcg data: [vcg_data1, vcg_data2, …]</p></li>
+<li><p><strong>legend</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Legend names for each VCG trace, default=None</p></li>
+<li><p><strong>colours</strong> (<em>list of list of float</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Colours to use for plotting, default=common_analysis.get_plot_colours</p></li>
+<li><p><strong>linestyles</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Linestyles to use for plotting, default=’-‘</p></li>
+<li><p><strong>legend_location</strong> (<em>str</em><em>, </em><em>optional</em>) – Location to plot the legend. Default=None, which will translate to ‘best’ if no legend is required for
+limits, or ‘upper right’ if legend is needed for limits</p></li>
+<li><p><strong>limits</strong> (<em>list of list of float</em><em>, </em><em>optional</em>) – QRS limits to plot on axes, default=None
+To be presented in form [[qrs_start1, qrs_starts, …], [qrs_end1, qrs_end2, …], …]</p></li>
+<li><p><strong>limits_legend</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Legend to apply to the limits plotted, default=None</p></li>
+<li><p><strong>limits_colours</strong> (<em>list of list of float</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Colours to use when plotting limits, default=common_analysis.get_plot_colours</p></li>
+<li><p><strong>limits_linestyles</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Linestyles to use when plotting limits, default=’-‘</p></li>
+<li><p><strong>limits_legend_location</strong> (<em>str</em><em>, </em><em>optional</em>) – Location to use for the legend containing the limits data</p></li>
+<li><p><strong>layout</strong> (<em>{'grid'</em><em>, </em><em>'figures'</em><em>, </em><em>'combined'</em><em>, </em><em>'row'</em><em>, </em><em>'column'</em><em>, </em><em>'best'}</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>Layout of resulting plot</dt><dd><p>grid        x,y,z plots are arranged in a grid (like best, but more rigid grid)
+figures     Each x,y,z plot is on a separate figure
+combined    x,y,z plots are combined on a single set of axes
+row         x,y,z plots are arranged on a horizontal row in one figure
+column      x,y,z plots are arranged in a vertical column in one figure
+best        x,y,z plots are arranged to try and optimise space (nb: figures not equal sizes…)</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Handle for resulting figure(s) and axes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fig, ax</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -52,17 +96,36 @@
 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="signalanalysis.html">signalanalysis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="signalplot.html">signalplot</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="signalplot.ecg.html">signalplot.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalplot.egm.html">signalplot.egm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalplot.general.html">signalplot.general</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="signalplot.vcg.html">signalplot.vcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docutils.html">docutils Documentation</a><ul>
+  <li><a href="signalplot.html">signalplot</a><ul>
+  <li><a href="signalplot.vcg.html">signalplot.vcg</a><ul>
+      <li>Previous: <a href="signalplot.vcg.plot_spatial_velocity.html" title="previous chapter">signalplot.vcg.plot_spatial_velocity</a></li>
+      <li>Next: <a href="signalplot.vcg.plot_xyz_vector.html" title="next chapter">signalplot.vcg.plot_xyz_vector</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

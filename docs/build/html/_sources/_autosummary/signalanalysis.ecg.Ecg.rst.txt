@@ -1,4 +1,4 @@
-﻿signalanalysis.ecg.Ecg
+signalanalysis.ecg.Ecg
 ======================
 
 .. currentmodule:: signalanalysis.ecg
@@ -17,14 +17,18 @@
       :nosignatures:
    
       ~Ecg.apply_filter
-      ~Ecg.get_n_beats
+      ~Ecg.get_beats
+      ~Ecg.get_peaks
       ~Ecg.get_qrs_start
       ~Ecg.get_rms
       ~Ecg.get_twave_end
       ~Ecg.plot
+      ~Ecg.plot_beats
+      ~Ecg.plot_peaks
       ~Ecg.read
       ~Ecg.read_ecg_from_wfdb
       ~Ecg.reset
+      ~Ecg.return_to_index
    
    
 

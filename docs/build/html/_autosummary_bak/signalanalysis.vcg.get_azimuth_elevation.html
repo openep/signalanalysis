@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signalanalysis.vcg.get_azimuth_elevation &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="signalanalysis-vcg-get-azimuth-elevation">
+<h1>signalanalysis.vcg.get_azimuth_elevation<a class="headerlink" href="#signalanalysis-vcg-get-azimuth-elevation" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalanalysis.vcg.get_azimuth_elevation">
+<code class="sig-prename descclassname">signalanalysis.vcg.</code><code class="sig-name descname">get_azimuth_elevation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vcgs</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span><span class="p">, </span>pandas.core.frame.DataFrame<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">t_start</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">t_end</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>List<span class="p">[</span>Iterable<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">, </span>List<span class="p">[</span>Iterable<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#signalanalysis.vcg.get_azimuth_elevation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate azimuth and elevation angles for a specified section of the VCG.</p>
+<p>Will calculate the azimuth and elevation angles for the VCG at each recorded point, potentially within specified
+limits (e.g. start/end of QRS)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vcgs</strong> (<em>pd.DataFrame</em><em> or </em><em>list of pd.DataFrame</em>) – VCG data to calculate</p></li>
+<li><p><strong>t_start</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Start time from which to calculate the angles, default=0</p></li>
+<li><p><strong>t_end</strong> (<em>list of float</em><em>, </em><em>optional</em>) – End time until which to calculate the angles, default=end</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>azimuth</strong> (<em>list of list of float</em>) – List (one entry for each passed VCG) of azimuth angles (in radians) for the dipole for every time point during
+the specified range</p></li>
+<li><p><strong>elevation</strong> (<em>list of list of float</em>) – List (one entry for each passed VCG) of elevation angles (in radians) for the dipole for every time point during
+the specified range</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">signalanalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Philip Gemmell.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary_bak/signalanalysis.vcg.get_azimuth_elevation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

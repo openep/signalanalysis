@@ -1,4 +1,4 @@
-signalanalysis.ecg
+﻿signalanalysis.ecg
 ==================
 
 .. automodule:: signalanalysis.ecg

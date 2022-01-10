@@ -12,9 +12,3 @@ and modules, with general use cases for each signal type described in the follow
    :glob:
 
    signalanalysis-*
-
-..
-  The following is the original list, but I realised that it may be better to put in a toctree instead
-  - :doc:`ECG <signalanalysis-ecg>`
-  - :doc:`VCG <signalanalysis-vcg>`
-  - :doc:`EGM <signalanalysis-egm>`

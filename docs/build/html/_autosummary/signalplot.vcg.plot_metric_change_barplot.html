@@ -12,8 +12,11 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalplot.vcg.plot_spatial_velocity" href="signalplot.vcg.plot_spatial_velocity.html" />
+    <link rel="prev" title="signalplot.vcg.plot_metric_change" href="signalplot.vcg.plot_metric_change.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,6 +35,30 @@
             
   <div class="section" id="signalplot-vcg-plot-metric-change-barplot">
 <h1>signalplot.vcg.plot_metric_change_barplot<a class="headerlink" href="#signalplot-vcg-plot-metric-change-barplot" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalplot.vcg.plot_metric_change_barplot">
+<code class="sig-prename descclassname">signalplot.vcg.</code><code class="sig-name descname">plot_metric_change_barplot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metrics_cont</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">metrics_lv</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">metrics_sept</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">metric_labels</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">layout</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<a class="headerlink" href="#signalplot.vcg.plot_metric_change_barplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a bar chart for the observed metrics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metrics_cont</strong> (<em>list of list of float</em>) – Values of series of metrics for no scar</p></li>
+<li><p><strong>metrics_lv</strong> (<em>list of list of float</em>) – Values of series of metrics for LV scar</p></li>
+<li><p><strong>metrics_sept</strong> (<em>list of list of float</em>) – Values of series of metrics for septal scar</p></li>
+<li><p><strong>metric_labels</strong> (<em>list of str</em>) – Names of metrics being plotted</p></li>
+<li><p><strong>layout</strong> (<em>{'combined'</em><em>, </em><em>'fig'}</em><em>, </em><em>optional</em>) – Whether to plot bar charts on combined plot window, or in individual figure windows</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>fig</strong> (<em>plt.figure or list of plt.figure</em>) – Handle(s) to figures</p></li>
+<li><p><strong>ax</strong> (<em>list</em>) – Handles to axes</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -52,17 +79,36 @@
 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="signalanalysis.html">signalanalysis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="signalplot.html">signalplot</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="signalplot.ecg.html">signalplot.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalplot.egm.html">signalplot.egm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalplot.general.html">signalplot.general</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="signalplot.vcg.html">signalplot.vcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docutils.html">docutils Documentation</a><ul>
+  <li><a href="signalplot.html">signalplot</a><ul>
+  <li><a href="signalplot.vcg.html">signalplot.vcg</a><ul>
+      <li>Previous: <a href="signalplot.vcg.plot_metric_change.html" title="previous chapter">signalplot.vcg.plot_metric_change</a></li>
+      <li>Next: <a href="signalplot.vcg.plot_spatial_velocity.html" title="next chapter">signalplot.vcg.plot_spatial_velocity</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

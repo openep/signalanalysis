@@ -1,1 +1,1 @@
-__all__ = ["general", "ecg", "vcg"]
+__all__ = ["general", "ecg", "vcg", "egm"]

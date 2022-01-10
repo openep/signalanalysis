@@ -2,12 +2,14 @@
 EGM Analysis
 ============
 
-.. _reading:
+.. _egm-example:
 
 Example data
 ------------
 
 Sample EGM data are stored in ``test/egm_unipolar.csv`` and ``tests/egm_bipolar.csv``.
+
+.. _egm-reading:
 
 Reading EGM data
 ----------------
@@ -23,6 +25,12 @@ frequency of the data when reading the data.
 
     >>> import signalanalysis.egm
     >>> example_egm = signalanalysis.egm.Egm('unipolar.csv', 'bipolar.csv', frequency=2034.5)
+    >>> example_egm_nobipolar = signalanalysis.egm.Egm('unipolar.csv', frequency=2034.5)
+
+From this point on, the code should automatically adapt what methods it uses - no change in calls are required in
+subsequent calculations depending on whether bipolar data are present.
+
+.. _egm-activation:
 
 Getting activation time
 -----------------------
@@ -47,6 +55,8 @@ as a dataframe, it will be a `m` x `n` matrix, where `m` is the number of EGM si
 maximum number of ATs detected. For those signals where fewer than `n` ATs are found, ``NaN`` will be recorded to
 fill in the blanks.
 
+.. _egm-repolarisation:
+
 Getting repolarisation time
 ---------------------------
 
@@ -67,11 +77,15 @@ been passed, as determined by the unipolar gradient moving to negative values, t
 
 Repolarisation time is calculated as ``example_egm.get_rt()``, with the result stored in ``example_egm.rt``.
 
+.. _egm-dvdt:
+
 Getting (dV/dt)max
 ------------------
 
 The value of (dV/dt) at the point of AT is automatically stored in the ``example_egm.dvdt`` attribute when AT is being
 calculated.
+
+.. _egm-qrsd:
 
 Getting QRS duration
 --------------------

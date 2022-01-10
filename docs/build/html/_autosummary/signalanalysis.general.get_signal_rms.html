@@ -12,8 +12,11 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="signalanalysis.general.get_twave_end" href="signalanalysis.general.get_twave_end.html" />
+    <link rel="prev" title="signalanalysis.general.get_bcl" href="signalanalysis.general.get_bcl.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,6 +35,52 @@
             
   <div class="section" id="signalanalysis-general-get-signal-rms">
 <h1>signalanalysis.general.get_signal_rms<a class="headerlink" href="#signalanalysis-general-get-signal-rms" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalanalysis.general.get_signal_rms">
+<code class="sig-prename descclassname">signalanalysis.general.</code><code class="sig-name descname">get_signal_rms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">signal</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">unipolar_only</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#signalanalysis.general.get_signal_rms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the ECG(RMS) of the ECG as a scalar</p>
+<blockquote>
+<div><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version The: </span>use of this module is deprecated, and the internal class method should be used in preference (
+signalanalysis.general.Signal.get_rms())</p>
+</div>
+<dl class="simple">
+<dt>signal: pd.DataFrame</dt><dd><p>ECG or VCG data to process</p>
+</dd>
+<dt>unipolar_only<span class="classifier">bool, optional</span></dt><dd><p>Whether to use only unipolar ECG leads to calculate RMS, default=True</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>signal_rms<span class="classifier">list of float</span></dt><dd><p>Scalar RMS ECG or VCG data</p>
+</dd>
+</dl>
+<p>The scalar RMS is calculated according to</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{\]</div>
+</div></blockquote>
+<p>rac{1}{n}sum_{i=1}^n (    extnormal{ECG}_i^2(t))}</p>
+<blockquote>
+<div><p>for all leads available from the signal (12 for ECG, 3 for VCG). If unipolar_only is set to true, then ECG RMS is
+calculated using only ‘unipolar’ leads. This uses V1-6, and the non-augmented limb leads (VF, VL and VR)</p>
+<p>..math:: VF = LL-V_{WCT} =</p>
+</div></blockquote>
+<dl class="simple">
+<dt>rac{2}{3}aVF</dt><dd><p>..math:: VL = LA-V_{WCT} =</p>
+</dd>
+<dt>rac{2}{3}aVL</dt><dd><p>..math:: VR = RA-V_{WCT} =</p>
+</dd>
+</dl>
+<p>rac{2}{3}aVR</p>
+<blockquote>
+<div><dl class="simple">
+<dt>The development and validation of an easy to use automatic QT-interval algorithm</dt><dd><p>Hermans BJM, Vink AS, Bennis FC, Filippini LH, Meijborg VMF, Wilde AAM, Pison L, Postema PG, Delhaas T
+PLoS ONE, 12(9), 1–14 (2017)
+<a class="reference external" href="https://doi.org/10.1371/journal.pone.0184352">https://doi.org/10.1371/journal.pone.0184352</a></p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
 </div>
 
 
@@ -52,17 +101,36 @@
 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="signalanalysis.html">signalanalysis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.ecg.html">signalanalysis.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.egm.html">signalanalysis.egm</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="signalanalysis.general.html">signalanalysis.general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.vcg.html">signalanalysis.vcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="signalplot.html">signalplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docutils.html">docutils Documentation</a><ul>
+  <li><a href="signalanalysis.html">signalanalysis</a><ul>
+  <li><a href="signalanalysis.general.html">signalanalysis.general</a><ul>
+      <li>Previous: <a href="signalanalysis.general.get_bcl.html" title="previous chapter">signalanalysis.general.get_bcl</a></li>
+      <li>Next: <a href="signalanalysis.general.get_twave_end.html" title="next chapter">signalanalysis.general.get_twave_end</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
