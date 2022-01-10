@@ -4,15 +4,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to signalanalysis’s documentation! &#8212; signalanalysis 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Usage" href="usage.html" />
@@ -32,42 +32,74 @@
 
           <div class="body" role="main">
             
-  <section id="welcome-to-signalanalysis-s-documentation">
+  <div class="section" id="welcome-to-signalanalysis-s-documentation">
 <h1>Welcome to signalanalysis’s documentation!<a class="headerlink" href="#welcome-to-signalanalysis-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p><strong>signalanalysis</strong> is a library including various tools for the reading, analysis and plotting of ECG and VCG data. It is designed to be as agnostic as possible for the types of data that it can read. Currently, it can read ECG data from:</p>
+<p><strong>signalanalysis</strong> is a library including various tools for the reading, analysis and plotting of ECG and VCG data.
+It is designed to be as agnostic as possible for the types of data that it can read. Currently, it can read ECG data
+from:</p>
 <ol class="arabic simple">
-<li><p>CARP simulations of whole torso activity, using existing projects from <cite>CARPutil &lt;https://git.opencarp.org/openCARP/carputils&gt;</cite>;</p></li>
-<li><p>.csv and .dat records;</p></li>
-<li><p>wfdb file formats, using <cite>wfdb-python &lt;https://github.com/MIT-LCP/wfdb-python&gt;</cite></p></li>
+<li><p>CARP simulations of whole torso activity, using existing projects from
+<a class="reference external" href="https://git.opencarp.org/openCARP/carputils">CARPutil</a></p></li>
+<li><p>.csv and .dat records</p></li>
+<li><p>wfdb file formats, using <a class="reference external" href="https://github.com/MIT-LCP/wfdb-python">wfdb-python</a></p></li>
 </ol>
-<p>Futher details of how to use these functions are in <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>, with the finer points within the files themselves.</p>
+<p>Futher details of how to use these functions are in <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>, with the finer points for each individual
+function within the files themselves.</p>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#installation-getting-started">Installation &amp; Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#reading-ecg-vcg-data">Reading ECG/VCG data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#shifting-to-classes-from-methods">Shifting to classes from methods</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="signalanalysis.html">Signal Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="signalanalysis-ecg.html">ECG Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis-ecg.html#reading-ecg-data">Reading ECG data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="signalanalysis-egm.html">EGM Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis-egm.html#example-data">Example data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis-egm.html#reading-egm-data">Reading EGM data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis-egm.html#getting-activation-time">Getting activation time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis-egm.html#getting-repolarisation-time">Getting repolarisation time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis-egm.html#getting-dv-dt-max">Getting (dV/dt)max</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis-egm.html#getting-qrs-duration">Getting QRS duration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="signalanalysis-vcg.html">VCG Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis-vcg.html#reading-vcg-data">Reading VCG data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="signalplot.html">Signal Plot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docutils.html">docutils Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/signalanalysis.html">signalanalysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/signalplot.html">signalplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/tools.html">tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/signalanalysis.html">signalanalysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/signalanalysis.ecg.html">signalanalysis.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/signalanalysis.egm.html">signalanalysis.egm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/signalanalysis.general.html">signalanalysis.general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/signalanalysis.vcg.html">signalanalysis.vcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/signalplot.html">signalplot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/signalplot.ecg.html">signalplot.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/signalplot.egm.html">signalplot.egm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/signalplot.general.html">signalplot.general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/signalplot.vcg.html">signalplot.vcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/tools.html">tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/tools.maths.html">tools.maths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/tools.plotting.html">tools.plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/tools.python.html">tools.python</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<p>Note that, at the moment, none of the following links actually work…</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
-</section>
+</div>
 
 
           </div>
@@ -86,9 +118,11 @@
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signalplot.html">Signal Plot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docutils.html">docutils Documentation</a></li>
 </ul>
 
@@ -104,7 +138,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -123,10 +157,10 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Philip Gemmell.
+      &copy;2022, Philip Gemmell.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

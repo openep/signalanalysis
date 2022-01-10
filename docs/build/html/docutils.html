@@ -4,19 +4,19 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>docutils Documentation &#8212; signalanalysis 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="signalanalysis" href="_autosummary/signalanalysis.html" />
-    <link rel="prev" title="Usage" href="usage.html" />
+    <link rel="prev" title="Overall signal plotting" href="signalplot.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,13 +33,15 @@
 
           <div class="body" role="main">
             
-  <section id="docutils-documentation">
+  <div class="section" id="docutils-documentation">
 <h1>docutils Documentation<a class="headerlink" href="#docutils-documentation" title="Permalink to this headline">¶</a></h1>
-<p>This is the index of all modules and their associated methods and classes, documenting their use, parameters and return values. See <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a> for a more step-by-step introduction to the intended use cases.</p>
+<p>This is the index of all modules and their associated methods and classes, documenting their use, parameters and
+return values. See <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a> for a more step-by-step introduction to the intended use cases.</p>
 <p>Broadly speaking, the modules are split thus:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">signalanalysis</span></code> covers the analysis scripts for ECG/VCG analysis (e.g. calculating QRS duration)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">signalplot</span></code> covers plotting methods (e.g. plotting the ECG leads on a single figure with annotation, plotting a 3D plot of VCG (including animation!))</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">signalanalysis</span></code> covers the analysis scripts for ECG/VCG/EGM analysis (e.g. calculating QRS duration)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">signalplot</span></code> covers plotting methods (e.g. plotting the ECG leads on a single figure with annotation, plotting a
+3D plot of VCG (including animation!))</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tools</span></code> covers more general use tools that are not limited to ECG/VCG analysis.</p></li>
 </ul>
 <table class="longtable docutils align-default">
@@ -48,19 +50,18 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/signalanalysis.html#module-signalanalysis" title="signalanalysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signalanalysis</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary_bak/signalanalysis.html#module-signalanalysis" title="signalanalysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signalanalysis</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/signalplot.html#module-signalplot" title="signalplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signalplot</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary_bak/signalplot.html#module-signalplot" title="signalplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signalplot</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tools.html#module-tools" title="tools"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tools</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary_bak/tools.html#module-tools" title="tools"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tools</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
 </table>
-<p>New stuff7</p>
-</section>
+</div>
 
 
           </div>
@@ -79,9 +80,11 @@
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signalplot.html">Signal Plot</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">docutils Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/signalanalysis.html">signalanalysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/signalplot.html">signalplot</a></li>
@@ -94,7 +97,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="usage.html" title="previous chapter">Usage</a></li>
+      <li>Previous: <a href="signalplot.html" title="previous chapter">Overall signal plotting</a></li>
       <li>Next: <a href="_autosummary/signalanalysis.html" title="next chapter">signalanalysis</a></li>
   </ul></li>
 </ul>
@@ -103,7 +106,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -122,10 +125,10 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Philip Gemmell.
+      &copy;2022, Philip Gemmell.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

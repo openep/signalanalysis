@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signalplot.vcg.plot_spatial_velocity &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="signalplot-vcg-plot-spatial-velocity">
+<h1>signalplot.vcg.plot_spatial_velocity<a class="headerlink" href="#signalplot-vcg-plot-spatial-velocity" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalplot.vcg.plot_spatial_velocity">
+<code class="sig-prename descclassname">signalplot.vcg.</code><code class="sig-name descname">plot_spatial_velocity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vcg</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">, </span>List<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">sv</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limits</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fig</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>matplotlib.pyplot.figure<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legend_vcg</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">, </span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legend_limits</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">, </span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limits_linestyles</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limits_colours</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filter_sv</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; Tuple<a class="headerlink" href="#signalplot.vcg.plot_spatial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the spatial velocity for given VCG data</p>
+<p>Plot the spatial velocity and VCG elements, with limits (e.g. QRS limits) if provided. Note that if spatial
+velocity is not provided, default values will be used to calculate it - if anything else is desired, then spatial
+velocity must be calculated first and provided to the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vcg</strong> (<em>pd.DataFrame</em><em> or </em><em>list of pd.DataFrame</em>) – VCG data</p></li>
+<li><p><strong>sv</strong> (<em>list of list of float</em><em>, </em><em>optional</em>) – Spatial velocity data. Only required to be given here if special parameters wish to be given, otherwise it
+will be calculated using default parameters (default)</p></li>
+<li><p><strong>limits</strong> (<em>list of list of float</em><em>, </em><em>optional</em>) – <p>A series of ‘limits’ to be plotted on the figure with the VCG and spatial plot. Presented as a list of the
+same length of the VCG data, with the required limits within:</p>
+<blockquote>
+<div><p>e.g. [[QRS_start1, QRS_start2, …], [QRS_end1, QRS_end2, …], …]</p>
+</div></blockquote>
+<p>Default=None</p>
+</p></li>
+<li><p><strong>fig</strong> (<em>plt.figure</em><em>, </em><em>optional</em>) – Handle to existing figure, if data is wished to be plotted on existing plot, default=None</p></li>
+<li><p><strong>legend_vcg</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Labels to apply to the VCG/SV data, default=None</p></li>
+<li><p><strong>legend_limits</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Labels to apply to the limits, default=None</p></li>
+<li><p><strong>limits_linestyles</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Linestyles to apply to the different limits being supplied, default=None (will use varying linestyles based
+on tools.plotting.get_plot_lines)</p></li>
+<li><p><strong>limits_colours</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Colours to apply to the different limits being supplied, default=None (will use varying colours based on
+tools.plotting.get_plot_colours)</p></li>
+<li><p><strong>filter_sv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to apply filtering to spatial velocity prior to finding the start/end points for the
+threshold, default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Handles to the figure and axes generated</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fig, ax</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">signalanalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Philip Gemmell.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary_bak/signalplot.vcg.plot_spatial_velocity.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

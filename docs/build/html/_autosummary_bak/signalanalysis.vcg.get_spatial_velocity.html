@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signalanalysis.vcg.get_spatial_velocity &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="signalanalysis-vcg-get-spatial-velocity">
+<h1>signalanalysis.vcg.get_spatial_velocity<a class="headerlink" href="#signalanalysis-vcg-get-spatial-velocity" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="signalanalysis.vcg.get_spatial_velocity">
+<code class="sig-prename descclassname">signalanalysis.vcg.</code><code class="sig-name descname">get_spatial_velocity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vcgs</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span><span class="p">, </span>pandas.core.frame.DataFrame<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">velocity_offset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">filter_sv</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">low_p</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">40</span></em>, <em class="sig-param"><span class="n">order</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span><a class="headerlink" href="#signalanalysis.vcg.get_spatial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate spatial velocity</p>
+<p>Calculate the spatial velocity of a VCG, in terms of calculating the gradient of the VCG in each of its x,
+y and z components, before combining these components in a Euclidian norm. Will then find the point at which the
+spatial velocity exceeds a threshold value, and the point at which it declines below another threshold value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vcgs</strong> (<em>list of pd.DataFrame</em><em> or </em><em>pd.DataFrame</em>) – VCG data to analyse</p></li>
+<li><p><strong>velocity_offset</strong> (<em>int</em><em>, </em><em>optional</em>) – Offset between values in VCG over which to calculate spatial velocity, i.e. 1 will use neighbouring values to
+calculate the gradient/velocity. Default=2</p></li>
+<li><p><strong>filter_sv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to apply filtering to spatial velocity, default=True</p></li>
+<li><p><strong>low_p</strong> (<em>float</em><em>, </em><em>optional</em>) – Low frequency for bandpass filter, default=40</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Order for Butterworth filter, default=2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>sv</strong> – Spatial velocity data, filtered according to input parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of pd.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Calculation of spatial velocity based on <a class="footnote-reference brackets" href="#id4" id="id1">1</a>, <a class="footnote-reference brackets" href="#id5" id="id2">2</a>, <a class="footnote-reference brackets" href="#id6" id="id3">3</a></p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Kors JA, van Herpen G, “Methodology of QT-interval measurement in the modular ECG analysis system (MEANS)”
+Ann Noninvasive Electrocardiol. 2009 Jan;14 Suppl 1:S48-53. doi: 10.1111/j.1542-474X.2008.00261.x.</p>
+</dd>
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Xue JQ, “Robust QT Interval Estimation—From Algorithm to Validation”
+Ann Noninvasive Electrocardiol. 2009 Jan;14 Suppl 1:S35-41. doi: 10.1111/j.1542-474X.2008.00264.x.</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Sörnmo L, “A model-based approach to QRS delineation”
+Comput Biomed Res. 1987 Dec;20(6):526-42.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">signalanalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docutils.html">docutils Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Philip Gemmell.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary_bak/signalanalysis.vcg.get_spatial_velocity.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

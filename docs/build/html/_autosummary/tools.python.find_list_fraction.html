@@ -4,15 +4,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tools.python.find_list_fraction &#8212; signalanalysis 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="tools.python.get_i_colour" href="tools.python.get_i_colour.html" />
@@ -33,11 +33,11 @@
 
           <div class="body" role="main">
             
-  <section id="tools-python-find-list-fraction">
+  <div class="section" id="tools-python-find-list-fraction">
 <h1>tools.python.find_list_fraction<a class="headerlink" href="#tools-python-find-list-fraction" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="tools.python.find_list_fraction">
-<span class="sig-prename descclassname"><span class="pre">tools.python.</span></span><span class="sig-name descname"><span class="pre">find_list_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tools.python.find_list_fraction" title="Permalink to this definition">¶</a></dt>
+<dt id="tools.python.find_list_fraction">
+<code class="sig-prename descclassname">tools.python.</code><code class="sig-name descname">find_list_fraction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_list</span></em>, <em class="sig-param"><span class="n">fraction</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">interpolate</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tools.python.find_list_fraction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find index corresponding to certain fractional length within a list, e.g. halfway along, a third along</p>
 <p>If only looking for an interval halfway along the list, uses a simpler method that is computationally faster</p>
 <p>input_list      List to find the fractional value of</p>
@@ -49,7 +49,7 @@ given to how close the fraction is to one value or the other)</p>
 </div></blockquote>
 </dd></dl>
 
-</section>
+</div>
 
 
           </div>
@@ -68,13 +68,20 @@ given to how close the fraction is to one value or the other)</p>
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="signalanalysis.html">signalanalysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="signalplot.html">signalplot</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="tools.html">tools</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tools.html">tools</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tools.maths.html">tools.maths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.plotting.html">tools.plotting</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="tools.python.html">tools.python</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -98,7 +105,7 @@ given to how close the fraction is to one value or the other)</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -117,10 +124,10 @@ given to how close the fraction is to one value or the other)</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Philip Gemmell.
+      &copy;2022, Philip Gemmell.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

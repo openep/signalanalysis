@@ -1,4 +1,4 @@
-signalplot.vcg
+﻿signalplot.vcg
 ==============
 
 .. automodule:: signalplot.vcg

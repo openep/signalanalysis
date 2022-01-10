@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EGM Analysis &#8212; signalanalysis 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="VCG Analysis" href="signalanalysis-vcg.html" />
+    <link rel="prev" title="ECG Analysis" href="signalanalysis-ecg.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="egm-analysis">
+<h1>EGM Analysis<a class="headerlink" href="#egm-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="example-data">
+<span id="egm-example"></span><h2>Example data<a class="headerlink" href="#example-data" title="Permalink to this headline">¶</a></h2>
+<p>Sample EGM data are stored in <code class="docutils literal notranslate"><span class="pre">test/egm_unipolar.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">tests/egm_bipolar.csv</span></code>.</p>
+</div>
+<div class="section" id="reading-egm-data">
+<span id="egm-reading"></span><h2>Reading EGM data<a class="headerlink" href="#reading-egm-data" title="Permalink to this headline">¶</a></h2>
+<p>Currently, this software is only able to read EGM data saved in a .csv format. In this format, each new line
+represents a fresh timepoint, and each comma-separated value on each line represents a different recording, i.e. a
+file containing 1000 lines of individual values will be for one EGM trace of 1000 timepoints.</p>
+<p>Currently, the unipolar data is <strong>required</strong>, whereas the bipolar data is optional. It is also required to pass the
+frequency of the data when reading the data.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">signalanalysis.egm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example_egm</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">egm</span><span class="o">.</span><span class="n">Egm</span><span class="p">(</span><span class="s1">&#39;unipolar.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;bipolar.csv&#39;</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mf">2034.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example_egm_nobipolar</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">egm</span><span class="o">.</span><span class="n">Egm</span><span class="p">(</span><span class="s1">&#39;unipolar.csv&#39;</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mf">2034.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>From this point on, the code should automatically adapt what methods it uses - no change in calls are required in
+subsequent calculations depending on whether bipolar data are present.</p>
+</div>
+<div class="section" id="getting-activation-time">
+<span id="egm-activation"></span><h2>Getting activation time<a class="headerlink" href="#getting-activation-time" title="Permalink to this headline">¶</a></h2>
+<p>Activation time is calculated based on peaks in the EGM data. Where bipolar data are available, the peaks in the
+squared bipolar signal are found (with minimum separation between peaks, and the threshold that must be passed before
+it counts as a peak, being able to be set manually if desired). These peaks provide a ‘search window’, within which
+the maximum downstroke of the unipolar signal is found—this is defined as the activation time for that particular
+beat. The width of the search window, centred on the bipolar peak, can also be manually specified.</p>
+<p>If bipolar data are not available, the squared unipolar signal is used for peak detection instead. However, this will
+be ‘thrown off’ by  far-field pacing artefacts. To correct for this, the search window for the AT is not centred on
+the detected unipolar peak, but is instead delayed to a point afterwards so that the peak is not included in the
+search window (though this can be manually over-ridden).</p>
+<p>The activation time for a given set of EGM data is calculated using the <code class="docutils literal notranslate"><span class="pre">.get_at</span></code> method. In its most basic call
+this can be as simple as <code class="docutils literal notranslate"><span class="pre">example_egm.get_at()</span></code>, with options available to plot example traces as required. These
+are documented more thoroughly in the <code class="docutils literal notranslate"><span class="pre">signalplot.egm.plot_signal</span></code> method.</p>
+<p>Once activation time is calculated, a dataframe of the ATs is stored in <code class="docutils literal notranslate"><span class="pre">example_egm.at</span></code>. It should be noted that,
+as a dataframe, it will be a <cite>m</cite> x <cite>n</cite> matrix, where <cite>m</cite> is the number of EGM signals available, and <cite>n</cite> is the
+maximum number of ATs detected. For those signals where fewer than <cite>n</cite> ATs are found, <code class="docutils literal notranslate"><span class="pre">NaN</span></code> will be recorded to
+fill in the blanks.</p>
+</div>
+<div class="section" id="getting-repolarisation-time">
+<span id="egm-repolarisation"></span><h2>Getting repolarisation time<a class="headerlink" href="#getting-repolarisation-time" title="Permalink to this headline">¶</a></h2>
+<p>The repolarisation time is calculated based on the activation times - if AT has not been calculated prior to
+calculating RT, it is automatically included in the process.</p>
+<p>The cycle length of the signal is calculated based on the AT, and from that, a search window is estimated within
+which the T-wave is searched for. Initially, this search looks for the T-wave peak by searching for the maximum value
+of the EGM within the window. If the maximum occurs at the beginning or end of the window, it is assumed that the
+maximum actually represents the tail end of the QRS complex, or the depolarisation associated with the following
+beat, and the search window is shortened to avoid these artefacts. If the search window is narrowed continuously as
+no peak is found, it is assumed that the T-wave is negative: the search window is set back to original size, and the
+minimum value of the EGM is used as the negative peak.</p>
+<p>Once the search window is determined, the signal in the window is search progressively, with the maximum gradient of
+the unipolar signal being searched for. This is not a universal search, but a progressive one - once the peak has
+been passed, as determined by the unipolar gradient moving to negative values, the search is stopped.</p>
+<p>Repolarisation time is calculated as <code class="docutils literal notranslate"><span class="pre">example_egm.get_rt()</span></code>, with the result stored in <code class="docutils literal notranslate"><span class="pre">example_egm.rt</span></code>.</p>
+</div>
+<div class="section" id="getting-dv-dt-max">
+<span id="egm-dvdt"></span><h2>Getting (dV/dt)max<a class="headerlink" href="#getting-dv-dt-max" title="Permalink to this headline">¶</a></h2>
+<p>The value of (dV/dt) at the point of AT is automatically stored in the <code class="docutils literal notranslate"><span class="pre">example_egm.dvdt</span></code> attribute when AT is being
+calculated.</p>
+</div>
+<div class="section" id="getting-qrs-duration">
+<span id="egm-qrsd"></span><h2>Getting QRS duration<a class="headerlink" href="#getting-qrs-duration" title="Permalink to this headline">¶</a></h2>
+<p>QRS duration can only be calculated when bipolar data are given. A search window based on the AT is isolated, and the
+squared bipolar signal is calculated within that window. The time at which this signal exceeds a threshold value
+(itself based on the maximum value within the search window) is used as the start of the QRS complex, and the last
+point within the window at which the threshold is exceeded is the end of the QRS.</p>
+<p>It is calculated using <code class="docutils literal notranslate"><span class="pre">example_egm.get_qrsd()</span></code>, with the data stored as <code class="docutils literal notranslate"><span class="pre">example_egm.qrs_duration</span></code>; QRS start
+and end points are recorded in <code class="docutils literal notranslate"><span class="pre">example_egm.qrs_start</span></code> and <code class="docutils literal notranslate"><span class="pre">example_egm.qrs_end</span></code>, respectively.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">signalanalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="signalanalysis.html">Signal Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="signalanalysis-ecg.html">ECG Analysis</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EGM Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-data">Example data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-egm-data">Reading EGM data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-activation-time">Getting activation time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-repolarisation-time">Getting repolarisation time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-dv-dt-max">Getting (dV/dt)max</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-qrs-duration">Getting QRS duration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="signalanalysis-vcg.html">VCG Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="signalplot.html">Signal Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docutils.html">docutils Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="signalanalysis.html">Overall signal analysis</a><ul>
+      <li>Previous: <a href="signalanalysis-ecg.html" title="previous chapter">ECG Analysis</a></li>
+      <li>Next: <a href="signalanalysis-vcg.html" title="next chapter">VCG Analysis</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Philip Gemmell.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/signalanalysis-egm.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

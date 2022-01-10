@@ -1,4 +1,4 @@
-signalanalysis.vcg
+﻿signalanalysis.vcg
 ==================
 
 .. automodule:: signalanalysis.vcg

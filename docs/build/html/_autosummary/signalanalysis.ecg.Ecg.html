@@ -4,19 +4,18 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>signalanalysis.ecg.Ecg &#8212; signalanalysis 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="signalanalysis.general" href="signalanalysis.general.html" />
+    <link rel="next" title="signalanalysis.egm" href="signalanalysis.egm.html" />
     <link rel="prev" title="signalanalysis.ecg.read_ecg_from_igb" href="signalanalysis.ecg.read_ecg_from_igb.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -34,39 +33,39 @@
 
           <div class="body" role="main">
             
-  <section id="signalanalysis-ecg-ecg">
+  <div class="section" id="signalanalysis-ecg-ecg">
 <h1>signalanalysis.ecg.Ecg<a class="headerlink" href="#signalanalysis-ecg-ecg" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">signalanalysis.ecg.</span></span><span class="sig-name descname"><span class="pre">Ecg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span></code></a></p>
-<p>Base class to encapsulate data regarding an ECG recording, inheriting from <a class="reference internal" href="signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span></code></a></p>
+<dt id="signalanalysis.ecg.Ecg">
+<em class="property">class </em><code class="sig-prename descclassname">signalanalysis.ecg.</code><code class="sig-name descname">Ecg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span></code></a></p>
+<p>Base class to encapsulate data regarding an ECG recording, inheriting from <a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span></code></a></p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span></code></a></p>
+<p><a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#signalanalysis.general.Signal" title="signalanalysis.general.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signalanalysis.general.Signal</span></code></a></p>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.read" title="Permalink to this definition">¶</a></dt>
+<dt id="signalanalysis.ecg.Ecg.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads in the data from the original file. Called upon initialisation</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.read_ecg_from_wfdb">
-<span class="sig-name descname"><span class="pre">read_ecg_from_wfdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.read_ecg_from_wfdb" title="Permalink to this definition">¶</a></dt>
+<dt id="signalanalysis.ecg.Ecg.read_ecg_from_wfdb">
+<code class="sig-name descname">read_ecg_from_wfdb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">normalise</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.read_ecg_from_wfdb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads data from a WFDB type series of files, e.g. from the Lobachevsky ECG database
 (<a class="reference external" href="https://physionet.org/content/ludb/1.0.1/">https://physionet.org/content/ludb/1.0.1/</a>)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.get_n_beats">
-<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_n_beats" title="Permalink to this definition">¶</a></dt>
+<dt id="signalanalysis.ecg.Ecg.get_n_beats">
+<code class="sig-name descname">get_n_beats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">min_separation</span><span class="o">=</span><span class="default_value">0.2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_n_beats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the number of beats given in the recording</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.get_qrs_start">
-<span class="sig-name descname"><span class="pre">get_qrs_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_qrs_start" title="Permalink to this definition">¶</a></dt>
+<dt id="signalanalysis.ecg.Ecg.get_qrs_start">
+<code class="sig-name descname">get_qrs_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_qrs_start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the start of the QRS complex</p>
 </dd></dl>
 
@@ -77,97 +76,150 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.apply_filter" title="signalanalysis.ecg.Ecg.apply_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_filter</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg.apply_filter" title="signalanalysis.ecg.Ecg.apply_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_filter</span></code></a></p></td>
 <td><p>Apply a given filter to the data, using their respective arguments as required</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="signalanalysis.ecg.Ecg.get_n_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_beats</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg.get_beats" title="signalanalysis.ecg.Ecg.get_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_beats</span></code></a></p></td>
 <td><p>Calculate the number of beats in a given signal, and save the individual beats to the object for later use</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id1" title="signalanalysis.ecg.Ecg.get_qrs_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_qrs_start</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg.get_peaks" title="signalanalysis.ecg.Ecg.get_peaks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_peaks</span></code></a></p></td>
+<td><p>Get the peaks of the RMS signal.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#id0" title="signalanalysis.ecg.Ecg.get_qrs_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_qrs_start</span></code></a></p></td>
 <td><p>Calculates start of QRS complex using method of Hermans et al. (2017).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.get_rms" title="signalanalysis.ecg.Ecg.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
-<td><p>Supplement the <a class="reference internal" href="signalanalysis.general.Signal.html#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a> with <cite>unipolar_only</cite></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg.get_rms" title="signalanalysis.ecg.Ecg.get_rms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rms</span></code></a></p></td>
+<td><p>Supplement the <a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a> with <cite>unipolar_only</cite></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_twave_end</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_twave_end</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.plot" title="signalanalysis.ecg.Ecg.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg.plot" title="signalanalysis.ecg.Ecg.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
 <td><p>Method to plot the data of the ECG</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id4" title="signalanalysis.ecg.Ecg.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_beats</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_peaks</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#id3" title="signalanalysis.ecg.Ecg.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a></p></td>
 <td><p>Reads in the data from the original file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id5" title="signalanalysis.ecg.Ecg.read_ecg_from_wfdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_ecg_from_wfdb</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#id4" title="signalanalysis.ecg.Ecg.read_ecg_from_wfdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_ecg_from_wfdb</span></code></a></p></td>
 <td><p>Read data from a waveform database file format</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#signalanalysis.ecg.Ecg.reset" title="signalanalysis.ecg.Ecg.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg.reset" title="signalanalysis.ecg.Ecg.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
 <td><p>Reset all properties of the class</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg.return_to_index" title="signalanalysis.ecg.Ecg.return_to_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">return_to_index</span></code></a></p></td>
+<td><p>Aligns a given sequence of time values to those in the index</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.apply_filter">
-<span class="sig-name descname"><span class="pre">apply_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.apply_filter" title="Permalink to this definition">¶</a></dt>
+<dt id="signalanalysis.ecg.Ecg.apply_filter">
+<code class="sig-name descname">apply_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.apply_filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply a given filter to the data, using their respective arguments as required</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="tools.maths.filter_butterworth.html#tools.maths.filter_butterworth" title="tools.maths.filter_butterworth"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tools.maths.filter_butterworth()</span></code></a></dt><dd><p>Potential filter</p>
+<dt><a class="reference internal" href="../_autosummary_bak/tools.maths.filter_butterworth.html#tools.maths.filter_butterworth" title="tools.maths.filter_butterworth"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tools.maths.filter_butterworth()</span></code></a></dt><dd><p>Potential filter</p>
 </dd>
-<dt><a class="reference internal" href="tools.maths.filter_savitzkygolay.html#tools.maths.filter_savitzkygolay" title="tools.maths.filter_savitzkygolay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tools.maths.filter_savitzkygolay()</span></code></a></dt><dd><p>Potential filter</p>
+<dt><a class="reference internal" href="../_autosummary_bak/tools.maths.filter_savitzkygolay.html#tools.maths.filter_savitzkygolay" title="tools.maths.filter_savitzkygolay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tools.maths.filter_savitzkygolay()</span></code></a></dt><dd><p>Potential filter</p>
 </dd>
 </dl>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">get_n_beats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dt id="signalanalysis.ecg.Ecg.get_beats">
+<code class="sig-name descname">get_beats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reset_index</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">offset_start</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">offset_end</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">plot</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_beats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the number of beats in a given signal, and save the individual beats to the object for later use</p>
 <p>When given the raw data of a given signal (ECG or VCG), will estimate the number of beats recorded in the trace
 based on the RMS of the signal exceeding a threshold value. The estimated individual beats will then be saved in
-a list in a lossless manner, i.e. saved as [ECG1, ECG2, …, ECG(n)], where ECG1=[0:peak2], ECG2=[peak1:peak3],
-…, ECGn=[peak(n-1):end]</p>
+a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reset_index</strong> (<em>bool</em>) – Whether to reset the time index for the separated beats so that they all start from zero (true),
+or whether to leave them with the original time index (false), default=True</p></li>
+<li><p><strong>offset_start</strong> (<em>float</em><em>, </em><em>optional</em>) – Time in ms to offset from the prior peak (<code class="docutils literal notranslate"><span class="pre">offset_start</span></code>) and from the following peak (<code class="docutils literal notranslate"><span class="pre">offset_end</span></code>)
+when extracting individual beats, default=None</p></li>
+<li><p><strong>offset_end</strong> (<em>float</em><em>, </em><em>optional</em>) – Time in ms to offset from the prior peak (<code class="docutils literal notranslate"><span class="pre">offset_start</span></code>) and from the following peak (<code class="docutils literal notranslate"><span class="pre">offset_end</span></code>)
+when extracting individual beats, default=None</p></li>
+<li><p><strong>plot</strong> (<em>bool</em>) – Whether to plot the overall signal, showing where the demarcation between individual plots has been made</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><p><strong>unipolar_only</strong> (<em>bool, optional</em>) – Only appropriate for ECG data. Whether to use only unipolar ECG leads to calculate RMS, default=True</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>self.beats</strong> (<em>list of pd.DataFrame</em>) – Individual beats in signal</p></li>
+<li><p><strong>self.beat_start</strong> (<em>list of float</em>) – Times at which the individual beats start in the overall signal data</p></li>
+<li><p><strong>self.beat_index_reset</strong> (<em>bool</em>) – Whether or not the time index for each individual beat has been zeroed (true) or not (false)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">offset_start</span></code> and <code class="docutils literal notranslate"><span class="pre">offset_end</span></code> are set to 0ms, then the n-th beat will be recorded as starting from the
+point of the (n-1)th peak, and concluding at the point of the (n+1)th peak. This will mean that the beats
+will be saved in a lossless manner, i.e. saved as [ECG1, ECG2, …, ECG(n)], where ECG1=[0:peak2],
+ECG2=[peak1:peak3], …, ECGn=[peak(n-1):end]; this will lead to excessive duplication of the data between the
+various recorded peaks, but will ensure that the start of the QRS and T-wave are not accidentally excluded.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#signalanalysis.general.Signal.get_peaks" title="signalanalysis.general.Signal.get_peaks"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_peaks()</span></code></a></dt><dd><p>Method to find peaks in the RMS signal</p>
+</dd>
+<dt><a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></dt><dd><p>RMS signal calculation required for getting n_beats</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="signalanalysis.ecg.Ecg.get_peaks">
+<code class="sig-name descname">get_peaks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">threshold</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.33</span></em>, <em class="sig-param"><span class="n">min_separation</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">200</span></em>, <em class="sig-param"><span class="n">plot</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_peaks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the peaks of the RMS signal.</p>
+<p>It is often the case that, to determine the number of beats, the peaks in the signal must be determined. This is
+usually done using the RMS of the signal, as demonstrated here. For alternative methods, this method is
+overwritten.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>threshold</strong> (<em>float {0&lt;1}</em>) – Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5</p></li>
-<li><p><strong>min_separation</strong> (<em>float</em>) – Minimum time (in s) that should be used to separate separate beats, default=0.2s</p></li>
-<li><p><strong>reset_index</strong> (<em>bool</em>) – Whether to reset the time index for the separated beats so that they all start from zero (true),
-or whether to leave them with the original time index (false), default=True</p></li>
+<li><p><strong>min_separation</strong> (<em>float</em>) – Minimum separation (in ms) required between neighbouring peaks in a given signal (correlates to the minimum
+pacing rate expected), default=200ms</p></li>
 <li><p><strong>plot</strong> (<em>bool</em>) – Whether to plot results of beat detection, default=False</p></li>
-<li><p><strong>unipolar_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – Only appropriate for ECG data. Whether to use only unipolar ECG leads to calculate RMS, default=True</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>self.n_beats</strong> – Number of beats detected in signal</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="signalanalysis.general.Signal.html#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></dt><dd><p>RMS signal calculation required for getting n_beats</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>self.n_beats</strong> (<em>int</em>) – Number of beats in signal</p></li>
+<li><p><strong>self.n_beats_threshold</strong> (<em>int</em>) – A record of the threshold value used to determine when a peak in the signal could potentially be counted
+as a ‘peak’</p></li>
+<li><p><strong>self.t_peaks</strong> (<em>list of float</em>) – Time at which peaks are detected</p></li>
+</ul>
+</p>
 </dd>
 </dl>
-</div>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">get_qrs_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_separation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dt id="id0">
+<code class="sig-name descname">get_qrs_start</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unipolar_only</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">min_separation</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">plot_result</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates start of QRS complex using method of Hermans et al. (2017)</p>
-<p>Calculates the start of the QRS complex by a simplified version of the work presented in <a class="footnote-reference brackets" href="#id3" id="id2">1</a>, wherein the
+<p>Calculates the start of the QRS complex by a simplified version of the work presented in <a class="footnote-reference brackets" href="#id2" id="id1">1</a>, wherein the
 point of maximum second derivative of the ECG RMS signal is used as the start of the QRS complex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#signalanalysis.ecg.Ecg" title="signalanalysis.ecg.Ecg"><em>Ecg</em></a>) – ECG data to analyse</p></li>
+<li><p><strong>self</strong> (<a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#signalanalysis.ecg.Ecg" title="signalanalysis.ecg.Ecg"><em>Ecg</em></a>) – ECG data to analyse</p></li>
 <li><p><strong>unipolar_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use only unipolar leads to calculate RMS, default=True</p></li>
-<li><p><strong>min_separation</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum separation from the peak used to detect various beats, default=0.05s</p></li>
+<li><p><strong>min_separation</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum separation from the peak used to detect various beats, default=50ms</p></li>
 <li><p><strong>plot_result</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the results for error-checking, default=False</p></li>
 </ul>
 </dd>
@@ -184,7 +236,7 @@ point of maximum second derivative of the ECG RMS signal is used as the start of
 indicated some edge problems that might throw off the results.</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Hermans BJM, Vink AS, Bennis FC, Filippini LH, Meijborg VMF, Wilde AAM, Pison L, Postema PG, Delhaas T,
 “The development and validation of an easy to use automatic QT-interval algorithm,”
 PLoS ONE, 12(9), 1–14 (2017), <a class="reference external" href="https://doi.org/10.1371/journal.pone.0184352">https://doi.org/10.1371/journal.pone.0184352</a></p>
@@ -193,21 +245,21 @@ PLoS ONE, 12(9), 1–14 (2017), <a class="reference external" href="https://doi.
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.get_rms">
-<span class="sig-name descname"><span class="pre">get_rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unipolar_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_rms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Supplement the <a class="reference internal" href="signalanalysis.general.Signal.html#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a> with <cite>unipolar_only</cite></p>
+<dt id="signalanalysis.ecg.Ecg.get_rms">
+<code class="sig-name descname">get_rms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">preprocess_data</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">drop_columns</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">unipolar_only</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_rms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supplement the <a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a> with <cite>unipolar_only</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>preprocess_data</strong> (<em>pd.DataFrame</em><em>, </em><em>optional</em>) – See <a class="reference internal" href="signalanalysis.general.Signal.html#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p></li>
-<li><p><strong>drop_columns</strong> (<em>list of str</em><em>, </em><em>optional</em>) – See <a class="reference internal" href="signalanalysis.general.Signal.html#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p></li>
+<li><p><strong>preprocess_data</strong> (<em>pd.DataFrame</em><em>, </em><em>optional</em>) – See <a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p></li>
+<li><p><strong>drop_columns</strong> (<em>list of str</em><em>, </em><em>optional</em>) – See <a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p></li>
 <li><p><strong>unipolar_only</strong> (<em>optional</em>) – Whether to use only unipolar ECG leads to calculate RMS, default=True</p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="signalanalysis.general.Signal.html#id1" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p>
+<p><a class="reference internal" href="../_autosummary_bak/signalanalysis.general.Signal.html#id0" title="signalanalysis.general.Signal.get_rms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.general.Signal.get_rms()</span></code></a></p>
 </div>
 <p class="rubric">Notes</p>
 <p>If <cite>unipolar_only</cite> is set to true, then ECG RMS is calculated using only ‘unipolar’ leads. This uses V1-6,
@@ -221,8 +273,8 @@ and the non-augmented limb leads (VF, VL and VR)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">separate_beats</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separate_figs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.plot" title="Permalink to this definition">¶</a></dt>
+<dt id="signalanalysis.ecg.Ecg.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">separate_beats</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">separate_figs</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to plot the data of the ECG</p>
 <p>Passes the function to the ECG plotting script, with the option to plot the individual beats instead of the
 entire signal; also, to plot these on individual figures or overlaid on the same figure</p>
@@ -245,8 +297,8 @@ other on a single figure (true), or on separate figures (false), default=False</
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id4">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dt id="id3">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">normalise</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads in the data from the original file. Called upon initialisation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -260,15 +312,15 @@ to be honest), default=False</p></li>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#id5" title="signalanalysis.ecg.Ecg.read_ecg_from_wfdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signalanalysis.ecg.Ecg.read_ecg_from_wfdb</span></code></a></dt><dd><p>underlying read method for wfdb files</p>
+<dt><a class="reference internal" href="../_autosummary_bak/signalanalysis.ecg.Ecg.html#id4" title="signalanalysis.ecg.Ecg.read_ecg_from_wfdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signalanalysis.ecg.Ecg.read_ecg_from_wfdb</span></code></a></dt><dd><p>underlying read method for wfdb files</p>
 </dd>
 </dl>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id5">
-<span class="sig-name descname"><span class="pre">read_ecg_from_wfdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comments_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dt id="id4">
+<code class="sig-name descname">read_ecg_from_wfdb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">sample_rate</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">comments_file</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">normalise</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read data from a waveform database file format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -297,8 +349,8 @@ extract data).</p>
 <li><p>PTB-XL</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>sample_rate = 100 if from records100/<a href="#id6"><span class="problematic" id="id7">*</span></a>/<a href="#id8"><span class="problematic" id="id9">*</span></a>_lr</p></li>
-<li><p>sample_rate = 500 if from records500/<a href="#id10"><span class="problematic" id="id11">*</span></a>/<a href="#id12"><span class="problematic" id="id13">*</span></a>_hr</p></li>
+<li><p>sample_rate = 100 if from records100/<a href="#id5"><span class="problematic" id="id6">*</span></a>/<a href="#id7"><span class="problematic" id="id8">*</span></a>_lr</p></li>
+<li><p>sample_rate = 500 if from records500/<a href="#id9"><span class="problematic" id="id10">*</span></a>/<a href="#id11"><span class="problematic" id="id12">*</span></a>_hr</p></li>
 <li><p>comments_file = ‘ptbxl_database.csv’</p></li>
 </ul>
 </div></blockquote>
@@ -307,16 +359,30 @@ extract data).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="signalanalysis.ecg.Ecg.reset">
-<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.reset" title="Permalink to this definition">¶</a></dt>
+<dt id="signalanalysis.ecg.Ecg.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset all properties of the class</p>
 <p>Function called when reading in new data into an existing class (for some reason), which would make these
 properties and attributes clash with the other data</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="signalanalysis.ecg.Ecg.return_to_index">
+<code class="sig-name descname">return_to_index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">original_sequence</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.return_to_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aligns a given sequence of time values to those in the index</p>
+<p>When manipulating time data, it can often fall out of sync with the time values for the data, e.g. the data
+are recorded every 2ms, then searching for a value at 5ms will be difficult. This function realigns a
+sequence of time data to the possible values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>original_sequence</strong> (<em>pd.DataFrame</em>) – The sequence of numbers to be returned to the correct time index</p>
+</dd>
+</dl>
 </dd></dl>
 
-</section>
+</dd></dl>
+
+</div>
 
 
           </div>
@@ -335,11 +401,19 @@ properties and attributes clash with the other data</p>
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalanalysis.html">Signal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signalplot.html">Signal Plot</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../docutils.html">docutils Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="signalanalysis.html">signalanalysis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="signalanalysis.html">signalanalysis</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="signalanalysis.ecg.html">signalanalysis.ecg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.egm.html">signalanalysis.egm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.general.html">signalanalysis.general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signalanalysis.vcg.html">signalanalysis.vcg</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="signalplot.html">signalplot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tools.html">tools</a></li>
 </ul>
@@ -354,7 +428,7 @@ properties and attributes clash with the other data</p>
   <li><a href="signalanalysis.html">signalanalysis</a><ul>
   <li><a href="signalanalysis.ecg.html">signalanalysis.ecg</a><ul>
       <li>Previous: <a href="signalanalysis.ecg.read_ecg_from_igb.html" title="previous chapter">signalanalysis.ecg.read_ecg_from_igb</a></li>
-      <li>Next: <a href="signalanalysis.general.html" title="next chapter">signalanalysis.general</a></li>
+      <li>Next: <a href="signalanalysis.egm.html" title="next chapter">signalanalysis.egm</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -365,7 +439,7 @@ properties and attributes clash with the other data</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -384,10 +458,10 @@ properties and attributes clash with the other data</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Philip Gemmell.
+      &copy;2022, Philip Gemmell.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

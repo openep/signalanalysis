@@ -1,4 +1,4 @@
-signalanalysis.general
+﻿signalanalysis.general
 ======================
 
 .. automodule:: signalanalysis.general
@@ -15,6 +15,7 @@ signalanalysis.general
       :toctree:
       :nosignatures:
    
+      get_bcl
       get_signal_rms
       get_twave_end
    
