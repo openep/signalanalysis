@@ -1,0 +1,10 @@
+SOURCE: https://physionet.org/content/ptb-xl/1.0.1/
+DOI: https://doi.org/10.13026/x4td-x982
+
+The files contained within `ptb-xl` comes from the "PTB-XL, a large publicly
+available electrocardiography dataset", from PhysioNet, available at the above
+URL; the LICENSE for the complete database is included here. The files included
+here are a subset from the complete database to allow testing and evaluation of
+the functions in this library.
+
+The sample rate for these data are 500 Hz.

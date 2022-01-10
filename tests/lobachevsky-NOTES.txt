@@ -1,0 +1,10 @@
+SOURCE: https://physionet.org/content/ludb/1.0.1/
+DOI: https://doi.org/10.13026/eegm-h675
+
+The files contained within `lobachesky` comes from the Lobachevsky University
+Electrocardiography Database, from PhysioNet, available at the above URL; the
+README and LICENSE for the complete database are included here. The files
+included here are a subset from the complete database to allow testing and
+evaluation of the functions in this library.
+
+The sample rate for these data are 500 Hz.

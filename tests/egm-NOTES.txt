@@ -1,0 +1,3 @@
+The sample EGM data, both unipolar and bipolar, are from EGM recordings made
+with porcine data. 	THESE ARE NOT TO BE USED ELSEWHERE WITHOUT EXPRESS
+PERMISSION.
