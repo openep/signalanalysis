@@ -46,6 +46,18 @@ some reason.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vcg_example</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">vcg</span><span class="o">.</span><span class="n">Vcg</span><span class="p">(</span><span class="n">ecg_example</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Currently, sample data are included in the GitHub archive - it is hoped that these will be freely available, but it
+unfortunately cannot be guaranteed. These can be loaded as follows:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ecg_example_lob</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">ecg</span><span class="o">.</span><span class="n">Ecg</span><span class="p">(</span><span class="s2">&quot;tests/lobachevsky/3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_ecg_ptb100</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">ecg</span><span class="o">.</span><span class="n">Ecg</span><span class="p">(</span><span class="s1">&#39;tests/ptb-xl/records100/00000/00001_lr&#39;</span><span class="p">,</span> \
+<span class="go">                                             sample_rate=100, \</span>
+<span class="go">                                             comments_file=&#39;tests/ptb-xl/ptbxl_database.csv&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_ecg_ptb500</span> <span class="o">=</span> <span class="n">signalanalysis</span><span class="o">.</span><span class="n">ecg</span><span class="o">.</span><span class="n">Ecg</span><span class="p">(</span><span class="s1">&#39;tests/ptb-xl/records500/00000/00001_hr&#39;</span><span class="p">,</span> \
+<span class="go">                                             sample_rate=500, \</span>
+<span class="go">                                             comments_file=&#39;tests/ptb-xl/ptbxl_database.csv&#39;)</span>
+</pre></div>
+</div>
+<p>These sample files are downloaded from PhysioNet, and represent only a fraction of the available data.</p>
 </div>
 </div>
 
