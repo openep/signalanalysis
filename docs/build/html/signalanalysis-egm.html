@@ -56,6 +56,7 @@ subsequent calculations depending on whether bipolar data are present.</p>
 </div>
 <div class="section" id="getting-activation-time">
 <span id="egm-activation"></span><h2>Getting activation time<a class="headerlink" href="#getting-activation-time" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="_autosummary_bak/signalanalysis.egm.Egm.html#id0" title="signalanalysis.egm.Egm.get_at"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.egm.Egm.get_at()</span></code></a></p>
 <p>Activation time is calculated based on peaks in the EGM data. Where bipolar data are available, the peaks in the
 squared bipolar signal are found (with minimum separation between peaks, and the threshold that must be passed before
 it counts as a peak, being able to be set manually if desired). These peaks provide a ‘search window’, within which
@@ -75,6 +76,7 @@ fill in the blanks.</p>
 </div>
 <div class="section" id="getting-repolarisation-time">
 <span id="egm-repolarisation"></span><h2>Getting repolarisation time<a class="headerlink" href="#getting-repolarisation-time" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="_autosummary_bak/signalanalysis.egm.Egm.html#signalanalysis.egm.Egm.get_rt" title="signalanalysis.egm.Egm.get_rt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.egm.Egm.get_rt()</span></code></a></p>
 <p>The repolarisation time is calculated based on the activation times - if AT has not been calculated prior to
 calculating RT, it is automatically included in the process.</p>
 <p>The cycle length of the signal is calculated based on the AT, and from that, a search window is estimated within
@@ -91,11 +93,13 @@ been passed, as determined by the unipolar gradient moving to negative values, t
 </div>
 <div class="section" id="getting-dv-dt-max">
 <span id="egm-dvdt"></span><h2>Getting (dV/dt)max<a class="headerlink" href="#getting-dv-dt-max" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="_autosummary_bak/signalanalysis.egm.Egm.html#id0" title="signalanalysis.egm.Egm.get_at"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.egm.Egm.get_at()</span></code></a></p>
 <p>The value of (dV/dt) at the point of AT is automatically stored in the <code class="docutils literal notranslate"><span class="pre">example_egm.dvdt</span></code> attribute when AT is being
 calculated.</p>
 </div>
 <div class="section" id="getting-qrs-duration">
 <span id="egm-qrsd"></span><h2>Getting QRS duration<a class="headerlink" href="#getting-qrs-duration" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="_autosummary_bak/signalanalysis.egm.Egm.html#signalanalysis.egm.Egm.get_qrsd" title="signalanalysis.egm.Egm.get_qrsd"><code class="xref py py-meth docutils literal notranslate"><span class="pre">signalanalysis.egm.Egm.get_qrsd()</span></code></a></p>
 <p>QRS duration can only be calculated when bipolar data are given. A search window based on the AT is isolated, and the
 squared bipolar signal is calculated within that window. The time at which this signal exceeds a threshold value
 (itself based on the maximum value within the search window) is used as the start of the QRS complex, and the last

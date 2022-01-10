@@ -180,7 +180,7 @@ various recorded peaks, but will ensure that the start of the QRS and T-wave are
 
 <dl class="py method">
 <dt id="signalanalysis.ecg.Ecg.get_peaks">
-<code class="sig-name descname">get_peaks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">threshold</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.33</span></em>, <em class="sig-param"><span class="n">min_separation</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">200</span></em>, <em class="sig-param"><span class="n">plot</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_peaks" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_peaks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">threshold</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.4</span></em>, <em class="sig-param"><span class="n">min_separation</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">200</span></em>, <em class="sig-param"><span class="n">plot</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.get_peaks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the peaks of the RMS signal.</p>
 <p>It is often the case that, to determine the number of beats, the peaks in the signal must be determined. This is
 usually done using the RMS of the signal, as demonstrated here. For alternative methods, this method is
@@ -188,10 +188,10 @@ overwritten.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>threshold</strong> (<em>float {0&lt;1}</em>) – Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.5</p></li>
-<li><p><strong>min_separation</strong> (<em>float</em>) – Minimum separation (in ms) required between neighbouring peaks in a given signal (correlates to the minimum
+<li><p><strong>threshold</strong> (<em>float {0&lt;1}</em><em>, </em><em>optional</em>) – Minimum value to search for for a peak in RMS signal to determine when a beat has occurred, default=0.33</p></li>
+<li><p><strong>min_separation</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum separation (in ms) required between neighbouring peaks in a given signal (correlates to the minimum
 pacing rate expected), default=200ms</p></li>
-<li><p><strong>plot</strong> (<em>bool</em>) – Whether to plot results of beat detection, default=False</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot results of beat detection, default=False</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -366,14 +366,22 @@ properties and attributes clash with the other data</p>
 
 <dl class="py method">
 <dt id="signalanalysis.ecg.Ecg.return_to_index">
-<code class="sig-name descname">return_to_index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">original_sequence</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.return_to_index" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">return_to_index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">original_sequence</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">, </span>list<span class="p">, </span>float<span class="p">, </span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signalanalysis.ecg.Ecg.return_to_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aligns a given sequence of time values to those in the index</p>
 <p>When manipulating time data, it can often fall out of sync with the time values for the data, e.g. the data
 are recorded every 2ms, then searching for a value at 5ms will be difficult. This function realigns a
 sequence of time data to the possible values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>original_sequence</strong> (<em>pd.DataFrame</em>) – The sequence of numbers to be returned to the correct time index</p>
+<dd class="field-odd"><p><strong>original_sequence</strong> (<em>pd.DataFrame</em><em> or </em><em>list</em><em> or </em><em>float</em><em> or </em><em>int</em>) – The sequence of numbers to be returned to the correct time index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>new_sequence</strong> – The sequence of numbers now corrected to match the time index for the data, returned in the same format
+as the original sequence was provided, i.e. pd.DataFrame will return pd.DataFrame, int will return int,
+and so on.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame or list or float or int</p>
 </dd>
 </dl>
 </dd></dl>
