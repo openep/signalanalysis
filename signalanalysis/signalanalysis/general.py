@@ -68,7 +68,7 @@ class Signal:
             Whether or not to normalise all ECG leads, default=False
         filter : {'butterworth', 'savitzky-golay'}, optional
             Whether to apply a filter to the signal data, and if so, which filter to apply. Keyword arguments for
-            each filter can then be passed (see filters in tools.maths for details)
+            each filter can then be passed (see filters in signalanalysis.tools.maths for details)
         """
         # Properties that can be derived subsequently to opening the file
         self.data = pd.DataFrame(dtype=float)
@@ -137,8 +137,8 @@ class Signal:
 
         See Also
         --------
-        :py:meth:`tools.maths.filter_butterworth` : Potential filter
-        :py:meth:`tools.maths.filter_savitzkygolay` : Potential filter
+        :py:meth:`signalanalysis.tools.maths.filter_butterworth` : Potential filter
+        :py:meth:`signalanalysis.tools.maths.filter_savitzkygolay` : Potential filter
         """
         if self.filter == 'butterworth':
             self.data = tools.maths.filter_butterworth(self.data, **kwargs)
@@ -300,8 +300,8 @@ class Signal:
 
         See Also
         --------
-        :py:meth:`signalanalysis.general.Signal.get_peaks` : Method to find peaks in the RMS signal
-        :py:meth:`signalanalysis.general.Signal.get_rms` : RMS signal calculation required for getting n_beats
+        :py:meth:`signalanalysis.signalplot.general.Signal.get_peaks` : Method to find peaks in the RMS signal
+        :py:meth:`signalanalysis.signalplot.general.Signal.get_rms` : RMS signal calculation required for getting n_beats
         """
 
         if self.t_peaks is None:
@@ -430,7 +430,7 @@ def get_signal_rms(signal: pd.DataFrame,
 
     .. deprecated::
         The use of this module is deprecated, and the internal class method should be used in preference (
-        signalanalysis.general.Signal.get_rms())
+        signalanalysis.signalplot.general.Signal.get_rms())
 
     Parameters
     ----------
@@ -641,8 +641,8 @@ def get_twave_end(ecgs: Union[List[pd.DataFrame], pd.DataFrame],
             twave_ends[i_twave].loc[0, 'median'] = twave_end_median
 
     if plot_result:
-        import signalplot.ecg as ep
-        import signalplot.vcg as vp
+        from ..signalplot import ecg as ep
+        from ..signalplot import vcg as vp
         from sklearn import preprocessing
 
         for i_ecg, ecg in enumerate(ecgs):

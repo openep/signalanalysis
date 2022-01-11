@@ -14,11 +14,11 @@ from .. import tools
 
 
 class Egm(general.Signal):
-    """Base class for EGM data, inheriting from :class:`signalanalysis.general.Signal`
+    """Base class for EGM data, inheriting from :class:`signalanalysis.signalanalysis.general.Signal`
 
     See Also
     --------
-    :py:class:`signalanalysis.general.Signal`
+    :py:class:`signalanalysis.signalanalysis.general.Signal`
 
     Methods
     -------
@@ -43,9 +43,9 @@ class Egm(general.Signal):
 
         See Also
         --------
-        :py:meth:`signalanalysis.general.Signal.__init__ : Base __init__ method
-        :py:meth:`signalanalysis.general.Signal.apply_filter` : Filtering method
-        :py:meth:`signalanalysis.general.Signal.get_n_beats` : Beat calculation method
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.__init__ : Base __init__ method
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.apply_filter` : Filtering method
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.get_n_beats` : Beat calculation method
 
         Notes
         -----
@@ -103,7 +103,7 @@ class Egm(general.Signal):
 
         See Also
         --------
-        :py:meth:`signalanalysis.egm.Egm.read_from_csv` : Method to read data from Matlab csv
+        :py:meth:`signalanalysis.signalanalysis.egm.Egm.read_from_csv` : Method to read data from Matlab csv
         """
 
         if data_location_uni.endswith('.csv'):
@@ -184,7 +184,7 @@ class Egm(general.Signal):
 
         See also
         --------
-        :py:meth:`signalanalysis.egm.Egm.plot_signal` : Method to plot the calculated AT
+        :py:meth:`signalanalysis.signalanalysis.egm.Egm.plot_signal` : Method to plot the calculated AT
         """
         if self.data_bi.empty:
             # super(Egm, self).get_peaks()
@@ -233,7 +233,7 @@ class Egm(general.Signal):
 
         See also
         --------
-        :py:meth:`signalanalysis.general.Signal.get_beats` : Base method
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.get_beats` : Base method
         """
         if self.t_peaks.empty:
             self.get_peaks(**kwargs)
@@ -290,7 +290,7 @@ class Egm(general.Signal):
                    **kwargs):
         """
         ..deprecated::
-            Need to move this to signalplot.egm (if this even works!)
+            Need to move this to signalanalysis.signalplot.egm (if this even works!)
         """
 
         # Calculate beats (if not done already)
@@ -367,8 +367,8 @@ class Egm(general.Signal):
 
         See also
         --------
-        :py:meth:`signalanalysis.egm.Egm.get_peaks` : Method to calculate peaks
-        :py:meth:`signalanalysis.egm.Egm.plot_signal` : Method to plot the signal
+        :py:meth:`signalanalysis.signalanalysis.egm.Egm.get_peaks` : Method to calculate peaks
+        :py:meth:`signalanalysis.signalanalysis.egm.Egm.plot_signal` : Method to plot the signal
         """
 
         if self.t_peaks.empty:
@@ -587,7 +587,7 @@ class Egm(general.Signal):
 
         See also
         --------
-        :py:meth:`signalanalysis.egm.Egm.get_rt` : Actual method called
+        :py:meth:`signalanalysis.signalanalysis.egm.Egm.get_rt` : Actual method called
         """
         if self.ari.empty:
             self.get_rt(plot=False, **kwargs)
@@ -628,8 +628,8 @@ class Egm(general.Signal):
 
         See also
         --------
-        :py:meth:`signalanalysis.egm.Egm.get_at` : Method used to calculate AT, that uses this method implicitly
-        :py:meth:`signalplot.egm.plot_signal` : Plotting function, with options that can be passed in **kwargs
+        :py:meth:`signalanalysis.signalanalysis.egm.Egm.get_at` : Method used to calculate AT, that uses this method implicitly
+        :py:meth:`signalanalysis.signalplot.egm.plot_signal` : Plotting function, with options that can be passed in **kwargs
         """
 
         if self.data_bi.empty:
@@ -700,7 +700,7 @@ class Egm(general.Signal):
 
         See also
         --------
-        :py:meth:`signalanalysis.egm.Egm.get_at` : Method used to calculate AT, that uses this method implicitly
+        :py:meth:`signalanalysis.signalanalysis.egm.Egm.get_at` : Method used to calculate AT, that uses this method implicitly
         """
 
         time_points = self.return_to_index(time_points)

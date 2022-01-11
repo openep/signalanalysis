@@ -7,7 +7,7 @@ EGM Analysis
 Example data
 ------------
 
-Sample EGM data are stored in ``test/egm_unipolar.csv`` and ``tests/egm_bipolar.csv``.
+Sample EGM data are stored in ``signalanalysis/data/egm_unipolar.csv`` and ``signalanalysis/data/egm_bipolar.csv``.
 
 .. _egm-reading:
 
@@ -23,7 +23,7 @@ frequency of the data when reading the data.
 
 .. code-block:: python3
 
-    >>> import signalanalysis.egm
+    >>> from signalanalysis import signalanalysis.egm
     >>> example_egm = signalanalysis.egm.Egm('unipolar.csv', 'bipolar.csv', frequency=2034.5)
     >>> example_egm_nobipolar = signalanalysis.egm.Egm('unipolar.csv', frequency=2034.5)
 
@@ -35,7 +35,7 @@ subsequent calculations depending on whether bipolar data are present.
 Getting activation time
 -----------------------
 
-:py:meth:`signalanalysis.egm.Egm.get_at()`
+:py:meth:`signalanalysis.signalanalysis.egm.Egm.get_at()`
 
 Activation time is calculated based on peaks in the EGM data. Where bipolar data are available, the peaks in the
 squared bipolar signal are found (with minimum separation between peaks, and the threshold that must be passed before
@@ -62,7 +62,7 @@ fill in the blanks.
 Getting repolarisation time
 ---------------------------
 
-:py:meth:`signalanalysis.egm.Egm.get_rt()`
+:py:meth:`signalanalysis.signalanalysis.egm.Egm.get_rt()`
 
 The repolarisation time is calculated based on the activation times - if AT has not been calculated prior to
 calculating RT, it is automatically included in the process.
@@ -86,7 +86,7 @@ Repolarisation time is calculated as ``example_egm.get_rt()``, with the result s
 Getting (dV/dt)max
 ------------------
 
-:py:meth:`signalanalysis.egm.Egm.get_at()`
+:py:meth:`signalanalysis.signalanalysis.egm.Egm.get_at()`
 
 The value of (dV/dt) at the point of AT is automatically stored in the ``example_egm.dvdt`` attribute when AT is being
 calculated.
@@ -96,7 +96,7 @@ calculated.
 Getting QRS duration
 --------------------
 
-:py:meth:`signalanalysis.egm.Egm.get_qrsd()`
+:py:meth:`signalanalysis.signalanalysis.egm.Egm.get_qrsd()`
 
 QRS duration can only be calculated when bipolar data are given. A search window based on the AT is isolated, and the
 squared bipolar signal is calculated within that window. The time at which this signal exceeds a threshold value

@@ -2,7 +2,7 @@
 VCG Analysis
 ============
 
-.. _reading:
+.. _vcg-reading:
 
 Reading VCG data
 ----------------
@@ -12,7 +12,7 @@ and thus VCG data can only (at this stage) be derived from ECG data.
 
 .. code-block:: python3
 
-    >>> import signalanalysis.ecg
-    >>> import signalanalysis.vcg
+    >>> from signalanalysis import signalanalysis.ecg
+    >>> from signalanalysis import signalanalysis.vcg
     >>> ecg_example = signalanalysis.ecg.Ecg("filename")
     >>> vcg_example = signalanalysis.vcg.Vcg(ecg_example)

@@ -32,8 +32,8 @@ class Vcg(general.Signal):
 
     See Also
     --------
-    :py:class:`signalanalysis.general.Signal : Base class
-    :py:class:`signalanalysis.ecg.Ecg` : Related class, from which the VCG signal is obtained
+    :py:class:`signalanalysis.signalanalysis.general.Signal : Base class
+    :py:class:`signalanalysis.signalanalysis.ecg.Ecg` : Related class, from which the VCG signal is obtained
     """
 
     def __init__(self,
@@ -47,15 +47,15 @@ class Vcg(general.Signal):
 
         Parameters
         ----------
-        ecg : signalanalysis.ecg.Ecg
+        ecg : signalanalysis.signalanalysis.ecg.Ecg
             Original ECG data object
 
         See Also
         --------
-        :py:meth:`signalanalysis.general.Signal.__init__ : Base __init__ method
-        :py:meth:`signalanalysis.vcg.Vcg.get_from_ecg : Method to convert ECG data to VCG data
-        :py:meth:`signalanalysis.general.Signal.apply_filter` : Filtering method
-        :py:meth:`signalanalysis.general.Signal.get_n_beats` : Beat calculation method
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.__init__ : Base __init__ method
+        :py:meth:`signalanalysis.signalanalysis.vcg.Vcg.get_from_ecg : Method to convert ECG data to VCG data
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.apply_filter` : Filtering method
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.get_n_beats` : Beat calculation method
         """
         super(Vcg, self).__init__(**kwargs)
         self.ecg_filter = ecg.filter
@@ -73,7 +73,7 @@ class Vcg(general.Signal):
 
         Parameters
         ----------
-        ecg : signalanalysis.ecg.Ecg
+        ecg : signalanalysis.signalanalysis.ecg.Ecg
             List of ECG dataframe data, or ECG dataframe data directly, with dict keys corresponding to ECG outputs
 
         References
@@ -325,7 +325,7 @@ def get_vcg_from_ecg(ecgs: Union[List[pd.DataFrame], pd.DataFrame]) -> List[pd.D
 
     .. deprecated::
         The use of this module is deprecated, and the internal class method should be used in preference (
-        signalanalysis.vcg.Vcg.get_from_ecg())
+        signalanalysis.signalanalysis.vcg.Vcg.get_from_ecg())
 
     Parameters
     ----------

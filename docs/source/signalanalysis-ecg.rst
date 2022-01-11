@@ -2,7 +2,7 @@
 ECG Analysis
 ============
 
-.. _reading:
+.. _ecg-reading:
 
 Reading ECG data
 ----------------
@@ -13,8 +13,8 @@ some reason.
 
 .. code-block:: python3
 
-    >>> import signalanalysis.ecg
-    >>> import signalanalysis.vcg
+    >>> from signalanalysis import signalanalysis.ecg
+    >>> from signalanalysis import signalanalysis.vcg
     >>> ecg_example = signalanalysis.ecg.Ecg("filename")
     >>> vcg_example = signalanalysis.vcg.Vcg(ecg_example)
 
