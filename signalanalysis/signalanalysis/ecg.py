@@ -16,11 +16,11 @@ plt.style.use('seaborn')
 
 
 class Ecg(general.Signal):
-    """Base class to encapsulate data regarding an ECG recording, inheriting from :class:`signalanalysis.general.Signal`
+    """Base class to encapsulate data regarding an ECG recording, inheriting from :class:`signalanalysis.signalanalysis.general.Signal`
 
     See Also
     --------
-    :py:class:`signalanalysis.general.Signal`
+    :py:class:`signalanalysis.signalanalysis.general.Signal`
 
     Methods
     -------
@@ -55,8 +55,8 @@ class Ecg(general.Signal):
 
         See Also
         --------
-        :py:meth:`signalanalysis.general.Signal.__init__` : Base initialisation method
-        :py:meth:`signalanalysis.ecg.Ecg.read` : Reads the data from the file into the object
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.__init__` : Base initialisation method
+        :py:meth:`signalanalysis.signalanalysis.ecg.Ecg.read` : Reads the data from the file into the object
         """
         super(Ecg, self).__init__(**kwargs)
 
@@ -83,7 +83,7 @@ class Ecg(general.Signal):
 
         See Also
         --------
-        signalanalysis.ecg.Ecg.read_ecg_from_wfdb : underlying read method for wfdb files
+        signalanalysis.signalanalysis.ecg.Ecg.read_ecg_from_wfdb : underlying read method for wfdb files
         """
 
         # Reset all other values to zero to prevent confusion if reading new data to an existing structure,
@@ -190,20 +190,20 @@ class Ecg(general.Signal):
                 preprocess_data: pd.DataFrame = None,
                 drop_columns: List[str] = None,
                 unipolar_only: bool = True):
-        """Supplement the :meth:`signalanalysis.general.Signal.get_rms` with `unipolar_only`
+        """Supplement the :meth:`signalanalysis.signalanalysis.general.Signal.get_rms` with `unipolar_only`
 
         Parameters
         ----------
         preprocess_data : pd.DataFrame, optional
-            See :meth:`signalanalysis.general.Signal.get_rms`
+            See :meth:`signalanalysis.signalanalysis.general.Signal.get_rms`
         drop_columns : list of str, optional
-            See :meth:`signalanalysis.general.Signal.get_rms`
+            See :meth:`signalanalysis.signalanalysis.general.Signal.get_rms`
         unipolar_only : optional
             Whether to use only unipolar ECG leads to calculate RMS, default=True
 
         See Also
         --------
-        :py:meth:`signalanalysis.general.Signal.get_rms`
+        :py:meth:`signalanalysis.signalanalysis.general.Signal.get_rms`
 
         Notes
         -----
@@ -363,7 +363,7 @@ def read_ecg_from_igb(filename: str,
 
     Notes
     -----
-    For the .igb data used thus far, the `electrode_file` can be found at ``tests/12LeadElectrodes.dat``, and `dt` is
+    For the .igb data used thus far, the `electrode_file` can be found at ``signalanalysis/data/12LeadElectrodes.dat``, and `dt` is
     2ms
 
     References
@@ -513,7 +513,7 @@ def get_electrode_phie(phie_data: np.ndarray,
 
     Notes
     -----
-    For the .igb data used thus far, the `electrode_file` can be found at ``tests/12LeadElectrodes.dat``
+    For the .igb data used thus far, the `electrode_file` can be found at ``signalanalysis/data/12LeadElectrodes.dat``
     """
 
     # Extract node locations for ECG data, then pull data corresponding to those nodes
