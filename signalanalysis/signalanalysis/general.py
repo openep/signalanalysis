@@ -6,8 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from typing import List, Union, Optional
 
-import tools.maths
-import tools.python
+from .. import tools
 
 plt.style.use('seaborn')
 

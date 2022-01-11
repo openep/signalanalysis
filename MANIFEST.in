@@ -1,0 +1,14 @@
+# include all sub-directories and files from these directories
+graft docs
+graft signalanalysis
+graft tests
+
+include LICENSE
+include README.rst
+include requirements.txt
+include requirements-dev.txt
+
+global-exclude *.py[cod] __pycache__/* *.so *.dylib
+global-exclude tags
+global-exclude *.swp
+global-exclude .signalanalysis.* *.debug

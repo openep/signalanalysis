@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from signalanalysis.egm import Egm
+    from ..signalanalysis.egm import Egm
 
 plt.style.use('seaborn')
 

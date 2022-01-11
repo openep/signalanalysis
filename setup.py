@@ -1,14 +1,18 @@
-from __future__ import print_function
-from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
-import io
 import os
-import sys
+import io
+from setuptools import setup
+from pkg_resources import parse_requirements
 
-import signalanalysis
+source_dir = os.path.abspath(os.path.dirname(__file__))
 
-here = os.path.abspath(os.path.dirname(__file__))
+# read the version and other strings from _version.py
+version_info = {}
+with open(os.path.join(source_dir, "signalanalysis/_version.py")) as o:
+    exec(o.read(), version_info)
 
+# read install requirements from requirements.txt
+with open(os.path.join(source_dir, "requirements.txt")) as o:
+    requirements = [str(r) for r in parse_requirements(o.read())]
 
 def read(*filenames, **kwargs):
     encoding = kwargs.get('encoding', 'utf-8')
@@ -19,54 +23,28 @@ def read(*filenames, **kwargs):
             buf.append(f.read())
     return sep.join(buf)
 
-
-long_description = read('README.txt', 'CHANGES.txt')
-
-
-class PyTest(TestCommand):
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        import pytest
-        errcode = pytest.main(self.test_args)
-        sys.exit(errcode)
-
+long_description = read('README.rst')
 
 setup(
-    name='sandman',
-    version=signalanalysis.__version__,
+    name='signalanalysis',
+    version=version_info['__version__'],
     url='https://github.com/philip-gemmell/signalanalysis',
     license='Apache Software License',
     author='Philip Gemmell',
-    tests_require=['pytest'],
-    install_requires=['Flask>=0.10.1',
-                      'Flask-SQLAlchemy>=1.0',
-                      'SQLAlchemy==0.8.2',
-                      ],
-    cmdclass={'test': PyTest},
-    author_email='jeff@jeffknupp.com',
-    description='Automated REST APIs for existing database-driven systems',
+    install_requires=requirements,
+    author_email='philip.gemmell@kcl.ac.uk',
+    description='A Python package for the reading, analysis and plotting of ECG and VCG data',
     long_description=long_description,
-    packages=['sandman'],
+    packages=['signalanalysis'],
+    package_dir={'signalanalysis': 'signalanalysis'},
+    package_data={'signalanalysis': ['data/**/*']},
     include_package_data=True,
     platforms='any',
-    test_suite='sandman.test.test_sandman',
     classifiers=[
         'Programming Language :: Python',
         'Development Status :: 4 - Beta',
         'Natural Language :: English',
-        'Environment :: Web Environment',
-        'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: Software Development :: Libraries :: Application Frameworks',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-        ],
-    extras_require={
-        'testing': ['pytest'],
-    }
+        ]
 )

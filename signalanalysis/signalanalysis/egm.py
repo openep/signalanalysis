@@ -8,12 +8,12 @@ import matplotlib.pyplot as plt
 from typing import Optional, Union, List
 from tqdm import tqdm
 
-import signalanalysis.general
-import signalplot.egm
-import tools.plotting
+from . import general
+from .. import signalplot
+from .. import tools
 
 
-class Egm(signalanalysis.general.Signal):
+class Egm(general.Signal):
     """Base class for EGM data, inheriting from :class:`signalanalysis.general.Signal`
 
     See Also
@@ -437,7 +437,7 @@ class Egm(signalanalysis.general.Signal):
         # Estimate BCL, then calculate the upper and lower bounds within which to search for the repolarisation time
         if self.at.empty:
             self.get_at(**kwargs)
-        bcl = signalanalysis.general.get_bcl(self.at)
+        bcl = general.get_bcl(self.at)
 
         # INITIALISE WINDOWS WITHIN WHICH TO SEARCH FOR RT
 

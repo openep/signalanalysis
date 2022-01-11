@@ -1,8 +1,7 @@
 import numpy as np
 from typing import List, Tuple, Union, Optional, Any
 
-import tools.plotting
-
+from . import plotting
 
 def recursive_len(item: list):
     """ Return the total number of elements with a potentially nested list """
@@ -222,9 +221,9 @@ def convert_input_to_list(input_data: Any,
         if default_entry is None:
             output_data = [input_data for _ in range(n_list)]
         elif default_entry == 'colour':
-            output_data = tools.plotting.get_plot_colours(n=n_list)
+            output_data = plotting.get_plot_colours(n=n_list)
         elif default_entry == 'line':
-            output_data = tools.plotting.get_plot_lines(n=n_list)
+            output_data = plotting.get_plot_lines(n=n_list)
         else:
             output_data = [default_entry for _ in range(n_list)]
 

@@ -1,1 +1,3 @@
-__all__ = ["general", "ecg", "vcg", "egm"]
+__all__ = ['signalanalysis', 'signalplot', 'tools']
+
+from . import signalanalysis, signalplot, tools

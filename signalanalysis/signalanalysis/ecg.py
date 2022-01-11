@@ -2,20 +2,20 @@ import ast
 import re
 import numpy as np
 import pandas as pd
+from signalanalysis.tools import maths
 import wfdb
 from typing import List, Union
 import matplotlib.pyplot as plt
 
-from carputils.carpio import igb  # type: ignore
-
-import tools.maths
-import signalanalysis.general
-import signalplot.ecg
+from . import general
+from .. import tools
+from .. import signalplot
+from ..io import igb
 
 plt.style.use('seaborn')
 
 
-class Ecg(signalanalysis.general.Signal):
+class Ecg(general.Signal):
     """Base class to encapsulate data regarding an ECG recording, inheriting from :class:`signalanalysis.general.Signal`
 
     See Also
@@ -282,7 +282,7 @@ class Ecg(signalanalysis.general.Signal):
             beats_short[i_beat] = beats_short[i_beat].iloc[i_start:i_end, :]
 
         # Perform QRS detection on the individual beats
-        ecgs_rms = [signalanalysis.general.get_signal_rms(beat_short, unipolar_only=unipolar_only) for beat_short in
+        ecgs_rms = [general.get_signal_rms(beat_short, unipolar_only=unipolar_only) for beat_short in
                     beats_short]
         ecgs_grad = [pd.Series(np.gradient(np.gradient(ecg_rms)), index=ecg_rms.index) for ecg_rms in ecgs_rms]
         self.qrs_start = [ecg_grad[ecg_grad == ecg_grad.max()].index[0] for ecg_grad in ecgs_grad]
@@ -612,7 +612,7 @@ def get_qrs_start(ecgs: Union[pd.DataFrame, List[pd.DataFrame]],
     if isinstance(ecgs, pd.DataFrame):
         ecgs = [ecgs]
 
-    ecgs_rms = [signalanalysis.general.get_signal_rms(ecg, unipolar_only=unipolar_only) for ecg in ecgs]
+    ecgs_rms = [get_signal_rms(ecg, unipolar_only=unipolar_only) for ecg in ecgs]
     ecgs_grad = [pd.Series(np.gradient(np.gradient(ecg_rms)), index=ecg_rms.index) for ecg_rms in ecgs_rms]
     qrs_starts = [ecg_grad[ecg_grad == ecg_grad.max()].index[0] for ecg_grad in ecgs_grad]
 

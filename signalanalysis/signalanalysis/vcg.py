@@ -7,11 +7,9 @@ from matplotlib import gridspec
 import warnings
 from typing import Union, List, Tuple, Optional, Iterable, TYPE_CHECKING
 
-import signalanalysis.ecg
-import signalplot.ecg
-import tools.maths
-import tools.python
-import tools.plotting
+from . import ecg, general
+from .. import signalplot
+from .. import tools
 
 if TYPE_CHECKING:
     from signalanalysis.ecg import Ecg
@@ -19,7 +17,7 @@ if TYPE_CHECKING:
 plt.style.use('seaborn')
 
 
-class Vcg(signalanalysis.general.Signal):
+class Vcg(general.Signal):
     """Base class to encapsulate data from VCG
 
     Attributes
@@ -39,7 +37,7 @@ class Vcg(signalanalysis.general.Signal):
     """
 
     def __init__(self,
-                 ecg: signalanalysis.ecg.Ecg,
+                 ecg: ecg.Ecg,
                  **kwargs):
         """Sub-method for __init___
 
@@ -70,7 +68,7 @@ class Vcg(signalanalysis.general.Signal):
 
         self.spatial_velocity = pd.DataFrame(dtype=float)
 
-    def get_from_ecg(self, ecg: signalanalysis.ecg.Ecg):
+    def get_from_ecg(self, ecg: ecg.Ecg):
         """Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
 
         Parameters

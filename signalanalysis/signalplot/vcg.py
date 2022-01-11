@@ -9,9 +9,7 @@ from math import sin, cos, acos, atan2
 import warnings
 from typing import List, Tuple, Optional, Union
 
-import tools.python
-import tools.plotting
-import signalanalysis.vcg
+from .. import tools
 
 plt.style.use('seaborn')
 
@@ -599,7 +597,7 @@ def plot_arc3d(vector1: List[float],
 
 
 def plot_spatial_velocity(vcg: Union[pd.DataFrame, List[pd.DataFrame]],
-                          sv: Optional[List[List[float]]] = None,
+                          sv: List[List[float]],
                           limits: Optional[List[List[float]]] = None,
                           fig: plt.figure = None,
                           legend_vcg: Union[List[str], str, None] = None,
@@ -618,8 +616,7 @@ def plot_spatial_velocity(vcg: Union[pd.DataFrame, List[pd.DataFrame]],
     vcg : pd.DataFrame or list of pd.DataFrame
         VCG data
     sv : list of list of float, optional
-        Spatial velocity data. Only required to be given here if special parameters wish to be given, otherwise it
-        will be calculated using default parameters (default)
+        Spatial velocity data.
     limits : list of list of float, optional
         A series of 'limits' to be plotted on the figure with the VCG and spatial plot. Presented as a list of the
         same length of the VCG data, with the required limits within:
@@ -696,9 +693,6 @@ def plot_spatial_velocity(vcg: Union[pd.DataFrame, List[pd.DataFrame]],
     ax['y'].set_ylabel('VCG (y)')
     ax['z'].set_ylabel('VCG (z)')
     ax['z'].set_xlabel('Time (ms)')
-
-    if sv is None:
-        sv = signalanalysis.vcg.get_spatial_velocity(vcgs=vcg, filter_sv=filter_sv)
 
     """ Plot spatial velocity and VCG components"""
     i_colour_init = tools.python.get_i_colour(ax['sv'])

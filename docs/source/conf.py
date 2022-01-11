@@ -14,8 +14,6 @@ import os
 import sys
 
 # sys.path.insert(0, os.path.abspath('../../signalanalysis'))
-# sys.path.insert(0, os.path.abspath('../../signalplot'))
-# sys.path.insert(0, os.path.abspath('../../tools'))
 # sys.path.insert(0, os.path.abspath('../../tests'))
 sys.path.insert(0, os.path.abspath('../..'))  # Source code dir relative to this file
 
