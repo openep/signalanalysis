@@ -615,7 +615,7 @@ def plot_spatial_velocity(vcg: Union[pd.DataFrame, List[pd.DataFrame]],
     ----------
     vcg : pd.DataFrame or list of pd.DataFrame
         VCG data
-    sv : list of list of float, optional
+    sv : list of list of float
         Spatial velocity data.
     limits : list of list of float, optional
         A series of 'limits' to be plotted on the figure with the VCG and spatial plot. Presented as a list of the
@@ -630,10 +630,10 @@ def plot_spatial_velocity(vcg: Union[pd.DataFrame, List[pd.DataFrame]],
         Labels to apply to the limits, default=None
     limits_linestyles : list of str, optional
         Linestyles to apply to the different limits being supplied, default=None (will use varying linestyles based
-        on tools.plotting.get_plot_lines)
+        on signalanalysis.tools.plotting.get_plot_lines)
     limits_colours : list of str, optional
         Colours to apply to the different limits being supplied, default=None (will use varying colours based on
-        tools.plotting.get_plot_colours)
+        signalanalysis.tools.plotting.get_plot_colours)
     filter_sv : bool, optional
         Whether or not to apply filtering to spatial velocity prior to finding the start/end points for the
         threshold, default=True

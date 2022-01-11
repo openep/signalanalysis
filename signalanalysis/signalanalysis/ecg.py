@@ -612,7 +612,7 @@ def get_qrs_start(ecgs: Union[pd.DataFrame, List[pd.DataFrame]],
     if isinstance(ecgs, pd.DataFrame):
         ecgs = [ecgs]
 
-    ecgs_rms = [get_signal_rms(ecg, unipolar_only=unipolar_only) for ecg in ecgs]
+    ecgs_rms = [general.get_signal_rms(ecg, unipolar_only=unipolar_only) for ecg in ecgs]
     ecgs_grad = [pd.Series(np.gradient(np.gradient(ecg_rms)), index=ecg_rms.index) for ecg_rms in ecgs_rms]
     qrs_starts = [ecg_grad[ecg_grad == ecg_grad.max()].index[0] for ecg_grad in ecgs_grad]
 
