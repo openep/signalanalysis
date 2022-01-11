@@ -186,7 +186,7 @@ def convert_input_to_list(input_data: Any,
     the form [[x11, x21,...,xn1], [x12, x22,...,xn2],...[x1m, x2m,...xnm]]
 
     If the data are not in list form, will:
-        (a) if default_entry==None, will replicate input_data to match n_vcg, e.g. '-' becomes ['-', '-',...]
+        (a) if default_entry==None, will replicate input_data to match n_list, e.g. '-' becomes ['-', '-',...]
         (b) if default_entry=='colour', will return list of RBG values for colours
         (c) if default_entry=='line', will return list of line entries
         (d) for any other value of default_entry, will reproduce that value
