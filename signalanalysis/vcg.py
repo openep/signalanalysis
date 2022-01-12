@@ -5,13 +5,16 @@ from math import sin, cos, acos, atan2
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
 import warnings
-from typing import Union, List, Tuple, Optional, Iterable
+from typing import Union, List, Tuple, Optional, Iterable, TYPE_CHECKING
 
 import signalanalysis.ecg
 import signalplot.ecg
 import tools.maths
 import tools.python
 import tools.plotting
+
+if TYPE_CHECKING:
+    from signalanalysis.ecg import Ecg
 
 plt.style.use('seaborn')
 
@@ -65,6 +68,8 @@ class Vcg(signalanalysis.general.Signal):
         if self.n_beats != ecg.n_beats:
             warnings.warn('Number of beats detected in VCG different from number of beats detected in ECG.')
 
+        self.spatial_velocity = pd.DataFrame(dtype=float)
+
     def get_from_ecg(self, ecg: signalanalysis.ecg.Ecg):
         """Convert ECG data to vectorcardiogram (VCG) data using the Kors matrix method
 
@@ -98,6 +103,223 @@ class Vcg(signalanalysis.general.Signal):
         self.comments = ecg.comments
         self.data_source = ecg.data_source
         self.ecg_filter = ecg.filter
+
+    def get_spatial_velocity(self,
+                             velocity_offset: int = 2,
+                             filter_sv: bool = True,
+                             low_p: float = 40,
+                             order: int = 2):
+        """Calculate spatial velocity
+
+        Calculate the spatial velocity of a VCG, in terms of calculating the gradient of the VCG in each of its x,
+        y and z components, before combining these components in a Euclidian norm. Will then find the point at which the
+        spatial velocity exceeds a threshold value, and the point at which it declines below another threshold value.
+
+        Parameters
+        ----------
+        velocity_offset : int, optional
+            Offset between values in VCG over which to calculate spatial velocity, i.e. 1 will use neighbouring values to
+            calculate the gradient/velocity. Default=2
+        filter_sv : bool, optional
+            Whether or not to apply filtering to spatial velocity, default=True
+        low_p : float, optional
+            Low frequency for bandpass filter, default=40
+        order : int, optional
+            Order for Butterworth filter, default=2
+
+        Returns
+        -------
+        self.sv : pd.DataFrame
+            Spatial velocity data, filtered according to input parameters
+
+        Notes
+        -----
+        Calculation of spatial velocity based on [1]_, [2]_, [3]_
+
+        References
+        ----------
+        .. [1] Kors JA, van Herpen G, "Methodology of QT-interval measurement in the modular ECG analysis system (MEANS)"
+               Ann Noninvasive Electrocardiol. 2009 Jan;14 Suppl 1:S48-53. doi: 10.1111/j.1542-474X.2008.00261.x.
+        .. [2] Xue JQ, "Robust QT Interval Estimation—From Algorithm to Validation"
+               Ann Noninvasive Electrocardiol. 2009 Jan;14 Suppl 1:S35-41. doi: 10.1111/j.1542-474X.2008.00264.x.
+        .. [3] Sörnmo L, "A model-based approach to QRS delineation"
+               Comput Biomed Res. 1987 Dec;20(6):526-42.
+        """
+
+        # Compute spatial velocity of VCG
+        dvcg = np.divide(self.data.values[velocity_offset:] - self.data.values[:-velocity_offset],
+                         self.data.index.values[velocity_offset:, None] - self.data.index.values[:-velocity_offset, None])
+
+        # Calculates Euclidean distance based on spatial velocity in x, y and z directions, i.e. will calculate
+        # sqrt(x^2+y^2+z^2) to get total spatial velocity
+
+        # Calculate the time appropriate to the spatial velocity - cuts time off from each side equally, with a bias
+        # towards cutting the tail values. If len(vcg)=n, then:
+        # If velocity_offset=1 => len(sv)=n-1 => time_sv=time_vcg[:-1]
+        # If velocity_offset=2 => len(sv)=n-2 => time_sv=time_vcg[1:-1]
+        pre_cut = math.floor(velocity_offset / 2)
+        end_cut = velocity_offset - pre_cut
+
+        sv = pd.DataFrame(np.linalg.norm(dvcg, axis=1), index=self.data.index.values[pre_cut:-end_cut], columns=['sv'])
+        if filter_sv:
+            self.spatial_velocity = tools.maths.filter_butterworth(sv, freq_filter=low_p, order=order)
+        else:
+            self.spatial_velocity = sv
+
+    def get_qrs(self,
+                threshold_frac_start: float = 0.22,
+                threshold_frac_end: float = 0.54,
+                qrs_window: float = 180,
+                ecg: Optional["Ecg"] = None,
+                **kwargs):
+        """Calculate the extent of the VCG QRS complex on the basis of max derivative
+
+        TODO: Check whether i_qrs_start variable is needed, or can be simplified using DataFrame function
+        TODO: Adapt to search signal containing multiple beats
+
+        Calculate the start and end points, and hence duration, of the QRS complex of a list of VCGs. For each
+        signal, it finds the time at which the spatial elocity of the VCG exceeds a threshold value (the start time),
+        then searches backwards from the end of the VCG to find when this threshold is exceeded (the end time); the
+        start and end thresholds do not necessarily have to be the same. Since this is calulcated through spatial
+        velocity, the parameters used in that function should be remembered when calculating QRS here.
+
+        Parameters
+        ----------
+        threshold_frac_start : float, optional
+            Fraction of maximum spatial velocity to trigger start of QRS detection, default=0.15
+        threshold_frac_end : float, optional
+            Fraction of maximum spatial velocity to trigger end of QRS detection, default=0.15
+        qrs_window : float, optional
+            Default size of 'window' in which to search for end of QRS complex, default=180ms
+        ecg : signalanalysis.ecg.Ecg, optional
+            ECG data associated with VCG data. Only used if having trouble establishing QRS start, in which case will be
+            used to plot ECG data to allow user to determine whether or not the QRS is occurring at the start of the
+            simulation, or whether there is a more deep-seated issue with the data.
+
+        Returns
+        -------
+        self.qrs_start : list of float
+            List of start time of QRS complexes of provided VCGs
+        self.qrs_end : list of float
+            List of end time of QRS complex of provided VCGs
+        self.qrs_duration : list of float
+            List of duration of QRS complex of provided VCGs
+
+        See Also
+        --------
+        :py:meth:`signalanalysis.vcg.Vcg.get_spatial_velocity` : Method to calculate spatial velocity
+        """
+
+        # Process input arguments
+        if ecg is not None:
+            assert self.data_source == ecg.data_source
+        assert 0 < threshold_frac_start < 1, "threshold_frac_start must be between 0 and 1"
+        assert 0 < threshold_frac_end < 1, "threshold_frac_end must be between 0 and 1"
+
+        if self.spatial_velocity.empty:
+            self.get_spatial_velocity(**kwargs)
+
+        # Determine threshold for QRS complex, then find start of QRS complex. Iteratively remove more of the plot if
+        # the 'start' is found to be 0 (implies it is still getting confused by the preceding wave,
+        # but inspection flag added to allow if just very early QRS).
+        sim_sv = self.spatial_velocity.copy()
+        threshold_start = sim_sv.max().values * threshold_frac_start
+        i_start = np.where(sim_sv > threshold_start)[0]
+        while i_start[0] == 0:
+            # Find where the difference between successive values above the threshold is greater than 1,
+            # which indicates a transition from the sequence at the start of the trace (which we want to avoid) to
+            # the next sequence (which is the one we actually want), then retrain with new data (need to reset
+            # threshold value!)
+            i_start_diff = np.diff(i_start)
+            i_start = np.where(i_start_diff != 1)[0][0]+1
+            t_start = self.spatial_velocity.index[i_start]
+            sim_sv = self.spatial_velocity.loc[t_start:, :]
+            threshold_start = sim_sv.max().values * threshold_frac_start
+            i_start = np.where(sim_sv > threshold_start)[0]
+            if self.data.index[i_start[0]]-self.data.index[0] > 50:
+                warnings.warn("More than 50 ms removed in QRS calculation!")
+                _ = signalplot.ecg.plot_dataframe(ecg.data)
+                fig, ax = plt.subplots(1, 1)
+                ax.plot(self.spatial_velocity)
+                ax.set_xlabel('Time')
+                ax.set_ylabel('Spatial Velocity')
+                ax.axhline(sim_sv.max().values * threshold_frac_start,
+                           label='Threshold={}'.format(threshold_frac_start))
+                ax.legend()
+                print("Hack applied here - need to close the figure window in order to continue with the program.")
+                plt.show(block=True)
+                qrs_early = ''
+                while not (qrs_early.lower() == 'y' or qrs_early.lower() == 'n' or ',' in qrs_early):
+                    qrs_early = input('More than 50ms of trace removed - do you wish to :'
+                                      '\n\tset start to 0 (y), '
+                                      '\n\tset values to NaN (n),'
+                                      '\n\tspecify a cut-off and new threshold (ms to remove, threshold_value)?')
+                if qrs_early.lower() == 'y':
+                    sim_sv = self.spatial_velocity.copy()
+                    i_start[0] = 0
+                    break
+                elif qrs_early.lower() == 'n':
+                    warnings.warn('QRS unable to be calculated - setting to NaN.')
+                    i_start[0] = np.nan
+                elif ',' in qrs_early:
+                    qrs_early = qrs_early.split(',')
+                    assert len(qrs_early) == 2
+                    qrs_early = [float(qrs_early_temp) for qrs_early_temp in qrs_early]
+                    assert self.spatial_velocity.index[0] <= qrs_early[0] < self.spatial_velocity.index[-1]
+                    # noinspection PyArgumentList
+                    assert self.spatial_velocity.min().values <= qrs_early[1] <= self.spatial_velocity.max().values
+                    sim_sv = self.spatial_velocity.loc[qrs_early[0]:, :]
+                    i_start = np.where(sim_sv > qrs_early[1])[0]
+
+        if np.isnan(i_start[0]):
+            self.qrs_start = np.nan
+            self.qrs_end = np.nan
+            self.qrs_duration = np.nan
+        else:
+            self.qrs_start = sim_sv.index[i_start][0]
+
+            threshold_end = sim_sv.max().values * threshold_frac_end
+            try:
+                # Set window for QRS complex, then find when threshold_end is exceeded (searching backwards from end
+                # of window)
+                sim_sv_temp = sim_sv.loc[self.qrs_start:self.qrs_start+qrs_window, :]
+                qrs_end_temp = sim_sv_temp[sim_sv_temp > threshold_end]
+                qrs_end_temp.dropna(axis=0, inplace=True)
+                self.qrs_end = qrs_end_temp.index[-1]
+                # i_qrs_end = len(sim_sv) - (np.where(np.flip(sim_sv.values) > threshold_end)[0][0] - 1)
+                # qrs_end.append(sim_sv.index[i_qrs_end])
+            except IndexError:
+                # Figure won't plot if using the Qt5Agg backend, for some reason (see
+                # https://github.com/matplotlib/matplotlib/issues/9206 for discussion, but that says it's fixed).
+                # Unable to change backend in any meaningful way to resolve this dispute, so forced to use a block on
+                # the plt.show() command
+                _ = signalplot.ecg.plot_ecg(ecg)
+                fig, ax = plt.subplots(1, 1)
+                ax.plot(sim_sv)
+                ax.set_xlabel('Time')
+                ax.set_ylabel('Spatial Velocity')
+                ax.axhline(threshold_start, color='k', linestyle='--')
+                ax.axhline(threshold_end, color='k', linestyle='-')
+                ax.axvline(sim_sv.index[i_start][0], color='k', linestyle='--')
+                print("Hack applied here - need to close the figure window in order to continue with the program.")
+                plt.show(block=True)
+
+                qrs_late = ''
+                while not (qrs_late.lower() == 'n'):
+                    qrs_late = input('Struggling to find QRS end - do you wish to:'
+                                     '\n\tset values to NaN (n),')
+                if qrs_late.lower() == 'n':
+                    warnings.warn('QRS unable to be calculated - setting to NaN.')
+                    self.qrs_end = np.nan
+
+            self.qrs_duration = self.qrs_end - self.qrs_start
+
+            if not np.isnan(self.qrs_end):
+                assert self.qrs_start < self.qrs_end, \
+                    "qrs_start {} >= qrs_end[-1] {}".format(self.qrs_start, self.qrs_end)
+                assert self.qrs_end <= self.spatial_velocity.index[-1], "i_qrs_end >= len(sv)"
+
+        return None
 
 
 def get_vcg_from_ecg(ecgs: Union[List[pd.DataFrame], pd.DataFrame]) -> List[pd.DataFrame]:
@@ -158,6 +380,10 @@ def get_qrs_start_end(vcgs: Union[List[pd.DataFrame], pd.DataFrame],
                       ecgs: Union[List[pd.DataFrame], pd.DataFrame, None] = None) -> Tuple[List[float], List[float],
                                                                                            List[float]]:
     """Calculate the extent of the VCG QRS complex on the basis of max derivative
+
+    .. deprecated::
+        The use of this module is deprecated, and the internal class method should be used in preference (
+        signalanalysis.vcg.Vcg.get_qrs())
 
     TODO: Check whether i_qrs_start variable is needed, or can be simplified using DataFrame function
 
@@ -322,6 +548,10 @@ def get_spatial_velocity(vcgs: Union[List[pd.DataFrame], pd.DataFrame],
                          low_p: float = 40,
                          order: int = 2) -> List[pd.DataFrame]:
     """Calculate spatial velocity
+
+    .. deprecated::
+        The use of this module is deprecated, and the internal class method should be used in preference (
+        signalanalysis.vcg.Vcg.get_spatial_velocity())
 
     Calculate the spatial velocity of a VCG, in terms of calculating the gradient of the VCG in each of its x,
     y and z components, before combining these components in a Euclidian norm. Will then find the point at which the
