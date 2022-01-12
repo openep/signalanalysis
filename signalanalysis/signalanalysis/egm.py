@@ -156,7 +156,7 @@ class Egm(general.Signal):
             egm1(tn), egm2(tn), egm3(tn)
 
         Historically, `frequency` has been set to 2034.5 Hz for the importprecision data, an example of which is
-        saved in ``signalanalysis/data/egm_unipolar.csv`` and ``signalanalysis/data/egm_bipolar.csv``.
+        can be accessed via ``signalanalysis.data.datafiles.EGM_UNIPOLAR`` and ``signalanalysis.data.datafiles.EGM_BIPOLAR``.
         """
 
         self.data_uni = pd.read_csv(data_location_uni, header=None)

@@ -7,7 +7,7 @@ EGM Analysis
 Example data
 ------------
 
-Sample EGM data are stored in ``signalanalysis/data/egm_unipolar.csv`` and ``signalanalysis/data/egm_bipolar.csv``.
+Sample EGM data can be accessed via ``signalanalysis.data.datafiles.EGM_UNIPOLAR`` and ``signalanalysis.data.datafiles.EGM_BIPOLAR``.
 
 .. _egm-reading:
 

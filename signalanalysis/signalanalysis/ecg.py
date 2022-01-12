@@ -362,8 +362,8 @@ def read_ecg_from_igb(filename: str,
 
     Notes
     -----
-    For the .igb data used thus far, the `electrode_file` can be found at ``signalanalysis/data/12LeadElectrodes.dat``, and `dt` is
-    2ms
+    For the .igb data used thus far, the `electrode_file` can be accessed via ``signalanalysis.data.datafiles.ELECTRODES``,
+    and `dt` is 2ms.
 
     References
     ----------
@@ -512,7 +512,7 @@ def get_electrode_phie(phie_data: np.ndarray,
 
     Notes
     -----
-    For the .igb data used thus far, the `electrode_file` can be found at ``signalanalysis/data/12LeadElectrodes.dat``
+    For the .igb data used thus far, the `electrode_file` can be accessed via ``signalanalysis.data.datafiles.ELECTRODES``,
     """
 
     # Extract node locations for ECG data, then pull data corresponding to those nodes

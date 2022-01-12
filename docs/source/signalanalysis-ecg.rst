@@ -23,12 +23,20 @@ unfortunately cannot be guaranteed. These can be loaded as follows:
 .. code-block:: python3
 
     >>> import signalanalysis as sa
-    >>> ecg_example_lob = sa.signalanalysis.ecg.Ecg("signalanalysis/data/lobachevsky/3")
-    >>> test_ecg_ptb100 = sa.signalanalysis.ecg.Ecg('signalanalysis/data/ptb-xl/records100/00000/00001_lr', \
-                                                    sample_rate=100, \
-                                                    comments_file='signalanalysis/data/ptb-xl/ptbxl_database.csv')
-    >>> test_ecg_ptb500 = sa.signalanalysis.ecg.Ecg('signalanalysis/data/ptb-xl/records500/00000/00001_hr', \
-                                                    sample_rate=500, \
-                                                    comments_file='signalanalysis/data/ptb-xl/ptbxl_database.csv')
+    >>> from signalanalysis.data import datafiles
+    >>> ecg_lob = sa.signalanalysis.ecg.Ecg(
+            datafiles.LOBACHEVSKY,
+            sample_rate=500,
+        )
+    >>> ecg_ptb_100 = sa.signalanalysis.ecg.Ecg(
+            datafiles.PTB_100,
+            sample_rate=100,
+            comments_file=datafiles.PTB_DATABASE,
+        )
+    >>> ecg_ptb_500 = sa.signalanalysis.ecg.Ecg(
+            datafiles.PTB_500,
+            sample_rate=500,
+            comments_file=datafiles.PTB_DATABASE,
+        )
 
 These sample files are downloaded from PhysioNet, and represent only a fraction of the available data.
