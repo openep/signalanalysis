@@ -2,7 +2,7 @@
 ECG Analysis
 ============
 
-.. _reading:
+.. _ecg-reading:
 
 Reading ECG data
 ----------------
@@ -13,22 +13,35 @@ some reason.
 
 .. code-block:: python3
 
-    >>> import signalanalysis.ecg
-    >>> import signalanalysis.vcg
-    >>> ecg_example = signalanalysis.ecg.Ecg("filename")
-    >>> vcg_example = signalanalysis.vcg.Vcg(ecg_example)
+    import signalanalysis as sa
+
+    ecg_example = sa.signalanalysis.ecg.Ecg("filename")
+    vcg_example = sa.signalanalysis.vcg.Vcg(ecg_example)
 
 Currently, sample data are included in the GitHub archive - it is hoped that these will be freely available, but it
 unfortunately cannot be guaranteed. These can be loaded as follows:
 
 .. code-block:: python3
 
-    >>> ecg_example_lob = signalanalysis.ecg.Ecg("tests/lobachevsky/3")
-    >>> test_ecg_ptb100 = signalanalysis.ecg.Ecg('tests/ptb-xl/records100/00000/00001_lr', \
-                                                 sample_rate=100, \
-                                                 comments_file='tests/ptb-xl/ptbxl_database.csv')
-    >>> test_ecg_ptb500 = signalanalysis.ecg.Ecg('tests/ptb-xl/records500/00000/00001_hr', \
-                                                 sample_rate=500, \
-                                                 comments_file='tests/ptb-xl/ptbxl_database.csv')
+    import signalanalysis as sa
+    from signalanalysis.data import datafiles
+
+    ecg_lob = sa.signalanalysis.ecg.Ecg(
+        datafiles.LOBACHEVSKY,
+        sample_rate=500,
+    )
+
+    ecg_ptb_100 = sa.signalanalysis.ecg.Ecg(
+        datafiles.PTB_100,
+        sample_rate=100,
+        comments_file=datafiles.PTB_DATABASE,
+    )
+
+    ecg_ptb_500 = sa.signalanalysis.ecg.Ecg(
+        datafiles.PTB_500,
+        sample_rate=500,
+        comments_file=datafiles.PTB_DATABASE,
+    )
+
 
 These sample files are downloaded from PhysioNet, and represent only a fraction of the available data.

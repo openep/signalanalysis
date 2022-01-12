@@ -1,0 +1,7 @@
+numpy>=1.19.3
+pandas>=1.1.4
+scipy<=1.5.4
+scikit-learn>=1.0.1
+matplotlib>=3.3.3
+wfdb==3.4.0
+tqdm

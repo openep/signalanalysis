@@ -13,7 +13,7 @@ dependencies are where possible maintained. Clone the repository, then install t
 
     user@home:~$ git clone git@github.com:philip-gemmell/signalanalysis.git
     user@home:~$ cd signalanalysis
-    user@home:~/signalanalysis$ pipenv install
+    user@home:~/signalanalysis$ pipenv install -e .
 
 Once the repository is cloned, it is currently the case that all work must be done within the Python3 environment.
 However, it is recommended to use the virtual environment from pipenv rather than the system-wide Python3 (after
@@ -34,23 +34,23 @@ separately---further details for each function can be found within each files do
 
 - :doc:`signalanalysis`
 
-  - signalanalysis.general
-  - :doc:`signalanalysis.ecg <signalanalysis-ecg>`
-  - :doc:`signalanalysis.vcg <signalanalysis-vcg>`
-  - :doc:`signalanalysis.egm <signalanalysis-egm>`
+  - signalanalysis.signalanalysis.general
+  - :doc:`signalanalysis.signalanalysis.ecg <signalanalysis-ecg>`
+  - :doc:`signalanalysis.signalanalysis.vcg <signalanalysis-vcg>`
+  - :doc:`signalanalysis.signalanalysis.egm <signalanalysis-egm>`
 
 - signalplot
 
-  - signalplot.general
-  - signalplot.ecg
-  - signalplot.vcg
-  - signalplot.egm
+  - signalanalysis.signalplot.general
+  - signalanalysis.signalplot.ecg
+  - signalanalysis.signalplot.vcg
+  - signalanalysis.signalplot.egm
 
 - tools
 
-  - tools.maths
-  - tools.plotting
-  - tools.python
+  - signalanalysis.tools.maths
+  - signalanalysis.tools.plotting
+  - signalanalysis.tools.python
 
 .. _classplan:
 
@@ -65,9 +65,10 @@ that end, the raw data can be accessed as the ``.data`` attribute:
 
 .. code-block:: python3
 
-    >>> ecg_class = signalanalysis.ecg.Ecg("filename") # Returns an Ecg class
-    >>> vcg_class = signalanalysis.vcg.Vcg(ecg_class)  # Returns a Vcg class
-    >>> ecg_data = ecg_class.data                      # Returns a Pandas DataFrame of the underlying data
-    >>> vcg_data = vcg_class.data                      # Returns a Pandas DataFrame of the underlying data
+    import signalanalysis as sa
+    ecg_class = sa.signalanalysis.ecg.Ecg("filename") # Returns an Ecg class
+    vcg_class = sa.signalanalysis.vcg.Vcg(ecg_class)  # Returns a Vcg class
+    ecg_data = ecg_class.data                         # Returns a Pandas DataFrame of the underlying data
+    vcg_data = vcg_class.data                         # Returns a Pandas DataFrame of the underlying data
 
 

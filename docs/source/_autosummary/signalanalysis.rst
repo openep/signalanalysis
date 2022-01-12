@@ -26,9 +26,10 @@
    :template: custom-module-template.rst
    :recursive:
 
-   signalanalysis.ecg
-   signalanalysis.egm
-   signalanalysis.general
-   signalanalysis.vcg
+   signalanalysis.data
+   signalanalysis.io
+   signalanalysis.signalanalysis
+   signalanalysis.signalplot
+   signalanalysis.tools
 
 

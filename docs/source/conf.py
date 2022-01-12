@@ -13,10 +13,8 @@
 import os
 import sys
 
-# sys.path.insert(0, os.path.abspath('../../signalanalysis'))
-# sys.path.insert(0, os.path.abspath('../../signalplot'))
-# sys.path.insert(0, os.path.abspath('../../tools'))
-# sys.path.insert(0, os.path.abspath('../../tests'))
+sys.path.insert(0, os.path.abspath('../../signalanalysis'))
+sys.path.insert(0, os.path.abspath('../../tests'))
 sys.path.insert(0, os.path.abspath('../..'))  # Source code dir relative to this file
 
 # -- Project information -----------------------------------------------------
@@ -40,7 +38,7 @@ extensions = [
     'sphinx.ext.coverage'
 ]
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
-autodoc_mock_imports = ["wfdb", "sklearn", "carputils", "tqdm"]
+autodoc_mock_imports = ["wfdb", "sklearn", "tqdm"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
