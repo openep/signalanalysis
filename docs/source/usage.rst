@@ -65,10 +65,10 @@ that end, the raw data can be accessed as the ``.data`` attribute:
 
 .. code-block:: python3
 
-    >>> import signalanalysis as sa
-    >>> ecg_class = sa.signalanalysis.ecg.Ecg("filename") # Returns an Ecg class
-    >>> vcg_class = sa.signalanalysis.vcg.Vcg(ecg_class)  # Returns a Vcg class
-    >>> ecg_data = ecg_class.data                         # Returns a Pandas DataFrame of the underlying data
-    >>> vcg_data = vcg_class.data                         # Returns a Pandas DataFrame of the underlying data
+    import signalanalysis as sa
+    ecg_class = sa.signalanalysis.ecg.Ecg("filename") # Returns an Ecg class
+    vcg_class = sa.signalanalysis.vcg.Vcg(ecg_class)  # Returns a Vcg class
+    ecg_data = ecg_class.data                         # Returns a Pandas DataFrame of the underlying data
+    vcg_data = vcg_class.data                         # Returns a Pandas DataFrame of the underlying data
 
 
