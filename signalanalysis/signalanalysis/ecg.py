@@ -2,7 +2,6 @@ import ast
 import re
 import numpy as np
 import pandas as pd
-from signalanalysis.tools import maths
 import wfdb
 from typing import List, Union
 import matplotlib.pyplot as plt

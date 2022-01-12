@@ -12,7 +12,6 @@ and thus VCG data can only (at this stage) be derived from ECG data.
 
 .. code-block:: python3
 
-    >>> from signalanalysis import signalanalysis.ecg
-    >>> from signalanalysis import signalanalysis.vcg
-    >>> ecg_example = signalanalysis.ecg.Ecg("filename")
-    >>> vcg_example = signalanalysis.vcg.Vcg(ecg_example)
+    >>> import signalanalysis as sa
+    >>> ecg_example = sa.signalanalysis.ecg.Ecg("filename")
+    >>> vcg_example = sa.signalanalysis.vcg.Vcg(ecg_example)

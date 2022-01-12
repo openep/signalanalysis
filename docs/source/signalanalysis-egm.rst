@@ -23,9 +23,9 @@ frequency of the data when reading the data.
 
 .. code-block:: python3
 
-    >>> from signalanalysis import signalanalysis.egm
-    >>> example_egm = signalanalysis.egm.Egm('unipolar.csv', 'bipolar.csv', frequency=2034.5)
-    >>> example_egm_nobipolar = signalanalysis.egm.Egm('unipolar.csv', frequency=2034.5)
+    >>> import signalanalysis as sa
+    >>> example_egm = sa.signalanalysis.egm.Egm('unipolar.csv', 'bipolar.csv', frequency=2034.5)
+    >>> example_egm_nobipolar = sa.signalanalysis.egm.Egm('unipolar.csv', frequency=2034.5)
 
 From this point on, the code should automatically adapt what methods it uses - no change in calls are required in
 subsequent calculations depending on whether bipolar data are present.
