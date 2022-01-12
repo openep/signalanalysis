@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..signalanalysis.egm import Egm
+    from signalanalysis.signalanalysis.egm import Egm
 
 plt.style.use('seaborn')
 
@@ -25,7 +25,7 @@ def plot_signal(data: "Egm",
 
     Parameters
     ----------
-    data : signalanalysis.egm.Egm
+    data : signalanalysis.signalanalysis.egm.Egm
         EGM data
     i_plot : int, optional
         Which signal from the data to plot, default=random

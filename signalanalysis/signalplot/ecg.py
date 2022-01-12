@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from typing import Union, Optional, List, Tuple
 
-from .. import tools
+from signalanalysis import tools
 
 plt.style.use('seaborn')
 

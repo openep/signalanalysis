@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 from typing import Optional, Union, List
 from tqdm import tqdm
 
-from . import general
-from .. import signalplot
-from .. import tools
+from signalanalysis.signalanalysis import general
+from signalanalysis import signalplot
+from signalanalysis import tools
 
 
 class Egm(general.Signal):

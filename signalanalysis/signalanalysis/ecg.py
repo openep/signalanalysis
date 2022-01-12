@@ -6,10 +6,10 @@ import wfdb
 from typing import List, Union
 import matplotlib.pyplot as plt
 
-from . import general
-from .. import tools
-from .. import signalplot
-from ..io import igb
+from signalanalysis.signalanalysis import general
+from signalanalysis import tools
+from signalanalysis import signalplot
+from signalanalysis.io import igb
 
 plt.style.use('seaborn')
 

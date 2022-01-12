@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from typing import List, Union, Optional
 
-from .. import tools
+from signalanalysis import tools
 
 plt.style.use('seaborn')
 
@@ -641,8 +641,8 @@ def get_twave_end(ecgs: Union[List[pd.DataFrame], pd.DataFrame],
             twave_ends[i_twave].loc[0, 'median'] = twave_end_median
 
     if plot_result:
-        from ..signalplot import ecg as ep
-        from ..signalplot import vcg as vp
+        from signalanalysis.signalplot import ecg as ep
+        from signalanalysis.signalplot import vcg as vp
         from sklearn import preprocessing
 
         for i_ecg, ecg in enumerate(ecgs):

@@ -7,9 +7,9 @@ from matplotlib import gridspec
 import warnings
 from typing import Union, List, Tuple, Optional, Iterable, TYPE_CHECKING
 
-from . import ecg, general
-from .. import signalplot
-from .. import tools
+from signalanalysis.signalanalysis import ecg, general
+from signalanalysis import signalplot
+from signalanalysis import tools
 
 if TYPE_CHECKING:
     from signalanalysis.ecg import Ecg
