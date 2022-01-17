@@ -238,6 +238,10 @@ class Egm(general.Signal):
         if self.t_peaks.empty:
             self.get_peaks(**kwargs)
 
+        # we'll store these values in data frames later on
+        beat_start_values = np.full_like(self.t_peaks, fill_value=np.NaN)
+        beat_end_values = np.full_like(self.t_peaks, fill_value=np.NaN)
+
         self.beats_uni = dict.fromkeys(self.data_uni.columns)
         self.beats_bi = dict.fromkeys(self.data_uni.columns)
 
@@ -245,7 +249,8 @@ class Egm(general.Signal):
         for key, bcls in zip(self.data_uni, all_bcls):
 
             # If only one beat is detected, can end here
-            if self.n_beats[key] == 1:
+            n_beats = self.n_beats[key]
+            if n_beats == 1:
                 self.beats_uni[key] = [self.data_uni.loc[:, key]]
                 self.beats_bi[key] = [self.data_bi.loc[:, key]]
                 continue
@@ -253,42 +258,61 @@ class Egm(general.Signal):
             # Calculate series of cycle length values, before then using this to estimate the start and end times of
             # each beat. The offset from the previous peak will be assumed at 0.4*BCL, while the offset from the
             # following peak will be 0.1*BCL (both with a minimum value of 30ms)
-            no_peak_index = np.searchsorted(self.t_peaks[key], np.NaN) - 1
 
             if offset_start is None:
-                offset_start_list = [max(0.6 * bcl, 30) for bcl in bcls[:no_peak_index]]
+                offset_start_list = [max(0.6 * bcl, 30) for bcl in bcls[:n_beats-1]]
             else:
                 offset_start_list = [offset_start] * (self.n_beats[key] - 1)
 
             if offset_end is None:
-                offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls[:no_peak_index]]
+                offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls[:n_beats-1]]
             else:
                 offset_end_list = [offset_end] * (self.n_beats[key] - 1)
 
-            self.beat_start = [self.data_uni.index[0]]
-            self.beat_start.extend(self.t_peaks[key][:no_peak_index].values + offset_start_list)
+            beat_start = [self.data_uni.index[0]]
+            beat_start.extend(self.t_peaks[key][:n_beats-1].values + offset_start_list)
 
             beat_end = []
-            beat_end.extend(self.t_peaks[key][1:no_peak_index+1].values - offset_end_list)
+            beat_end.extend(self.t_peaks[key][1:n_beats].values - offset_end_list)
             beat_end.append(self.data_uni.index[-1])
 
-            signal_beats_uni = []
-            signal_beats_bi = []
-            for t_s, t_p, t_e in zip(self.beat_start, self.t_peaks[key], beat_end):
+            # we'll store these values in data frames later on
+            column_index = self.t_peaks.columns.get_loc(key)
+            beat_start_values[:n_beats, column_index] = beat_start
+            beat_end_values[:n_beats, column_index] = beat_end
+
+            signal_beats_uni = np.empty(n_beats, dtype=object)
+            signal_beats_bi = np.empty(n_beats, dtype=object)
+            for beat_index, (t_s, t_p, t_e) in enumerate(zip(beat_start, self.t_peaks[key], beat_end)):
+                
                 if not (t_s < t_p < t_e):
                     raise ValueError("Error in windowing process - a peak is outside of the window for EGM ", key)
-                signal_beats_uni.append(self.data_uni.loc[t_s:t_e, :])
-                signal_beats_bi.append(self.data_bi.loc[t_s:t_e, :])
+                signal_beats_uni[beat_index] = self.data_uni.loc[t_s:t_e, :]
+                signal_beats_bi[beat_index] = self.data_bi.loc[t_s:t_e, :]
+                
+                if not reset_index:
+                    continue
+                
+                zeroed_index = signal_beats_uni[beat_index].index - signal_beats_uni[beat_index].index[0]
+                signal_beats_uni[beat_index].set_index(zeroed_index, inplace=True)
+                signal_beats_bi[beat_index].set_index(zeroed_index, inplace=True)
 
             self.beat_index_reset = reset_index
-            if reset_index:
-                for i_beat in range(self.n_beats[key]):
-                    zeroed_index = signal_beats_uni[i_beat].index - signal_beats_uni[i_beat].index[0]
-                    signal_beats_uni[i_beat].set_index(zeroed_index, inplace=True)
-                    signal_beats_bi[i_beat].set_index(zeroed_index, inplace=True)
-
             self.beats_uni[key] = signal_beats_uni
             self.beats_bi[key] = signal_beats_bi
+
+        self.beat_start = pd.DataFrame(
+            data=beat_start_values,
+            index=self.t_peaks.index,
+            columns=self.t_peaks.columns,
+            dtype=float,
+        )
+        self.beat_end = pd.DataFrame(
+            data=beat_end_values,
+            index=self.t_peaks.index,
+            columns=self.t_peaks.columns,
+            dtype=float,
+        )
 
         if plot:
             _ = self.plot_beats(offset_end=offset_end, **kwargs)
