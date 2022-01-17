@@ -318,7 +318,6 @@ class Egm(general.Signal):
             _ = self.plot_beats(offset_end=offset_end, **kwargs)
 
     def plot_beats(self,
-                   offset_end: Optional[float] = None,
                    i_plot: Optional[int] = None,
                    **kwargs):
         """
@@ -328,7 +327,7 @@ class Egm(general.Signal):
 
         # Calculate beats (if not done already)
         if self.beats_uni is None:
-            self.get_beats(offset_end=offset_end, plot=False, **kwargs)
+            self.get_beats(offset_end=None, plot=False, **kwargs)
 
         # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
         if i_plot is None:
@@ -337,47 +336,42 @@ class Egm(general.Signal):
         elif self.n_beats[i_plot] == 0:
                 raise IOError("No beats detected in specified trace")
 
-        # Recalculate offsets for the end of the beats for the signal to be plotted
-        no_peak_index = np.searchsorted(self.t_peaks[i_plot], np.NaN) - 1
+        n_beats = n_beats = self.n_beats[i_plot]
+        t_peaks = self.t_peaks[i_plot]
+        beat_start = self.beat_start[i_plot]
+        beat_end = self.beat_end[i_plot]
 
-        if offset_end is None:
-            bcls = np.diff(self.t_peaks[i_plot])
-            offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls[:no_peak_index]]
-        else:
-            offset_end_list = [offset_end] * (self.n_beats[i_plot] - 1)
+        ax_labels = ['Unipolar', 'Bipolar']
+        egm_data = [self.data_uni, self.data_bi]
+        colours = tools.plotting.get_plot_colours(n_beats)
 
-        beat_end = []
-        beat_end.extend(self.t_peaks[i_plot][1:no_peak_index+1].values - offset_end_list)
-        beat_end.append(self.data_uni.index[-1])
+        fig, axes = plt.subplots(2, 1)
+        fig.suptitle('Trace {}'.format(i_plot))
 
-        fig = plt.figure()
-        ax = dict()
-        ax_labels = ['Unipolar', 'Bipolar', 'Bipolar^2']
-        colours = tools.plotting.get_plot_colours(self.n_beats[i_plot])
-        for i_ax, data in enumerate([self.data_uni, self.data_bi]):
-            ax[ax_labels[i_ax]] = fig.add_subplot(2, 1, i_ax + 1)
-            ax[ax_labels[i_ax]].plot(data.loc[:, i_plot], color='C0')
-            ax[ax_labels[i_ax]].scatter(
-                self.t_peaks[i_plot, :no_peak_index+1],
-                data.loc[:, i_plot][self.t_peaks[i_plot, :no_peak_index+1]],
+        for index, (ax, data) in enumerate(zip(axes, egm_data)):
+            
+            plt.sca(ax)
+            plt.plot(data.loc[:, i_plot], color='C0')
+            plt.scatter(
+                t_peaks[:n_beats],
+                data.loc[:, i_plot][t_peaks[:n_beats]],
                 marker='o',
                 edgecolor='tab:orange',
                 facecolor='none',
                 linewidths=2,
             )
-            ax[ax_labels[i_ax]].set_ylabel(ax_labels[i_ax])
+            plt.ylabel(ax_labels[index])
 
-            i_beat = 1
             max_height = np.max(data.loc[:, i_plot])
             height_shift = (np.max(data.loc[:, i_plot]) - np.min(data.loc[:, i_plot])) * 0.1
-            height_val = [max_height, max_height - height_shift] * math.ceil(self.n_beats[i_plot] / 2)
-            for t_s, t_e, col, h in zip(self.beat_start[i_plot], beat_end, colours, height_val):
-                ax[ax_labels[i_ax]].axvline(t_s, color=col)
-                ax[ax_labels[i_ax]].axvline(t_e, color=col)
-                ax[ax_labels[i_ax]].annotate(text='{}'.format(i_beat), xy=(t_s, h), xytext=(t_e, h),
+            height_val = [max_height, max_height - height_shift] * math.ceil(n_beats / 2)
+            for beat_index, (t_s, t_p, t_e) in enumerate(zip(beat_start[:n_beats], t_peaks[:n_beats], beat_end[:n_beats])):
+
+                plt.axvline(t_s, color=colours[beat_index])
+                plt.axvline(t_e, color=colours[beat_index])
+                plt.annotate(text='{}'.format(beat_index+1), xy=(t_s, height_val[beat_index]), xytext=(t_e, height_val[beat_index]),
                                              arrowprops=dict(arrowstyle='<->', linewidth=3))
-                i_beat = i_beat + 1
-        fig.suptitle('Trace {}'.format(i_plot))
+
         return fig, ax
 
     def get_at(self,
