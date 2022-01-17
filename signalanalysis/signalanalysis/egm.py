@@ -334,8 +334,7 @@ class Egm(general.Signal):
         if i_plot is None:
             weights = (self.n_beats.values > 0).astype(int)
             i_plot = self.n_beats.sample(weights=weights).index[0]
-        else:
-            if self.n_beats[i_plot] == 0:
+        elif self.n_beats[i_plot] == 0:
                 raise IOError("No beats detected in specified trace")
 
         # Recalculate offsets for the end of the beats for the signal to be plotted
