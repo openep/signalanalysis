@@ -315,13 +315,17 @@ class Egm(general.Signal):
                 raise IOError("No beats detected in specified trace")
 
         # Recalculate offsets for the end of the beats for the signal to be plotted
+        no_peak_index = np.searchsorted(self.t_peaks[i_plot], np.NaN) - 1
+
         if offset_end is None:
             bcls = np.diff(self.t_peaks[i_plot])
-            offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls]
+            offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls[:no_peak_index]]
         else:
-            offset_end_list = [offset_end] * self.n_beats[i_plot]
-        beat_end = [t_p - offset for t_p, offset in zip(self.t_peaks[i_plot][1:], offset_end_list)] + \
-                   [self.data_uni.index[-1]]
+            offset_end_list = [offset_end] * (self.n_beats[i_plot] - 1)
+
+        beat_end = []
+        beat_end.extend(self.t_peaks[i_plot][1:no_peak_index+1].values - offset_end_list)
+        beat_end.append(self.data_uni.index[-1])
 
         fig = plt.figure()
         ax = dict()
@@ -330,8 +334,14 @@ class Egm(general.Signal):
         for i_ax, data in enumerate([self.data_uni, self.data_bi]):
             ax[ax_labels[i_ax]] = fig.add_subplot(2, 1, i_ax + 1)
             ax[ax_labels[i_ax]].plot(data.loc[:, i_plot], color='C0')
-            ax[ax_labels[i_ax]].scatter(self.t_peaks[i_plot], data.loc[:, i_plot][self.t_peaks[i_plot]],
-                                        marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
+            ax[ax_labels[i_ax]].scatter(
+                self.t_peaks[i_plot, :no_peak_index+1],
+                data.loc[:, i_plot][self.t_peaks[i_plot, :no_peak_index+1]],
+                marker='o',
+                edgecolor='tab:orange',
+                facecolor='none',
+                linewidths=2,
+            )
             ax[ax_labels[i_ax]].set_ylabel(ax_labels[i_ax])
 
             i_beat = 1
