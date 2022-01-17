@@ -365,7 +365,7 @@ class Egm(general.Signal):
             max_height = np.max(data.loc[:, i_plot])
             height_shift = (np.max(data.loc[:, i_plot]) - np.min(data.loc[:, i_plot])) * 0.1
             height_val = [max_height, max_height - height_shift] * math.ceil(n_beats / 2)
-            for beat_index, (t_s, t_p, t_e) in enumerate(zip(beat_start[:n_beats], t_peaks[:n_beats], beat_end[:n_beats])):
+            for beat_index, (t_s, t_e) in enumerate(zip(beat_start[:n_beats], beat_end[:n_beats])):
 
                 plt.axvline(t_s, color=colours[beat_index])
                 plt.axvline(t_e, color=colours[beat_index])
