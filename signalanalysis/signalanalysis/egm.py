@@ -308,10 +308,8 @@ class Egm(general.Signal):
 
         # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
         if i_plot is None:
-            import random
-            i_plot = random.randint(0, len(self.n_beats))
-            while self.n_beats[i_plot] == 0:
-                i_plot = random.randint(0, len(self.n_beats))
+            weights = (self.n_beats.values > 0).astype(int)
+            i_plot = self.n_beats.sample(weights=weights).index[0]
         else:
             if self.n_beats[i_plot] == 0:
                 raise IOError("No beats detected in specified trace")
