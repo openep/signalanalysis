@@ -550,9 +550,9 @@ class Egm(general.Signal):
                 max_grad = -100
                 t_max_grad = -1
                 window_data = egm_uni_grad.loc[t_start:t_end, key]
-                for uni_val in window_data:
+                t_index_in_uni_data = np.searchsorted(self.data_uni.index.values, window_data.index.values)
+                for (t_window, uni_val), i_tm in zip(window_data.iteritems(), t_index_in_uni_data):
                     # Look for maximum gradient in the search window thus far
-                    t_window = window_data.index[window_data == uni_val][0]
                     if uni_val > max_grad:
                         max_grad = uni_val
                         t_max_grad = t_window
@@ -563,10 +563,9 @@ class Egm(general.Signal):
                         self.rt.loc[i_row, key] = t_max_grad
                         self.ari.loc[i_row, key] = t_max_grad - self.at.loc[i_row, key]
                     else:
-                        i_tm = np.where(self.data_uni.index.values == t_window)[0][0]
                         t1 = self.data_uni.index[i_tm-1]
                         t2 = self.data_uni.index[i_tm+2]    # Adding 2 to ensure that the limit is taken at +1, not i_tm
-                        if (window_data.loc[t1:t2] < 0).all() and t_window > t_peak:
+                        if (t_window > t_peak) and (window_data.loc[t1:t2] < 0).all():
                             self.rt.loc[i_row, key] = t_max_grad
                             self.ari.loc[i_row, key] = t_max_grad - self.at.loc[i_row, key]
                             break
