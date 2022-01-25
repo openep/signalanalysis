@@ -238,12 +238,19 @@ class Egm(general.Signal):
         if self.t_peaks.empty:
             self.get_peaks(**kwargs)
 
-        self.beat_start = pd.Series(dtype=pd.DataFrame, index=self.data_uni.columns)
+        # we'll store these values in data frames later on
+        beat_start_values = np.full_like(self.t_peaks, fill_value=np.NaN)
+        beat_end_values = np.full_like(self.t_peaks, fill_value=np.NaN)
+
         self.beats_uni = dict.fromkeys(self.data_uni.columns)
         self.beats_bi = dict.fromkeys(self.data_uni.columns)
-        for key in self.data_uni:
+
+        all_bcls = np.diff(self.t_peaks, axis=0).T
+        for key, bcls in zip(self.data_uni, all_bcls):
+
             # If only one beat is detected, can end here
-            if self.n_beats[key] == 1:
+            n_beats = self.n_beats[key]
+            if n_beats == 1:
                 self.beats_uni[key] = [self.data_uni.loc[:, key]]
                 self.beats_bi[key] = [self.data_bi.loc[:, key]]
                 continue
@@ -251,41 +258,66 @@ class Egm(general.Signal):
             # Calculate series of cycle length values, before then using this to estimate the start and end times of
             # each beat. The offset from the previous peak will be assumed at 0.4*BCL, while the offset from the
             # following peak will be 0.1*BCL (both with a minimum value of 30ms)
-            if offset_start is None:
-                bcls = np.diff(self.t_peaks[key])
-                offset_start_list = [max(0.6 * bcl, 30) for bcl in bcls]
-            else:
-                offset_start_list = [offset_start] * self.n_beats[key]
-            if offset_end is None:
-                bcls = np.diff(self.t_peaks[key])
-                offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls]
-            else:
-                offset_end_list = [offset_end] * self.n_beats[key]
-            self.beat_start.append([self.data_uni.index[0]] + list(self.t_peaks[key][:-1] + offset_start_list))
-            beat_end = [t_p - offset for t_p, offset in zip(self.t_peaks[key][1:], offset_end_list)] + \
-                       [self.data_uni.index[-1]]
 
-            signal_beats_uni = list()
-            signal_beats_bi = list()
-            for t_s, t_p, t_e in zip(self.beat_start[-1], self.t_peaks[key], beat_end):
-                assert t_s < t_p < t_e, "Error in windowing process"
-                signal_beats_uni.append(self.data_uni.loc[t_s:t_e, :])
-                signal_beats_bi.append(self.data_bi.loc[t_s:t_e, :])
+            if offset_start is None:
+                offset_start_list = [max(0.6 * bcl, 30) for bcl in bcls[:n_beats-1]]
+            else:
+                offset_start_list = [offset_start] * (self.n_beats[key] - 1)
+
+            if offset_end is None:
+                offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls[:n_beats-1]]
+            else:
+                offset_end_list = [offset_end] * (self.n_beats[key] - 1)
+
+            beat_start = [self.data_uni.index[0]]
+            beat_start.extend(self.t_peaks[key][:n_beats-1].values + offset_start_list)
+
+            beat_end = []
+            beat_end.extend(self.t_peaks[key][1:n_beats].values - offset_end_list)
+            beat_end.append(self.data_uni.index[-1])
+
+            # we'll store these values in data frames later on
+            column_index = self.t_peaks.columns.get_loc(key)
+            beat_start_values[:n_beats, column_index] = beat_start
+            beat_end_values[:n_beats, column_index] = beat_end
+
+            signal_beats_uni = np.empty(n_beats, dtype=object)
+            signal_beats_bi = np.empty(n_beats, dtype=object)
+            for beat_index, (t_s, t_p, t_e) in enumerate(zip(beat_start, self.t_peaks[key], beat_end)):
+                
+                if not (t_s < t_p < t_e):
+                    raise ValueError("Error in windowing process - a peak is outside of the window for EGM ", key)
+                signal_beats_uni[beat_index] = self.data_uni.loc[t_s:t_e, :]
+                signal_beats_bi[beat_index] = self.data_bi.loc[t_s:t_e, :]
+                
+                if not reset_index:
+                    continue
+                
+                zeroed_index = signal_beats_uni[beat_index].index - signal_beats_uni[beat_index].index[0]
+                signal_beats_uni[beat_index].set_index(zeroed_index, inplace=True)
+                signal_beats_bi[beat_index].set_index(zeroed_index, inplace=True)
 
             self.beat_index_reset = reset_index
-            if reset_index:
-                for i_beat in range(self.n_beats[key]):
-                    zeroed_index = signal_beats_uni[i_beat].index - signal_beats_uni[i_beat].index[0]
-                    signal_beats_uni[i_beat].set_index(zeroed_index, inplace=True)
-                    signal_beats_bi[i_beat].set_index(zeroed_index, inplace=True)
             self.beats_uni[key] = signal_beats_uni
             self.beats_bi[key] = signal_beats_bi
+
+        self.beat_start = pd.DataFrame(
+            data=beat_start_values,
+            index=self.t_peaks.index,
+            columns=self.t_peaks.columns,
+            dtype=float,
+        )
+        self.beat_end = pd.DataFrame(
+            data=beat_end_values,
+            index=self.t_peaks.index,
+            columns=self.t_peaks.columns,
+            dtype=float,
+        )
 
         if plot:
             _ = self.plot_beats(offset_end=offset_end, **kwargs)
 
     def plot_beats(self,
-                   offset_end: Optional[float] = None,
                    i_plot: Optional[int] = None,
                    **kwargs):
         """
@@ -295,49 +327,51 @@ class Egm(general.Signal):
 
         # Calculate beats (if not done already)
         if self.beats_uni is None:
-            self.get_beats(offset_end=offset_end, plot=False, **kwargs)
+            self.get_beats(offset_end=None, plot=False, **kwargs)
 
         # Pick a random signal to plot as an example trace (making sure to not pick a 'dead' trace)
         if i_plot is None:
-            import random
-            i_plot = random.randint(0, len(self.n_beats))
-            while self.n_beats[i_plot] == 0:
-                i_plot = random.randint(0, len(self.n_beats))
-        else:
-            if self.n_beats[i_plot] == 0:
+            weights = (self.n_beats.values > 0).astype(int)
+            i_plot = self.n_beats.sample(weights=weights).index[0]
+        elif self.n_beats[i_plot] == 0:
                 raise IOError("No beats detected in specified trace")
 
-        # Recalculate offsets for the end of the beats for the signal to be plotted
-        if offset_end is None:
-            bcls = np.diff(self.t_peaks[i_plot])
-            offset_end_list = [max(0.1 * bcl, 30) for bcl in bcls]
-        else:
-            offset_end_list = [offset_end] * self.n_beats[i_plot]
-        beat_end = [t_p - offset for t_p, offset in zip(self.t_peaks[i_plot][1:], offset_end_list)] + \
-                   [self.data_uni.index[-1]]
+        n_beats = n_beats = self.n_beats[i_plot]
+        t_peaks = self.t_peaks[i_plot]
+        beat_start = self.beat_start[i_plot]
+        beat_end = self.beat_end[i_plot]
 
-        fig = plt.figure()
-        ax = dict()
-        ax_labels = ['Unipolar', 'Bipolar', 'Bipolar^2']
-        colours = tools.plotting.get_plot_colours(self.n_beats[i_plot])
-        for i_ax, data in enumerate([self.data_uni, self.data_bi]):
-            ax[ax_labels[i_ax]] = fig.add_subplot(2, 1, i_ax + 1)
-            ax[ax_labels[i_ax]].plot(data.loc[:, i_plot], color='C0')
-            ax[ax_labels[i_ax]].scatter(self.t_peaks[i_plot], data.loc[:, i_plot][self.t_peaks[i_plot]],
-                                        marker='o', edgecolor='tab:orange', facecolor='none', linewidths=2)
-            ax[ax_labels[i_ax]].set_ylabel(ax_labels[i_ax])
+        ax_labels = ['Unipolar', 'Bipolar']
+        egm_data = [self.data_uni, self.data_bi]
+        colours = tools.plotting.get_plot_colours(n_beats)
 
-            i_beat = 1
+        fig, axes = plt.subplots(2, 1)
+        fig.suptitle('Trace {}'.format(i_plot))
+
+        for index, (ax, data) in enumerate(zip(axes, egm_data)):
+            
+            plt.sca(ax)
+            plt.plot(data.loc[:, i_plot], color='C0')
+            plt.scatter(
+                t_peaks[:n_beats],
+                data.loc[:, i_plot][t_peaks[:n_beats]],
+                marker='o',
+                edgecolor='tab:orange',
+                facecolor='none',
+                linewidths=2,
+            )
+            plt.ylabel(ax_labels[index])
+
             max_height = np.max(data.loc[:, i_plot])
             height_shift = (np.max(data.loc[:, i_plot]) - np.min(data.loc[:, i_plot])) * 0.1
-            height_val = [max_height, max_height - height_shift] * math.ceil(self.n_beats[i_plot] / 2)
-            for t_s, t_e, col, h in zip(self.beat_start[i_plot], beat_end, colours, height_val):
-                ax[ax_labels[i_ax]].axvline(t_s, color=col)
-                ax[ax_labels[i_ax]].axvline(t_e, color=col)
-                ax[ax_labels[i_ax]].annotate(text='{}'.format(i_beat), xy=(t_s, h), xytext=(t_e, h),
+            height_val = [max_height, max_height - height_shift] * math.ceil(n_beats / 2)
+            for beat_index, (t_s, t_e) in enumerate(zip(beat_start[:n_beats], beat_end[:n_beats])):
+
+                plt.axvline(t_s, color=colours[beat_index])
+                plt.axvline(t_e, color=colours[beat_index])
+                plt.annotate(text='{}'.format(beat_index+1), xy=(t_s, height_val[beat_index]), xytext=(t_e, height_val[beat_index]),
                                              arrowprops=dict(arrowstyle='<->', linewidth=3))
-                i_beat = i_beat + 1
-        fig.suptitle('Trace {}'.format(i_plot))
+
         return fig, ax
 
     def get_at(self,
